@@ -1,10 +1,9 @@
-import {MenuItemProps, MenuProps} from "antd"
-import React, {
-    Dispatch, ReactNode,
+import {MenuProps} from "antd"
+import {
+    Dispatch,
     SetStateAction,
     useState
 } from "react"
-import {MenuItemType} from "antd/es/menu/hooks/useItems";
 
 interface IUseMenu {
     menuProps: {
@@ -17,11 +16,9 @@ interface IUseMenu {
     }
 }
 
-export const useMenu = (props: MenuProps): IUseMenu => {
-    const [collapsed, setCollapsed] = useState<boolean>(true)
-    const [menuProps, setMenuProps] = useState<MenuProps>(props)
-
-
+export const useMenu = (props: { menuProps: MenuProps, collapsed?: boolean }): IUseMenu => {
+    const [collapsed, setCollapsed] = useState<boolean>(props.collapsed ?? true)
+    const [menuProps, setMenuProps] = useState<MenuProps>(props.menuProps)
 
     return {
         menuProps: {menuProps, setMenuProps},
