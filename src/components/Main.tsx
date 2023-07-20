@@ -1,14 +1,15 @@
 import React, {FC, ReactNode} from 'react';
 import {
     DesktopOutlined,
-    FileOutlined,
     PieChartOutlined,
     TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import {  Layout, Menu, theme } from 'antd';
-import * as url from "url";
+    UserOutlined
+} from '@ant-design/icons'
+import {AiOutlineLogin} from "react-icons/ai"
+import type { MenuProps } from 'antd'
+import {  Layout, Menu, theme } from 'antd'
+
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -36,15 +37,34 @@ const items: MenuItem[] = [
         getItem('Bill', '4'),
         getItem('Alex', '5'),
     ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
-];
+    getItem('Tournament', 'sub2', <TeamOutlined />, [getItem('Type 1x1', '6'), getItem('Type 2x2', '8')]),
+]
+
+const menuProps: MenuProps = {
+    theme: "dark",
+    mode: "horizontal",
+    items,
+    defaultSelectedKeys: ["1"]
+}
+
+
+
+const Login = () =>{
+    const authProps: MenuProps = {
+        theme: "dark",
+        mode: "horizontal",
+        items: [getItem("Login", "login", <AiOutlineLogin />)],
+        selectable: false
+    }
+
+    return <Menu style={{width: 100}} {...authProps}/>
+}
 
 const Main: FC<{children: ReactNode}> = ({children}) => {
     const {token: { colorBgContainer }} = theme.useToken();
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout style={{ minHeight: '100vh'}}>
             <Header style={{
                 position: 'sticky',
                 top: 0,
@@ -52,13 +72,10 @@ const Main: FC<{children: ReactNode}> = ({children}) => {
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: "space-between"
             }}>
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={['2']}
-                    items={items}
-                />
+                <Menu {...menuProps}/>
+                <Login/>
             </Header>
             <Layout >
                 <Header style={{ padding: 0, background: colorBgContainer, height: 100 }} />
@@ -73,4 +90,4 @@ const Main: FC<{children: ReactNode}> = ({children}) => {
     );
 };
 
-export default Main;
+export default Main
