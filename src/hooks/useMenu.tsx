@@ -18,7 +18,7 @@ interface IUseMenu {
 }
 
 export const useMenu = (props: MenuProps): IUseMenu => {
-    const [collapsed, setCollapsed] = useState<boolean>(false)
+    const [collapsed, setCollapsed] = useState<boolean>(true)
     const [menuProps, setMenuProps] = useState<MenuProps>(props)
 
 
