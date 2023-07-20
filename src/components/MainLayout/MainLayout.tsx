@@ -1,9 +1,10 @@
-import React, {FC, ReactNode} from 'react'
+import React, {FC, ReactNode, useEffect, useState} from 'react'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, HomeOutlined} from '@ant-design/icons';
 import {Layout, Menu, Button, theme} from 'antd'
 import {useMenu} from "../../hooks/useMenu";
 import {MenuItemType} from "antd/es/menu/hooks/useItems";
 import {TbTournament} from "react-icons/tb";
+
 const {Header, Sider, Content, Footer} = Layout
 
 interface IMainLayout {
@@ -19,8 +20,32 @@ const createMenuItem = (key: string, icon?: ReactNode, label?: string): MenuItem
     return {key, icon, label}
 }
 
+const useWindowSize = () => {
+    const [size, setSize] = useState<{ height: number, width: number }>({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
+
+    const resize = () => {
+        setSize(() => ({height: window.innerHeight, width: window.innerWidth}))
+        console.log("Size:", size)
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", resize)
+        return () => {
+            window.removeEventListener("resize", resize)
+        }
+    }, [size.width, size.height])
+
+    return {
+        size,  setSize
+    }
+}
+
 const MainLayout: FC<IMainLayout> = ({children}) => {
-    const {token: {colorBgContainer}, theme: {}} = theme.useToken()
+    const {token: {colorBgContainer}} = theme.useToken()
+    const windowSize = useWindowSize()
     const menu = useMenu({
         theme: "dark",
         mode: "inline",
@@ -28,12 +53,16 @@ const MainLayout: FC<IMainLayout> = ({children}) => {
         defaultOpenKeys: ["/"],
         onSelect,
         items: [
-            createMenuItem('/',<HomeOutlined />, "Home"),
-            createMenuItem('/user',<UserOutlined/>, "User"),
-            createMenuItem('/Tournament',<TbTournament/>,'Tournament'),
+            createMenuItem('/', <HomeOutlined/>, "Home"),
+            createMenuItem('/user', <UserOutlined/>, "User"),
+            createMenuItem('/Tournament', <TbTournament/>, 'Tournament'),
         ]
     })
 
+    useEffect(() => {
+        if (windowSize.size.width < 1000) menu.menuCollapse.setCollapsed(true)
+        else menu.menuCollapse.setCollapsed(false)
+    },[windowSize.size.width, windowSize.size.height])
 
     return (
         <Layout>
