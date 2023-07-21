@@ -1,15 +1,8 @@
-import React, {FC, ReactNode, useEffect, useState} from 'react';
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined
-} from '@ant-design/icons'
+import React, {FC, ReactNode} from 'react';
+import {TeamOutlined} from '@ant-design/icons'
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import type { MenuProps } from 'antd'
 import {  Layout, Menu, theme } from 'antd'
-
-
 
 const { Header, Content, Footer } = Layout;
 
@@ -25,29 +18,11 @@ function getItem(
         key,
         icon,
         children,
-        label,
+        label
     } as MenuItem;
 }
 
-const useWindowSize = () => {
-    const [size, setSize] = useState({height: window.innerHeight, width: window.innerWidth})
 
-    const resizeHandle = () => {
-        setSize({height: window.innerHeight, width: window.innerWidth})
-    }
-
-    useEffect(() => {
-        window.addEventListener("resize", resizeHandle)
-
-        return () => {
-            window.removeEventListener("resize", resizeHandle)
-        }
-    }, [])
-
-    return {
-        size, setSize
-    }
-}
 
 
 
@@ -68,8 +43,6 @@ const Login = () =>{
 }
 
 const Nav = () => {
-    const {size, setSize} = useWindowSize()
-
     const items: MenuItem[] = [
         getItem("Home", "home", <AiOutlineHome/>),
         getItem('Tournament', 'tournaments', <TeamOutlined />, [
@@ -77,15 +50,14 @@ const Nav = () => {
             getItem('Type 2x2', 'tournament_2x2'),
             getItem('Type 3x3', 'tournament_3x3'),
             getItem('Type 4x4', 'tournament_4x4'),
-        ]),
+        ])
     ]
 
     const menuProps: MenuProps = {
         theme: "dark",
         mode: "horizontal",
         items,
-        // defaultSelectedKeys: ["1"],
-        selectable: false
+        selectable: false,
     }
 
     const styles = {
@@ -98,7 +70,7 @@ const Nav = () => {
 }
 
 const Main: FC<{children: ReactNode}> = ({children}) => {
-    const {token: { colorBgContainer }} = theme.useToken();
+    const {token: { colorBgContainer, colorBgSpotlight }} = theme.useToken();
 
     return (
         <Layout style={{ minHeight: '100vh'}}>
@@ -116,9 +88,11 @@ const Main: FC<{children: ReactNode}> = ({children}) => {
                 <Login/>
             </Header>
             <Layout >
-                <Header style={{ padding: 0, background: colorBgContainer, height: 100 }} />
-                <Content style={{ margin: '0 16px' }}>
-                    <div style={{ padding: 0, minHeight: 360, backgroundImage: colorBgContainer  }}>
+                <Header style={{ padding: 0, background: colorBgContainer, height: 100 }}>
+                    <div className={"gradient-background"} style={{width: "100%", height: "100%", textAlign: "center"}}>LOGO</div>
+                </Header>
+                <Content style={{ margin: '0 0' }}>
+                    <div style={{ padding: 0, margin: 0, minHeight: 360, backgroundImage: colorBgContainer  }}>
                         {children}
                     </div>
                 </Content>
