@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, ReactNode, useEffect, useState} from 'react';
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -29,22 +29,24 @@ function getItem(
     } as MenuItem;
 }
 
-const items: MenuItem[] = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
-    ]),
-    getItem('Tournament', 'sub2', <TeamOutlined />, [getItem('Type 1x1', '6'), getItem('Type 2x2', '8')]),
-]
+const useWindowSize = () => {
+    const [size, setSize] = useState({height: window.innerHeight, width: window.innerWidth})
 
-const menuProps: MenuProps = {
-    theme: "dark",
-    mode: "horizontal",
-    items,
-    defaultSelectedKeys: ["1"]
+    const resizeHandle = () => {
+        setSize(() => ({height: window.innerHeight, width: window.innerWidth}))
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", resizeHandle)
+
+        return () => {
+            window.removeEventListener("resize", resizeHandle)
+        }
+    }, [])
+
+    return {
+        size, setSize
+    }
 }
 
 
@@ -57,7 +59,43 @@ const Login = () =>{
         selectable: false
     }
 
-    return <Menu style={{width: 100}} {...authProps}/>
+    const styles = {
+        width: "50%",
+        justifyContent: "right"
+    }
+
+    return <Menu style={styles} {...authProps}/>
+}
+
+const Nav = () => {
+    const {size, setSize} = useWindowSize()
+
+    const items: MenuItem[] = [
+        getItem('Tournament', 'sub2', <TeamOutlined />, [getItem('Type 1x1', '6'), getItem('Type 2x2', '8')]),
+        getItem('Option 1', '1', <PieChartOutlined />),
+        getItem('Option 2', '2', <DesktopOutlined />),
+        getItem('User', 'sub1', <UserOutlined />, [
+            getItem('Tom', '3'),
+            getItem('Bill', '4'),
+            getItem('Alex', '5'),
+        ]),
+    ]
+
+    const menuProps: MenuProps = {
+        theme: "dark",
+        mode: "horizontal",
+        items,
+        // defaultSelectedKeys: ["1"],
+        selectable: false
+    }
+
+    const styles = {
+        width: "50%"
+    }
+
+    return(
+        <Menu style={styles} {...menuProps}/>
+    )
 }
 
 const Main: FC<{children: ReactNode}> = ({children}) => {
@@ -72,15 +110,16 @@ const Main: FC<{children: ReactNode}> = ({children}) => {
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                paddingInline: 0
             }}>
-                <Menu {...menuProps}/>
+                <Nav/>
                 <Login/>
             </Header>
             <Layout >
                 <Header style={{ padding: 0, background: colorBgContainer, height: 100 }} />
                 <Content style={{ margin: '0 16px' }}>
-                    <div style={{ padding: 24, minHeight: 360, backgroundImage: colorBgContainer  }}>
+                    <div style={{ padding: 0, minHeight: 360, backgroundImage: colorBgContainer  }}>
                         {children}
                     </div>
                 </Content>
