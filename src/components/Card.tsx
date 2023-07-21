@@ -1,23 +1,20 @@
-import {Card} from 'antd'
+import {Card, theme} from 'antd'
 import {UsergroupAddOutlined, LoginOutlined} from '@ant-design/icons'
 
 const gridStyle: React.CSSProperties = {
     width: "25%",
     minWidth: 100,
-    // height: 250,
     textAlign: 'center',
-    // height: 300
-    // background: "#001529"
-    justifySelf: "center",
-    // margin: 5
+    justifySelf: "center"
 }
 
 
 
 const CardTournament = () => {
 
+
     return (
-        <Card >
+        <Card style={{margin: "15px 0"}}>
             <Card.Grid style={gridStyle}>
                 <Card.Meta title={"Daily"}/>
             </Card.Grid>
