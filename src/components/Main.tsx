@@ -5,7 +5,7 @@ import {
     TeamOutlined,
     UserOutlined
 } from '@ant-design/icons'
-import {AiOutlineLogin} from "react-icons/ai"
+import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import type { MenuProps } from 'antd'
 import {  Layout, Menu, theme } from 'antd'
 
@@ -33,7 +33,7 @@ const useWindowSize = () => {
     const [size, setSize] = useState({height: window.innerHeight, width: window.innerWidth})
 
     const resizeHandle = () => {
-        setSize(() => ({height: window.innerHeight, width: window.innerWidth}))
+        setSize({height: window.innerHeight, width: window.innerWidth})
     }
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Login = () =>{
     }
 
     const styles = {
-        width: "50%",
+        width: "30%",
         justifyContent: "right"
     }
 
@@ -71,13 +71,12 @@ const Nav = () => {
     const {size, setSize} = useWindowSize()
 
     const items: MenuItem[] = [
-        getItem('Tournament', 'sub2', <TeamOutlined />, [getItem('Type 1x1', '6'), getItem('Type 2x2', '8')]),
-        getItem('Option 1', '1', <PieChartOutlined />),
-        getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('User', 'sub1', <UserOutlined />, [
-            getItem('Tom', '3'),
-            getItem('Bill', '4'),
-            getItem('Alex', '5'),
+        getItem("Home", "home", <AiOutlineHome/>),
+        getItem('Tournament', 'tournaments', <TeamOutlined />, [
+            getItem('Type 1x1', 'tournament_1x1'),
+            getItem('Type 2x2', 'tournament_2x2'),
+            getItem('Type 3x3', 'tournament_3x3'),
+            getItem('Type 4x4', 'tournament_4x4'),
         ]),
     ]
 
@@ -90,7 +89,7 @@ const Nav = () => {
     }
 
     const styles = {
-        width: "50%"
+        width: "70%"
     }
 
     return(
