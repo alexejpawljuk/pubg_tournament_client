@@ -3,7 +3,7 @@ import {UsergroupAddOutlined, LoginOutlined} from '@ant-design/icons'
 
 const gridStyle: React.CSSProperties = {
     width: "25%",
-
+    minWidth: 100,
     // height: 250,
     textAlign: 'center',
     // height: 300
