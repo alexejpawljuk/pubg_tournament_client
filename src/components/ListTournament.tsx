@@ -114,18 +114,18 @@ const tournamentModel: ColumnsType<ITournament> = [
         dataIndex: "action",
         align: "center",
         render: (value, record) =>
-            <Space>
-                <Tag
-                    // size="small"
+            <Space direction={"vertical"}>
+                <Button
+                    size="small"
                     // color={"#55acee"}
-                    icon={<LoginOutlined/> }
+                    icon={<LoginOutlined/>}
                     onClick={e => {
                         e.stopPropagation()
                         console.log("Click on JOIN", record)
                     }}
                 >
                     JOIN
-                </Tag>
+                </Button>
             </Space>
     }
 ]
@@ -194,7 +194,6 @@ const ListTournament: React.FC = () => {
             setTableDataSource(sortedByDateTournamentList)
         }, 2000)
     }, [])
-
 
 
     return (
