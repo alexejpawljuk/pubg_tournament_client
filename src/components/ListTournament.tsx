@@ -49,7 +49,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Date",
         dataIndex: "date",
         align: "center",
-        width: 150,
+        // width: 150,
         sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
         render: (value, record) => {
             let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
@@ -74,7 +74,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Rating",
         dataIndex: "rating",
         align: "center",
-        width: 120,
+        // width: 120,
         sorter: (a, b) => a.condition.rating - b.condition.rating,
         render: (value, record) => <Rate allowHalf count={3} value={record.condition.rating}></Rate>,
     },
@@ -184,7 +184,9 @@ const ListTournament: React.FC = () => {
                 rowKey={record => record.key = uid()}
                 scroll={{y: 300, x: "100vh"}}
                 size={"small"}
-
+                bordered
+                footer={() => <div style={{height: 10}}></div>}
+                tableLayout={"auto"}
             />
         </div>
     )
