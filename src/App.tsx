@@ -5,6 +5,7 @@ import {BrowserRouter} from "react-router-dom"
 
 import Main from "./components/Main";
 import ListTournament from "./components/ListTournament";
+import ModalPopup from "./components/ModalPopup";
 
 const appThemeConfig: ThemeConfig = {
     algorithm: theme.defaultAlgorithm
@@ -29,6 +30,7 @@ function App() {
                     {/*<CardTournament/>*/}
                     <div style={{padding: 10}}>
                         <ListTournament/>
+
                     </div>
                 </Main>
             </AppProvider>

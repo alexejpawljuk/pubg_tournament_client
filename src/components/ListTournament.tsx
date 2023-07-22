@@ -1,10 +1,12 @@
 import React, {useMemo} from 'react'
-import {Button, Rate, Space, Table, Tag} from 'antd'
+import {Button, Rate, Space, Table, Tag, theme} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
-import {isToday, format, isTomorrow, compareAsc, isBefore, isAfter} from "date-fns"
-import {LiteralUnion} from "antd/es/_util/type";
-import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors";
+import {isToday, format, isTomorrow, isAfter} from "date-fns"
+import {LiteralUnion} from "antd/es/_util/type"
+import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
+import ModalPopup from "./ModalPopup"
+import {LoginOutlined} from "@ant-design/icons"
 
 type TournamentType = "SOLO" | "DUO" | "SQUAD" | "DAILY" | "CUSTOM"
 
@@ -49,7 +51,6 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Date",
         dataIndex: "date",
         align: "center",
-        // width: 150,
         sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
         render: (value, record) => {
             let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
@@ -63,6 +64,10 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Reward",
         dataIndex: "reward",
         align: "center",
+        sorter: (a, b) => {
+            if (a.reward.token === b.reward.token) return a.reward.coin - b.reward.coin
+            else return a.reward.token - b.reward.token
+        },
         render: (value, record) =>
             <Space direction={"vertical"}>
                 <div>Token: {record.reward.token}</div>
@@ -74,9 +79,8 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Rating",
         dataIndex: "rating",
         align: "center",
-        // width: 120,
         sorter: (a, b) => a.condition.rating - b.condition.rating,
-        render: (value, record) => <Rate allowHalf count={3} value={record.condition.rating}></Rate>,
+        render: (value, record) => <Rate disabled allowHalf count={3} value={record.condition.rating}></Rate>,
     },
     {
         key: 'members',
@@ -94,6 +98,10 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Price",
         dataIndex: "price",
         align: "center",
+        sorter: (a, b) => {
+            if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
+            else return a.price.ticket - b.price.ticket
+        },
         render: (value, record) =>
             <Space direction={"vertical"}>
                 <span>Ticket: {record.price.ticket}</span>
@@ -105,17 +113,18 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Action",
         dataIndex: "action",
         align: "center",
-        render: (value, record) => {
-            const onJoin = () => {
-                console.log(record)
-            }
-
-            return (
-                <div>
-                    <Button size={"small"} onClick={onJoin}>JOIN</Button>
-                </div>
-            )
-        }
+        render: (value, record) =>
+            <Space>
+                <Button
+                    size="small"
+                    icon={<LoginOutlined/>}
+                    onClick={e => {
+                        e.stopPropagation()
+                    }}
+                >
+                    JOIN
+                </Button>
+            </Space>
     }
 ]
 
@@ -145,48 +154,51 @@ const ListTournament: React.FC = () => {
     ]
 
 
-    for (let i = 0; i < 150; i++) {
-        tournamentList.push({
-            id: uid(),
-            name: getRandomTournamentType(),
-            members: {
-                max: 100,
-                alreadyRegistered: getRandomNumber(100)
-            },
-            reward: {
-                token: getRandomNumber(20),
-                coin: getRandomNumber(20)
-            },
-            price: {
-                ticket: getRandomNumber(20),
-                coin: getRandomNumber(20)
-            },
-            date: new Date(2023, 6, getRandomNumber(28)),
-            condition: {
-                rating: getRandomNumber(3)
-            },
-        })
-    }
-
     const sortedByDateTournamentList = useMemo(() => {
+        for (let i = 0; i < 150; i++) {
+            tournamentList.push({
+                id: uid(),
+                name: getRandomTournamentType(),
+                members: {
+                    max: 100,
+                    alreadyRegistered: getRandomNumber(100)
+                },
+                reward: {
+                    token: getRandomNumber(20),
+                    coin: getRandomNumber(20)
+                },
+                price: {
+                    ticket: getRandomNumber(20),
+                    coin: getRandomNumber(20)
+                },
+                date: new Date(2023, 6, getRandomNumber(28)),
+                condition: {
+                    rating: getRandomNumber(3)
+                },
+            })
+        }
         const filteredByDateTournamentList = tournamentList.filter(tournament => isAfter(tournament.date, new Date()) || isToday(tournament.date))
         return filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
     }, [tournamentList])
 
+    const {token: {colorBgContainer, colorTextHeading}} = theme.useToken()
 
     return (
         <div>
             <Table
-                className="virtual-table"
                 columns={tournamentModel}
                 pagination={false}
                 dataSource={sortedByDateTournamentList}
                 rowKey={record => record.key = uid()}
                 scroll={{y: 300, x: "100vh"}}
-                size={"small"}
-                bordered
+                size="small"
                 footer={() => <div style={{height: 10}}></div>}
-                tableLayout={"auto"}
+                tableLayout="auto"
+                onRow={data => ({
+                    onClick: () => {
+                        console.log("Click on row:", data)
+                    }
+                })}
             />
         </div>
     )
