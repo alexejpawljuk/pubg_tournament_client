@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {Button, Rate, Space, Table, Tag, theme} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
@@ -115,15 +115,17 @@ const tournamentModel: ColumnsType<ITournament> = [
         align: "center",
         render: (value, record) =>
             <Space>
-                <Button
-                    size="small"
-                    icon={<LoginOutlined/>}
+                <Tag
+                    // size="small"
+                    // color={"#55acee"}
+                    icon={<LoginOutlined/> }
                     onClick={e => {
                         e.stopPropagation()
+                        console.log("Click on JOIN", record)
                     }}
                 >
                     JOIN
-                </Button>
+                </Tag>
             </Space>
     }
 ]
@@ -183,15 +185,28 @@ const ListTournament: React.FC = () => {
 
     const {token: {colorBgContainer, colorTextHeading}} = theme.useToken()
 
+    const [isTableLoading, setIsTableLoading] = useState<boolean>(true)
+    const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsTableLoading(false)
+            setTableDataSource(sortedByDateTournamentList)
+        }, 2000)
+    }, [])
+
+
+
     return (
         <div>
             <Table
                 columns={tournamentModel}
                 pagination={false}
-                dataSource={sortedByDateTournamentList}
+                dataSource={tableDataSource}
                 rowKey={record => record.key = uid()}
                 scroll={{y: 300, x: "100vh"}}
                 size="small"
+                loading={isTableLoading}
                 footer={() => <div style={{height: 10}}></div>}
                 tableLayout="auto"
                 onRow={data => ({
