@@ -12,7 +12,6 @@ type TournamentName = "DAILY" | "CUSTOM"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
-const getRandomFloat = (factor: number): number => +(Math.random() * factor).toFixed(2)
 const getRandomTournamentType = (): TournamentType => {
     const tournamentTypes: TournamentType[] = ["SOLO", "DUO", "SQUAD"]
     return tournamentTypes[getRandomNumber(tournamentTypes.length)]
@@ -42,7 +41,7 @@ interface ITournament {
         coin: number
     }
     condition: {
-        rank: number
+        rank: number // 0.00 - 3.00
     }
 }
 
@@ -98,28 +97,22 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Rank",
         dataIndex: "rank",
         align: "center",
-        width: 250,
+        width: 150,
         sorter: (a, b) => a.condition.rank - b.condition.rank,
         render: (value, record) =>
-            <Space direction={"vertical"}>
-                <Rate
-                    disabled
-                    allowHalf
-                    count={3}
-                    value={record.condition.rank}
-                />
-                <Progress
-                    style={{margin: 0}}
-                    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}
-                    size={[150, 5]}
-                />
-            </Space>,
+            <Rate
+                disabled
+                allowHalf
+                count={5}
+                value={record.condition.rank}
+            />,
     },
     {
         key: 'members',
         title: 'Members',
         dataIndex: 'members',
         align: "center",
+        width: 150,
         sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
         render: (value, record) =>
             <Space>
@@ -131,6 +124,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Price",
         dataIndex: "price",
         align: "center",
+        width: 200,
         sorter: (a, b) => {
             if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
             else return a.price.ticket - b.price.ticket
@@ -146,6 +140,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Action",
         dataIndex: "action",
         align: "center",
+        width: 200,
         render: (value, record) =>
             <Space direction={"vertical"}>
                 <Button
@@ -186,7 +181,7 @@ const ListTournament: React.FC = () => {
                 },
                 date: new Date(2023, 6, getRandomNumber(28)),
                 condition: {
-                    rank: getRandomFloat(3)
+                    rank: getRandomNumber(5)
                 },
             })
         }
@@ -206,7 +201,6 @@ const ListTournament: React.FC = () => {
             setTableDataSource(sortedByDateTournamentList)
         }, 2000)
     }, [])
-
 
 
     return (
@@ -232,3 +226,12 @@ const ListTournament: React.FC = () => {
 }
 
 export default ListTournament
+
+
+
+// const getRandomFloat = (factor: number): number => +(Math.random() * factor).toFixed(2)
+{/*<Progress*/}
+{/*    style={{margin: 0}}*/}
+{/*    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}*/}
+{/*    size={[150, 5]}*/}
+{/*/>*/}
