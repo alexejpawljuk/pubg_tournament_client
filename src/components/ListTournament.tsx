@@ -74,6 +74,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Rating",
         dataIndex: "rating",
         align: "center",
+        width: 120,
         sorter: (a, b) => a.condition.rating - b.condition.rating,
         render: (value, record) => <Rate allowHalf count={3} value={record.condition.rating}></Rate>,
     },
