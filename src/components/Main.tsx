@@ -70,7 +70,7 @@ const Nav = () => {
 }
 
 const Main: FC<{children: ReactNode}> = ({children}) => {
-    const {token: { colorBgContainer, colorBgSpotlight }} = theme.useToken();
+    const {token: { colorBgContainer }} = theme.useToken();
 
     return (
         <Layout style={{ minHeight: '100vh'}}>
