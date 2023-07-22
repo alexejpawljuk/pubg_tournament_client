@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {Button, Rate, Space, Table, Tag, theme} from 'antd'
+import {Button, Progress, Rate, Space, Table, Tag, theme} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
@@ -8,18 +8,26 @@ import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
 import ModalPopup from "./ModalPopup"
 import {LoginOutlined} from "@ant-design/icons"
 
-type TournamentType = "SOLO" | "DUO" | "SQUAD" | "DAILY" | "CUSTOM"
+type TournamentName = "DAILY" | "CUSTOM"
+type TournamentType = "SOLO" | "DUO" | "SQUAD"
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
+const getRandomFloat = (factor: number): number => +(Math.random() * factor).toFixed(2)
 const getRandomTournamentType = (): TournamentType => {
-    const tournaments: TournamentType[] = ["SOLO", "DUO", "SQUAD", "DAILY", "CUSTOM"]
-    return tournaments[getRandomNumber(tournaments.length)]
+    const tournamentTypes: TournamentType[] = ["SOLO", "DUO", "SQUAD"]
+    return tournamentTypes[getRandomNumber(tournamentTypes.length)]
+}
+
+const getRandomTournamentName = (): TournamentName => {
+    const tournamentNames: TournamentName[] = ["DAILY", "CUSTOM"]
+    return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
 interface ITournament {
     key?: string
     id: string
-    name: TournamentType
+    name: TournamentName
+    type: TournamentType
     members: {
         max: number
         alreadyRegistered: number
@@ -34,7 +42,7 @@ interface ITournament {
         coin: number
     }
     condition: {
-        rating: number
+        rank: number
     }
 }
 
@@ -44,13 +52,23 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: 'Name',
         dataIndex: 'name',
         align: "center",
+        width: 120,
         sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
+    },
+    {
+        key: 'type',
+        title: 'Type',
+        dataIndex: 'type',
+        align: "center",
+        width: 120,
+        sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
     },
     {
         key: "date",
         title: "Date",
         dataIndex: "date",
         align: "center",
+        width: 150,
         sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
         render: (value, record) => {
             let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
@@ -64,6 +82,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Reward",
         dataIndex: "reward",
         align: "center",
+        width: 150,
         sorter: (a, b) => {
             if (a.reward.token === b.reward.token) return a.reward.coin - b.reward.coin
             else return a.reward.token - b.reward.token
@@ -75,12 +94,26 @@ const tournamentModel: ColumnsType<ITournament> = [
             </Space>
     },
     {
-        key: "rating",
-        title: "Rating",
-        dataIndex: "rating",
+        key: "rank",
+        title: "Rank",
+        dataIndex: "rank",
         align: "center",
-        sorter: (a, b) => a.condition.rating - b.condition.rating,
-        render: (value, record) => <Rate disabled allowHalf count={3} value={record.condition.rating}></Rate>,
+        width: 250,
+        sorter: (a, b) => a.condition.rank - b.condition.rank,
+        render: (value, record) =>
+            <Space direction={"vertical"}>
+                <Rate
+                    disabled
+                    allowHalf
+                    count={3}
+                    value={record.condition.rank}
+                />
+                <Progress
+                    style={{margin: 0}}
+                    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}
+                    size={[150, 5]}
+                />
+            </Space>,
     },
     {
         key: 'members',
@@ -132,35 +165,13 @@ const tournamentModel: ColumnsType<ITournament> = [
 
 
 const ListTournament: React.FC = () => {
-    const tournamentList: ITournament[] = [
-        {
-            id: uid(),
-            name: getRandomTournamentType(),
-            members: {
-                max: 100,
-                alreadyRegistered: getRandomNumber(100)
-            },
-            reward: {
-                token: getRandomNumber(20),
-                coin: getRandomNumber(20)
-            },
-            price: {
-                ticket: getRandomNumber(20),
-                coin: getRandomNumber(20)
-            },
-            date: new Date(2023, 6, 22),
-            condition: {
-                rating: getRandomNumber(3)
-            },
-        }
-    ]
-
-
+    const tournamentList: ITournament[] = []
     const sortedByDateTournamentList = useMemo(() => {
         for (let i = 0; i < 150; i++) {
             tournamentList.push({
                 id: uid(),
-                name: getRandomTournamentType(),
+                name: getRandomTournamentName(),
+                type: getRandomTournamentType(),
                 members: {
                     max: 100,
                     alreadyRegistered: getRandomNumber(100)
@@ -175,12 +186,13 @@ const ListTournament: React.FC = () => {
                 },
                 date: new Date(2023, 6, getRandomNumber(28)),
                 condition: {
-                    rating: getRandomNumber(3)
+                    rank: getRandomFloat(3)
                 },
             })
         }
         const filteredByDateTournamentList = tournamentList.filter(tournament => isAfter(tournament.date, new Date()) || isToday(tournament.date))
-        return filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
+        const sorteredByDate = filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
+        return sorteredByDate
     }, [tournamentList])
 
     const {token: {colorBgContainer, colorTextHeading}} = theme.useToken()
@@ -196,6 +208,7 @@ const ListTournament: React.FC = () => {
     }, [])
 
 
+
     return (
         <div>
             <Table
@@ -207,7 +220,7 @@ const ListTournament: React.FC = () => {
                 size="small"
                 loading={isTableLoading}
                 footer={() => <div style={{height: 10}}></div>}
-                tableLayout="auto"
+                // tableLayout="auto"
                 onRow={data => ({
                     onClick: () => {
                         console.log("Click on row:", data)
