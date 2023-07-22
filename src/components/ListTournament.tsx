@@ -73,6 +73,7 @@ const tournamentModel: ColumnsType<ITournament> = [
         title: "Rating",
         dataIndex: "rating",
         align: "center",
+        width: 150,
         sorter: (a, b) => a.condition.rating - b.condition.rating,
         render: (value, record) => <Rate allowHalf count={3} value={record.condition.rating}></Rate>,
     },
@@ -181,8 +182,9 @@ const ListTournament: React.FC = () => {
                     sortedByDateTournamentList.filter(tournament => tournament.date.getTime() >= new Date().getTime())
                 }
                 rowKey={record => record.key = uid()}
-                scroll={{y: 300, x: true}}
+                scroll={{y: 300, x: "100vh"}}
                 size={"small"}
+
             />
         </div>
     )
