@@ -2,7 +2,7 @@ import React, {useMemo} from 'react'
 import {Button, Rate, Space, Table, Tag} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
-import {isToday, format, isTomorrow} from "date-fns"
+import {isToday, format, isTomorrow, compareAsc, isBefore, isAfter} from "date-fns"
 import {LiteralUnion} from "antd/es/_util/type";
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors";
 
@@ -137,7 +137,7 @@ const ListTournament: React.FC = () => {
                 ticket: getRandomNumber(20),
                 coin: getRandomNumber(20)
             },
-            date: new Date(),
+            date: new Date(2023, 6, 22),
             condition: {
                 rating: getRandomNumber(3)
             },
@@ -145,7 +145,7 @@ const ListTournament: React.FC = () => {
     ]
 
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 150; i++) {
         tournamentList.push({
             id: uid(),
             name: getRandomTournamentType(),
@@ -169,7 +169,8 @@ const ListTournament: React.FC = () => {
     }
 
     const sortedByDateTournamentList = useMemo(() => {
-        return tournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
+        const filteredByDateTournamentList = tournamentList.filter(tournament => isAfter(tournament.date, new Date()) || isToday(tournament.date))
+        return filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
     }, [tournamentList])
 
 
@@ -179,9 +180,7 @@ const ListTournament: React.FC = () => {
                 className="virtual-table"
                 columns={tournamentModel}
                 pagination={false}
-                dataSource={
-                    sortedByDateTournamentList.filter(tournament => tournament.date.getTime() >= new Date().getTime())
-                }
+                dataSource={sortedByDateTournamentList}
                 rowKey={record => record.key = uid()}
                 scroll={{y: 300, x: "100vh"}}
                 size={"small"}
