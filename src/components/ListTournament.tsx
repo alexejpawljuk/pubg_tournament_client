@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Button, Descriptions, Rate, Space, Table, Tag} from 'antd'
+import {Button, Rate, Space, Table, Tag} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
@@ -57,20 +57,7 @@ const getRandomTournamentName = (): TournamentName => {
     return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
-// const JoinTournamentButton = () => {
-//     return(
-//         <Button
-//             size="small"
-//             icon={<LoginOutlined/>}
-//             onClick={e => {
-//                 e.stopPropagation()
-//                 // console.log("Click on JOIN", record)
-//             }}
-//         >
-//             JOIN
-//         </Button>
-//     )
-// }
+
 
 const DateDisplay: FC<IDateDisplay> = ({date}) => {
     let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
@@ -88,7 +75,7 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
     />)
 }
 
-const TournamentItem: FC<ITournamentItem> = ({tournamentItem}) => {
+const TournamentInfo: FC<ITournamentItem> = ({tournamentItem}) => {
     const {
         name,
         type,
@@ -100,15 +87,14 @@ const TournamentItem: FC<ITournamentItem> = ({tournamentItem}) => {
         condition,
     } = tournamentItem
 
-    let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
-    if (isToday(date)) color = "green"
-    if (isTomorrow(date)) color = "warning"
-
     return (
         <Space
-            style={{padding: "20px 0px"}}
-            direction={"horizontal"}
+            wrap
+            size={[0,10]}
         >
+            <Space >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
+            </Space>
             <Space>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
             </Space>
@@ -120,6 +106,10 @@ const TournamentItem: FC<ITournamentItem> = ({tournamentItem}) => {
 }
 
 const TournamentList: React.FC = () => {
+    const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
+    const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
+    const modalPopup = useModalPopup()
+
     const tournamentModel: ColumnsType<ITournament> = [
         {
             key: 'name',
@@ -251,9 +241,7 @@ const TournamentList: React.FC = () => {
     }, [tournamentList])
 
 
-    const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
-    const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
-    const modalPopup = useModalPopup()
+
 
     useEffect(() => {
         setTableDataSource(sortedByDateTournamentList)
@@ -275,7 +263,7 @@ const TournamentList: React.FC = () => {
                     console.log("Click on row:", data)
                     modalPopup.setOpenModal({
                         openModal: true,
-                        children: <TournamentItem tournamentItem={data}/>
+                        children: <TournamentInfo tournamentItem={data}/>
                     })
                 }
             })}

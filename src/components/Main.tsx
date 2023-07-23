@@ -2,7 +2,10 @@ import React, {FC, ReactNode} from 'react';
 import {TeamOutlined} from '@ant-design/icons'
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import type { MenuProps } from 'antd'
-import {  Layout, Menu, theme } from 'antd'
+import { Layout, Menu, theme } from 'antd'
+import {useModalPopup} from "../store/useModelPopup";
+import AuthForm from "./AuthForm";
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,15 +26,14 @@ function getItem(
 }
 
 
-
-
-
 const Login = () =>{
+    const modalPopup = useModalPopup()
+
     const authProps: MenuProps = {
         theme: "dark",
         mode: "horizontal",
         items: [getItem("Login", "login", <AiOutlineLogin />)],
-        selectable: false
+        selectable: false,
     }
 
     const styles = {
@@ -39,7 +41,11 @@ const Login = () =>{
         justifyContent: "right"
     }
 
-    return <Menu style={styles} {...authProps}/>
+    const onClick = () => {
+        modalPopup.setOpenModal({openModal: true, children: <AuthForm/>})
+    }
+
+    return <Menu onClick={onClick} style={styles} {...authProps}/>
 }
 
 const Nav = () => {
@@ -70,7 +76,7 @@ const Nav = () => {
 }
 
 const Main: FC<{children: ReactNode}> = ({children}) => {
-    const {token: { colorBgContainer }} = theme.useToken();
+    const {token: { colorBgContainer }} = theme.useToken()
 
     return (
         <Layout style={{ minHeight: '100vh'}}>

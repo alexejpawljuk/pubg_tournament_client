@@ -1,6 +1,22 @@
-import React from 'react'
+import React, {CSSProperties, FC, ReactNode} from 'react'
 import {Modal} from "antd"
-import {useModalPopup} from "../store/useModelPopup";
+import {useModalPopup} from "../store/useModelPopup"
+
+interface IContent {
+    children: ReactNode
+}
+
+const Content: FC<IContent> = ({children}) => {
+    const styles: CSSProperties = {
+        margin: 20
+    }
+
+    return (
+        <div style={styles}>
+            {children}
+        </div>
+    )
+}
 
 const ModalPopup = () => {
     const {
@@ -18,7 +34,7 @@ const ModalPopup = () => {
             keyboard
             footer={null}
             onCancel={() => setOpenModal({openModal: false, children: null})}
-        >{children}
+        ><Content>{children}</Content>
         </Modal>
     )
 }
