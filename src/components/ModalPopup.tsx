@@ -28,7 +28,7 @@ const ModalPopup = () => {
     return (
         <Modal
             open={openModal}
-            width={1000}
+            // width={400}
             centered
             destroyOnClose
             keyboard
