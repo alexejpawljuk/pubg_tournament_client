@@ -1,26 +1,15 @@
-import React, {useEffect, useMemo, useState} from 'react'
-import {Button, Progress, Rate, Space, Table, Tag, theme} from 'antd'
+import React, {FC, useEffect, useMemo, useState} from 'react'
+import {Button, Descriptions, Rate, Space, Table, Tag} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
 import {LiteralUnion} from "antd/es/_util/type"
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
-import ModalPopup from "./ModalPopup"
 import {LoginOutlined} from "@ant-design/icons"
+import {useModalPopup} from "../store/useModelPopup"
 
 type TournamentName = "DAILY" | "CUSTOM"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
-
-const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
-const getRandomTournamentType = (): TournamentType => {
-    const tournamentTypes: TournamentType[] = ["SOLO", "DUO", "SQUAD"]
-    return tournamentTypes[getRandomNumber(tournamentTypes.length)]
-}
-
-const getRandomTournamentName = (): TournamentName => {
-    const tournamentNames: TournamentName[] = ["DAILY", "CUSTOM"]
-    return tournamentNames[getRandomNumber(tournamentNames.length)]
-}
 
 interface ITournament {
     key?: string
@@ -45,107 +34,180 @@ interface ITournament {
     }
 }
 
-const tournamentModel: ColumnsType<ITournament> = [
-    {
-        key: 'name',
-        title: 'Name',
-        dataIndex: 'name',
-        align: "center",
-        width: 120,
-        sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
-    },
-    {
-        key: 'type',
-        title: 'Type',
-        dataIndex: 'type',
-        align: "center",
-        width: 120,
-        sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
-    },
-    {
-        key: "date",
-        title: "Date",
-        dataIndex: "date",
-        align: "center",
-        width: 150,
-        sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
-        render: (value, record) => {
-            let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
-            if (isToday(value)) color = "green"
-            if (isTomorrow(value)) color = "warning"
-            return <Tag color={color}>{format(record.date, "dd.MM.yyyy hh:MM")}</Tag>
-        }
-    },
-    {
-        key: "reward",
-        title: "Reward",
-        dataIndex: "reward",
-        align: "center",
-        width: 150,
-        sorter: (a, b) => {
-            if (a.reward.token === b.reward.token) return a.reward.coin - b.reward.coin
-            else return a.reward.token - b.reward.token
-        },
-        render: (value, record) =>
-            <Space direction={"vertical"}>
-                <div>Token: {record.reward.token}</div>
-                <div>Coin: {record.reward.coin}</div>
-            </Space>
-    },
-    {
-        key: "rank",
-        title: "Rank",
-        dataIndex: "rank",
-        align: "center",
-        width: 150,
-        sorter: (a, b) => a.condition.rank - b.condition.rank,
-        render: (value, record) =>
-            <Rate
-                disabled
-                allowHalf
-                count={5}
-                value={record.condition.rank}
-            />,
-    },
-    {
-        key: 'members',
-        title: 'Members',
-        dataIndex: 'members',
-        align: "center",
-        width: 150,
-        sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
-        render: (value, record) =>
+interface ITournamentItem {
+    tournamentItem: ITournament
+}
+
+interface IDateDisplay {
+    date: Date
+}
+
+interface IRankDisplay {
+    value: number
+}
+
+const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
+const getRandomTournamentType = (): TournamentType => {
+    const tournamentTypes: TournamentType[] = ["SOLO", "DUO", "SQUAD"]
+    return tournamentTypes[getRandomNumber(tournamentTypes.length)]
+}
+
+const getRandomTournamentName = (): TournamentName => {
+    const tournamentNames: TournamentName[] = ["DAILY", "CUSTOM"]
+    return tournamentNames[getRandomNumber(tournamentNames.length)]
+}
+
+// const JoinTournamentButton = () => {
+//     return(
+//         <Button
+//             size="small"
+//             icon={<LoginOutlined/>}
+//             onClick={e => {
+//                 e.stopPropagation()
+//                 // console.log("Click on JOIN", record)
+//             }}
+//         >
+//             JOIN
+//         </Button>
+//     )
+// }
+
+const DateDisplay: FC<IDateDisplay> = ({date}) => {
+    let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
+    if (isToday(date)) color = "green"
+    if (isTomorrow(date)) color = "warning"
+    return <Tag color={color}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
+}
+
+const RankDisplay: FC<IRankDisplay> = ({value}) => {
+    return(<Rate
+        disabled
+        allowHalf
+        count={5}
+        value={value}
+    />)
+}
+
+const TournamentItem: FC<ITournamentItem> = ({tournamentItem}) => {
+    const {
+        name,
+        type,
+        id,
+        members,
+        reward,
+        price,
+        date,
+        condition,
+    } = tournamentItem
+
+    let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
+    if (isToday(date)) color = "green"
+    if (isTomorrow(date)) color = "warning"
+
+    return (
+        <Space
+            style={{padding: "20px 0px"}}
+            direction={"horizontal"}
+        >
             <Space>
-                {record.members.alreadyRegistered} / {record.members.max}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
             </Space>
-    },
-    {
-        key: "price",
-        title: "Price",
-        dataIndex: "price",
-        align: "center",
-        width: 200,
-        sorter: (a, b) => {
-            if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
-            else return a.price.ticket - b.price.ticket
+            <Space>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
+            </Space>
+        </Space>
+    )
+}
+
+const TournamentList: React.FC = () => {
+    const tournamentModel: ColumnsType<ITournament> = [
+        {
+            key: 'name',
+            title: 'Name',
+            dataIndex: 'name',
+            align: "center",
+            width: 120,
+            sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
         },
-        render: (value, record) =>
-            <Space direction={"vertical"}>
-                <span>Ticket: {record.price.ticket}</span>
-                <span>Coin: {record.price.coin}</span>
-            </Space>
-    },
-    {
-        key: "action",
-        title: "Action",
-        dataIndex: "action",
-        align: "center",
-        width: 200,
-        render: (value, record) =>
-            <Space direction={"vertical"}>
+        {
+            key: 'type',
+            title: 'Type',
+            dataIndex: 'type',
+            align: "center",
+            width: 120,
+            sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
+        },
+        {
+            key: "date",
+            title: "Date",
+            dataIndex: "date",
+            align: "center",
+            width: 150,
+            sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
+            render: (value, record) => <DateDisplay date={record.date}/>
+        },
+        {
+            key: "reward",
+            title: "Reward",
+            dataIndex: "reward",
+            align: "center",
+            width: 150,
+            sorter: (a, b) => {
+                if (a.reward.token === b.reward.token) return a.reward.coin - b.reward.coin
+                else return a.reward.token - b.reward.token
+            },
+            render: (value, record) =>
+                <Space direction={"vertical"}>
+                    <div>Token: {record.reward.token}</div>
+                    <div>Coin: {record.reward.coin}</div>
+                </Space>
+        },
+        {
+            key: "rank",
+            title: "Rank",
+            dataIndex: "rank",
+            align: "center",
+            width: 150,
+            sorter: (a, b) => a.condition.rank - b.condition.rank,
+            render: (value, record) => <RankDisplay value={record.condition.rank}/>,
+        },
+        {
+            key: 'members',
+            title: 'Members',
+            dataIndex: 'members',
+            align: "center",
+            width: 150,
+            sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
+            render: (value, record) =>
+                <Space>
+                    {record.members.alreadyRegistered} / {record.members.max}
+                </Space>
+        },
+        {
+            key: "price",
+            title: "Price",
+            dataIndex: "price",
+            align: "center",
+            width: 200,
+            sorter: (a, b) => {
+                if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
+                else return a.price.ticket - b.price.ticket
+            },
+            render: (value, record) =>
+                <Space direction={"vertical"}>
+                    <span>Ticket: {record.price.ticket}</span>
+                    <span>Coin: {record.price.coin}</span>
+                </Space>
+        },
+        {
+            key: "action",
+            title: "Action",
+            dataIndex: "action",
+            align: "center",
+            width: 200,
+            render: (value, record) =>
                 <Button
                     size="small"
-                    // color={"#55acee"}
                     icon={<LoginOutlined/>}
                     onClick={e => {
                         e.stopPropagation()
@@ -154,12 +216,10 @@ const tournamentModel: ColumnsType<ITournament> = [
                 >
                     JOIN
                 </Button>
-            </Space>
-    }
-]
+        }
+    ]
 
-
-const ListTournament: React.FC = () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const tournamentList: ITournament[] = []
     const sortedByDateTournamentList = useMemo(() => {
         for (let i = 0; i < 150; i++) {
@@ -179,7 +239,7 @@ const ListTournament: React.FC = () => {
                     ticket: getRandomNumber(20),
                     coin: getRandomNumber(20)
                 },
-                date: new Date(2023, 6, getRandomNumber(28)),
+                date: new Date(2023, 6, getRandomNumber(28), getRandomNumber(24), getRandomNumber(60)),
                 condition: {
                     rank: getRandomNumber(5)
                 },
@@ -190,48 +250,50 @@ const ListTournament: React.FC = () => {
         return sorteredByDate
     }, [tournamentList])
 
-    const {token: {colorBgContainer, colorTextHeading}} = theme.useToken()
 
-    const [isTableLoading, setIsTableLoading] = useState<boolean>(true)
+    const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
+    const modalPopup = useModalPopup()
 
     useEffect(() => {
-        setTimeout(() => {
-            setIsTableLoading(false)
-            setTableDataSource(sortedByDateTournamentList)
-        }, 2000)
+        setTableDataSource(sortedByDateTournamentList)
     }, [])
 
-
     return (
-        <div>
-            <Table
-                columns={tournamentModel}
-                pagination={false}
-                dataSource={tableDataSource}
-                rowKey={record => record.key = uid()}
-                scroll={{y: 300, x: "100vh"}}
-                size="small"
-                loading={isTableLoading}
-                footer={() => <div style={{height: 10}}></div>}
-                // tableLayout="auto"
-                onRow={data => ({
-                    onClick: () => {
-                        console.log("Click on row:", data)
-                    }
-                })}
-            />
-        </div>
+        <Table
+            style={{padding: "10px 5px"}}
+            columns={tournamentModel}
+            pagination={false}
+            dataSource={tableDataSource}
+            rowKey={record => record.key = uid()}
+            scroll={{y: 300, x: "100vh"}}
+            size="small"
+            loading={isTableLoading}
+            footer={() => <div style={{height: 10}}></div>}
+            onRow={data => ({
+                onClick: () => {
+                    console.log("Click on row:", data)
+                    modalPopup.setOpenModal({
+                        openModal: true,
+                        children: <TournamentItem tournamentItem={data}/>
+                    })
+                }
+            })}
+        />
     )
 }
 
-export default ListTournament
-
+export default TournamentList
 
 
 // const getRandomFloat = (factor: number): number => +(Math.random() * factor).toFixed(2)
-{/*<Progress*/}
-{/*    style={{margin: 0}}*/}
-{/*    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}*/}
-{/*    size={[150, 5]}*/}
-{/*/>*/}
+{/*<Progress*/
+}
+{/*    style={{margin: 0}}*/
+}
+{/*    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}*/
+}
+{/*    size={[150, 5]}*/
+}
+{/*/>*/
+}

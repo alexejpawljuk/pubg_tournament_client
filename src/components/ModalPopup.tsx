@@ -1,32 +1,24 @@
-import React, {Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from 'react'
-import {Modal, ModalProps} from "antd"
+import React from 'react'
+import {Modal} from "antd"
+import {useModalPopup} from "../store/useModelPopup";
 
-interface IModalPopup {
-    children?: ReactNode
-    props?: ModalProps
-}
-
-const ModalPopup: FC<IModalPopup> = ({children, props}) => {
-    const [open, setOpen] = useState<boolean>()
-
-    useEffect(() => {
-        console.log("Modal:", open)
-        setTimeout(() => {
-            setOpen(true)
-        }, 2000)
-    }, [])
+const ModalPopup = () => {
+    const {
+        openModal,
+        setOpenModal,
+        children,
+    } = useModalPopup()
 
     return (
         <Modal
-            title="ModalPopup 1000px width"
-            centered
-            open={open}
-            onOk={() => setOpen(false)}
-            onCancel={() => setOpen(false)}
+            open={openModal}
             width={1000}
-            {...props}
-        >
-            {children}
+            centered
+            destroyOnClose
+            keyboard
+            footer={null}
+            onCancel={() => setOpenModal({openModal: false, children: null})}
+        >{children}
         </Modal>
     )
 }

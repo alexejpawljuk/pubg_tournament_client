@@ -4,7 +4,7 @@ import {ConfigProvider} from "antd"
 import {BrowserRouter} from "react-router-dom"
 
 import Main from "./components/Main";
-import ListTournament from "./components/ListTournament";
+import TournamentList from "./components/ListTournament";
 import ModalPopup from "./components/ModalPopup";
 
 const appThemeConfig: ThemeConfig = {
@@ -28,10 +28,8 @@ function App() {
             <AppProvider>
                 <Main>
                     {/*<CardTournament/>*/}
-                    <div style={{padding: 10}}>
-                        <ListTournament/>
-
-                    </div>
+                    <ModalPopup/>
+                    <TournamentList/>
                 </Main>
             </AppProvider>
         </div>
