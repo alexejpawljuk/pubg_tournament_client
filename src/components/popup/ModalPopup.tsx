@@ -1,6 +1,6 @@
 import React, {CSSProperties, FC, ReactNode} from 'react'
 import {Modal} from "antd"
-import {useModalPopup} from "../store/useModelPopup"
+import {useModalPopup} from "../../store/useModelPopup"
 
 interface IContent {
     children: ReactNode

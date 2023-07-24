@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Root/RootContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutContentHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutFooter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/content/Home.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/content/NotFound.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navigation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Root/Root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/Home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/NotFound.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ModalPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/popup/ModalPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/Root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/Root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/RootContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/RootContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/RootLayoutContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/RootLayoutContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/RootLayoutContentHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/RootLayoutContentHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/RootLayoutFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/RootLayoutFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root/RootLayoutHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/root/RootLayoutHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +50,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/popup" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/components/Root" />
     </key>
@@ -66,7 +65,7 @@
       <updated>1687547856222</updated>
       <workItem from="1687547857837" duration="610000" />
       <workItem from="1689879314039" duration="117233000" />
-      <workItem from="1690233376554" duration="3673000" />
+      <workItem from="1690233376554" duration="4766000" />
     </task>
     <servers />
   </component>

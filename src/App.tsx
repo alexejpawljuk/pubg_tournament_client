@@ -5,8 +5,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 
 import Home from "./components/content/Home"
 import NoFound from "./components/content/NotFound"
-import ModalPopup from "./components/ModalPopup"
-import Root from "./components/Root/Root";
+import ModalPopup from "./components/popup/ModalPopup"
+import Root from "./components/root/Root";
 
 const appThemeConfig: ThemeConfig = {
     algorithm: theme.defaultAlgorithm

@@ -1,20 +1,10 @@
 import React from 'react'
-import {TeamOutlined, UserOutlined, UserAddOutlined, createFromIconfontCN} from '@ant-design/icons'
+import {Menu, MenuProps} from "antd"
+import {useModalPopup} from "../store/useModelPopup"
+import {TeamOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons"
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
-import type {MenuProps} from 'antd'
-import {Layout, Menu} from 'antd'
-import {useModalPopup} from "../../store/useModelPopup"
-import AuthForm from "../AuthForm"
-import RegisterForm from "../RegisterForm"
-import RootLayoutHeader from "./RootLayoutHeader"
-import RootLayoutContent from "./RootLayoutContent"
-import RootLayoutContentHeader from "./RootLayoutContentHeader"
-import RootContent from './RootContent'
-import RootLayoutFooter from "./RootLayoutFooter"
-import {Route, Routes} from "react-router-dom"
-import Home from "../content/Home"
-import NoFound from "../content/NotFound"
-
+import AuthForm from "./AuthForm"
+import RegisterForm from "./RegisterForm"
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -33,7 +23,7 @@ export function getItem(
 }
 
 
-const Login = () => {
+const Account = () => {
     const modalPopup = useModalPopup()
 
     const authProps: MenuProps = {
@@ -111,30 +101,13 @@ const Nav = () => {
     )
 }
 
-const Root = () => {
-
+const Navigation = () => {
     return (
-        <Layout style={{minHeight: '100vh'}}>
-            <RootLayoutHeader>
-                <Nav/>
-                <Login/>
-            </RootLayoutHeader>
-            <RootLayoutContent>
-                <RootLayoutContentHeader>
-                    LOGO
-                </RootLayoutContentHeader>
-                <RootContent>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="*" element={<NoFound/>}/>
-                    </Routes>
-                </RootContent>
-            </RootLayoutContent>
-            <RootLayoutFooter>
-                Ant Design ©2023 Created by Ant UED
-            </RootLayoutFooter>
-        </Layout>
+        <>
+            <Nav/>
+            <Account/>
+        </>
     )
 }
 
-export default Root
+export default Navigation
