@@ -1,7 +1,7 @@
 import React from 'react'
 import {Menu, MenuProps} from "antd"
 import {useModalPopup} from "../store/useModelPopup"
-import {TeamOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons"
+import {ShoppingCartOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons"
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import AuthForm from "./AuthForm"
 import RegisterForm from "./RegisterForm"
@@ -70,12 +70,7 @@ const Account = () => {
 const Nav = () => {
     const items: MenuItem[] = [
         getItem("Home", "home", <AiOutlineHome/>),
-        getItem('Tournament', 'tournaments', <TeamOutlined/>, [
-            getItem('Type 1x1', 'tournament_1x1'),
-            getItem('Type 2x2', 'tournament_2x2'),
-            getItem('Type 3x3', 'tournament_3x3'),
-            getItem('Type 4x4', 'tournament_4x4'),
-        ])
+        getItem('Shop', 'shop', <ShoppingCartOutlined />)
     ]
 
     const menuProps: MenuProps = {
@@ -93,6 +88,9 @@ const Nav = () => {
         const {key} = e
         if (key === "home") {
             window.location.replace("/")
+        }
+        if (key === "shop"){
+            console.log("Click shop")
         }
     }
 
