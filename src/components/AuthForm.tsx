@@ -1,16 +1,37 @@
 import React, {CSSProperties, useState} from 'react'
 import {LockOutlined, UserOutlined} from '@ant-design/icons'
 import {Button, Form, Input, Space} from 'antd'
+import {useModalPopup} from "../store/useModelPopup";
+import RegisterForm from "./RegisterForm";
 
 const AuthFrom: React.FC = () => {
+    const modalPopup = useModalPopup()
     const [loading, setLoading] = useState<boolean>(false)
+
+
+    const linkStyles: CSSProperties = {
+        paddingLeft: 0
+    }
+
     const onFinish = (values: any) => {
         setLoading(true)
         console.log('Received values of form: ', values)
     }
 
-    const linkStyles: CSSProperties = {
-        paddingLeft: 0
+    const onForgotPassword = () => {
+        console.log("Forgot password")
+    }
+
+    const onRegisterNow = () => {
+        console.log("Register now")
+        modalPopup.setOpenModal(prevState => ({
+            ...prevState,
+            openModal: true,
+            props: {
+                width: 800
+            },
+            children: <RegisterForm/>
+        }))
     }
 
     return (
@@ -39,8 +60,8 @@ const AuthFrom: React.FC = () => {
             </Form.Item>
             <Form.Item>
                 <Space wrap direction={"vertical"} size={[0, 0]}>
-                    <Button href="" style={linkStyles} type="link">Forgot password</Button>
-                    <Button href="" style={linkStyles} type={"link"}>Register now!</Button>
+                    <Button onClick={onForgotPassword} style={linkStyles} type="link">Forgot password</Button>
+                    <Button onClick={onRegisterNow} style={linkStyles} type={"link"}>Register now!</Button>
                 </Space>
             </Form.Item>
             <Form.Item>

@@ -1,10 +1,10 @@
 import React, {FC, ReactNode} from 'react'
 import {theme, ThemeConfig} from "antd"
 import {ConfigProvider} from "antd"
-import {BrowserRouter} from "react-router-dom"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 
-import Main from "./components/Main";
-import TournamentList from "./components/ListTournament";
+import Home from "./content/Home"
+import NoFound from "./content/NotFound"
 import ModalPopup from "./components/ModalPopup";
 
 const appThemeConfig: ThemeConfig = {
@@ -26,11 +26,11 @@ function App() {
     return (
         <div className="App">
             <AppProvider>
-                <Main>
-                    {/*<CardTournament/>*/}
-                    <ModalPopup/>
-                    <TournamentList/>
-                </Main>
+                <ModalPopup/>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="*" element={<NoFound/>}/>
+                </Routes>
             </AppProvider>
         </div>
     )

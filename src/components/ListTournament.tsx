@@ -11,7 +11,7 @@ import {useModalPopup} from "../store/useModelPopup"
 type TournamentName = "DAILY" | "CUSTOM"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
 
-interface ITournament {
+export interface ITournament {
     key?: string
     id: string
     name: TournamentName
@@ -238,7 +238,7 @@ const TournamentList: React.FC = () => {
         const filteredByDateTournamentList = tournamentList.filter(tournament => isAfter(tournament.date, new Date()) || isToday(tournament.date))
         const sorteredByDate = filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
         return sorteredByDate
-    }, [tournamentList])
+    }, [])
 
 
 
