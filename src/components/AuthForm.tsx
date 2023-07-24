@@ -1,8 +1,8 @@
 import React, {CSSProperties, useState} from 'react'
 import {LockOutlined, UserOutlined} from '@ant-design/icons'
 import {Button, Form, Input, Space} from 'antd'
-import {useModalPopup} from "../store/useModelPopup";
-import RegisterForm from "./RegisterForm";
+import {useModalPopup} from "../store/useModelPopup"
+import RegisterForm from "./RegisterForm"
 
 const AuthFrom: React.FC = () => {
     const modalPopup = useModalPopup()
@@ -10,7 +10,7 @@ const AuthFrom: React.FC = () => {
 
 
     const linkStyles: CSSProperties = {
-        paddingLeft: 0
+        paddingLeft: 0,
     }
 
     const onFinish = (values: any) => {
@@ -40,7 +40,6 @@ const AuthFrom: React.FC = () => {
             className="login-form"
             initialValues={{remember: true}}
             onFinish={onFinish}
-            size="small"
         >
             <Form.Item
                 name="username"
@@ -60,8 +59,8 @@ const AuthFrom: React.FC = () => {
             </Form.Item>
             <Form.Item>
                 <Space wrap direction={"vertical"} size={[0, 0]}>
-                    <Button onClick={onForgotPassword} style={linkStyles} type="link">Forgot password</Button>
-                    <Button onClick={onRegisterNow} style={linkStyles} type={"link"}>Register now!</Button>
+                    <Button onClick={onForgotPassword} style={linkStyles} size="small" type="link">Forgot password?</Button>
+                    <Button onClick={onRegisterNow} style={linkStyles} size="small" type={"link"}>Register now</Button>
                 </Space>
             </Form.Item>
             <Form.Item>
