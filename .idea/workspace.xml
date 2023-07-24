@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/ListTournament.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ListTournament.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/comtent/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/comtent/NotFound.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/NotFound.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Root/RootContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutContentHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutFooter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Root/RootLayoutHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/content/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/content/NotFound.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Root/Root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/Home.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/NotFound.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,25 +34,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/home/Desktop/Programming/Projects/PUBG_mobile/client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "/Users/home/Desktop/Programming/Projects/PUBG_mobile/client/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/home/Desktop/Programming/Projects/PUBG_mobile/client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/home/Desktop/Programming/Projects/PUBG_mobile/client/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/Root" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -55,7 +65,8 @@
       <option name="presentableId" value="Default" />
       <updated>1687547856222</updated>
       <workItem from="1687547857837" duration="610000" />
-      <workItem from="1689879314039" duration="103042000" />
+      <workItem from="1689879314039" duration="117233000" />
+      <workItem from="1690233376554" duration="3673000" />
     </task>
     <servers />
   </component>

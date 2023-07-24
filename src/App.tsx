@@ -3,9 +3,10 @@ import {theme, ThemeConfig} from "antd"
 import {ConfigProvider} from "antd"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 
-import Home from "./content/Home"
-import NoFound from "./content/NotFound"
-import ModalPopup from "./components/ModalPopup";
+import Home from "./components/content/Home"
+import NoFound from "./components/content/NotFound"
+import ModalPopup from "./components/ModalPopup"
+import Root from "./components/Root/Root";
 
 const appThemeConfig: ThemeConfig = {
     algorithm: theme.defaultAlgorithm
@@ -27,10 +28,7 @@ function App() {
         <div className="App">
             <AppProvider>
                 <ModalPopup/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="*" element={<NoFound/>}/>
-                </Routes>
+                <Root/>
             </AppProvider>
         </div>
     )

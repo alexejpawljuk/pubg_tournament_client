@@ -1,17 +1,24 @@
-import React, {FC, ReactNode} from 'react'
-import {TeamOutlined, UserOutlined} from '@ant-design/icons'
+import React from 'react'
+import {TeamOutlined, UserOutlined, UserAddOutlined, createFromIconfontCN} from '@ant-design/icons'
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import type {MenuProps} from 'antd'
-import {Layout, Menu, theme} from 'antd'
-import {useModalPopup} from "../store/useModelPopup"
-import AuthForm from "./AuthForm"
-import RegisterForm from "./RegisterForm";
+import {Layout, Menu} from 'antd'
+import {useModalPopup} from "../../store/useModelPopup"
+import AuthForm from "../AuthForm"
+import RegisterForm from "../RegisterForm"
+import RootLayoutHeader from "./RootLayoutHeader"
+import RootLayoutContent from "./RootLayoutContent"
+import RootLayoutContentHeader from "./RootLayoutContentHeader"
+import RootContent from './RootContent'
+import RootLayoutFooter from "./RootLayoutFooter"
+import {Route, Routes} from "react-router-dom"
+import Home from "../content/Home"
+import NoFound from "../content/NotFound"
 
-const {Header, Content, Footer} = Layout
 
-type MenuItem = Required<MenuProps>['items'][number]
+export type MenuItem = Required<MenuProps>['items'][number]
 
-function getItem(
+export function getItem(
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
@@ -33,8 +40,10 @@ const Login = () => {
         theme: "dark",
         mode: "horizontal",
         items: [
-            getItem("Register", "register", <UserOutlined/>),
-            getItem("Login", "login", <AiOutlineLogin/>),
+            getItem("Account", "",  <UserOutlined/>, [
+                getItem("Login", "login", <AiOutlineLogin/>),
+                getItem("Register", "register", <UserAddOutlined />),
+            ])
         ],
         selectable: false,
     }
@@ -102,39 +111,30 @@ const Nav = () => {
     )
 }
 
-const MainLayout: FC<{ children: ReactNode }> = ({children}) => {
-    const {token: {colorBgContainer}} = theme.useToken()
+const Root = () => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <Header style={{
-                position: 'sticky',
-                top: 0,
-                zIndex: 1,
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: "space-between",
-                paddingInline: 0
-            }}>
+            <RootLayoutHeader>
                 <Nav/>
                 <Login/>
-            </Header>
-            <Layout>
-                <Header style={{padding: 0, background: colorBgContainer, height: 100}}>
-                    <div className={"gradient-background"}
-                         style={{width: "100%", height: "100%", textAlign: "center"}}>LOGO
-                    </div>
-                </Header>
-                <Content style={{margin: '0 0'}}>
-                    <div style={{padding: 0, margin: 0, minHeight: 360, backgroundImage: colorBgContainer}}>
-                        {children}
-                    </div>
-                </Content>
-                <Footer style={{textAlign: 'center'}}>Ant Design ©2023 Created by Ant UED</Footer>
-            </Layout>
+            </RootLayoutHeader>
+            <RootLayoutContent>
+                <RootLayoutContentHeader>
+                    LOGO
+                </RootLayoutContentHeader>
+                <RootContent>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="*" element={<NoFound/>}/>
+                    </Routes>
+                </RootContent>
+            </RootLayoutContent>
+            <RootLayoutFooter>
+                Ant Design ©2023 Created by Ant UED
+            </RootLayoutFooter>
         </Layout>
-    );
-};
+    )
+}
 
-export default MainLayout
+export default Root
