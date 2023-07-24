@@ -261,10 +261,7 @@ const TournamentList: React.FC = () => {
             onRow={data => ({
                 onClick: () => {
                     console.log("Click on row:", data)
-                    modalPopup.setOpenModal({
-                        openModal: true,
-                        children: <TournamentInfo tournamentItem={data}/>
-                    })
+                    modalPopup.setOpenModal({openModal: true, children: <TournamentInfo tournamentItem={data}/>, props: {width: 1000}})
                 }
             })}
         />

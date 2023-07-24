@@ -1,15 +1,15 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, ReactNode} from 'react'
 import {TeamOutlined} from '@ant-design/icons'
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import type { MenuProps } from 'antd'
 import { Layout, Menu, theme } from 'antd'
-import {useModalPopup} from "../store/useModelPopup";
-import AuthForm from "./AuthForm";
+import {useModalPopup} from "../store/useModelPopup"
+import AuthForm from "./AuthForm"
 
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 function getItem(
     label: React.ReactNode,
@@ -42,7 +42,12 @@ const Login = () =>{
     }
 
     const onClick = () => {
-        modalPopup.setOpenModal({openModal: true, children: <AuthForm/>})
+        modalPopup.setOpenModal(prevState => ({
+            ...prevState,
+            openModal: true,
+            children: <AuthForm/>,
+            props: {width: 350}
+        }))
     }
 
     return <Menu onClick={onClick} style={styles} {...authProps}/>

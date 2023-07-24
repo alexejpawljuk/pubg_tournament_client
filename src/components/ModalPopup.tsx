@@ -23,17 +23,27 @@ const ModalPopup = () => {
         openModal,
         setOpenModal,
         children,
+        props
     } = useModalPopup()
+
+    const close = () => {
+        setOpenModal(prevState => ({...prevState, openModal: false}))
+    }
+
+    const toDefault = () => {
+        setOpenModal(prevState => ({...prevState, children: null, props: {}}))
+    }
 
     return (
         <Modal
             open={openModal}
-            // width={400}
             centered
             destroyOnClose
             keyboard
             footer={null}
-            onCancel={() => setOpenModal({openModal: false, children: null})}
+            onCancel={close}
+            afterClose={toDefault}
+            {...props}
         ><Content>{children}</Content>
         </Modal>
     )
