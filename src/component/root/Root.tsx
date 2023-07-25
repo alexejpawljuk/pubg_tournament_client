@@ -9,6 +9,7 @@ import RootLayoutFooter from "./RootLayoutFooter"
 import Home from "../content/Home"
 import NoFound from "../content/NotFound"
 import Navigation from "../Navigation"
+import CardTournament from "../CardTournament";
 
 
 const Root = () => {

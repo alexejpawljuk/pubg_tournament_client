@@ -3,10 +3,10 @@ import {theme, ThemeConfig} from "antd"
 import {ConfigProvider} from "antd"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 
-import Home from "./components/content/Home"
-import NoFound from "./components/content/NotFound"
-import ModalPopup from "./components/popup/ModalPopup"
-import Root from "./components/root/Root";
+import Home from "./component/content/Home"
+import NoFound from "./component/content/NotFound"
+import ModalPopup from "./component/popup/ModalPopup"
+import Root from "./component/root/Root";
 
 const appThemeConfig: ThemeConfig = {
     algorithm: theme.defaultAlgorithm
