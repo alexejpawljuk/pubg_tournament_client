@@ -209,7 +209,6 @@ const TournamentList: React.FC = () => {
         }
     ]
 
-    // eslint-disable-next-line react-hook/exhaustive-deps
     const tournamentList: ITournament[] = []
     const sortedByDateTournamentList = useMemo(() => {
         for (let i = 0; i < 150; i++) {
