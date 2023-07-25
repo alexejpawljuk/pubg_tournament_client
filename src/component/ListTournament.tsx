@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Button, Rate, Space, Table, Tag} from 'antd'
+import {Button, Rate, Space, Table, Tag, Tooltip} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
@@ -196,16 +196,18 @@ const TournamentList: React.FC = () => {
             align: "center",
             width: 200,
             render: (value, record) =>
-                <Button
-                    size="small"
-                    icon={<LoginOutlined/>}
-                    onClick={e => {
-                        e.stopPropagation()
-                        console.log("Click on JOIN", record)
-                    }}
-                >
-                    JOIN
-                </Button>
+                <Tooltip title="Join game" color="orange">
+                    <Button
+                        size="small"
+                        icon={<LoginOutlined/>}
+                        onClick={e => {
+                            e.stopPropagation()
+                            console.log("Click on JOIN", record)
+                        }}
+                    >
+                        JOIN
+                    </Button>
+                </Tooltip>
         }
     ]
 
