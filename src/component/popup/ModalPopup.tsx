@@ -8,7 +8,7 @@ interface IContent {
 
 const Content: FC<IContent> = ({children}) => {
     const styles: CSSProperties = {
-        margin: 20
+        margin: "20px 0"
     }
 
     return (

@@ -5,6 +5,8 @@ import {ShoppingCartOutlined, UserAddOutlined, UserOutlined} from "@ant-design/i
 import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
 import AuthForm from "./AuthForm"
 import RegisterForm from "./RegisterForm"
+import Shop from "./Shop"
+import {useTheme} from "../store/useTheme"
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -25,16 +27,19 @@ export function getItem(
 
 const Account = () => {
     const modalPopup = useModalPopup()
+    const {theme} = useTheme()
+
+    const items: MenuItem[] = [
+        getItem("Account", "account", <UserOutlined/>, [
+            getItem("Login", "login", <AiOutlineLogin/>),
+            getItem("Register", "register", <UserAddOutlined/>),
+        ])
+    ]
 
     const authProps: MenuProps = {
-        theme: "dark",
+        theme,
         mode: "horizontal",
-        items: [
-            getItem("Account", "",  <UserOutlined/>, [
-                getItem("Login", "login", <AiOutlineLogin/>),
-                getItem("Register", "register", <UserAddOutlined />),
-            ])
-        ],
+        items,
         selectable: false,
     }
 
@@ -68,13 +73,16 @@ const Account = () => {
 }
 
 const Nav = () => {
+    const modalPopup = useModalPopup()
+    const {theme} = useTheme()
+
     const items: MenuItem[] = [
         getItem("Home", "home", <AiOutlineHome/>),
-        getItem('Shop', 'shop', <ShoppingCartOutlined />)
+        getItem('Shop', 'shop', <ShoppingCartOutlined/>)
     ]
 
     const menuProps: MenuProps = {
-        theme: "dark",
+        theme,
         mode: "horizontal",
         items,
         selectable: false,
@@ -89,8 +97,16 @@ const Nav = () => {
         if (key === "home") {
             window.location.replace("/")
         }
-        if (key === "shop"){
+        if (key === "shop") {
             console.log("Click shop")
+            modalPopup.setOpenModal(prevState => ({
+                ...prevState,
+                openModal: true,
+                props: {
+                    width: 800
+                },
+                children: <Shop/>
+            }))
         }
     }
 
