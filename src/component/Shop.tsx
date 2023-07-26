@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from 'react'
-import {Avatar, Card, CardProps, Divider, Space, Tag, theme} from 'antd'
+import {Avatar, Card, CardProps, Divider, InputNumber, Select, Space, Tag, theme} from 'antd'
 import {ShoppingCartOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import Meta from "antd/es/card/Meta"
 import coinsImage from '../image/coins.png'
@@ -65,7 +65,28 @@ const Shop = () => {
                         <Meta
                             avatar={<Avatar src={premiumAccount}/>}
                             title="Premium account"
-                            description={"Price: 10"}
+                            description={
+                               <Space direction={"vertical"}>
+                                   <span>Price: 1</span>
+                                   <span>Total tokens: 10</span>
+                                   <InputNumber
+                                       style={{width: 50}}
+                                       defaultValue={10}
+                                       min={0}
+                                       max={100}
+                                       controls={true}
+                                       size="small"
+
+                                       // formatter={(value) => `${value}`}
+                                       // parser={(value) => value!.replace('%', '')}
+                                       onChange={e => {
+                                           console.log(e)
+                                       }}
+                                   />
+
+                               </Space>
+                        }
+                            key={"premium_account"}
                         />
                     </Card>
 
