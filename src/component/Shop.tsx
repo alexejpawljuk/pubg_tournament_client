@@ -3,6 +3,8 @@ import {Avatar, Card, CardProps, Divider, Space, Tag, theme} from 'antd'
 import {ShoppingCartOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import Meta from "antd/es/card/Meta"
 import coinsImage from '../image/coins.png'
+import ticketImage from "../image/ticket.png"
+import premiumAccount from "../image/high-quality.png"
 
 const ShopUnit: FC<{ children?: ReactNode, props?: CardProps }> = ({children, props}) => {
     return (
@@ -53,9 +55,47 @@ const Shop = () => {
 
             <Space style={{display: "block"}}>
                 <div style={styles}>
-                    <ShopUnit/>
-                    <ShopUnit/>
-                    <ShopUnit/>
+                    <Card
+                        style={{margin: 16, width: 300}}
+                        actions={[
+                            <ShoppingCartOutlined key="buy"/>,
+                            <InfoCircleOutlined key="shop_unit_info"/>
+                        ]}
+                    >
+                        <Meta
+                            avatar={<Avatar src={premiumAccount}/>}
+                            title="Premium account"
+                            description={"Price: 10"}
+                        />
+                    </Card>
+
+                    <Card
+                        style={{margin: 16, width: 300}}
+                        actions={[
+                            <ShoppingCartOutlined key="buy"/>,
+                            <InfoCircleOutlined key="shop_unit_info"/>
+                        ]}
+                    >
+                        <Meta
+                            avatar={<Avatar src={ticketImage}/>}
+                            title="Ticket"
+                            description={"Price: 10"}
+                        />
+                    </Card>
+
+                    <Card
+                        style={{margin: 16, width: 300}}
+                        actions={[
+                            <ShoppingCartOutlined key="buy"/>,
+                            <InfoCircleOutlined key="shop_unit_info"/>
+                        ]}
+                    >
+                        <Meta
+                            avatar={<Avatar src={coinsImage}/>}
+                            title="Coin"
+                            description={"Price: 10"}
+                        />
+                    </Card>
                 </div>
             </Space>
             <Space>
