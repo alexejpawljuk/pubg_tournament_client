@@ -9,7 +9,7 @@ interface UseTheme {
 }
 
 export const useTheme = create<UseTheme>(setState => ({
-    theme: "dark",
+    theme: "light",
     setTheme: value => {
         if (typeof value === "function"){
             setState(state => ({

@@ -196,7 +196,7 @@ const TournamentList: React.FC = () => {
             align: "center",
             width: 200,
             render: (value, record) =>
-                <Tooltip title="Join game" color="orange">
+                // <Tooltip title="Join game" color="orange">
                     <Button
                         size="small"
                         icon={<LoginOutlined/>}
@@ -207,7 +207,7 @@ const TournamentList: React.FC = () => {
                     >
                         JOIN
                     </Button>
-                </Tooltip>
+                // </Tooltip>
         }
     ]
 

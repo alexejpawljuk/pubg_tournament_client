@@ -7,7 +7,7 @@ import ModalPopup from "./component/popup/ModalPopup"
 import Root from "./component/root/Root";
 
 const appThemeConfig: ThemeConfig = {
-    algorithm: theme.defaultAlgorithm,
+    algorithm: theme.darkAlgorithm,
     components: {
         Menu: {
 

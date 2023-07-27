@@ -36,7 +36,7 @@ const UnitCard: FC<IUnitCard> = ({data}) => {
                     {`${price} TOKEN`}
                 </span>
             }
-            headStyle={{background: "#001529"}}
+            // headStyle={{background: "#001529"}}
             actions={[
                 <ShoppingCartOutlined key="buy"/>,
                 <InfoCircleOutlined key="shop_unit_info"/>
