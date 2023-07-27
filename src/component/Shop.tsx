@@ -1,10 +1,20 @@
 import React, {FC, ReactNode} from 'react'
-import {Avatar, Card, CardProps, Divider, InputNumber, Select, Space, Tag, theme} from 'antd'
+import {Avatar, Card, CardProps, Divider, InputNumber, Space, Tag, theme} from 'antd'
 import {ShoppingCartOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import Meta from "antd/es/card/Meta"
+
 import coinsImage from '../image/coins.png'
 import ticketImage from "../image/ticket.png"
 import premiumAccount from "../image/high-quality.png"
+import contractImage from "../image/contract.png"
+
+import {GrFormAdd} from "react-icons/gr"
+import {AiOutlineMinus} from "react-icons/ai"
+import { createFromIconfontCN } from '@ant-design/icons';
+
+const MyIcon = createFromIconfontCN({
+
+})
 
 const ShopUnit: FC<{ children?: ReactNode, props?: CardProps }> = ({children, props}) => {
     return (
@@ -26,9 +36,10 @@ const ShopUnit: FC<{ children?: ReactNode, props?: CardProps }> = ({children, pr
 }
 
 const Shop = () => {
-    const {token: {colorBorder, borderRadius, colorBgLayout}} = theme.useToken()
+    const {token: {colorBorder, borderRadius, colorBgLayout, Menu}} = theme.useToken()
     const styles = {
         display: "flex",
+        // width: 1000,
         justifyContent: "space-between",
         overflow: "scroll",
         border: "1px solid",
@@ -46,17 +57,26 @@ const Shop = () => {
             <Space style={{display: "flex", justifyContent: "end"}}>
                 <Tag
                     onClick={onClickBalance}
-                    color="processing"
-                > Balance: 0
+                    // color={Menu?.colorItemBg}
+                    color="#001529"
+                    style={{
+                        color: "rgba(255, 255, 255, 0.65)",
+                        padding: "10px 5px"
+                }}
+                > Balance: 10 TOKEN
                 </Tag>
             </Space>
 
-            <Divider orientation="left">Shop</Divider>
+            <Divider orientation="center">Shop</Divider>
 
             <Space style={{display: "block"}}>
                 <div style={styles}>
                     <Card
                         style={{margin: 16, width: 300}}
+                        hoverable
+                        size="small"
+                        extra={<span style={{color: "rgba(255, 255, 255, 0.65)"}}>4 TOKEN</span>}
+                        headStyle={{background: "#001529"}}
                         actions={[
                             <ShoppingCartOutlined key="buy"/>,
                             <InfoCircleOutlined key="shop_unit_info"/>
@@ -67,17 +87,17 @@ const Shop = () => {
                             title="Premium account"
                             description={
                                <Space direction={"vertical"}>
-                                   <span>Price: 1</span>
+
                                    <span>Total tokens: 10</span>
                                    <InputNumber
-                                       style={{width: 50}}
                                        defaultValue={10}
-                                       min={0}
+                                       min={1}
                                        max={100}
-                                       controls={true}
+                                       controls={false}
                                        size="small"
+                                       addonAfter={<GrFormAdd key="buy"/>}
+                                       addonBefore={<AiOutlineMinus key="buy"/>}
 
-                                       // formatter={(value) => `${value}`}
                                        // parser={(value) => value!.replace('%', '')}
                                        onChange={e => {
                                            console.log(e)
@@ -92,6 +112,7 @@ const Shop = () => {
 
                     <Card
                         style={{margin: 16, width: 300}}
+                        hoverable
                         actions={[
                             <ShoppingCartOutlined key="buy"/>,
                             <InfoCircleOutlined key="shop_unit_info"/>
@@ -106,6 +127,7 @@ const Shop = () => {
 
                     <Card
                         style={{margin: 16, width: 300}}
+                        hoverable
                         actions={[
                             <ShoppingCartOutlined key="buy"/>,
                             <InfoCircleOutlined key="shop_unit_info"/>
