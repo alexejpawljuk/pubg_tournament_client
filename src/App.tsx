@@ -1,15 +1,18 @@
 import React, {FC, ReactNode} from 'react'
 import {theme, ThemeConfig} from "antd"
 import {ConfigProvider} from "antd"
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {BrowserRouter} from "react-router-dom"
 
-import Home from "./component/content/Home"
-import NoFound from "./component/content/NotFound"
 import ModalPopup from "./component/popup/ModalPopup"
 import Root from "./component/root/Root";
 
 const appThemeConfig: ThemeConfig = {
-    algorithm: theme.defaultAlgorithm
+    algorithm: theme.defaultAlgorithm,
+    components: {
+        Menu: {
+
+        }
+    }
 }
 
 const AppProvider: FC<{ children: ReactNode }> = ({children}) => {

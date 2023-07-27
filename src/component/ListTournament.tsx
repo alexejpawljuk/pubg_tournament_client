@@ -213,7 +213,7 @@ const TournamentList: React.FC = () => {
 
     const tournamentList: ITournament[] = []
     const sortedByDateTournamentList = useMemo(() => {
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             tournamentList.push({
                 id: uid(),
                 name: getRandomTournamentName(),
@@ -230,7 +230,7 @@ const TournamentList: React.FC = () => {
                     ticket: getRandomNumber(20),
                     coin: getRandomNumber(20)
                 },
-                date: new Date(2023, 6, getRandomNumber(28), getRandomNumber(24), getRandomNumber(60)),
+                date: new Date(2023, 6, getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
                 condition: {
                     rank: getRandomNumber(5)
                 },

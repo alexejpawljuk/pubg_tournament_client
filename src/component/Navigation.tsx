@@ -103,7 +103,7 @@ const Nav = () => {
                 ...prevState,
                 openModal: true,
                 props: {
-                    width: 800
+                    width: 550
                 },
                 children: <Shop/>
             }))
