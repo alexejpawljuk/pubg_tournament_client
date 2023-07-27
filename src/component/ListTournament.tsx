@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Button, Rate, Space, Table, Tag, Tooltip} from 'antd'
+import {Button, Rate, Space, Table, Tag, theme, Tooltip} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
@@ -106,6 +106,9 @@ const TournamentInfo: FC<ITournamentItem> = ({tournamentItem}) => {
 }
 
 const TournamentList: React.FC = () => {
+    const {token: {
+        colorBgLayout
+    }} = theme.useToken()
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
     const modalPopup = useModalPopup()
@@ -196,10 +199,12 @@ const TournamentList: React.FC = () => {
             align: "center",
             width: 200,
             render: (value, record) =>
-                // <Tooltip title="Join game" color="orange">
+
                     <Button
                         size="small"
                         icon={<LoginOutlined/>}
+                        style={{background: "orange", color: colorBgLayout}}
+                        type="default"
                         onClick={e => {
                             e.stopPropagation()
                             console.log("Click on JOIN", record)
@@ -207,7 +212,16 @@ const TournamentList: React.FC = () => {
                     >
                         JOIN
                     </Button>
-                // </Tooltip>
+                //     <Tag
+                //     icon={<LoginOutlined/>}
+                //     color="orange"
+                //
+                //     onClick={(event) => {
+                //         event.stopPropagation()
+                //         console.log(event)
+                //     }}
+                // >JOIN</Tag>
+
         }
     ]
 
