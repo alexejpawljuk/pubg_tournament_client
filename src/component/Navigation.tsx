@@ -1,12 +1,13 @@
 import React from 'react'
-import {Menu, MenuProps} from "antd"
+import {Menu, MenuProps, Switch, theme} from "antd"
 import {useModalPopup} from "../store/useModelPopup"
-import {ShoppingCartOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons"
-import {AiOutlineHome, AiOutlineLogin} from "react-icons/ai"
+import {ShoppingCartOutlined, UserAddOutlined, UserOutlined, CheckOutlined, CloseOutlined} from "@ant-design/icons"
+import {AiOutlineHome, AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
 import AuthForm from "./AuthForm"
 import RegisterForm from "./RegisterForm"
 import Shop from "./Shop"
-import {useTheme} from "../store/useTheme"
+import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md";
+import {useTheme} from "../store/useTheme";
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -27,45 +28,59 @@ export function getItem(
 
 const Account = () => {
     const modalPopup = useModalPopup()
-    const {theme} = useTheme()
+    const {setTheme} = useTheme()
 
     const items: MenuItem[] = [
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
             getItem("Register", "register", <UserAddOutlined/>),
-        ])
+            getItem("Setting", "setting", <AiOutlineSetting/>, [
+                getItem("Dark", "dark", <MdDarkMode/>),
+                getItem("Light", "light", <MdOutlineDarkMode/>),
+            ]),
+        ]),
     ]
 
     const authProps: MenuProps = {
-        theme,
         mode: "horizontal",
         items,
         selectable: false,
     }
 
     const styles = {
-        width: "30%",
+        width: "40%",
         justifyContent: "right"
     }
 
     const onClick: MenuProps["onClick"] = (e) => {
-        if (e.key === "login") {
-            modalPopup.setOpenModal(prevState => ({
-                ...prevState,
-                openModal: true,
-                children: <AuthForm/>,
-                props: {width: 350}
-            }))
-        }
-        if (e.key === "register") {
-            modalPopup.setOpenModal(prevState => ({
-                ...prevState,
-                openModal: true,
-                props: {
-                    width: 800
-                },
-                children: <RegisterForm/>
-            }))
+        switch (e.key) {
+            case "login":
+                modalPopup.setOpenModal(prevState => ({
+                    ...prevState,
+                    openModal: true,
+                    children: <AuthForm/>,
+                    props: {width: 350}
+                }))
+                break;
+
+            case "register":
+                modalPopup.setOpenModal(prevState => ({
+                    ...prevState,
+                    openModal: true,
+                    props: {
+                        width: 800
+                    },
+                    children: <RegisterForm/>
+                }))
+                break;
+
+            case "dark":
+                setTheme(prevState => ({...prevState, algorithm: theme.darkAlgorithm}))
+                break;
+
+            case "light":
+                setTheme(prevState => ({...prevState, algorithm: theme.defaultAlgorithm}))
+                break;
         }
     }
 
@@ -74,7 +89,6 @@ const Account = () => {
 
 const Nav = () => {
     const modalPopup = useModalPopup()
-    const {theme} = useTheme()
 
     const items: MenuItem[] = [
         getItem("Home", "home", <AiOutlineHome/>),
@@ -82,14 +96,13 @@ const Nav = () => {
     ]
 
     const menuProps: MenuProps = {
-        theme,
         mode: "horizontal",
         items,
         selectable: false,
     }
 
     const styles = {
-        width: "70%"
+        width: "60%"
     }
 
     const onClick: MenuProps["onClick"] = (e) => {

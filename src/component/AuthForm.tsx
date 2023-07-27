@@ -8,7 +8,6 @@ const AuthFrom: React.FC = () => {
     const modalPopup = useModalPopup()
     const [loading, setLoading] = useState<boolean>(false)
 
-
     const linkStyles: CSSProperties = {
         paddingLeft: 0,
     }

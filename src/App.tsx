@@ -4,18 +4,13 @@ import {ConfigProvider} from "antd"
 import {BrowserRouter} from "react-router-dom"
 
 import ModalPopup from "./component/popup/ModalPopup"
-import Root from "./component/root/Root";
+import Root from "./component/root/Root"
+import {useTheme} from "./store/useTheme";
 
-const appThemeConfig: ThemeConfig = {
-    algorithm: theme.darkAlgorithm,
-    components: {
-        Menu: {
-
-        }
-    }
-}
 
 const AppProvider: FC<{ children: ReactNode }> = ({children}) => {
+    const {appThemeConfig} = useTheme()
+
     return (
         <BrowserRouter>
             <ConfigProvider theme={appThemeConfig}>

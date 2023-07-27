@@ -1,20 +1,24 @@
 import {create} from "zustand"
-import {MenuProps} from "antd"
+import {theme, ThemeConfig} from "antd"
 import {Dispatch, SetStateAction} from "react"
 
 
 interface UseTheme {
-    theme: MenuProps["theme"]
-    setTheme: Dispatch<SetStateAction<MenuProps["theme"]>>
+    appThemeConfig: ThemeConfig
+    setTheme: Dispatch<SetStateAction<ThemeConfig>>
+}
+
+const defaultAppConfig: ThemeConfig = {
+    algorithm: theme.darkAlgorithm,
 }
 
 export const useTheme = create<UseTheme>(setState => ({
-    theme: "light",
+    appThemeConfig: defaultAppConfig,
     setTheme: value => {
         if (typeof value === "function"){
             setState(state => ({
                 ...state,
-                theme: value(state.theme)
+                appThemeConfig: value(state.appThemeConfig)
             }))
         }
         else {

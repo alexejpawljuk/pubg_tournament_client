@@ -57,8 +57,6 @@ const getRandomTournamentName = (): TournamentName => {
     return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
-
-
 const DateDisplay: FC<IDateDisplay> = ({date}) => {
     let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
     if (isToday(date)) color = "green"
@@ -107,7 +105,7 @@ const TournamentInfo: FC<ITournamentItem> = ({tournamentItem}) => {
 
 const TournamentList: React.FC = () => {
     const {token: {
-        colorBgLayout
+        colorBgLayout,
     }} = theme.useToken()
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
@@ -199,7 +197,6 @@ const TournamentList: React.FC = () => {
             align: "center",
             width: 200,
             render: (value, record) =>
-
                     <Button
                         size="small"
                         icon={<LoginOutlined/>}
@@ -221,7 +218,6 @@ const TournamentList: React.FC = () => {
                 //         console.log(event)
                 //     }}
                 // >JOIN</Tag>
-
         }
     ]
 
@@ -272,7 +268,7 @@ const TournamentList: React.FC = () => {
             scroll={{y: 300, x: "100vh"}}
             size="small"
             loading={isTableLoading}
-            footer={() => <div style={{height: 10}}></div>}
+            footer={() => <div style={{height: 5}}></div>}
             onRow={data => ({
                 onClick: () => {
                     console.log("Click on row:", data)
@@ -284,16 +280,3 @@ const TournamentList: React.FC = () => {
 }
 
 export default TournamentList
-
-
-// const getRandomFloat = (factor: number): number => +(Math.random() * factor).toFixed(2)
-{/*<Progress*/
-}
-{/*    style={{margin: 0}}*/
-}
-{/*    percent={Number((100 * (record.condition.rank % 1)).toFixed(2))}*/
-}
-{/*    size={[150, 5]}*/
-}
-{/*/>*/
-}
