@@ -5,39 +5,38 @@ import {ModalProps} from "antd";
 
 namespace UseModalPopup {
     type OpenModal = boolean
+
     export interface IStore {
         openModal: OpenModal
         children: ReactNode | null
         props: ModalProps
-        setOpenModal: Dispatch<SetStateAction<{ openModal: OpenModal, children: ReactNode, props?: ModalProps}>>
+        setOpenModal: Dispatch<SetStateAction<{ openModal: OpenModal, children: ReactNode, props?: ModalProps }>>
     }
 }
 
-export const useModalPopup = create<UseModalPopup.IStore>()(
-    devtools(
-        (setState) => {
-            return {
-                openModal: false,
-                children: null,
-                props: {},
-                setOpenModal: (value) => {
-                    if (typeof value === "function") {
-                        setState(state => ({
-                            ...state,
-                            openModal: value(state).openModal,
-                            children: value(state).children,
-                            props: value(state).props
-                        }))
-                    } else {
-                        setState(state => ({
-                            ...state,
-                            openModal: value.openModal,
-                            children: value.children,
-                            props: value.props
-                        }))
-                    }
+export const useModalPopup = create<UseModalPopup.IStore>(
+    (setState) => {
+        return {
+            openModal: false,
+            children: null,
+            props: {},
+            setOpenModal: (value) => {
+                if (typeof value === "function") {
+                    setState(state => ({
+                        ...state,
+                        openModal: value(state).openModal,
+                        children: value(state).children,
+                        props: value(state).props
+                    }))
+                } else {
+                    setState(state => ({
+                        ...state,
+                        openModal: value.openModal,
+                        children: value.children,
+                        props: value.props
+                    }))
                 }
             }
         }
-    )
+    }
 )
