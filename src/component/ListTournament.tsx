@@ -64,6 +64,23 @@ const DateDisplay: FC<IDateDisplay> = ({date}) => {
     return <Tag color={color}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
 }
 
+const JoinGameButton: FC<{tournament: ITournament}> = ({tournament}) => {
+    const {token: {colorBgLayout}} = theme.useToken()
+
+     return <Button
+         size="small"
+         icon={<LoginOutlined/>}
+         style={{background: "orange", color: colorBgLayout}}
+         type="default"
+         onClick={e => {
+             e.stopPropagation()
+             console.log("Click on JOIN", tournament)
+         }}
+     >
+         JOIN
+     </Button>
+}
+
 const RankDisplay: FC<IRankDisplay> = ({value}) => {
     return(<Rate
         disabled
@@ -109,6 +126,7 @@ const TournamentList: React.FC = () => {
     }} = theme.useToken()
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
+    const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const modalPopup = useModalPopup()
 
     const tournamentModel: ColumnsType<ITournament> = [
@@ -196,28 +214,7 @@ const TournamentList: React.FC = () => {
             dataIndex: "action",
             align: "center",
             width: 200,
-            render: (value, record) =>
-                    <Button
-                        size="small"
-                        icon={<LoginOutlined/>}
-                        style={{background: "orange", color: colorBgLayout}}
-                        type="default"
-                        onClick={e => {
-                            e.stopPropagation()
-                            console.log("Click on JOIN", record)
-                        }}
-                    >
-                        JOIN
-                    </Button>
-                //     <Tag
-                //     icon={<LoginOutlined/>}
-                //     color="orange"
-                //
-                //     onClick={(event) => {
-                //         event.stopPropagation()
-                //         console.log(event)
-                //     }}
-                // >JOIN</Tag>
+            render: (value, record) => <JoinGameButton tournament={record}/>
         }
     ]
 
@@ -250,8 +247,6 @@ const TournamentList: React.FC = () => {
         const sorteredByDate = filteredByDateTournamentList.sort((a, b) => a.date.getTime() - b.date.getTime())
         return sorteredByDate
     }, [])
-
-
 
 
     useEffect(() => {

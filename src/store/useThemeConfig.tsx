@@ -5,23 +5,23 @@ import {Dispatch, SetStateAction} from "react"
 
 interface UseTheme {
     appThemeConfig: ThemeConfig
-    setTheme: Dispatch<SetStateAction<ThemeConfig>>
+    setThemeConfig: Dispatch<SetStateAction<ThemeConfig>>
 }
 
 const defaultAppConfig: ThemeConfig = {
-    algorithm: theme.darkAlgorithm,
+    algorithm: theme.darkAlgorithm
 }
 
-export const useTheme = create<UseTheme>(setState => ({
+export const useThemeConfig = create<UseTheme>((setState, getState) => ({
     appThemeConfig: defaultAppConfig,
-    setTheme: value => {
-        if (typeof value === "function"){
+    setThemeConfig: value => {
+        if (typeof value === "function") {
             setState(state => ({
                 ...state,
                 appThemeConfig: value(state.appThemeConfig)
             }))
-        }
-        else {
+
+        } else {
             setState(state => ({
                 ...state,
                 theme: value

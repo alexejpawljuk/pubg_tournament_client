@@ -1,5 +1,5 @@
 import React, {FC, ReactNode, useState} from 'react'
-import {Avatar, Card, CardProps, Divider, Input, InputNumber, Space, Tag, theme} from 'antd'
+import {Avatar, Card, CardProps, ConfigProvider, Divider, Input, InputNumber, Space, Tag, theme} from 'antd'
 import {ShoppingCartOutlined, InfoCircleOutlined} from "@ant-design/icons"
 import Meta from "antd/es/card/Meta"
 
@@ -9,7 +9,7 @@ import premiumAccount from "../image/high-quality.png"
 
 import {GrFormAdd} from "react-icons/gr"
 import {AiOutlineMinus} from "react-icons/ai"
-import {uid} from "uid";
+import {uid} from "uid"
 
 
 interface IUnitCardData {
@@ -24,7 +24,15 @@ interface IUnitCard {
 }
 
 const UnitCard: FC<IUnitCard> = ({data}) => {
-    const {title ,price, avatarPath} = data
+    const {title, price, avatarPath} = data
+
+    const onBuyItem = () => {
+        console.log("Buy",)
+    }
+
+    const onInfo = () => {
+        console.log("Info")
+    }
 
     return (
         <Card
@@ -32,13 +40,13 @@ const UnitCard: FC<IUnitCard> = ({data}) => {
             hoverable
             size="small"
             extra={
-                <span style={{color: "rgba(255, 255, 255, 0.65)"}}>
+                <div style={{color: "rgba(255, 255, 255, 0.65)"}}>
                     {`${price} TOKEN`}
-                </span>
+                </div>
             }
             // headStyle={{background: "#001529"}}
             actions={[
-                <ShoppingCartOutlined key="buy"/>,
+                <ShoppingCartOutlined key="buy" />,
                 <InfoCircleOutlined key="shop_unit_info"/>
             ]}
         >
@@ -46,10 +54,17 @@ const UnitCard: FC<IUnitCard> = ({data}) => {
                 avatar={<Avatar src={avatarPath}/>}
                 title={title}
                 description={
-                    <Space direction={"vertical"}>
-                        <span>Total tokens: 10</span>
-                        <Input type="number" min={1} max={100} defaultValue={1} size="small" style={{width: 60}}/>
-                    </Space>
+                    <>
+                        <Space direction="vertical">
+                            <span>
+                                Description
+                            </span>
+                        </Space>
+                        <Space size={[10, 0]}>
+                            <Input type="number" min={1} max={100} defaultValue={1} size="small" style={{width: 60}}/>
+                            <span>{` / ${10}`}</span>
+                        </Space>
+                    </>
                 }
                 key={"premium_account"}
             />
@@ -61,9 +76,9 @@ const UnitCard: FC<IUnitCard> = ({data}) => {
 const Shop = () => {
     const {token: {colorBorder, borderRadius, colorBgLayout}} = theme.useToken()
     const [shopItems, setShopItems] = useState<IUnitCardData[]>([
-        {price: 10, avatarPath: premiumAccount, title: "Premium account", },
-        {price: 0.1, avatarPath: coinsImage, title: "Coin", },
-        {price: 1, avatarPath: ticketImage, title: "Ticket", },
+        {price: 10, avatarPath: premiumAccount, title: "Premium account",},
+        {price: 0.1, avatarPath: coinsImage, title: "Coin",},
+        {price: 1, avatarPath: ticketImage, title: "Ticket",},
     ])
 
 

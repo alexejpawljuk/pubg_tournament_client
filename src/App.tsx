@@ -1,16 +1,11 @@
 import React, {FC, ReactNode} from 'react'
-import {theme, ThemeConfig} from "antd"
-import {ConfigProvider} from "antd"
+import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
-
 import ModalPopup from "./component/popup/ModalPopup"
 import Root from "./component/root/Root"
-import {useTheme} from "./store/useTheme";
+import {useUserTheme} from "./hook/useUserTheme"
 
-
-const AppProvider: FC<{ children: ReactNode }> = ({children}) => {
-    const {appThemeConfig} = useTheme()
-
+const AppProvider: FC<{ children: ReactNode, appThemeConfig: ThemeConfig }> = ({children, appThemeConfig}) => {
     return (
         <BrowserRouter>
             <ConfigProvider theme={appThemeConfig}>
@@ -21,10 +16,11 @@ const AppProvider: FC<{ children: ReactNode }> = ({children}) => {
 }
 
 function App() {
+    const {appThemeConfig} = useUserTheme()
 
     return (
         <div className="App">
-            <AppProvider>
+            <AppProvider appThemeConfig={appThemeConfig}>
                 <ModalPopup/>
                 <Root/>
             </AppProvider>

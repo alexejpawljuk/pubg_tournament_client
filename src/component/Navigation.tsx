@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Menu, MenuProps, Switch, theme} from "antd"
 import {useModalPopup} from "../store/useModelPopup"
 import {ShoppingCartOutlined, UserAddOutlined, UserOutlined, CheckOutlined, CloseOutlined} from "@ant-design/icons"
@@ -7,7 +7,8 @@ import AuthForm from "./AuthForm"
 import RegisterForm from "./RegisterForm"
 import Shop from "./Shop"
 import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md";
-import {useTheme} from "../store/useTheme";
+import {useThemeConfig} from "../store/useThemeConfig";
+import {useUserTheme} from "../hook/useUserTheme";
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -28,7 +29,8 @@ export function getItem(
 
 const Account = () => {
     const modalPopup = useModalPopup()
-    const {setTheme} = useTheme()
+    const {setThemeConfig} = useThemeConfig()
+    const {setUserTheme} = useUserTheme()
 
     const items: MenuItem[] = [
         getItem("Account", "account", <UserOutlined/>, [
@@ -75,11 +77,13 @@ const Account = () => {
                 break;
 
             case "dark":
-                setTheme(prevState => ({...prevState, algorithm: theme.darkAlgorithm}))
+                setThemeConfig(prevState => ({...prevState, algorithm: theme.darkAlgorithm}))
+                setUserTheme(e.key)
                 break;
 
             case "light":
-                setTheme(prevState => ({...prevState, algorithm: theme.defaultAlgorithm}))
+                setThemeConfig(prevState => ({...prevState, algorithm: theme.defaultAlgorithm}))
+                setUserTheme(e.key)
                 break;
         }
     }
