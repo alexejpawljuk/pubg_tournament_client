@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hook/useUserTheme.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/image/piggy-bank-money-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/image/piggybank.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ListTournament.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ListTournament.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/Navigation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useTheme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useThemeConfig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/root/Root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/root/Root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/image/contract.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typing/import-png.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typing/import-png.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,14 +50,15 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/image" />
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/public/image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/component/navigation" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/typing" />
       <recent name="$PROJECT_DIR$/src/component" />
       <recent name="$PROJECT_DIR$/public/image" />
-      <recent name="$PROJECT_DIR$/src/components/popup" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -68,7 +71,7 @@
       <updated>1687547856222</updated>
       <workItem from="1687547857837" duration="610000" />
       <workItem from="1689879314039" duration="117233000" />
-      <workItem from="1690233376554" duration="80027000" />
+      <workItem from="1690233376554" duration="85864000" />
     </task>
     <servers />
   </component>

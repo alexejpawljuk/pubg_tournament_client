@@ -8,7 +8,7 @@ import RootContent from './RootContent'
 import RootLayoutFooter from "./RootLayoutFooter"
 import Home from "../content/Home"
 import NoFound from "../content/NotFound"
-import Navigation from "../Navigation"
+import Navigation from "../navigation/Navigation"
 
 
 const Root = () => {

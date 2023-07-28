@@ -1,14 +1,20 @@
-import React, {useEffect} from 'react'
-import {Menu, MenuProps, Switch, theme} from "antd"
-import {useModalPopup} from "../store/useModelPopup"
-import {ShoppingCartOutlined, UserAddOutlined, UserOutlined, CheckOutlined, CloseOutlined} from "@ant-design/icons"
+import React from 'react'
+import {Menu, MenuProps, theme} from "antd"
+import {useModalPopup} from "../../store/useModelPopup"
+import {ShoppingCartOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons"
 import {AiOutlineHome, AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
-import AuthForm from "./AuthForm"
-import RegisterForm from "./RegisterForm"
-import Shop from "./Shop"
-import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md";
-import {useThemeConfig} from "../store/useThemeConfig";
-import {useUserTheme} from "../hook/useUserTheme";
+import AuthForm from "../AuthForm"
+import RegisterForm from "../RegisterForm"
+import Shop from "../Shop"
+import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md"
+import {useThemeConfig} from "../../store/useThemeConfig"
+import {useUserTheme} from "../../hook/useUserTheme"
+import piggyBank from "../../image/piggy-bank-money-svgrepo-com.svg"
+
+import { createFromIconfontCN } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
+import {PiPiggyBankLight} from "react-icons/pi";
+import {LiaPiggyBankSolid} from "react-icons/lia";
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -33,6 +39,7 @@ const Account = () => {
     const {setUserTheme} = useUserTheme()
 
     const items: MenuItem[] = [
+        getItem(<span style={{color: "gold"}}>10</span>, "balance", <LiaPiggyBankSolid color={"gold"} title={"title"} size={18}/>),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
             getItem("Register", "register", <UserAddOutlined/>),
