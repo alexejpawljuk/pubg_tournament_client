@@ -15,6 +15,8 @@ import { createFromIconfontCN } from '@ant-design/icons'
 import Icon from '@ant-design/icons'
 import {PiPiggyBankLight} from "react-icons/pi";
 import {LiaPiggyBankSolid} from "react-icons/lia";
+import {GiTakeMyMoney} from "react-icons/gi";
+import {FaRegMoneyBill1} from "react-icons/fa6";
 
 export type MenuItem = Required<MenuProps>['items'][number]
 
@@ -39,7 +41,7 @@ const Account = () => {
     const {setUserTheme} = useUserTheme()
 
     const items: MenuItem[] = [
-        getItem(<span style={{color: "gold"}}>10</span>, "balance", <LiaPiggyBankSolid color={"gold"} title={"title"} size={18}/>),
+        getItem(<span style={{color: "gold"}}>10</span>, "balance", <FaRegMoneyBill1 color={"gold"} title={"title"} size={15}/>),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
             getItem("Register", "register", <UserAddOutlined/>),
@@ -57,7 +59,7 @@ const Account = () => {
     }
 
     const styles = {
-        width: "40%",
+        width: "50%",
         justifyContent: "right"
     }
 
@@ -113,7 +115,7 @@ const Nav = () => {
     }
 
     const styles = {
-        width: "60%"
+        width: "50%"
     }
 
     const onClick: MenuProps["onClick"] = (e) => {
