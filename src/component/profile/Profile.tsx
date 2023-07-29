@@ -1,5 +1,5 @@
 import React from 'react'
-import {Divider, Space, Card, Rate, Progress, Avatar, Tag, Tooltip} from "antd"
+import {Divider, Space, Card, Rate, Progress, Avatar, Tag, Tooltip, Badge} from "antd"
 import UpCircleOutlined from "@ant-design/icons"
 
 
@@ -14,29 +14,31 @@ const Profile = () => {
 
 
             <Space style={{display: "flex", justifyContent: "center"}}>
-                <Card
-                    style={{width: 200, height: 300, textAlign: "center", padding: 0, margin: 0}}
-                    hoverable
-                >
-                    <Space direction="vertical">
-                        <Tag style={{margin: "0px 0px 0px 0px", padding: "5px ", fontSize: 16}}
-                             color="gold">Nickname</Tag>
-                        <Tooltip
-                            placement="left"
-                            title="Your ID"
-                        >
-                            <Tag style={{margin: 0}}>ID: 1234567890</Tag>
-                        </Tooltip>
-                    </Space>
-                    <Rate disabled value={2}/>
-                    <Avatar style={{margin: "5px 20px"}} size={100} src={avatar}/>
-                    <Tooltip
-                        placement="leftTop"
-                        title="In tournaments, you gain experience points for participation. If you win a tournament, you receive x5 experience points. However, you will also lose experience points if you haven't participated in tournaments for a long time."
+                <Badge.Ribbon text="Premium" color="gold" >
+                    <Card
+                        style={{width: 200, height: 300, textAlign: "center", padding: "15px 0", margin: 0}}
+                        hoverable
                     >
-                        <Progress percent={80} size={[187, 5]}/>
-                    </Tooltip>
-                </Card>
+                        <Space direction="vertical">
+                            <Tag style={{margin: "0px 0px 0px 0px", padding: "5px ", fontSize: 16}}
+                                 color="gold">Nickname</Tag>
+                            <Tooltip
+                                placement="left"
+                                title="Your ID"
+                            >
+                                <Tag style={{margin: 0}}>ID: 1234567890</Tag>
+                            </Tooltip>
+                        </Space>
+                        <Rate disabled value={2}/>
+                        <Avatar style={{margin: "5px 20px"}} size={100} src={avatar}/>
+                        <Tooltip
+                            placement="leftTop"
+                            title="In tournaments, you gain experience points for participation. If you win a tournament, you receive x5 experience points. However, you will also lose experience points if you haven't participated in tournaments for a long time."
+                        >
+                            <Progress percent={80} size={[187, 5]}/>
+                        </Tooltip>
+                    </Card>
+                </Badge.Ribbon>
             </Space>
 
 

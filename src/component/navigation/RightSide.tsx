@@ -23,7 +23,7 @@ const RightSide = () => {
 
     const items: MenuItem[] = [
         getItem(<span style={{color: "gold"}}>10</span>, "balance", icon.get("token_currency"), [
-            getItem("Add", "add_funds", <CiWallet color="gold"/>)
+            getItem("Add_tokens", "add_funds", <CiWallet color="gold"/>)
         ]),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
