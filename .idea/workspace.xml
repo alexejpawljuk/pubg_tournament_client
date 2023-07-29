@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/component/navigation/LeftSide.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/navigation/RightSide.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/shop/ShopItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hook/useIcon.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/shop/Shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/image/piggy-bank-money-svgrepo-com.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/image/piggybank.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModelPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useThemeConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useThemeConfig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/profile/Profile.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +28,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/home/Desktop/Programming/Projects/PUBG_mobile/client/src/image",
     "node.js.detected.package.eslint": "true",
@@ -74,7 +65,7 @@
       <updated>1687547856222</updated>
       <workItem from="1687547857837" duration="610000" />
       <workItem from="1689879314039" duration="117233000" />
-      <workItem from="1690233376554" duration="98546000" />
+      <workItem from="1690233376554" duration="111031000" />
     </task>
     <servers />
   </component>
