@@ -5,8 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/component/CreateTournament.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/Wallet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/profile/DisplayPremium.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/profile/ProfileCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/image/svg/coins.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/image/svg/premium-quality.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/content/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/content/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/navigation/LeftSide.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/LeftSide.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/Navigation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/navigation/RightSide.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/RightSide.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/root/Root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/root/Root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/shop/Shop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModelPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useThemeConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useThemeConfig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +46,7 @@
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/home/Desktop/Programming/Projects/PUBG_mobile/client/src/image",
+    "last_opened_file_path": "/Users/home/Desktop/Programming/Projects/PUBG_mobile/client/src/image/svg",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -43,6 +59,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/image/svg" />
       <recent name="$PROJECT_DIR$/src/image" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/public/image" />
@@ -65,7 +82,7 @@
       <updated>1687547856222</updated>
       <workItem from="1687547857837" duration="610000" />
       <workItem from="1689879314039" duration="117233000" />
-      <workItem from="1690233376554" duration="112964000" />
+      <workItem from="1690233376554" duration="131223000" />
     </task>
     <servers />
   </component>

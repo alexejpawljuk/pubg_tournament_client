@@ -2,7 +2,6 @@ import {useModalPopup} from "../../store/useModelPopup"
 import {AiOutlineHome} from "react-icons/ai"
 import {ShoppingCartOutlined} from "@ant-design/icons"
 import {Menu, MenuProps} from "antd"
-import Shop from "../shop/Shop"
 import React from "react"
 import {getItem, LeftMenuKey, MenuItem} from "./Navigation"
 
@@ -31,14 +30,15 @@ const LeftSide = () => {
                 break;
 
             case "shop":
-                modalPopup.setOpenModal(prevState => ({
-                    ...prevState,
-                    openModal: true,
-                    props: {
-                        width: 550
-                    },
-                    children: <Shop/>
-                }))
+                window.location.replace("/shop")
+                // modalPopup.setOpenModal(prevState => ({
+                //     ...prevState,
+                //     openModal: true,
+                //     props: {
+                //         width: 550
+                //     },
+                //     children: <Shop/>
+                // }))
                 break;
         }
     }

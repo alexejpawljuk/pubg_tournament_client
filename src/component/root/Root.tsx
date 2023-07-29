@@ -1,5 +1,5 @@
 import React from 'react'
-import {Layout} from 'antd'
+import {Image, Layout} from 'antd'
 import {Route, Routes} from "react-router-dom"
 import RootLayoutHeader from "./RootLayoutHeader"
 import RootLayoutContent from "./RootLayoutContent"
@@ -9,7 +9,9 @@ import RootLayoutFooter from "./RootLayoutFooter"
 import Home from "../content/Home"
 import NoFound from "../content/NotFound"
 import Navigation from "../navigation/Navigation"
-
+import Profile from "../profile/Profile"
+import Shop from "../shop/Shop"
+import premium from "../../image/svg/premium-quality.svg"
 
 const Root = () => {
     return (
@@ -24,6 +26,8 @@ const Root = () => {
                 <RootContent>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/shop" element={<Shop/>}/>
                         <Route path="*" element={<NoFound/>}/>
                     </Routes>
                 </RootContent>

@@ -1,4 +1,4 @@
-import type { CascaderProps } from 'antd';
+import type { CascaderProps } from 'antd'
 import {
     AutoComplete,
     Button,
@@ -150,13 +150,13 @@ const RegisterForm: React.FC = () => {
             <Form.Item
                 name="password"
                 label="Password"
+                hasFeedback
                 rules={[
                     {
                         required: true,
                         message: 'Please input your password!',
                     },
                 ]}
-                hasFeedback
             >
                 <Input.Password />
             </Form.Item>
@@ -191,62 +191,6 @@ const RegisterForm: React.FC = () => {
                 rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
             >
                 <Input />
-            </Form.Item>
-
-            <Form.Item
-                name="residence"
-                label="Habitual Residence"
-                rules={[
-                    { type: 'array', required: true, message: 'Please select your habitual residence!' },
-                ]}
-            >
-                <Cascader options={residences} />
-            </Form.Item>
-
-            <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[{ required: true, message: 'Please input your phone number!' }]}
-            >
-                <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item
-                name="donation"
-                label="Donation"
-                rules={[{ required: true, message: 'Please input donation amount!' }]}
-            >
-                <InputNumber addonAfter={suffixSelector} style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item
-                name="website"
-                label="Website"
-                rules={[{ required: true, message: 'Please input website!' }]}
-            >
-                <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-                    <Input />
-                </AutoComplete>
-            </Form.Item>
-
-            <Form.Item
-                name="intro"
-                label="Intro"
-                rules={[{ required: true, message: 'Please input Intro' }]}
-            >
-                <Input.TextArea showCount maxLength={100} />
-            </Form.Item>
-
-            <Form.Item
-                name="gender"
-                label="Gender"
-                rules={[{ required: true, message: 'Please select gender!' }]}
-            >
-                <Select placeholder="select your gender">
-                    <Option value="male">Male</Option>
-                    <Option value="female">Female</Option>
-                    <Option value="other">Other</Option>
-                </Select>
             </Form.Item>
 
             <Form.Item label="Captcha" extra="We must make sure that your are a human.">

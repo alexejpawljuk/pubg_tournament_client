@@ -29,7 +29,7 @@ const ShopItem: FC<IShopItem> = ({data}) => {
 
     return (
         <Card
-            style={{margin: 16, width: 210}}
+            style={{margin: 16,}}
             hoverable
             size="small"
             extra={

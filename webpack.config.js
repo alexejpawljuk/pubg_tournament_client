@@ -3,7 +3,7 @@ module.exports = {
     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
     use: [
         {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
         },
         {
             loader: '@svgr/webpack',

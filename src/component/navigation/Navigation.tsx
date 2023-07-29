@@ -7,7 +7,7 @@ import RightSide from "./RightSide"
 export type MenuItem = Required<MenuProps>['items'][number]
 
 export type LeftMenuKey = "home" | "shop"
-export type RightMenuKey = "add_funds" | "balance" | "account" | "login" | "register" | "profile" | "setting" | "dark" | "light"
+export type RightMenuKey =  "balance" | "buy_coins" | "my_wallet" | "account" | "login" | "register" | "profile" | "setting" | "dark" | "light"
 
 export function getItem(
     label: React.ReactNode,
