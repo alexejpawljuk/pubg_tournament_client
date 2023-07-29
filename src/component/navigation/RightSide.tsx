@@ -10,8 +10,9 @@ import RegisterForm from "../RegisterForm"
 import React from "react"
 import {getItem, MenuItem} from "./Navigation"
 import {useIcon} from "../../hook/useIcon"
-import {BiUserCheck} from "react-icons/bi";
-import Profile from "../profile/Profile";
+import {BiUserCheck} from "react-icons/bi"
+import Profile from "../profile/Profile"
+import {CiWallet} from "react-icons/ci"
 
 const RightSide = () => {
     const modalPopup = useModalPopup()
@@ -20,9 +21,10 @@ const RightSide = () => {
     const icon = useIcon()
 
 
-
     const items: MenuItem[] = [
-        getItem(<span style={{color: "gold"}}>10</span>, "balance", icon.get("token_currency")),
+        getItem(<span style={{color: "gold"}}>10</span>, "balance", icon.get("token_currency"), [
+            getItem("Add funds", "add_funds", <CiWallet color="gold"/>)
+        ]),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
             getItem("Register", "register", <UserAddOutlined/>),
@@ -86,6 +88,10 @@ const RightSide = () => {
                     },
                     children: <Profile/>
                 }))
+                break;
+
+            case "add_funds":
+                console.log("Add funds")
                 break;
         }
     }
