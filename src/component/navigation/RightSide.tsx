@@ -8,7 +8,7 @@ import {Menu, MenuProps, theme} from "antd"
 import AuthForm from "../AuthForm"
 import RegisterForm from "../RegisterForm"
 import React from "react"
-import {getItem, MenuItem} from "./Navigation"
+import {getItem, MenuItem, RightMenuKey} from "./Navigation"
 import {useIcon} from "../../hook/useIcon"
 import {BiUserCheck} from "react-icons/bi"
 import Profile from "../profile/Profile"
@@ -23,7 +23,7 @@ const RightSide = () => {
 
     const items: MenuItem[] = [
         getItem(<span style={{color: "gold"}}>10</span>, "balance", icon.get("token_currency"), [
-            getItem("Add funds", "add_funds", <CiWallet color="gold"/>)
+            getItem("Add", "add_funds", <CiWallet color="gold"/>)
         ]),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
@@ -48,7 +48,7 @@ const RightSide = () => {
     }
 
     const onClick: MenuProps["onClick"] = (e) => {
-        switch (e.key) {
+        switch (e.key as RightMenuKey) {
             case "login":
                 modalPopup.setOpenModal(prevState => ({
                     ...prevState,
@@ -91,7 +91,14 @@ const RightSide = () => {
                 break;
 
             case "add_funds":
-                console.log("Add funds")
+                modalPopup.setOpenModal(prevState => ({
+                    ...prevState,
+                    openModal: true,
+                    props: {
+                        width: 500
+                    },
+                    children: <div>Тут будет инструкция как пополнить кошелек (крипта)</div>
+                }))
                 break;
         }
     }
