@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
-import {Col, Divider, Row, Space, theme} from 'antd'
+import {Col, Divider, Row, theme} from 'antd'
 import ShopItem, {IShopItemData} from "./ShopItem"
 import {uid} from "uid"
 
 import coinsImage from '../../image/coins.png'
 import ticketImage from "../../image/ticket.png"
 import premiumAccount from "../../image/high-quality.png"
-import ProfileCard from "../profile/ProfileCard";
-import shopItem from "./ShopItem";
+
 
 
 const Shop = () => {
@@ -21,13 +20,6 @@ const Shop = () => {
     ])
 
     return (
-        // <Space style={{display: "block"}}>
-        //     <Divider orientation="center" style={{height: 30}}>Shop</Divider>
-        //
-        //     <Space wrap style={{justifyContent: "space-between"}}>
-        //         {shopItems?.map(shopItem => <ShopItem key={uid()} data={shopItem}/>)}
-        //     </Space>
-        // </Space>
         <Col>
             <Row>
                 <Col flex={"auto"}>
@@ -39,17 +31,9 @@ const Shop = () => {
 
             <Row justify={"center"} gutter={[0, 0]} style={{background: colorBgContainer, padding: "24px", margin: 0}}>
 
-                {
-                    shopItems.map(shopItem =>
-                        <Col
-                            key={uid()}
-                            style={{
-                                width: 200,
-                                // height: 350
-                            }}
-                        >
-                            <ShopItem data={shopItem}/>
-                        </Col>)}
+                {shopItems.map(shopItem => <Col key={uid()} style={{width: 200}}>
+                    <ShopItem data={shopItem}/>
+                </Col>)}
 
             </Row>
         </Col>

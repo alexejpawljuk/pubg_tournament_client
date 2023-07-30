@@ -13,12 +13,14 @@ export function getItem(
     label: React.ReactNode,
     key: RightMenuKey | LeftMenuKey,
     icon?: React.ReactNode,
+    type?: "group"| "divider",
     children?: MenuItem[],
 ): MenuItem {
     return {
         key,
         icon,
         children,
+        type,
         label
     } as MenuItem
 }
