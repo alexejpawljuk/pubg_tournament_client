@@ -8,6 +8,7 @@ import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
 import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import {useModalPopup} from "../store/useModelPopup"
 import coinSVG from "../image/svg/coins.svg"
+import {FaPeopleGroup} from "react-icons/fa6";
 
 type TournamentName = "DAILY" | "CUSTOM" | "SPONSORSHIP"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
@@ -221,16 +222,17 @@ const TournamentList: React.FC = () => {
             width: 90,
             sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
             render: (value, record) =>
-                <span style={{fontSize}}>
-                    {record.members.alreadyRegistered} / {record.members.max}
-                </span>
+                <div style={{fontSize}}>
+                    <FaPeopleGroup size={18} color={record.members.max - record.members.alreadyRegistered ? "green" : "red"}/>
+                    <div>{record.members.alreadyRegistered} / {record.members.max}</div>
+                </div>
         },
         {
             key: "price",
             title: "Price",
             dataIndex: "price",
             align: "center",
-            width: 200,
+            width: 100,
             sorter: (a, b) => {
                 if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
                 else return a.price.ticket - b.price.ticket
@@ -246,7 +248,7 @@ const TournamentList: React.FC = () => {
             title: "Action",
             dataIndex: "action",
             align: "center",
-            width: 200,
+            width: 70,
             render: (value, record) => <JoinGameButton tournament={record}/>
         }
     ]
