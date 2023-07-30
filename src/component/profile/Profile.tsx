@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useState} from 'react'
+import React, {FC, ReactNode, useEffect, useState} from 'react'
 import {Divider, Space, Card, Rate, Progress, Avatar, Tag, Tooltip, Badge, Row, Col, theme} from "antd"
 import ProfileCard from "./ProfileCard";
 

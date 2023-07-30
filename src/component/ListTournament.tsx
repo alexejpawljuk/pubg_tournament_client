@@ -1,14 +1,15 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Button, Rate, Space, Table, Tag, theme, Tooltip} from 'antd'
+import {Avatar, Button, Rate, Space, Table, Tag, TagProps, theme, Tooltip} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
 import {LiteralUnion} from "antd/es/_util/type"
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
-import {LoginOutlined} from "@ant-design/icons"
+import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import {useModalPopup} from "../store/useModelPopup"
+import coinSVG from "../image/svg/coins.svg"
 
-type TournamentName = "DAILY" | "CUSTOM"
+type TournamentName = "DAILY" | "CUSTOM" | "SPONSORSHIP"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
 
 export interface ITournament {
@@ -21,7 +22,6 @@ export interface ITournament {
         alreadyRegistered: number
     }
     reward: {
-        token: number
         coin: number
     }
     date: Date
@@ -39,6 +39,7 @@ interface ITournamentItem {
 }
 
 interface IDateDisplay {
+    props?: TagProps
     date: Date
 }
 
@@ -53,41 +54,51 @@ const getRandomTournamentType = (): TournamentType => {
 }
 
 const getRandomTournamentName = (): TournamentName => {
-    const tournamentNames: TournamentName[] = ["DAILY", "CUSTOM"]
+    const tournamentNames: TournamentName[] = ["DAILY", "CUSTOM", "SPONSORSHIP"]
     return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
-const DateDisplay: FC<IDateDisplay> = ({date}) => {
+const DateDisplay: FC<IDateDisplay> = ({date, props}) => {
     let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
     if (isToday(date)) color = "green"
     if (isTomorrow(date)) color = "warning"
-    return <Tag color={color}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
+    return <Tag color={color} {...props}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
 }
 
-const JoinGameButton: FC<{tournament: ITournament}> = ({tournament}) => {
+const JoinGameButton: FC<{ tournament: ITournament }> = ({tournament}) => {
     const {token: {colorBgLayout}} = theme.useToken()
 
-     return <Button
-         size="small"
-         icon={<LoginOutlined/>}
-         style={{background: "orange", color: colorBgLayout}}
-         type="default"
-         onClick={e => {
-             e.stopPropagation()
-             console.log("Click on JOIN", tournament)
-         }}
-     >
-         JOIN
-     </Button>
+    return <Button
+        size="small"
+        icon={<LoginOutlined/>}
+        style={{background: "orange", color: colorBgLayout}}
+        type="default"
+        onClick={e => {
+            e.stopPropagation()
+            console.log("Click on JOIN", tournament)
+        }}
+    >
+        JOIN
+    </Button>
 }
 
 const RankDisplay: FC<IRankDisplay> = ({value}) => {
-    return(<Rate
-        disabled
-        allowHalf
-        count={5}
-        value={value}
-    />)
+    return (
+
+        <Rate
+            disabled
+            allowHalf
+            count={5}
+            value={value}
+            character={
+                <Tooltip placement="top"
+                         title="To participate in the tournament, you must have the corresponding rank or higher."
+                >
+                    <StarFilled style={{width: "0.6em"}}/>
+                </Tooltip>
+            }
+        />
+    )
 }
 
 const TournamentInfo: FC<ITournamentItem> = ({tournamentItem}) => {
@@ -105,29 +116,50 @@ const TournamentInfo: FC<ITournamentItem> = ({tournamentItem}) => {
     return (
         <Space
             wrap
-            size={[0,10]}
+            size={[0, 10]}
         >
-            <Space >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
+            <Space>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
+                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
+                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
+                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
+                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
+                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
+                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
+                magni neque nostrum quas quidem rem unde velit veritatis?
             </Space>
             <Space>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
+                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
+                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
+                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
+                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
+                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
+                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
+                magni neque nostrum quas quidem rem unde velit veritatis?
             </Space>
             <Space>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio, doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam magni neque nostrum quas quidem rem unde velit veritatis?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
+                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
+                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
+                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
+                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
+                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
+                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
+                magni neque nostrum quas quidem rem unde velit veritatis?
             </Space>
         </Space>
     )
 }
 
 const TournamentList: React.FC = () => {
-    const {token: {
-        colorBgLayout,
-    }} = theme.useToken()
+    // const {token: {colorBgLayout}} = theme.useToken()
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const modalPopup = useModalPopup()
+
+    const fontSize = 12
 
     const tournamentModel: ColumnsType<ITournament> = [
         {
@@ -135,62 +167,63 @@ const TournamentList: React.FC = () => {
             title: 'Name',
             dataIndex: 'name',
             align: "center",
-            width: 120,
+            width: 110,
             sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
+            render: (value, record) => <span style={{fontSize}}>{record.name}</span>
         },
         {
             key: 'type',
             title: 'Type',
             dataIndex: 'type',
             align: "center",
-            width: 120,
+            width: 70,
             sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
+            render: (value, record) => <span style={{fontSize}}>{record.type}</span>
         },
         {
             key: "date",
             title: "Date",
             dataIndex: "date",
             align: "center",
-            width: 150,
+            width: 130,
             sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
-            render: (value, record) => <DateDisplay date={record.date}/>
+            render: (value, record) => <DateDisplay date={record.date} props={{style: {fontSize}}}/>
         },
         {
             key: "reward",
             title: "Reward",
             dataIndex: "reward",
             align: "center",
-            width: 150,
-            sorter: (a, b) => {
-                if (a.reward.token === b.reward.token) return a.reward.coin - b.reward.coin
-                else return a.reward.token - b.reward.token
-            },
+            width: 85,
+            sorter: (a, b) => a.reward.coin - b.reward.coin,
             render: (value, record) =>
-                <Space direction={"vertical"}>
-                    <div>Token: {record.reward.token}</div>
-                    <div>Coin: {record.reward.coin}</div>
-                </Space>
+                <Tooltip placement="top"
+                         title="For the victory in the tournament, the winner will receive coins as a reward.">
+                    <Avatar size={20} src={coinSVG} alt={"coin"}/>
+                    <div style={{fontSize}}>{record.reward.coin}</div>
+                </Tooltip>
         },
         {
             key: "rank",
             title: "Rank",
             dataIndex: "rank",
             align: "center",
-            width: 150,
+            width: 115,
             sorter: (a, b) => a.condition.rank - b.condition.rank,
-            render: (value, record) => <RankDisplay value={record.condition.rank}/>,
+            render: (value, record) =>
+                <RankDisplay value={record.condition.rank}/>,
         },
         {
             key: 'members',
             title: 'Members',
             dataIndex: 'members',
             align: "center",
-            width: 150,
+            width: 90,
             sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
             render: (value, record) =>
-                <Space>
+                <span style={{fontSize}}>
                     {record.members.alreadyRegistered} / {record.members.max}
-                </Space>
+                </span>
         },
         {
             key: "price",
@@ -222,7 +255,7 @@ const TournamentList: React.FC = () => {
     const sortedByDateTournamentList = useMemo(() => {
         for (let i = 0; i < 200; i++) {
             tournamentList.push({
-                id: uid(),
+                id: i.toString(),
                 name: getRandomTournamentName(),
                 type: getRandomTournamentType(),
                 members: {
@@ -230,8 +263,7 @@ const TournamentList: React.FC = () => {
                     alreadyRegistered: getRandomNumber(100)
                 },
                 reward: {
-                    token: getRandomNumber(20),
-                    coin: getRandomNumber(20)
+                    coin: getRandomNumber(1000)
                 },
                 price: {
                     ticket: getRandomNumber(20),
@@ -267,7 +299,11 @@ const TournamentList: React.FC = () => {
             onRow={data => ({
                 onClick: () => {
                     console.log("Click on row:", data)
-                    modalPopup.setOpenModal({openModal: true, children: <TournamentInfo tournamentItem={data}/>, props: {width: 1000}})
+                    modalPopup.setOpenModal(prevState => ({
+                        openModal: true,
+                        children: <TournamentInfo tournamentItem={data}/>,
+                        props: {width: 1000}
+                    }))
                 }
             })}
         />

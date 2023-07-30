@@ -1,24 +1,22 @@
 import {useModalPopup} from "../../store/useModelPopup"
-import {useThemeConfig} from "../../store/useThemeConfig"
-import {useUserTheme} from "../../hook/useUserTheme"
-import {UserAddOutlined, UserOutlined} from "@ant-design/icons"
+import {useAppUserTheme} from "../../store/useAppUserTheme"
+import {UserAddOutlined, UserOutlined, WalletOutlined} from "@ant-design/icons"
 import {AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
 import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md"
-import {Avatar, Badge, Image, Menu, MenuProps, theme} from "antd"
+import {Badge, Menu, MenuProps} from "antd"
 import AuthForm from "../AuthForm"
 import RegisterForm from "../RegisterForm"
 import React from "react"
 import {getItem, MenuItem, RightMenuKey} from "./Navigation"
 import {BiUserCheck} from "react-icons/bi"
 import {CiWallet} from "react-icons/ci"
-import coins from "../../image/svg/coins.svg"
-import Wallet from "../Wallet";
+import Wallet from "../Wallet"
 
 
 const RightSide = () => {
     const modalPopup = useModalPopup()
-    const {setThemeConfig} = useThemeConfig()
-    const {setUserTheme} = useUserTheme()
+    const {setAppUserTheme} = useAppUserTheme()
+    // const {setUserTheme} = useUserTheme()
 
 
     const items: MenuItem[] = [
@@ -28,7 +26,7 @@ const RightSide = () => {
                     coins
                 </span>
             </Badge>, "balance",
-            <CiWallet color="gold" size={16}/>, [
+            <WalletOutlined style={{color: "gold"}} size={16}/>, [
                 getItem("My wallet", "my_wallet", <CiWallet color="gold" size={16}/>),
             ]),
         getItem("Account", "account", <UserOutlined/>, [
@@ -76,13 +74,11 @@ const RightSide = () => {
                 break;
 
             case "dark":
-                setThemeConfig(prevState => ({...prevState, algorithm: theme.darkAlgorithm}))
-                setUserTheme(e.key)
+                setAppUserTheme(() => "dark")
                 break;
 
             case "light":
-                setThemeConfig(prevState => ({...prevState, algorithm: theme.defaultAlgorithm}))
-                setUserTheme(e.key)
+                setAppUserTheme(() => "light")
                 break;
 
             case "profile":

@@ -1,5 +1,5 @@
-import React from 'react'
-import {Layout} from 'antd'
+import React, {useEffect} from 'react'
+import {Layout, theme} from 'antd'
 import {Route, Routes} from "react-router-dom"
 import RootLayoutHeader from "./RootLayoutHeader"
 import RootLayoutContent from "./RootLayoutContent"
@@ -14,6 +14,14 @@ import Profile from "../profile/Profile"
 
 
 const Root = () => {
+    const {token: {colorBgContainer}} = theme.useToken()
+
+    useEffect(() => {
+        const bodyEl = document.querySelector("body")
+        if (bodyEl) bodyEl.style.background = colorBgContainer
+    }, [colorBgContainer])
+
+
     return (
         <Layout style={{minHeight: '100vh'}}>
             <RootLayoutHeader>

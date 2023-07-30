@@ -3,12 +3,12 @@ import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import ModalPopup from "./component/popup/ModalPopup"
 import Root from "./component/root/Root"
-import {useUserTheme} from "./hook/useUserTheme"
+import {useAppUserTheme} from "./store/useAppUserTheme";
 
-const AppProvider: FC<{ children: ReactNode, appThemeConfig: ThemeConfig }> = ({children, appThemeConfig}) => {
+const AppProvider: FC<{ children: ReactNode, appThemeConfig: ThemeConfig["algorithm"] }> = ({children, appThemeConfig}) => {
     return (
         <BrowserRouter>
-            <ConfigProvider theme={appThemeConfig}>
+            <ConfigProvider theme={{algorithm: appThemeConfig}}>
                 {children}
             </ConfigProvider>
         </BrowserRouter>
@@ -16,11 +16,11 @@ const AppProvider: FC<{ children: ReactNode, appThemeConfig: ThemeConfig }> = ({
 }
 
 function App() {
-    const {appThemeConfig} = useUserTheme()
+    const {appAlgorithm} = useAppUserTheme()
 
     return (
         <div className="App">
-            <AppProvider appThemeConfig={appThemeConfig}>
+            <AppProvider appThemeConfig={appAlgorithm}>
                 <ModalPopup/>
                 <Root/>
             </AppProvider>
