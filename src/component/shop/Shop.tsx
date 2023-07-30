@@ -10,8 +10,6 @@ import ProfileCard from "../profile/ProfileCard";
 import shopItem from "./ShopItem";
 
 
-
-
 const Shop = () => {
     const {token: {colorBgContainer}} = theme.useToken()
 
@@ -39,9 +37,19 @@ const Shop = () => {
                 </Col>
             </Row>
 
-            <Row justify="center" gutter={[20, 0]} style={{background: colorBgContainer, padding: "24px", margin: 0}}>
+            <Row justify={"center"} gutter={[0, 0]} style={{background: colorBgContainer, padding: "24px", margin: 0}}>
 
-                {shopItems.map(shopItem => <Col key={uid()} style={{width: 270, height: 350}}><ShopItem data={shopItem}/></Col>)}
+                {
+                    shopItems.map(shopItem =>
+                        <Col
+                            key={uid()}
+                            style={{
+                                width: 200,
+                                // height: 350
+                            }}
+                        >
+                            <ShopItem data={shopItem}/>
+                        </Col>)}
 
             </Row>
         </Col>

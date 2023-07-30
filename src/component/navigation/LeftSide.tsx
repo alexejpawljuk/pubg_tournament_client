@@ -4,6 +4,7 @@ import {ShoppingCartOutlined} from "@ant-design/icons"
 import {Menu, MenuProps} from "antd"
 import React from "react"
 import {getItem, LeftMenuKey, MenuItem} from "./Navigation"
+import Shop from "../shop/Shop";
 
 const LeftSide = () => {
     const modalPopup = useModalPopup()
@@ -30,15 +31,15 @@ const LeftSide = () => {
                 break;
 
             case "shop":
-                window.location.replace("/shop")
-                // modalPopup.setOpenModal(prevState => ({
-                //     ...prevState,
-                //     openModal: true,
-                //     props: {
-                //         width: 550
-                //     },
-                //     children: <Shop/>
-                // }))
+                // window.location.replace("/shop")
+                modalPopup.setOpenModal(prevState => ({
+                    ...prevState,
+                    openModal: true,
+                    props: {
+                        width: 550
+                    },
+                    children: <Shop/>
+                }))
                 break;
         }
     }
