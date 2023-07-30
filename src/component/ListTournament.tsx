@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Avatar, Button, Rate, Space, Table, Tag, TagProps, theme, Tooltip} from 'antd'
+import {Avatar, Badge, Button, Col, Rate, Row, Space, Table, Tag, TagProps, theme, Tooltip} from 'antd'
 import type {ColumnsType} from 'antd/es/table'
 import {uid} from "uid"
 import {isToday, format, isTomorrow, isAfter} from "date-fns"
@@ -8,7 +8,10 @@ import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
 import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import {useModalPopup} from "../store/useModelPopup"
 import coinSVG from "../image/svg/coins.svg"
-import {FaPeopleGroup} from "react-icons/fa6";
+import ticketSVG from "../image/svg/ticket.svg"
+import premiumSVG from "../image/svg/high-quality.svg"
+import {FaPeopleGroup} from "react-icons/fa6"
+
 
 type TournamentName = "DAILY" | "CUSTOM" | "SPONSORSHIP"
 type TournamentType = "SOLO" | "DUO" | "SQUAD"
@@ -29,9 +32,11 @@ export interface ITournament {
     price: {
         ticket: number
         coin: number
+
     }
     condition: {
         rank: number // 0.00 - 3.00
+        premium: boolean
     }
 }
 
@@ -161,6 +166,7 @@ const TournamentList: React.FC = () => {
     const modalPopup = useModalPopup()
 
     const fontSize = 12
+    const iconSize = 20
 
     const tournamentModel: ColumnsType<ITournament> = [
         {
@@ -168,9 +174,35 @@ const TournamentList: React.FC = () => {
             title: 'Name',
             dataIndex: 'name',
             align: "center",
-            width: 110,
+            width: 150,
             sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
-            render: (value, record) => <span style={{fontSize}}>{record.name}</span>
+            render: (value, record) => {
+                if (record.condition.premium) {
+                    return (
+                        <Badge
+                            count={
+                                <Avatar
+                                    size={iconSize}
+                                    src={premiumSVG}
+                                />
+                            }
+                            offset={
+                                [12, -6]
+                            }
+                        >
+                            <div style={{fontSize}}>
+                                {record.name}
+                            </div>
+                        </Badge>
+                    )
+                } else {
+                    return (
+                        <div style={{fontSize}}>
+                            {record.name}
+                        </div>
+                    )
+                }
+            }
         },
         {
             key: 'type',
@@ -200,7 +232,7 @@ const TournamentList: React.FC = () => {
             render: (value, record) =>
                 <Tooltip placement="top"
                          title="For the victory in the tournament, the winner will receive coins as a reward.">
-                    <Avatar size={20} src={coinSVG} alt={"coin"}/>
+                    <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
                     <div style={{fontSize}}>{record.reward.coin}</div>
                 </Tooltip>
         },
@@ -223,7 +255,8 @@ const TournamentList: React.FC = () => {
             sorter: (a, b) => a.members.alreadyRegistered - b.members.alreadyRegistered,
             render: (value, record) =>
                 <div style={{fontSize}}>
-                    <FaPeopleGroup size={18} color={record.members.max - record.members.alreadyRegistered ? "green" : "red"}/>
+                    <FaPeopleGroup size={iconSize - 2}
+                                   color={record.members.max - record.members.alreadyRegistered ? "green" : "red"}/>
                     <div>{record.members.alreadyRegistered} / {record.members.max}</div>
                 </div>
         },
@@ -238,10 +271,16 @@ const TournamentList: React.FC = () => {
                 else return a.price.ticket - b.price.ticket
             },
             render: (value, record) =>
-                <Space direction={"vertical"}>
-                    <span>Ticket: {record.price.ticket}</span>
-                    <span>Coin: {record.price.coin}</span>
-                </Space>
+                <Row justify="space-evenly">
+                    <Col>
+                        <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
+                        <div style={{fontSize}}>{record.price.ticket}</div>
+                    </Col>
+                    <Col>
+                        <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
+                        <div style={{fontSize}}>{record.price.coin}</div>
+                    </Col>
+                </Row>
         },
         {
             key: "action",
@@ -269,11 +308,12 @@ const TournamentList: React.FC = () => {
                 },
                 price: {
                     ticket: getRandomNumber(20),
-                    coin: getRandomNumber(20)
+                    coin: getRandomNumber(20),
                 },
-                date: new Date(2023, 6, getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
+                date: new Date(2023, getRandomNumber(8), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
                 condition: {
-                    rank: getRandomNumber(5)
+                    rank: getRandomNumber(5),
+                    premium: getRandomNumber(2) % 2 === 0
                 },
             })
         }
