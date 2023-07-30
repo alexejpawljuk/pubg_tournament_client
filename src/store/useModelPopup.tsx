@@ -1,7 +1,7 @@
 import {create} from "zustand"
 import {Dispatch, ReactNode, SetStateAction} from "react"
 import {devtools} from "zustand/middleware"
-import {ModalProps} from "antd";
+import {ModalProps} from "antd"
 
 namespace UseModalPopup {
     type OpenModal = boolean

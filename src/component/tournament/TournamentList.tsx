@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useMemo, useState} from 'react'
-import {Space, Table} from 'antd'
+import {App, Space, Table} from 'antd'
 import {uid} from "uid"
 import {isToday, isAfter} from "date-fns"
 import {useModalPopup} from "../../store/useModelPopup"
 import list from "../../DATA/tournamentData";
 import {tournamentModel} from "./tableModel";
 import {useLogger} from "../../hook/useLogger";
+import TournamentInfo from "./TournamentInfo";
 
 
 export type TournamentNameType = "DAILY" | "CUSTOM" | "SPONSORSHIP"
@@ -35,63 +36,13 @@ export interface ITournament {
     }
 }
 
-interface ITournamentInfo {
-    tournamentItem: ITournament
-}
 
-const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
-    const {
-        name,
-        type,
-        id,
-        members,
-        reward,
-        price,
-        date,
-        condition,
-    } = tournamentItem
 
-    return (
-        <Space
-            wrap
-            size={[0, 10]}
-        >
-            <Space>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
-                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
-                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
-                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
-                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
-                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
-                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
-                magni neque nostrum quas quidem rem unde velit veritatis?
-            </Space>
-            <Space>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
-                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
-                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
-                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
-                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
-                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
-                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
-                magni neque nostrum quas quidem rem unde velit veritatis?
-            </Space>
-            <Space>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio iusto, laudantium libero
-                possimus reiciendis rem veritatis. Ab asperiores aspernatur, at delectus deleniti dignissimos dolor
-                dolore doloribus error, esse facilis harum illo impedit labore laboriosam maxime modi nesciunt numquam
-                optio perferendis porro possimus praesentium quaerat quam quasi qui quia quibusdam, repellendus sit
-                tempora tempore temporibus totam unde velit veritatis voluptates voluptatibus. Ab ad, distinctio,
-                doloribus expedita libero minima minus obcaecati perspiciatis quidem repellat similique sunt ullam
-                voluptatibus? Alias corporis cumque, deleniti doloribus dolorum ea fugiat hic illo in iste iure magnam
-                magni neque nostrum quas quidem rem unde velit veritatis?
-            </Space>
-        </Space>
-    )
-}
+
 
 const TournamentList: React.FC = () => {
     useLogger("TournamentList render")
+
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
     const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
     const modalPopup = useModalPopup()

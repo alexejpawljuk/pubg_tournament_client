@@ -10,7 +10,8 @@ import Home from "../content/Home"
 import NoFound from "../content/NotFound"
 import Navigation from "../navigation/Navigation"
 import Profile from "../profile/Profile"
-
+import ModalPopup from "../popup/ModalPopup"
+import CommunityFloatButton from "../community/CommunityFloatButton"
 
 
 const Root = () => {
@@ -24,6 +25,9 @@ const Root = () => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
+            <ModalPopup/>
+            <CommunityFloatButton/>
+
             <RootLayoutHeader>
                 <Navigation/>
             </RootLayoutHeader>
