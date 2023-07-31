@@ -13,7 +13,7 @@ const getRandomTournamentName = (): TournamentNameType => {
 
 const list = new Promise<ITournament[]>(resolve => {
     const list: ITournament[] = []
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 300; i++) {
         list.push({
             id: i.toString(),
             name: getRandomTournamentName(),

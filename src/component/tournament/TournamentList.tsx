@@ -1,12 +1,12 @@
-import React, {FC, useEffect, useMemo, useState} from 'react'
-import {App, Space, Table} from 'antd'
+import React, {useEffect, useMemo, useState} from 'react'
+import {Table} from 'antd'
 import {uid} from "uid"
 import {isToday, isAfter} from "date-fns"
 import {useModalPopup} from "../../store/useModelPopup"
-import list from "../../DATA/tournamentData";
-import {tournamentModel} from "./tableModel";
-import {useLogger} from "../../hook/useLogger";
-import TournamentInfo from "./TournamentInfo";
+import list from "../../DATA/tournamentData"
+import {tournamentModel} from "./tableModel"
+import {useLogger} from "../../hook/useLogger"
+import TournamentInfo from "./TournamentInfo"
 
 
 export type TournamentNameType = "DAILY" | "CUSTOM" | "SPONSORSHIP"
@@ -37,14 +37,11 @@ export interface ITournament {
 }
 
 
-
-
-
 const TournamentList: React.FC = () => {
     useLogger("TournamentList render")
 
     const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
-    const [tableDataSource, setTableDataSource] = useState<ITournament[]>()
+    const [tableDataSource, setTableDataSource] = useState<ITournament[]>([])
     const modalPopup = useModalPopup()
 
 
@@ -55,6 +52,22 @@ const TournamentList: React.FC = () => {
     const sortedByDateTournamentList = useMemo(() => {
         return filteredByDateTournamentList?.sort((a, b) => a.date.getTime() - b.date.getTime())
     }, [filteredByDateTournamentList])
+
+    // const chunkTableData = useMemo(() => {
+    //     const chunkSize = 10
+    //     const chunk: ITournament[] = []
+    //     let iter = 0
+    //     for (let i = 0; i < sortedByDateTournamentList.length; i++) {
+    //         if (iter < chunkSize) {
+    //             iter++
+    //             chunk.push(sortedByDateTournamentList[i])
+    //         } else {
+    //             iter = 0
+    //         }
+    //     }
+    //
+    //     return chunk
+    // }, [sortedByDateTournamentList])
 
 
     useEffect(() => {

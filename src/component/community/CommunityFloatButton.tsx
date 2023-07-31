@@ -3,6 +3,7 @@ import {FloatButton} from "antd"
 import {useModalPopup} from "../../store/useModelPopup"
 import {BsChatDots} from "react-icons/bs"
 import Community from "./Community"
+import {FaPeopleRoof} from "react-icons/fa6";
 
 const CommunityFloatButton = () => {
     const modalPopup = useModalPopup()
@@ -12,7 +13,7 @@ const CommunityFloatButton = () => {
             ...prevState,
             openModal: true,
             props: {
-                width: 400,
+                width: 800,
             },
             children: <Community/>
         }))
@@ -24,7 +25,7 @@ const CommunityFloatButton = () => {
             <FloatButton
                 tooltip={"CommunityFloatButton"}
                 onClick={onClickChat}
-                icon={<BsChatDots/>}
+                icon={<FaPeopleRoof/>}
                 badge={{
                     count: 5,
                     color: "orange",

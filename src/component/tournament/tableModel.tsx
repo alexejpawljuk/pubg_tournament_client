@@ -1,15 +1,15 @@
-import {ColumnsType} from "antd/es/table";
-import {Avatar, Badge, Button, Col, Rate, Row, Tag, TagProps, theme, Tooltip} from "antd";
-import premiumSVG from "../../image/svg/high-quality.svg";
-import coinSVG from "../../image/svg/coins.svg";
-import {FaPeopleGroup} from "react-icons/fa6";
-import ticketSVG from "../../image/svg/ticket.svg";
-import React, {FC} from "react";
-import {ITournament} from "./TournamentList";
-import {LiteralUnion} from "antd/es/_util/type";
-import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors";
-import {format, isToday, isTomorrow} from "date-fns";
-import {LoginOutlined, StarFilled} from "@ant-design/icons";
+import {ColumnsType} from "antd/es/table"
+import {Avatar, Badge, Button, Col, Rate, Row, Tag, TagProps, theme, Tooltip} from "antd"
+import premiumSVG from "../../image/svg/high-quality.svg"
+import coinSVG from "../../image/svg/coins.svg"
+import {FaPeopleGroup} from "react-icons/fa6"
+import ticketSVG from "../../image/svg/ticket.svg"
+import React, {CSSProperties, FC} from "react"
+import {ITournament} from "./TournamentList"
+import {LiteralUnion} from "antd/es/_util/type"
+import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
+import {format, isToday, isTomorrow} from "date-fns"
+import {LoginOutlined, StarFilled} from "@ant-design/icons"
 
 interface IDateDisplay {
     props?: TagProps
@@ -20,6 +20,14 @@ interface IRankDisplay {
     value: number
 }
 
+interface IJoinGameButton {
+    tournament: ITournament
+    style?: CSSProperties
+}
+
+const iconSize = 20
+const fontSize = 10
+
 const DateDisplay: FC<IDateDisplay> = ({date, props}) => {
     let color: LiteralUnion<PresetColorType | PresetStatusColorType> = "default"
     if (isToday(date)) color = "green"
@@ -27,13 +35,13 @@ const DateDisplay: FC<IDateDisplay> = ({date, props}) => {
     return <Tag color={color} {...props}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
 }
 
-const JoinGameButton: FC<{ tournament: ITournament }> = ({tournament}) => {
+const JoinGameButton: FC<IJoinGameButton> = ({tournament, style}) => {
     const {token: {colorBgLayout}} = theme.useToken()
 
     return <Button
         size="small"
         icon={<LoginOutlined/>}
-        style={{background: "orange", color: colorBgLayout}}
+        style={{background: "orange", color: colorBgLayout, ...style}}
         type="default"
         onClick={e => {
             e.stopPropagation()
@@ -63,8 +71,7 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
     )
 }
 
-const iconSize = 20
-const fontSize = 12
+
 
 export const tournamentModel: ColumnsType<ITournament> = [
     {
@@ -72,7 +79,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: 'Name',
         dataIndex: 'name',
         align: "center",
-        width: 150,
+        width: 90,
         sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
         render: (value, record) => {
             if (record.condition.premium) {
@@ -107,7 +114,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: 'Type',
         dataIndex: 'type',
         align: "center",
-        width: 70,
+        width: 60,
         sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
         render: (value, record) => <span style={{fontSize}}>{record.type}</span>
     },
@@ -116,7 +123,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: "Date",
         dataIndex: "date",
         align: "center",
-        width: 130,
+        width: 110,
         sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
         render: (value, record) => <DateDisplay date={record.date} props={{style: {fontSize}}}/>
     },
@@ -125,7 +132,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: "Reward",
         dataIndex: "reward",
         align: "center",
-        width: 85,
+        width: 75,
         sorter: (a, b) => a.reward.coin - b.reward.coin,
         render: (value, record) =>
             <Tooltip placement="top"
@@ -163,7 +170,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: "Price",
         dataIndex: "price",
         align: "center",
-        width: 100,
+        width: 70,
         sorter: (a, b) => {
             if (a.price.ticket === b.price.ticket) return a.price.coin - b.price.coin
             else return a.price.ticket - b.price.ticket
@@ -186,6 +193,6 @@ export const tournamentModel: ColumnsType<ITournament> = [
         dataIndex: "action",
         align: "center",
         width: 70,
-        render: (value, record) => <JoinGameButton tournament={record}/>
+        render: (value, record) => <JoinGameButton tournament={record} style={{fontSize}}/>
     }
 ]

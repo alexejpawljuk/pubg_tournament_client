@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/component/community/Community.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/community/CommunityFloatButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/tournament/TournamentInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/useCommunity.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/content/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/content/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/root/Root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/root/Root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModelPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DATA/tournamentData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DATA/tournamentData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/community/Community.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/community/Community.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/community/CommunityFloatButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/community/CommunityFloatButton.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +69,7 @@
       <workItem from="1687547857837" duration="610000" />
       <workItem from="1689879314039" duration="117233000" />
       <workItem from="1690233376554" duration="132709000" />
-      <workItem from="1690703441101" duration="31338000" />
+      <workItem from="1690703441101" duration="38136000" />
     </task>
     <servers />
   </component>

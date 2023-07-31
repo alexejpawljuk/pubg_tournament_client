@@ -1,11 +1,40 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
+import {Tabs, TabsProps} from 'antd'
+import {NotificationOutlined, MessageOutlined} from "@ant-design/icons"
 
-const Community = () => {
-    return (
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequatur cumque dicta dolore excepturi incidunt minima, quia sint totam! Ab accusamus aliquid aut consequuntur cum, cumque deleniti ea est ex hic ipsum iure iusto labore laboriosam laborum modi molestias nam nihil non qui quibusdam saepe ullam ut vel voluptas. Blanditiis consectetur consequuntur corporis dolorem doloribus eaque, expedita fugit incidunt modi odit, pariatur possimus quas tenetur! Eius facere laudantium, odit quam quisquam totam voluptatum? Alias aliquid at corporis deleniti dicta dolore ea eos exercitationem illo maiores maxime numquam, perferendis provident quam quasi repellat repellendus reprehenderit ullam vel voluptas. Ab accusamus adipisci architecto aspernatur commodi earum error, facilis fuga inventore ipsam laboriosam libero molestiae odit officiis pariatur, possimus quam quia quis repellat sint ullam vero voluptatibus? Adipisci aliquam debitis ducimus nesciunt quis ratione vero? Ab adipisci aliquid amet, at atque autem commodi corporis deleniti doloribus dolorum ducimus eaque eius enim est et explicabo fugit hic, iste laboriosam maiores neque non nostrum odit omnis perspiciatis quae quam qui quod ratione recusandae reiciendis similique sit ullam, unde veritatis voluptate voluptates. Dolor expedita fugit itaque molestias nesciunt numquam placeat porro quidem quos vel! Dicta dolore earum labore magni natus, necessitatibus neque nihil nulla omnis quasi quibusdam rerum similique ullam unde veritatis! Accusantium aliquid animi beatae consectetur consequatur dolorem esse id illo inventore maiores maxime natus non provident, quos repudiandae rerum soluta tempora vero! Doloremque eum mollitia odio officia quasi qui repellendus repudiandae totam? Accusantium ad alias aperiam architecto blanditiis delectus distinctio dolorem doloremque, dolores eaque et explicabo facere hic impedit inventore ipsam ipsum iusto magni nam nostrum numquam odio omnis pariatur perferendis porro quas qui quisquam quo ratione reiciendis repudiandae rerum sint tempore unde vel veniam vero. A accusantium ad alias architecto deserunt doloribus dolorum ducimus eaque eos error esse et eveniet ex excepturi exercitationem facere fugiat laborum laudantium, minus mollitia nam, natus necessitatibus nostrum odio placeat quidem reiciendis repudiandae sint soluta suscipit ut voluptas voluptate voluptatum. Dolorem id nemo odio unde vel! A, accusantium aperiam architecto at aut autem commodi consequatur deserunt distinctio dolore doloremque est magnam minus necessitatibus officia placeat porro quae quas quidem quod ratione recusandae repellat repellendus reprehenderit sapiente sed, sequi similique soluta sunt tempora tempore tenetur totam ut! Corporis doloribus mollitia tenetur? Accusamus adipisci, asperiores aut autem blanditiis commodi corporis culpa dignissimos doloremque ea, exercitationem ipsa laboriosam laudantium libero magnam maiores minima nihil obcaecati omnis pariatur perferendis porro quas quia quos sequi suscipit ut veritatis. Distinctio, earum non placeat possimus quis sed veritatis. Ducimus impedit officia placeat praesentium repudiandae! Adipisci facilis incidunt magnam nobis numquam pariatur quidem vero voluptatibus? Accusantium adipisci aliquid amet aperiam asperiores culpa cumque doloribus eaque enim est et eum exercitationem explicabo facere facilis nemo non nulla numquam officia quas quod rerum saepe sint sunt ullam, veritatis voluptate? Aperiam esse explicabo fugit laudantium minima placeat sit veniam. Consequatur cupiditate debitis dolores libero pariatur reiciendis rerum, voluptates voluptatibus. Asperiores consequuntur culpa cumque, est incidunt inventore iste iusto laborum, minima mollitia pariatur porro quidem rem repellat saepe soluta tenetur!
-        </div>
-    );
-};
+
+type Key = "notification" | "chat"
+
+const getTabs = (
+    label: ReactNode,
+    key: Key,
+    children?: ReactNode,
+) => {
+    return {
+        label, key, children
+    }
+}
+
+const communityModel: TabsProps["items"] = [
+    getTabs(
+        <span><MessageOutlined/>Chat</span>,
+        "chat",
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, praesentium.</div>
+    ),
+    getTabs(
+            <span><NotificationOutlined />Notification</span>,
+        "notification",
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores commodi cum delectus enim fuga harum iusto nemo ratione ut vero!</div>
+    ),
+]
+
+const Community: React.FC = () => (
+
+    <Tabs
+        defaultActiveKey="chat"
+        items={communityModel}
+
+    />
+)
 
 export default Community
