@@ -79,7 +79,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         title: 'Name',
         dataIndex: 'name',
         align: "center",
-        width: 90,
+        width: 110,
         sorter: (a, b, sortOrder) => a.name.localeCompare(b.name),
         render: (value, record) => {
             if (record.condition.premium) {
