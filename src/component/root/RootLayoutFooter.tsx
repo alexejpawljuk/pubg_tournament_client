@@ -3,7 +3,7 @@ import React, {FC, ReactNode} from 'react'
 
 const RootLayoutFooter: FC<{children: ReactNode}> = ({children}) => {
     return (
-        <Footer style={{textAlign: 'center'}}>
+        <Footer style={{textAlign: 'center', height: 120}}>
             {children}
         </Footer>
     )
