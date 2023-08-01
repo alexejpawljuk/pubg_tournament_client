@@ -1,4 +1,5 @@
 import {ITournament, TournamentNameType, TournamentType} from "../component/tournament/TournamentList"
+import {uid} from "uid"
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
 const getRandomTournamentType = (): TournamentType => {
@@ -13,9 +14,9 @@ const getRandomTournamentName = (): TournamentNameType => {
 
 const list = new Promise<ITournament[]>(resolve => {
     const list: ITournament[] = []
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 50; i++) {
         list.push({
-            id: i.toString(),
+            id: uid(),
             name: getRandomTournamentName(),
             type: getRandomTournamentType(),
             members: {

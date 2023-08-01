@@ -6,9 +6,11 @@ import TournamentScrollingList from "../tournament/TournamentScrollingList";
 
 const Home = () => {
 
+
     return (
         <div>
             {/*<TournamentCreate/>*/}
+
             <TournamentList/>
             {/*<TournamentScrollingList/>*/}
         </div>

@@ -1,10 +1,10 @@
 import {ColumnsType} from "antd/es/table"
-import {Avatar, Badge, Button, Col, Rate, Row, Tag, TagProps, theme, Tooltip} from "antd"
+import {Avatar, Badge, BadgeProps, Button, Col, Rate, Row, Tag, TagProps, theme, Tooltip} from "antd"
 import premiumSVG from "../../image/svg/high-quality.svg"
 import coinSVG from "../../image/svg/coins.svg"
 import {FaPeopleGroup} from "react-icons/fa6"
 import ticketSVG from "../../image/svg/ticket.svg"
-import React, {CSSProperties, FC} from "react"
+import React, {CSSProperties, FC, ReactNode} from "react"
 import {ITournament} from "./TournamentList"
 import {LiteralUnion} from "antd/es/_util/type"
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
@@ -71,7 +71,22 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
     )
 }
 
+const PremiumDisplay: FC<{ children: ReactNode }> = ({children}) => {
 
+    const props: BadgeProps = {
+        count: <Avatar
+            size={iconSize}
+            src={premiumSVG}
+        />,
+        offset: [6, -8]
+    }
+
+    return (
+        <Badge {...props}>
+            {children}
+        </Badge>
+    )
+}
 
 export const tournamentModel: ColumnsType<ITournament> = [
     {
@@ -84,27 +99,44 @@ export const tournamentModel: ColumnsType<ITournament> = [
         render: (value, record) => {
             if (record.condition.premium) {
                 return (
-                    <Badge
-                        count={
-                            <Avatar
-                                size={iconSize}
-                                src={premiumSVG}
-                            />
-                        }
-                        offset={
-                            [12, -6]
-                        }
-                    >
-                        <div style={{fontSize}}>
-                            {record.name}
-                        </div>
-                    </Badge>
+                    <>
+                        {/*<PremiumDisplay>*/}
+                            <Row
+                                justify="center"
+                                style={{marginTop: 22}}
+                            >
+                               <PremiumDisplay>
+                                   <span style={{fontSize}}>
+                                       {record.name}
+                                   </span>
+                               </PremiumDisplay>
+                            </Row>
+                        {/*</PremiumDisplay>*/}
+                        <Row
+                            justify="center"
+                            style={{fontSize: fontSize - 2, marginTop: 8}}
+                        >
+                            ID: {record.id}
+                        </Row>
+                    </>
+
                 )
             } else {
                 return (
-                    <div style={{fontSize}}>
-                        {record.name}
-                    </div>
+                    <>
+                        <Row
+                            justify="center"
+                            style={{fontSize, marginTop: 22}}
+                        >
+                            {record.name}
+                        </Row>
+                        <Row
+                            justify="center"
+                            style={{fontSize: fontSize - 2, marginTop: 2}}
+                        >
+                            ID: {record.id}
+                        </Row>
+                    </>
                 )
             }
         }

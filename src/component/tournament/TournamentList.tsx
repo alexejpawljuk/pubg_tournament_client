@@ -53,25 +53,15 @@ const TournamentList: React.FC = () => {
         return filteredByDateTournamentList?.sort((a, b) => a.date.getTime() - b.date.getTime())
     }, [filteredByDateTournamentList])
 
-    // const chunkTableData = useMemo(() => {
-    //     const chunkSize = 10
-    //     const chunk: ITournament[] = []
-    //     let iter = 0
-    //     for (let i = 0; i < sortedByDateTournamentList.length; i++) {
-    //         if (iter < chunkSize) {
-    //             iter++
-    //             chunk.push(sortedByDateTournamentList[i])
-    //         } else {
-    //             iter = 0
-    //         }
-    //     }
-    //
-    //     return chunk
-    // }, [sortedByDateTournamentList])
+    const clickOnRow = (data: ITournament) => {
 
+    }
 
     useEffect(() => {
-        list.then(data => setTableDataSource(data))
+        (async () => {
+            const tableData = await list
+            setTableDataSource(tableData)
+        })()
     }, [])
 
 
@@ -92,7 +82,9 @@ const TournamentList: React.FC = () => {
                     modalPopup.setOpenModal(prevState => ({
                         openModal: true,
                         children: <TournamentInfo tournamentItem={data}/>,
-                        props: {width: 1000}
+                        props: {
+                            width: 1000,
+                        }
                     }))
                 }
             })}
