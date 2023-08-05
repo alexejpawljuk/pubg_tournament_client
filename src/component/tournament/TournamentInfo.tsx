@@ -1,7 +1,7 @@
 import React, {FC} from "react"
 import {Space} from "antd";
+import {ITournament} from "./Tournament";
 
-import {ITournament} from "./TournamentList"
 
 
 interface ITournamentInfo {

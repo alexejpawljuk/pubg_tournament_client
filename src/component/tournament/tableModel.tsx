@@ -5,11 +5,11 @@ import coinSVG from "../../image/svg/coins.svg"
 import {FaPeopleGroup} from "react-icons/fa6"
 import ticketSVG from "../../image/svg/ticket.svg"
 import React, {CSSProperties, FC, ReactNode} from "react"
-import {ITournament} from "./TournamentList"
 import {LiteralUnion} from "antd/es/_util/type"
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
 import {format, isToday, isTomorrow} from "date-fns"
 import {LoginOutlined, StarFilled} from "@ant-design/icons"
+import {ITournament} from "./Tournament";
 
 interface IDateDisplay {
     props?: TagProps
@@ -107,7 +107,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
                             >
                                <PremiumDisplay>
                                    <span style={{fontSize}}>
-                                       {record.name}
+                                       {record.name.toUpperCase()}
                                    </span>
                                </PremiumDisplay>
                             </Row>
@@ -148,7 +148,7 @@ export const tournamentModel: ColumnsType<ITournament> = [
         align: "center",
         width: 60,
         sorter: (a, b, sortOrder) => a.type.localeCompare(b.type),
-        render: (value, record) => <span style={{fontSize}}>{record.type}</span>
+        render: (value, record) => <span style={{fontSize}}>{record.type.toUpperCase()}</span>
     },
     {
         key: "date",

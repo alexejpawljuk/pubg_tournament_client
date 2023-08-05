@@ -11,6 +11,7 @@ const RootLayoutHeader: FC<{children: ReactNode}> = ({children}) => {
         alignItems: 'center',
         justifyContent: "space-between",
         paddingInline: 0,
+
     }
 
     return (

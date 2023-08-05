@@ -1,20 +1,20 @@
-import {ITournament, TournamentNameType, TournamentType} from "../component/tournament/TournamentList"
 import {uid} from "uid"
+import {ITournament, ITournamentNameType, ITournamentType} from "../component/tournament/Tournament";
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
-const getRandomTournamentType = (): TournamentType => {
-    const tournamentTypes: TournamentType[] = ["SOLO", "DUO", "SQUAD"]
+const getRandomTournamentType = (): ITournamentType => {
+    const tournamentTypes: ITournamentType[] = ["solo", "duo", "squad"]
     return tournamentTypes[getRandomNumber(tournamentTypes.length)]
 }
 
-const getRandomTournamentName = (): TournamentNameType => {
-    const tournamentNames: TournamentNameType[] = ["DAILY", "CUSTOM", "SPONSORSHIP"]
+const getRandomTournamentName = (): ITournamentNameType => {
+    const tournamentNames: ITournamentNameType[] = ["daily", "custom", "sponsorship"]
     return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
 const list = new Promise<ITournament[]>(resolve => {
     const list: ITournament[] = []
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 200; i++) {
         list.push({
             id: uid(),
             name: getRandomTournamentName(),

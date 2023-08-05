@@ -1,80 +1,43 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {FC, TransitionStartFunction, useEffect, useState, useTransition} from 'react'
 import {Table} from 'antd'
 import {uid} from "uid"
-import {isToday, isAfter} from "date-fns"
 import {useModalPopup} from "../../store/useModelPopup"
-import list from "../../DATA/tournamentData"
 import {tournamentModel} from "./tableModel"
 import {useLogger} from "../../hook/useLogger"
 import TournamentInfo from "./TournamentInfo"
+import {ITournament} from "./Tournament"
 
 
-export type TournamentNameType = "DAILY" | "CUSTOM" | "SPONSORSHIP"
-export type TournamentType = "SOLO" | "DUO" | "SQUAD"
-
-export interface ITournament {
-    key?: string
-    id: string
-    name: TournamentNameType
-    type: TournamentType
-    members: {
-        max: number
-        alreadyRegistered: number
-    }
-    reward: {
-        coin: number
-    }
-    date: Date
-    price: {
-        ticket: number
-        coin: number
-
-    }
-    condition: {
-        rank: number // 0.00 - 3.00
-        premium: boolean
+interface ITournamentList {
+    tournamentList: ITournament[]
+    transition: {
+        startTransition: TransitionStartFunction
+        isPending: boolean
     }
 }
 
-
-const TournamentList: React.FC = () => {
+const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
     useLogger("TournamentList render")
-
-    const [isTableLoading, setIsTableLoading] = useState<boolean>(false)
-    const [tableDataSource, setTableDataSource] = useState<ITournament[]>([])
     const modalPopup = useModalPopup()
-
-
-    const filteredByDateTournamentList = useMemo(() => {
-        return tableDataSource?.filter(tournament => isAfter(tournament.date, new Date()) || isToday(tournament.date))
-    }, [tableDataSource])
-
-    const sortedByDateTournamentList = useMemo(() => {
-        return filteredByDateTournamentList?.sort((a, b) => a.date.getTime() - b.date.getTime())
-    }, [filteredByDateTournamentList])
-
-    const clickOnRow = (data: ITournament) => {
-
-    }
+    const {isPending, startTransition} = transition
+    const [list, setList] = useState<ITournament[]>([])
 
     useEffect(() => {
-        (async () => {
-            const tableData = await list
-            setTableDataSource(tableData)
-        })()
-    }, [])
-
+        startTransition(() => {
+            setList(() => tournamentList)
+        })
+    }, [tournamentList])
 
     return (
         <Table
             style={{padding: "10px 5px"}}
             columns={tournamentModel}
             pagination={false}
-            dataSource={sortedByDateTournamentList}
+            dataSource={list}
             rowKey={record => record.key = uid()}
-            scroll={{y: 350, x: "100vh"}}
+            scroll={{y: 350, x: "100svh"}}
             size="small"
-            loading={isTableLoading}
+            loading={isPending}
             footer={() => <div style={{height: 5}}></div>}
             onRow={data => ({
                 onClick: () => {

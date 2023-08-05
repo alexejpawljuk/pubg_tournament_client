@@ -1,17 +1,12 @@
 import React from 'react'
-import TournamentList from "../tournament/TournamentList"
-import TournamentCreate from "../tournament/TournamentCreate"
-import TournamentScrollingList from "../tournament/TournamentScrollingList";
-
+import Tournament from "../tournament/Tournament";
 
 const Home = () => {
-
 
     return (
         <div>
             {/*<TournamentCreate/>*/}
-
-            <TournamentList/>
+            <Tournament/>
             {/*<TournamentScrollingList/>*/}
         </div>
     )
