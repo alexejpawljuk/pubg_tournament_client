@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react'
+import React, {FC, ReactNode, useEffect} from 'react'
 import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import Root from "./component/root/Root"
@@ -22,8 +22,9 @@ const AppProvider: FC<IAppProvider> = ({children, appThemeConfig}) => {
 
 function App() {
     const {appAlgorithm} = useAppUserTheme()
-    useLogger("App render")
-
+    useEffect(() => {
+        console.log("Render App")
+    })
 
     return (
         <div className="App">

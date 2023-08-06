@@ -32,12 +32,12 @@ export interface ITournament {
 }
 
 const Tournament = () => {
-    const tournament = useTournament()
+    const {tournamentList, tournamentFetch} = useTournament()
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
         startTransition(() => {
-            tournament.tournamentFetch().catch(console.log)
+            tournamentFetch().catch(console.log)
         })
     }, [])
 
@@ -47,7 +47,7 @@ const Tournament = () => {
                 transition={{isPending, startTransition}}
             />
             <TournamentScrollingList
-                tournamentList={tournament.tournamentList}
+                tournamentList={tournamentList}
                 transition={{isPending, startTransition}}
             />
             {/*<TournamentList*/}

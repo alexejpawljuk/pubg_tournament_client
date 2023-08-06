@@ -21,7 +21,7 @@ const LeftSide = () => {
     }
 
     const styles = {
-        width: "50%"
+        width: "50%",
     }
 
     const onClick: MenuProps["onClick"] = (e) => {

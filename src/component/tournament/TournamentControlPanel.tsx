@@ -7,9 +7,10 @@ import {
     Row, theme,
 } from "antd"
 import React, {
+    ChangeEvent,
     CSSProperties,
     FC, TransitionStartFunction, useEffect,
-    useRef,
+    useRef, useState,
 } from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
@@ -31,17 +32,17 @@ interface ITournamentControlPanel {
 
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
+
     const {token: {borderRadius, colorBorder}} = theme.useToken()
     const tournament = useTournament()
     const {isPending, startTransition} = transition
-
-
-    const searchRef = useRef<InputRef>(null)
+    const [searchValue, setSearchValue] = useState<string>("")
     const filterOptionsRef = useRef<IFilterOptions>({name: "all", type: "all"})
 
     const onChangeFilterOption = (e: RadioChangeEvent) => {
         if (e.target.name === "tournament_name") filterOptionsRef.current.name = e.target.value
         if (e.target.name === "tournament_type") filterOptionsRef.current.type = e.target.value
+        setSearchValue(() => "")
         startTransition(() => {
             tournament.tournamentFilter(filterOptionsRef.current)
         })
@@ -50,13 +51,23 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     const onSearch = (value: string) => {
         filterOptionsRef.current.name = "all"
         filterOptionsRef.current.type = "all"
+        setSearchValue(() => value)
         startTransition(() => {
             tournament.tournamentSearch(value)
         })
     }
 
+    const onInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(() => e.target.value)
+        if (e.target.value === "")
+            startTransition(() => {
+                tournament.tournamentSearch(e.target.value)
+            })
+
+    }
+
     const stylesColumn: CSSProperties = {
-        width: "30%",
+        width: "99%",
         minWidth: 300,
         margin: "10px auto",
         padding: "10px 5px",
@@ -69,17 +80,18 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     return (
         <Row justify="center">
-            <Col style={{...stylesColumn}}>
-                <Input placeholder="Tournament search by ID: 1"/>
-            </Col>
-            <Col style={{...stylesColumn}}>
-                <Input placeholder="Tournament search by ID: 2"/>
-            </Col>
+            {/*<Col style={{...stylesColumn}}>*/}
+            {/*    <Input placeholder="Tournament search by ID: 1"/>*/}
+            {/*</Col>*/}
+            {/*<Col style={{...stylesColumn}}>*/}
+            {/*    <Input placeholder="Tournament search by ID: 2"/>*/}
+            {/*</Col>*/}
             <Col style={{...stylesColumn}}>
                 <Row>
                     <Radio.Group
                         defaultValue="all"
                         size="small"
+                        disabled={isPending}
                         name="tournament_name"
                         value={filterOptionsRef.current.name.toLowerCase()}
                         onChange={onChangeFilterOption}
@@ -94,6 +106,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                     <Radio.Group
                         defaultValue="all"
                         size="small"
+                        disabled={isPending}
                         name="tournament_type"
                         value={filterOptionsRef.current.type.toLowerCase()}
                         onChange={onChangeFilterOption}
@@ -107,9 +120,11 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                 <Row wrap>
                     <Search
                         placeholder="Tournament search by ID:"
+                        disabled={isPending}
                         loading={isPending}
                         enterButton
-                        ref={searchRef}
+                        onInput={onInput}
+                        value={searchValue}
                         onSearch={onSearch}
                     />
                 </Row>

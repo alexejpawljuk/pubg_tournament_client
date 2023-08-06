@@ -13,6 +13,7 @@ interface UseTournament {
 
     tournamentFilter: (options: IFilterOptions) => void
     tournamentSearch: (value: string) => void
+
 }
 
 
@@ -23,7 +24,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
     /**
      * Request tournament list from server
      */
-    tournamentFetch: async () => {
+    async tournamentFetch ()  {
         const tournaments = await list
         setState(state => ({
             ...state,
@@ -32,7 +33,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
         }))
     },
 
-    tournamentUpdate: async (tournament: ITournament) => {
+    async tournamentUpdate (tournament: ITournament) {
 
     },
 
@@ -40,7 +41,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
      * Filter tournament list by tournament name and tournament type then return new array
      * @param options
      */
-    tournamentFilter: (options) => {
+    tournamentFilter(options) {
         const {name, type} = options
         const filteredTournaments = [...getState().dataSource]
             .filter(tournament => {
@@ -63,12 +64,13 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
      * Filter tournament list by tournament id then return new array
      * @param value
      */
-    tournamentSearch: (value) => {
+    tournamentSearch(value) {
         const searchedTournaments = [...getState().dataSource]
             .filter(tournament => tournament.id.includes(value))
         setState(state => ({
             ...state,
             tournamentList: searchedTournaments
         }))
-    }
+    },
+
 }))
