@@ -1,21 +1,20 @@
 import {
-    Col,
-    Input,
-    InputRef,
+    Col, InputRef,
     Radio,
-    RadioChangeEvent,
+    RadioChangeEvent, RadioGroupProps,
     Row, theme,
 } from "antd"
 import React, {
     ChangeEvent,
     CSSProperties,
-    FC, TransitionStartFunction, useEffect,
+    FC, ReactNode, TransitionStartFunction, useEffect,
     useRef, useState,
 } from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
 import {useLogger} from "../../hook/useLogger"
 import Search from "antd/es/input/Search";
+import {SearchProps} from "antd/lib/input";
 
 
 export interface IFilterOptions {
@@ -28,6 +27,89 @@ interface ITournamentControlPanel {
         startTransition: TransitionStartFunction
         isPending: boolean
     }
+}
+
+interface ITournamentSortByName {
+    props: RadioGroupProps
+}
+
+interface ITournamentSortByType {
+    props: RadioGroupProps
+}
+
+interface ITournamentSearch {
+    props: SearchProps
+}
+
+interface ITournamentControlItem {
+    children: ReactNode
+}
+
+const TournamentSortByName: FC<ITournamentSortByName> = ({props}) => {
+    return (
+        <Radio.Group
+            defaultValue="all"
+            size="small"
+            name="tournament_name"
+            {...props}
+        >
+            <Radio.Button value="all">all</Radio.Button>
+            <Radio.Button value="daily">daily</Radio.Button>
+            <Radio.Button value="custom">custom</Radio.Button>
+            <Radio.Button value="sponsorship">sponsorship</Radio.Button>
+        </Radio.Group>
+    )
+}
+
+const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
+    return (
+        <Radio.Group
+            defaultValue="all"
+            size="small"
+            name="tournament_type"
+            {...props}
+        >
+            <Radio.Button value="all">all</Radio.Button>
+            <Radio.Button value="solo">solo</Radio.Button>
+            <Radio.Button value="duo">duo</Radio.Button>
+            <Radio.Button value="squad">squad</Radio.Button>
+        </Radio.Group>
+    )
+}
+
+const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
+    const searchRef = useRef<InputRef>(null)
+
+    useEffect(() => {
+        searchRef.current?.focus()
+    }, [props.value])
+
+    return (
+        <Search
+            placeholder="Tournament search by ID:"
+            size="small"
+            enterButton
+            ref={searchRef}
+            {...props}
+        />
+    )
+}
+
+const TournamentControlItem: FC<ITournamentControlItem> = ({children}) => {
+    const styles: CSSProperties = {
+        // border: "1px solid",
+        // borderColor: "white"
+        marginTop: 5
+    }
+
+    return (
+        <Col
+            style={styles}
+            xs={{offset: 1}}
+        >
+            {children}
+        </Col>
+    )
 }
 
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
@@ -63,15 +145,14 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
             startTransition(() => {
                 tournament.tournamentSearch(e.target.value)
             })
-
     }
 
     const stylesColumn: CSSProperties = {
         width: "99%",
-        minWidth: 300,
+        // minWidth: 300,
         margin: "10px auto",
         padding: "10px 5px",
-        height: 100,
+        // height: 100,
         border: "2px solid",
         borderColor: colorBorder,
         borderRadius: borderRadius,
@@ -79,56 +160,38 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     }
 
     return (
-        <Row justify="center">
-            {/*<Col style={{...stylesColumn}}>*/}
-            {/*    <Input placeholder="Tournament search by ID: 1"/>*/}
-            {/*</Col>*/}
-            {/*<Col style={{...stylesColumn}}>*/}
-            {/*    <Input placeholder="Tournament search by ID: 2"/>*/}
-            {/*</Col>*/}
-            <Col style={{...stylesColumn}}>
-                <Row>
-                    <Radio.Group
-                        defaultValue="all"
-                        size="small"
-                        disabled={isPending}
-                        name="tournament_name"
-                        value={filterOptionsRef.current.name.toLowerCase()}
-                        onChange={onChangeFilterOption}
-                    >
-                        <Radio.Button value="all">all</Radio.Button>
-                        <Radio.Button value="daily">daily</Radio.Button>
-                        <Radio.Button value="custom">custom</Radio.Button>
-                        <Radio.Button value="sponsorship">sponsorship</Radio.Button>
-                    </Radio.Group>
-                </Row>
-                <Row>
-                    <Radio.Group
-                        defaultValue="all"
-                        size="small"
-                        disabled={isPending}
-                        name="tournament_type"
-                        value={filterOptionsRef.current.type.toLowerCase()}
-                        onChange={onChangeFilterOption}
-                    >
-                        <Radio.Button value="all">all</Radio.Button>
-                        <Radio.Button value="solo">solo</Radio.Button>
-                        <Radio.Button value="duo">duo</Radio.Button>
-                        <Radio.Button value="squad">squad</Radio.Button>
-                    </Radio.Group>
-                </Row>
-                <Row wrap>
-                    <Search
-                        placeholder="Tournament search by ID:"
-                        disabled={isPending}
-                        loading={isPending}
-                        enterButton
-                        onInput={onInput}
-                        value={searchValue}
-                        onSearch={onSearch}
+        <Row wrap>
+            <Row justify="space-around" style={{...stylesColumn}}>
+                <TournamentControlItem>
+                    <TournamentSortByName
+                        props={{
+                            disabled: isPending,
+                            value: filterOptionsRef.current.name.toLowerCase(),
+                            onChange: onChangeFilterOption,
+                        }}
                     />
-                </Row>
-            </Col>
+                </TournamentControlItem>
+                <TournamentControlItem>
+                    <TournamentSortByType
+                        props={{
+                            disabled: isPending,
+                            value: filterOptionsRef.current.type.toLowerCase(),
+                            onChange: onChangeFilterOption,
+                        }}
+                    />
+                </TournamentControlItem>
+                <TournamentControlItem>
+                    <TournamentSearch
+                        props={{
+                            disabled: isPending,
+                            loading: isPending,
+                            value: searchValue,
+                            onInput,
+                            onSearch,
+                        }}
+                    />
+                </TournamentControlItem>
+            </Row>
         </Row>
     )
 }

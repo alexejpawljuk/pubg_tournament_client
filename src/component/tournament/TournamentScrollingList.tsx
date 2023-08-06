@@ -143,65 +143,6 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
     };
 
     return (
-        // <List loading={isPending}>
-        //     <VirtualList
-        //         data={list}
-        //         height={containerHeight}
-        //         itemHeight={itemHeight}
-        //         itemKey="id"
-        //         onScroll={onScroll}
-        //     >
-        //         {(item: ITournament) => (
-        //             <List.Item>
-        //                 <Col style={{...stylesCol, width: "22%"}}>
-        //                     <Row style={{fontSize}} justify="center">{item.name.toUpperCase()}</Row>
-        //                     <Row style={{fontSize: fontSize - 1}} justify="center">{item.type.toUpperCase()}</Row>
-        //                     <Row style={{fontSize: fontSize - 3}} justify="center">ID: {item.id}</Row>
-        //                 </Col>
-        //                 <Col style={stylesCol}>
-        //                     <Row justify="center">
-        //                         <DateDisplay date={item.date} fontSize={fontSize}/>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "10%"}}>
-        //                     <Row justify="center"><Avatar src={coinSVG} size={iconSize} alt={"coin"}/></Row>
-        //                     <Row justify="center">
-        //                         <div style={{fontSize}}>{item.reward.coin}</div>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "25%"}}>
-        //                     <Row justify="center"><RankDisplay value={item.condition.rank}/></Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "12%"}}>
-        //                     <Row justify="center">
-        //                         <FaPeopleGroup size={iconSize}
-        //                                        color={item.members.max - item.members.alreadyRegistered ? "green" : "red"}/>
-        //                     </Row>
-        //                     <Row justify="center">
-        //                         <div style={{fontSize}}>{item.members.alreadyRegistered} / {item.members.max}</div>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "14%"}}>
-        //
-        //                     <Row justify="center">
-        //                         <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
-        //                         <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-        //                             <div style={{fontSize: 12}}>{999}</div>
-        //                         </Col>
-        //                     </Row>
-        //
-        //                     <Row justify="center" align="middle">
-        //                         <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
-        //                         <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-        //                             <div style={{fontSize: 12}}>{7}</div>
-        //                         </Col>
-        //                     </Row>
-        //
-        //                 </Col>
-        //             </List.Item>
-        //         )}
-        //     </VirtualList>
-        // </List>
         <Row justify="center">
             <List
                 style={{height: 340, overflowY: "scroll", width: "99%"}}
@@ -263,7 +204,6 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
 
                         </Col>
                     </Row>
-
                 )}
             />
         </Row>
