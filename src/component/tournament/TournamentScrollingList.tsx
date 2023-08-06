@@ -133,14 +133,8 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
                 lineHeight: '32px',
             }}
         >
-            <Button disabled={isPending} onClick={loadMoreData} icon={<ReloadOutlined/>}>loading more</Button>
+            <Button disabled={isPending} onClick={loadMoreData} icon={<ReloadOutlined/>}>load more</Button>
         </div>) : null
-
-    const onScroll = (e: React.UIEvent<HTMLElement, UIEvent>) => {
-        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === containerHeight) {
-            loadMoreData()
-        }
-    };
 
     return (
         <Row justify="center">

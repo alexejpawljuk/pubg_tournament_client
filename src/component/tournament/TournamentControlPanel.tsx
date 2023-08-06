@@ -1,20 +1,11 @@
-import {
-    Col, InputRef,
-    Radio,
-    RadioChangeEvent, RadioGroupProps,
-    Row, theme,
-} from "antd"
-import React, {
-    ChangeEvent,
-    CSSProperties,
-    FC, ReactNode, TransitionStartFunction, useEffect,
-    useRef, useState,
-} from "react"
+import {Button, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
+import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState,} from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
 import {useLogger} from "../../hook/useLogger"
-import Search from "antd/es/input/Search";
-import {SearchProps} from "antd/lib/input";
+import Search from "antd/es/input/Search"
+import {SearchProps} from "antd/lib/input"
+import {LoginOutlined} from "@ant-design/icons";
 
 
 export interface IFilterOptions {
@@ -78,18 +69,16 @@ const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
 }
 
 const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
-    const searchRef = useRef<InputRef>(null)
-
-    useEffect(() => {
-        searchRef.current?.focus()
-    }, [props.value])
+    const styles: CSSProperties = {
+        width: 225
+    }
 
     return (
         <Search
             placeholder="Tournament search by ID:"
             size="small"
+            style={styles}
             enterButton
-            ref={searchRef}
             {...props}
         />
     )
@@ -97,9 +86,7 @@ const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
 
 const TournamentControlItem: FC<ITournamentControlItem> = ({children}) => {
     const styles: CSSProperties = {
-        // border: "1px solid",
-        // borderColor: "white"
-        marginTop: 5
+        marginTop: 10
     }
 
     return (
@@ -111,6 +98,16 @@ const TournamentControlItem: FC<ITournamentControlItem> = ({children}) => {
         </Col>
     )
 }
+
+const TournamentCreate = () => {
+
+    return(
+        <>
+            <Button style={{background: "orange", opacity: 4}} icon={<LoginOutlined />} size="small">create tournament</Button>
+        </>
+    )
+}
+
 
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
@@ -151,7 +148,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         width: "99%",
         // minWidth: 300,
         margin: "10px auto",
-        padding: "10px 5px",
+        padding: "5px 0px 15px 0px",
         // height: 100,
         border: "2px solid",
         borderColor: colorBorder,
@@ -162,6 +159,9 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     return (
         <Row wrap>
             <Row justify="space-around" style={{...stylesColumn}}>
+                <TournamentControlItem>
+                    <TournamentCreate/>
+                </TournamentControlItem>
                 <TournamentControlItem>
                     <TournamentSortByName
                         props={{
