@@ -15,7 +15,7 @@ const getRandomTournamentName = (): ITournamentNameType => {
 
 const list = new Promise<ITournament[]>(resolve => {
     const list: ITournament[] = []
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 1000; i++) {
         const item = {
             id: uid(),
             name: getRandomTournamentName(),

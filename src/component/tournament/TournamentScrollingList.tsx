@@ -14,6 +14,8 @@ import {IconBaseProps} from "react-icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useLogger} from "../../hook/useLogger";
 import VirtualList from 'rc-virtual-list';
+import TournamentInfo from "./TournamentInfo";
+import {useModalPopup} from "../../store/useModelPopup";
 
 
 interface ITournamentScrollingList {
@@ -72,8 +74,8 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
 }
 
 const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, transition}) => {
-    const iter = useRef(0)
 
+    const iter = useRef(0)
     useEffect(() => {
         console.log("Render TournamentScrollingList:", iter.current)
         iter.current = iter.current + 1
@@ -86,10 +88,12 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
             colorBorder
         }
     } = theme.useToken()
+    const modalPopup = useModalPopup()
+
     const {isPending, startTransition} = transition
     const [list, setList] = useState<ITournament[]>([])
 
-    const itemPortion = 10
+    const itemPortion = 100
     const fontSize = 11
     const iconSize = 17
     const containerHeight = 340;
@@ -108,6 +112,17 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
         })
     }
 
+
+    const onSelectTournament = (tournament: ITournament) => {
+        console.log("Select tournament:", tournament)
+        modalPopup.setOpenModal(prevState => ({
+            openModal: true,
+            children: <TournamentInfo tournamentItem={tournament}/>,
+            props: {
+                width: 1000,
+            }
+        }))
+    }
 
     const stylesCol = {
         // border: "1px solid white",
@@ -148,6 +163,7 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
                 size={"small"}
                 renderItem={(item) => (
                     <Row
+                        onClick={() => onSelectTournament(item)}
                         align="middle"
                         justify="space-around"
                         style={stylesRow}

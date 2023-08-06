@@ -182,13 +182,6 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         <Row wrap>
             <Row justify="space-around" style={{...stylesRow}}>
                 <TournamentControlItem>
-                    <TournamentCreateButton
-                        props={{
-                            onClick: onTournamentCreate
-                        }}
-                    />
-                </TournamentControlItem>
-                <TournamentControlItem>
                     <TournamentSortByName
                         props={{
                             disabled: isPending,
@@ -203,6 +196,13 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                             disabled: isPending,
                             value: filterOptionsRef.current.type.toLowerCase(),
                             onChange: onChangeFilterOption,
+                        }}
+                    />
+                </TournamentControlItem>
+                <TournamentControlItem>
+                    <TournamentCreateButton
+                        props={{
+                            onClick: onTournamentCreate
                         }}
                     />
                 </TournamentControlItem>
