@@ -2,6 +2,7 @@ import React, {useEffect, useState, useTransition} from 'react'
 import TournamentList from "./TournamentList"
 import TournamentControlPanel from "./TournamentControlPanel"
 import {useTournament} from "../../store/useTournament"
+import TournamentScrollingList from "./TournamentScrollingList";
 
 export type ITournamentNameType = "daily" | "custom" | "sponsorship"
 export type ITournamentType = "solo" | "duo" | "squad"
@@ -45,10 +46,14 @@ const Tournament = () => {
             <TournamentControlPanel
                 transition={{isPending, startTransition}}
             />
-            <TournamentList
+            <TournamentScrollingList
                 tournamentList={tournament.tournamentList}
                 transition={{isPending, startTransition}}
             />
+            {/*<TournamentList*/}
+            {/*    tournamentList={tournament.tournamentList}*/}
+            {/*    transition={{isPending, startTransition}}*/}
+            {/*/>*/}
         </div>
     );
 };

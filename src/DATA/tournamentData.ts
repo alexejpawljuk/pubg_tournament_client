@@ -1,5 +1,6 @@
 import {uid} from "uid"
-import {ITournament, ITournamentNameType, ITournamentType} from "../component/tournament/Tournament";
+import {ITournament, ITournamentNameType, ITournamentType} from "../component/tournament/Tournament"
+import {isAfter} from "date-fns"
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
 const getRandomTournamentType = (): ITournamentType => {
@@ -14,8 +15,8 @@ const getRandomTournamentName = (): ITournamentNameType => {
 
 const list = new Promise<ITournament[]>(resolve => {
     const list: ITournament[] = []
-    for (let i = 0; i < 200; i++) {
-        list.push({
+    for (let i = 0; i < 100; i++) {
+        const item = {
             id: uid(),
             name: getRandomTournamentName(),
             type: getRandomTournamentType(),
@@ -35,9 +36,14 @@ const list = new Promise<ITournament[]>(resolve => {
                 rank: getRandomNumber(5),
                 premium: getRandomNumber(2) % 2 === 0
             },
-        })
+        }
+
+        if (isAfter(item.date.getTime(), new Date().getTime())) list.push(item)
+        else i--
     }
-    resolve(list)
+
+    const listSortedByDate = list.sort((a, b) => a.date.getTime() - b.date.getTime())
+    resolve(listSortedByDate)
 })
 
 export default list

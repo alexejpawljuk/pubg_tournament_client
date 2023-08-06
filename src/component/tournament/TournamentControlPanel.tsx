@@ -47,10 +47,6 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         })
     }
 
-    useEffect(() => {
-        searchRef.current?.focus()
-    }, [])
-
     const onSearch = (value: string) => {
         filterOptionsRef.current.name = "all"
         filterOptionsRef.current.type = "all"
