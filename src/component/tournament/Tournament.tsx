@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useTransition} from 'react'
-import TournamentList from "./TournamentList"
 import TournamentControlPanel from "./TournamentControlPanel"
 import {useTournament} from "../../store/useTournament"
-import TournamentScrollingList from "./TournamentScrollingList";
+import TournamentScrollingList from "./TournamentScrollingList"
+import TournamentCreate from "./TournamentCreate";
 
 export type ITournamentNameType = "daily" | "custom" | "sponsorship"
 export type ITournamentType = "solo" | "duo" | "squad"
@@ -34,11 +34,17 @@ export interface ITournament {
 const Tournament = () => {
     const {tournamentList, tournamentFetch} = useTournament()
     const [isPending, startTransition] = useTransition()
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         startTransition(() => {
             tournamentFetch().catch(console.log)
         })
+
+
+        setTimeout(() => {
+            setOpen(() => true)
+        }, 2000)
     }, [])
 
     return (
@@ -50,10 +56,6 @@ const Tournament = () => {
                 tournamentList={tournamentList}
                 transition={{isPending, startTransition}}
             />
-            {/*<TournamentList*/}
-            {/*    tournamentList={tournament.tournamentList}*/}
-            {/*    transition={{isPending, startTransition}}*/}
-            {/*/>*/}
         </div>
     );
 };

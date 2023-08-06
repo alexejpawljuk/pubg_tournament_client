@@ -1,11 +1,17 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-const TournamentCreate = () => {
+
+interface ITournamentCreate {
+
+}
+
+const TournamentCreate: FC<ITournamentCreate> = () => {
+
     return (
-        <div>
+        <>
 
-        </div>
-    );
-};
+        </>
+    )
+}
 
 export default TournamentCreate

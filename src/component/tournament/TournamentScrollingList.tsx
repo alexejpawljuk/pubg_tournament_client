@@ -1,7 +1,7 @@
 import React, {CSSProperties, FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
 import {Avatar, Button, Col, Divider, List, Rate, Row, Skeleton, Tag, TagProps, theme, Tooltip} from 'antd'
 import {LoadingOutlined, ReloadOutlined} from "@ant-design/icons"
-import tournament, {ITournament} from "./Tournament";
+import tournament, {ITournament} from "./Tournament"
 import {LiteralUnion} from "antd/es/_util/type";
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors";
 import {format, isToday, isTomorrow} from "date-fns";

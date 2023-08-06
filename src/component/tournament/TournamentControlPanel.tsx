@@ -1,11 +1,13 @@
-import {Button, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
+import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
 import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState,} from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
 import {useLogger} from "../../hook/useLogger"
 import Search from "antd/es/input/Search"
 import {SearchProps} from "antd/lib/input"
-import {LoginOutlined} from "@ant-design/icons";
+import {LoginOutlined} from "@ant-design/icons"
+import TournamentCreate from "./TournamentCreate";
+import {useModalDrawer} from "../../store/useModalDrawer";
 
 
 export interface IFilterOptions {
@@ -34,6 +36,10 @@ interface ITournamentSearch {
 
 interface ITournamentControlItem {
     children: ReactNode
+}
+
+interface ITournamentCreate {
+    props: ButtonProps
 }
 
 const TournamentSortByName: FC<ITournamentSortByName> = ({props}) => {
@@ -99,11 +105,20 @@ const TournamentControlItem: FC<ITournamentControlItem> = ({children}) => {
     )
 }
 
-const TournamentCreate = () => {
+const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
 
-    return(
+    return (
         <>
-            <Button style={{background: "orange", opacity: 4}} icon={<LoginOutlined />} size="small">create tournament</Button>
+            <Button
+                style={{background: "orange"}}
+                icon={<LoginOutlined/>}
+                size="small"
+                {...props}
+            >
+                <span>
+                    create tournament
+                </span>
+            </Button>
         </>
     )
 }
@@ -114,6 +129,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     const {token: {borderRadius, colorBorder}} = theme.useToken()
     const tournament = useTournament()
+    const modalDrawer = useModalDrawer()
     const {isPending, startTransition} = transition
     const [searchValue, setSearchValue] = useState<string>("")
     const filterOptionsRef = useRef<IFilterOptions>({name: "all", type: "all"})
@@ -144,12 +160,18 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
             })
     }
 
-    const stylesColumn: CSSProperties = {
+    const onTournamentCreate = () => {
+        console.log("Create tournament")
+        modalDrawer.setOpenDrawer(() => ({
+            openDrawer: true,
+            children: <></>
+        }))
+    }
+
+    const stylesRow: CSSProperties = {
         width: "99%",
-        // minWidth: 300,
         margin: "10px auto",
         padding: "5px 0px 15px 0px",
-        // height: 100,
         border: "2px solid",
         borderColor: colorBorder,
         borderRadius: borderRadius,
@@ -158,9 +180,13 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     return (
         <Row wrap>
-            <Row justify="space-around" style={{...stylesColumn}}>
+            <Row justify="space-around" style={{...stylesRow}}>
                 <TournamentControlItem>
-                    <TournamentCreate/>
+                    <TournamentCreateButton
+                        props={{
+                            onClick: onTournamentCreate
+                        }}
+                    />
                 </TournamentControlItem>
                 <TournamentControlItem>
                     <TournamentSortByName
