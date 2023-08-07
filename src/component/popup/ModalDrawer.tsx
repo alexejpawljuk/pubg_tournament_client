@@ -1,7 +1,6 @@
 import React, {CSSProperties, FC, ReactNode, useEffect} from 'react'
-import {Button, Drawer, Space} from "antd"
+import {Drawer} from "antd"
 import {useModalDrawer} from "../../store/useModalDrawer"
-import {ShoppingCartOutlined} from "@ant-design/icons";
 
 interface IContent {
     children: ReactNode
@@ -51,20 +50,7 @@ const ModalDrawer = () => {
             width={500}
             onClose={onClose}
             {...props}
-
-            extra={
-                <Space>
-                    <Button onClick={onClose}>Cancel</Button>
-                    <Button icon={<ShoppingCartOutlined loop={true}/>} onClick={onClose}>
-                    </Button>
-                </Space>
-            }
-        >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            {/*<Content>{children}</Content>*/}
-        </Drawer>
+        ><Content>{children}</Content></Drawer>
     )
 }
 

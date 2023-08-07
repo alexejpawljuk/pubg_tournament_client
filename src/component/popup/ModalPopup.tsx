@@ -18,7 +18,11 @@ const Content: FC<IContent> = ({children}) => {
     )
 }
 
-const ModalPopup = () => {
+interface IModalPopup {
+
+}
+
+const ModalPopup: FC<IModalPopup> = () => {
     const {
         openModal,
         setOpenModal,

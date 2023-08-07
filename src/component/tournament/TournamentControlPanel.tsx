@@ -1,11 +1,10 @@
-import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
+import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, Space, theme} from "antd"
 import React, {
     ChangeEvent,
     CSSProperties,
     FC,
     ReactNode,
     TransitionStartFunction,
-    useEffect,
     useRef,
     useState,
 } from "react"
@@ -17,6 +16,10 @@ import {SearchProps} from "antd/lib/input"
 import {LoginOutlined} from "@ant-design/icons"
 import {useModalDrawer} from "../../store/useModalDrawer"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
+import TournamentCreate, {TournamentCreateProps} from "./TournamentCreate";
+import modalPopup from "../popup/ModalPopup";
+import {useModalPopup} from "../../store/useModelPopup";
+import Shop from "../shop/Shop";
 
 export interface IFilterOptions {
     name: ITournamentNameType | "all"
@@ -45,7 +48,6 @@ interface ITournamentSortByType {
 interface ITournamentSearch {
     props: SearchProps
 }
-
 
 
 interface ITournamentCreate {
@@ -140,14 +142,13 @@ const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
 }
 
 
-
-
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
 
     const {token: {borderRadius, colorBorder}} = theme.useToken()
     const tournament = useTournament()
     const modalDrawer = useModalDrawer()
+    const modalPopup = useModalPopup()
     const breakpoint = useBreakpoint()
     console.log("Breakpoint:", breakpoint)
 
@@ -184,9 +185,13 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     const onTournamentCreate = () => {
         console.log("Create tournament")
+
         modalDrawer.setOpenDrawer(() => ({
             openDrawer: true,
-            children: <></>
+            children: <TournamentCreate/>,
+            props: {
+                extra: <TournamentCreateProps modalPopup={modalPopup}/>
+            }
         }))
     }
 
@@ -224,7 +229,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                         value: searchValue,
                         onInput,
                         onSearch
-                }}/>
+                    }}/>
             </Row>
         </Row>
     )

@@ -3,7 +3,7 @@ import {Dispatch, ReactNode, SetStateAction} from "react"
 import {devtools} from "zustand/middleware"
 import {ModalProps} from "antd"
 
-namespace UseModalPopup {
+export namespace IUseModalPopup {
     type OpenModal = boolean
 
     export interface IStore {
@@ -14,7 +14,7 @@ namespace UseModalPopup {
     }
 }
 
-export const useModalPopup = create<UseModalPopup.IStore>()(
+export const useModalPopup = create<IUseModalPopup.IStore>()(
     devtools(
         (setState) => {
             return {

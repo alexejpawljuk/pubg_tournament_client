@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
-import {Divider, Card, Row, Col, theme} from "antd"
-import ProfileCard from "../profile/ProfileCard"
-
+import {Card, Col, Divider, Row, theme} from "antd"
+import ProfileCard from "./ProfileCard"
 
 const Profile = () => {
     const {token: {colorBgContainer}} = theme.useToken()
     const [isPremiumAccount, setIsPremiumAccount] = useState<boolean>(true)
-
 
     return (
         // <Space style={{display: "block", width: "100%"}}>
@@ -50,4 +48,4 @@ const Profile = () => {
     );
 };
 
-export default Profile
+export default Profile;
