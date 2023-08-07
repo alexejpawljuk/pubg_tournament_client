@@ -1,10 +1,15 @@
-import React, {CSSProperties, useState} from 'react'
+import React, {CSSProperties, FC, useState} from 'react'
 import {LockOutlined, UserOutlined} from '@ant-design/icons'
-import {Button, Form, Input, Space} from 'antd'
+import {Button, Form, FormProps, Input, Space} from 'antd'
 import {useModalPopup} from "../store/useModelPopup"
 import RegisterForm from "./RegisterForm"
 
-const AuthFrom: React.FC = () => {
+
+interface IAuthFrom {
+    props?: FormProps
+}
+
+const AuthFrom: FC<IAuthFrom> = ({props}) => {
     const modalPopup = useModalPopup()
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -13,7 +18,7 @@ const AuthFrom: React.FC = () => {
     }
 
     const onFinish = (values: any) => {
-        setLoading(true)
+        setLoading(() => true)
         console.log('Received values of form: ', values)
     }
 
@@ -39,6 +44,7 @@ const AuthFrom: React.FC = () => {
             className="login-form"
             initialValues={{remember: true}}
             onFinish={onFinish}
+            {...props}
         >
             <Form.Item
                 name="username"

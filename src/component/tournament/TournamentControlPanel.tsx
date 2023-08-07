@@ -1,13 +1,5 @@
-import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, Space, theme} from "antd"
-import React, {
-    ChangeEvent,
-    CSSProperties,
-    FC,
-    ReactNode,
-    TransitionStartFunction,
-    useRef,
-    useState,
-} from "react"
+import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
+import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState} from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
 import {useLogger} from "../../hook/useLogger"
@@ -16,11 +8,8 @@ import {SearchProps} from "antd/lib/input"
 import {LoginOutlined} from "@ant-design/icons"
 import {useModalDrawer} from "../../store/useModalDrawer"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
-import TournamentCreate, {TournamentCreateProps} from "./TournamentCreate";
-import modalPopup from "../popup/ModalPopup";
-import {useModalPopup} from "../../store/useModelPopup";
-import Shop from "../shop/Shop";
-
+import TournamentCreate, {TournamentCreateProps} from "./TournamentCreate"
+import {useModalPopup} from "../../store/useModelPopup"
 export interface IFilterOptions {
     name: ITournamentNameType | "all"
     type: ITournamentType | "all"
@@ -128,8 +117,7 @@ const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
         <TournamentControlItemWrap>
             <Button
                 style={{background: "orange"}}
-                icon={<LoginOutlined style={{color: colorBgContainer}
-                }/>}
+                icon={<LoginOutlined style={{color: colorBgContainer}}/>}
                 size="small"
                 {...props}
             >
