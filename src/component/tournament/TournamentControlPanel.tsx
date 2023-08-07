@@ -18,7 +18,7 @@ import {SearchProps} from "antd/lib/input"
 import {LoginOutlined} from "@ant-design/icons"
 import {useModalDrawer} from "../../store/useModalDrawer"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
-import TournamentCreate, {TournamentCreateProps} from "./TournamentCreate"
+import TournamentCreate, {TournamentCreateHeader} from "./TournamentCreate"
 import {useModalPopup} from "../../store/useModelPopup"
 
 export interface IFilterOptions {
@@ -195,7 +195,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
             openDrawer: true,
             children: <TournamentCreate/>,
             props: {
-                extra: <TournamentCreateProps modalPopup={modalPopup}/>
+                extra: <TournamentCreateHeader modalPopup={modalPopup}/>
             }
         }))
     }
