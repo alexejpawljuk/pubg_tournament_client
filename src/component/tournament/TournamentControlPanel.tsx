@@ -1,4 +1,14 @@
-import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
+import {
+    Button,
+    ButtonProps,
+    Col,
+    DatePicker,
+    Radio,
+    RadioChangeEvent,
+    RadioGroupProps,
+    Row,
+    theme
+} from "antd"
 import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState} from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
@@ -10,6 +20,7 @@ import {useModalDrawer} from "../../store/useModalDrawer"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
 import TournamentCreate, {TournamentCreateProps} from "./TournamentCreate"
 import {useModalPopup} from "../../store/useModelPopup"
+
 export interface IFilterOptions {
     name: ITournamentNameType | "all"
     type: ITournamentType | "all"
@@ -133,7 +144,7 @@ const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
 
-    const {token: {borderRadius, colorBorder}} = theme.useToken()
+    const {token: {borderRadius, colorBorder, size}} = theme.useToken()
     const tournament = useTournament()
     const modalDrawer = useModalDrawer()
     const modalPopup = useModalPopup()
@@ -217,7 +228,18 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                         value: searchValue,
                         onInput,
                         onSearch
+                    }}
+                />
+                <TournamentControlItemWrap>
+
+                    <DatePicker
+                        size="small"
+                        disabled={isPending}
+                        onChange={(e, date) => {
+                        console.log(new Date(date))
                     }}/>
+
+                </TournamentControlItemWrap>
             </Row>
         </Row>
     )
