@@ -10,9 +10,9 @@ import Home from "../content/Home"
 import NoFound from "../content/NotFound"
 import Navigation from "../navigation/Navigation"
 import Account from "../content/Account"
-import ModalPopup from "../popup/ModalPopup"
+import ModalPopup from "../modal/ModalPopup"
 import CommunityFloatButton from "../community/CommunityFloatButton"
-import ModalDrawer from "../popup/ModalDrawer";
+import ModalDrawer from "../modal/ModalDrawer";
 
 
 const Root = () => {

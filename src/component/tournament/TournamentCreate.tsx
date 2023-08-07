@@ -13,13 +13,16 @@ import {InfoCircleOutlined, ShoppingCartOutlined, StarFilled} from "@ant-design/
 import Shop from "../shop/Shop"
 import {IUseModalPopup} from "../../store/useModelPopup"
 import AuthFrom from "../AuthForm"
-import {ITournamentType} from "./Tournament"
+import {ITournament, ITournamentType} from "./Tournament"
 import {IoCreateOutline} from "react-icons/io5";
+import {GrNext} from "react-icons/gr";
 
 
 interface ITournamentCreate {
 
 }
+
+type ITournamentProps = Omit<ITournament, "id" | "key" | "reward" | "name" | "members">
 
 interface ITournamentCreateProps {
     props?: ButtonProps
@@ -89,6 +92,18 @@ const Title = () => {
 const TournamentCreateOptions = () => {
     const {token} = theme.useToken()
     const [rang, setRang] = useState<number>(0)
+    const [props, setProps] = useState<ITournamentProps>({
+        type: "solo",
+        price: {
+            coin: 10,
+            ticket: 0
+        },
+        condition: {
+            rank: 0,
+            premium: false
+        },
+        date: new Date()
+    })
 
     const [current, setCurrent] = useState(0)
 
@@ -97,12 +112,8 @@ const TournamentCreateOptions = () => {
     }
 
     const onSelectRang = (e: number) => {
-    setRang(() => e)
+        setRang(() => e)
     }
-
-    // const stylesItem: CSSProperties = {
-    //     color: colorText
-    // }
 
     const SelectType = <Select
         defaultValue={"solo"}
@@ -129,11 +140,17 @@ const TournamentCreateOptions = () => {
 
     const SelectRank =
         <Rate
+            style={{margin: 0}}
             onChange={onSelectRang}
             count={5}
             value={rang}
             character={<StarFilled style={{width: "0.8em"}}/>}
         />
+
+    const Result =
+        <>
+
+        </>
 
     const steps = [
         getStepItem("Type", SelectType),
@@ -141,6 +158,7 @@ const TournamentCreateOptions = () => {
         getStepItem("Rank", SelectRank),
         getStepItem("Players", <>Content</>),
         getStepItem("Price", <>Content</>),
+        getStepItem("Finish", <>Content</>),
     ];
 
     const next = () => {
@@ -152,7 +170,7 @@ const TournamentCreateOptions = () => {
     };
 
     const contentStyle: React.CSSProperties = {
-        lineHeight: '60px',
+        lineHeight: '80px',
         textAlign: 'center',
         color: token.colorTextTertiary,
         backgroundColor: token.colorFillAlter,
@@ -163,19 +181,28 @@ const TournamentCreateOptions = () => {
 
     return (
         <>
-            <Steps style={{marginTop: 25}} current={current} items={steps}/>
+            <Steps size="small" direction="vertical" style={{marginTop: 25}} current={current} items={steps}/>
             <div style={contentStyle}>{steps[current].content}</div>
             <div style={{marginTop: 24}}>
                 {current < steps.length - 1 && (
-                    <Button type="primary" onClick={() => next()}>
+                    <Button
+                        type="primary"
+                        size="small"
+                        style={{
+                            width: 100
+                        }}
+                        onClick={next}
+                    >
                         Next
                     </Button>
                 )}
                 {current === steps.length - 1 && (
                     <Button
+                        size="small"
                         style={{
                             background: "orange",
                             color: token.colorText,
+                            width: 100,
                         }}
                         icon={<IoCreateOutline color={token.colorText}/>}
                         onClick={() => console.log('Processing complete!')}
@@ -184,7 +211,11 @@ const TournamentCreateOptions = () => {
                     </Button>
                 )}
                 {current > 0 && (
-                    <Button style={{margin: '0 8px'}} onClick={() => prev()}>
+                    <Button
+                        size="small"
+                        style={{margin: '0 8px'}}
+                        onClick={() => prev()}
+                    >
                         Back
                     </Button>
                 )}
@@ -197,7 +228,7 @@ const TournamentCreate: FC<ITournamentCreate> = () => {
     const {token: {colorBorder}} = theme.useToken()
 
 
-    const [isAuth, setIsAuth] = useState<boolean>(false)
+    const [isAuth, setIsAuth] = useState<boolean>(true)
 
 
     if (isAuth)
