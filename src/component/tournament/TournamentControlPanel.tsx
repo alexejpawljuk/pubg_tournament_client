@@ -105,7 +105,7 @@ const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
 
 const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
     const styles: CSSProperties = {
-        width: 225
+        width: 230
     }
 
     return (
@@ -123,11 +123,15 @@ const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
 
 const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
     const {token: {colorBgContainer}} = theme.useToken()
+    const styles: CSSProperties = {
+        background: "orange",
+        width: 164
+    }
 
     return (
         <TournamentControlItemWrap>
             <Button
-                style={{background: "orange"}}
+                style={styles}
                 icon={<LoginOutlined style={{color: colorBgContainer}}/>}
                 size="small"
                 {...props}
@@ -144,16 +148,18 @@ const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
 
-    const {token: {borderRadius, colorBorder, size}} = theme.useToken()
+    const {token: {borderRadius, colorBorder}} = theme.useToken()
     const tournament = useTournament()
     const modalDrawer = useModalDrawer()
     const modalPopup = useModalPopup()
+
     const breakpoint = useBreakpoint()
     console.log("Breakpoint:", breakpoint)
 
     const {isPending, startTransition} = transition
     const [searchValue, setSearchValue] = useState<string>("")
     const filterOptionsRef = useRef<IFilterOptions>({name: "all", type: "all"})
+
 
     const onChangeFilterOption = (e: RadioChangeEvent) => {
         if (e.target.name === "tournament_name") filterOptionsRef.current.name = e.target.value
@@ -206,7 +212,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     return (
         <Row wrap>
-            <Row justify="space-around" style={{...stylesRow}}>
+            <Row justify="space-evenly" style={{...stylesRow}}>
                 <TournamentCreateButton
                     props={{
                         onClick: onTournamentCreate
@@ -235,9 +241,12 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                     <DatePicker
                         size="small"
                         disabled={isPending}
+                        style={{
+                            width: 223
+                        }}
                         onChange={(e, date) => {
-                        console.log(new Date(date))
-                    }}/>
+                            console.log(new Date(date))
+                        }}/>
 
                 </TournamentControlItemWrap>
             </Row>
