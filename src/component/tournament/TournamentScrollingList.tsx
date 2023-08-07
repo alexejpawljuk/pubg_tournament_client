@@ -45,7 +45,7 @@ const DateDisplay: FC<IDateDisplay> = ({date, props, fontSize}) => {
             <Tag {...dataDisplayProps} {...props}>
                 {format(date, "dd.MM.yy")}
             </Tag>
-            <Row style={{fontSize}} justify="center">
+            <Row style={{fontSize, paddingTop: 3}} justify="center">
                 {format(date, "hh:mm")}
             </Row>
         </Col>

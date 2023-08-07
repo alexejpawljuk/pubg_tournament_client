@@ -38,7 +38,7 @@ export const TournamentCreateProps: FC<ITournamentCreateProps> = ({props, modalP
 }
 
 const TournamentCreate: FC<ITournamentCreate> = () => {
-    const [isAuth, setIsAuth] = useState<boolean>(true)
+    const [isAuth, setIsAuth] = useState<boolean>(false)
 
 
     if (isAuth)

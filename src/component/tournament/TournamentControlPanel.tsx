@@ -166,7 +166,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         if (e.target.name === "tournament_type") filterOptionsRef.current.type = e.target.value
         setSearchValue(() => "")
         startTransition(() => {
-            tournament.tournamentFilter(filterOptionsRef.current)
+            tournament.tournamentFilterByNameAndType(filterOptionsRef.current)
         })
     }
 

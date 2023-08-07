@@ -11,7 +11,7 @@ interface UseTournament {
     tournamentFetch: () => Promise<void>
     tournamentUpdate: (tournament: ITournament) => Promise<void>
 
-    tournamentFilter: (options: IFilterOptions) => void
+    tournamentFilterByNameAndType: (options: IFilterOptions) => void
     tournamentSearch: (value: string) => void
 
 }
@@ -41,7 +41,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
      * Filter tournament list by tournament name and tournament type then return new array
      * @param options
      */
-    tournamentFilter(options) {
+    tournamentFilterByNameAndType(options) {
         const {name, type} = options
         const filteredTournaments = [...getState().dataSource]
             .filter(tournament => {
