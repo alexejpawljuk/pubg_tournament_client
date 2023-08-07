@@ -242,7 +242,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                         size="small"
                         disabled={isPending}
                         style={{
-                            width: 223
+                            width: 231
                         }}
                         onChange={(e, date) => {
                             console.log(new Date(date))

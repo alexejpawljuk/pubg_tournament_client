@@ -108,15 +108,19 @@ const TournamentCreateOptions = () => {
     const [current, setCurrent] = useState(0)
 
     const onSelectTournamentType = (e: ITournamentType) => {
-        console.log(e)
+        setProps(prevState => ({...prevState, type: e}))
+    }
+
+    const onSelectDate = (e: any, date: string) => {
+        setProps(prevState => ({...prevState, date: new Date(date)}))
     }
 
     const onSelectRang = (e: number) => {
-        setRang(() => e)
+        setProps(prevState => ({...prevState, condition: {rank: e, premium: false}}))
     }
 
     const SelectType = <Select
-        defaultValue={"solo"}
+        defaultValue={props.type}
         size={"small"}
         style={{width: 120}}
         onChange={onSelectTournamentType}
@@ -134,16 +138,15 @@ const TournamentCreateOptions = () => {
             style={{
                 width: 223
             }}
-            onChange={(e, date) => {
-                console.log(new Date(date))
-            }}/>
+            onChange={onSelectDate}
+        />
 
     const SelectRank =
         <Rate
             style={{margin: 0}}
             onChange={onSelectRang}
             count={5}
-            value={rang}
+            value={props.condition.rank}
             character={<StarFilled style={{width: "0.8em"}}/>}
         />
 
