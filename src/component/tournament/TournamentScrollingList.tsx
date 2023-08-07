@@ -1,21 +1,15 @@
-import React, {CSSProperties, FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
-import {Avatar, Button, Col, Divider, List, Rate, Row, Skeleton, Tag, TagProps, theme, Tooltip} from 'antd'
-import {LoadingOutlined, ReloadOutlined} from "@ant-design/icons"
-import tournament, {ITournament} from "./Tournament"
-import {LiteralUnion} from "antd/es/_util/type";
-import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors";
-import {format, isToday, isTomorrow} from "date-fns";
-import coinSVG from "../../image/svg/coins.svg";
-import {StarFilled} from "@ant-design/icons";
-import {FaPeopleGroup} from "react-icons/fa6";
-import ticketSVG from "../../image/svg/ticket.svg";
-import {uid} from "uid";
-import {IconBaseProps} from "react-icons";
-import InfiniteScroll from "react-infinite-scroll-component";
-import {useLogger} from "../../hook/useLogger";
-import VirtualList from 'rc-virtual-list';
-import TournamentInfo from "./TournamentInfo";
-import {useModalPopup} from "../../store/useModelPopup";
+import React, { FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
+import {Avatar, Button, Col, List, Rate, Row, Tag, TagProps, theme} from 'antd'
+import {ReloadOutlined} from "@ant-design/icons"
+import {ITournament} from "./Tournament"
+
+import {format, isToday, isTomorrow} from "date-fns"
+import coinSVG from "../../image/svg/coins.svg"
+import {StarFilled} from "@ant-design/icons"
+import {FaPeopleGroup} from "react-icons/fa6"
+import ticketSVG from "../../image/svg/ticket.svg"
+import TournamentInfo from "./TournamentInfo"
+import {useModalPopup} from "../../store/useModelPopup"
 
 
 interface ITournamentScrollingList {
@@ -93,7 +87,7 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
     const {isPending, startTransition} = transition
     const [list, setList] = useState<ITournament[]>([])
 
-    const itemPortion = 100
+    const itemPortion = 9
     const fontSize = 11
     const iconSize = 17
     const containerHeight = 340;

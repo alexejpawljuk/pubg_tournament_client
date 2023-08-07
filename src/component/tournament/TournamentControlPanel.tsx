@@ -1,14 +1,22 @@
 import {Button, ButtonProps, Col, Radio, RadioChangeEvent, RadioGroupProps, Row, theme} from "antd"
-import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState,} from "react"
+import React, {
+    ChangeEvent,
+    CSSProperties,
+    FC,
+    ReactNode,
+    TransitionStartFunction,
+    useEffect,
+    useRef,
+    useState,
+} from "react"
 import {useTournament} from "../../store/useTournament"
 import {ITournamentNameType, ITournamentType} from "./Tournament"
 import {useLogger} from "../../hook/useLogger"
 import Search from "antd/es/input/Search"
 import {SearchProps} from "antd/lib/input"
 import {LoginOutlined} from "@ant-design/icons"
-import TournamentCreate from "./TournamentCreate";
-import {useModalDrawer} from "../../store/useModalDrawer";
-
+import {useModalDrawer} from "../../store/useModalDrawer"
+import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
 
 export interface IFilterOptions {
     name: ITournamentNameType | "all"
@@ -20,6 +28,10 @@ interface ITournamentControlPanel {
         startTransition: TransitionStartFunction
         isPending: boolean
     }
+}
+
+interface ITournamentControlItemWrap {
+    children: ReactNode
 }
 
 interface ITournamentSortByName {
@@ -34,43 +46,58 @@ interface ITournamentSearch {
     props: SearchProps
 }
 
-interface ITournamentControlItem {
-    children: ReactNode
-}
+
 
 interface ITournamentCreate {
     props: ButtonProps
 }
 
+const TournamentControlItemWrap: FC<ITournamentControlItemWrap> = ({children}) => {
+    const styles: CSSProperties = {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 10,
+        minWidth: 240,
+    }
+
+    return (
+        <Col style={styles}>{children}</Col>
+    )
+}
+
 const TournamentSortByName: FC<ITournamentSortByName> = ({props}) => {
     return (
-        <Radio.Group
-            defaultValue="all"
-            size="small"
-            name="tournament_name"
-            {...props}
-        >
-            <Radio.Button value="all">all</Radio.Button>
-            <Radio.Button value="daily">daily</Radio.Button>
-            <Radio.Button value="custom">custom</Radio.Button>
-            <Radio.Button value="sponsorship">sponsorship</Radio.Button>
-        </Radio.Group>
+        <TournamentControlItemWrap>
+            <Radio.Group
+                defaultValue="all"
+                size="small"
+                name="tournament_name"
+                {...props}
+            >
+                <Radio.Button value="all">all</Radio.Button>
+                <Radio.Button value="daily">daily</Radio.Button>
+                <Radio.Button value="custom">custom</Radio.Button>
+                <Radio.Button value="sponsorship">sponsorship</Radio.Button>
+            </Radio.Group>
+        </TournamentControlItemWrap>
     )
 }
 
 const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
     return (
-        <Radio.Group
-            defaultValue="all"
-            size="small"
-            name="tournament_type"
-            {...props}
-        >
-            <Radio.Button value="all">all</Radio.Button>
-            <Radio.Button value="solo">solo</Radio.Button>
-            <Radio.Button value="duo">duo</Radio.Button>
-            <Radio.Button value="squad">squad</Radio.Button>
-        </Radio.Group>
+        <TournamentControlItemWrap>
+            <Radio.Group
+                defaultValue="all"
+                size="small"
+                name="tournament_type"
+                {...props}
+            >
+                <Radio.Button value="all">all</Radio.Button>
+                <Radio.Button value="solo">solo</Radio.Button>
+                <Radio.Button value="duo">duo</Radio.Button>
+                <Radio.Button value="squad">squad</Radio.Button>
+            </Radio.Group>
+        </TournamentControlItemWrap>
     )
 }
 
@@ -80,48 +107,39 @@ const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
     }
 
     return (
-        <Search
-            placeholder="Tournament search by ID:"
-            size="small"
-            style={styles}
-            enterButton
-            {...props}
-        />
-    )
-}
-
-const TournamentControlItem: FC<ITournamentControlItem> = ({children}) => {
-    const styles: CSSProperties = {
-        marginTop: 10
-    }
-
-    return (
-        <Col
-            style={styles}
-            xs={{offset: 1}}
-        >
-            {children}
-        </Col>
+        <TournamentControlItemWrap>
+            <Search
+                placeholder="Tournament search by ID:"
+                size="small"
+                style={styles}
+                enterButton
+                {...props}
+            />
+        </TournamentControlItemWrap>
     )
 }
 
 const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
+    const {token: {colorBgContainer}} = theme.useToken()
 
     return (
-        <>
+        <TournamentControlItemWrap>
             <Button
                 style={{background: "orange"}}
-                icon={<LoginOutlined/>}
+                icon={<LoginOutlined style={{color: colorBgContainer}
+                }/>}
                 size="small"
                 {...props}
             >
-                <span>
+                <span style={{color: colorBgContainer}}>
                     create tournament
                 </span>
             </Button>
-        </>
+        </TournamentControlItemWrap>
     )
 }
+
+
 
 
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
@@ -130,6 +148,9 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     const {token: {borderRadius, colorBorder}} = theme.useToken()
     const tournament = useTournament()
     const modalDrawer = useModalDrawer()
+    const breakpoint = useBreakpoint()
+    console.log("Breakpoint:", breakpoint)
+
     const {isPending, startTransition} = transition
     const [searchValue, setSearchValue] = useState<string>("")
     const filterOptionsRef = useRef<IFilterOptions>({name: "all", type: "all"})
@@ -144,6 +165,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     }
 
     const onSearch = (value: string) => {
+        if (!value) return
         filterOptionsRef.current.name = "all"
         filterOptionsRef.current.type = "all"
         setSearchValue(() => value)
@@ -181,42 +203,28 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     return (
         <Row wrap>
             <Row justify="space-around" style={{...stylesRow}}>
-                <TournamentControlItem>
-                    <TournamentSortByName
-                        props={{
-                            disabled: isPending,
-                            value: filterOptionsRef.current.name.toLowerCase(),
-                            onChange: onChangeFilterOption,
-                        }}
-                    />
-                </TournamentControlItem>
-                <TournamentControlItem>
-                    <TournamentSortByType
-                        props={{
-                            disabled: isPending,
-                            value: filterOptionsRef.current.type.toLowerCase(),
-                            onChange: onChangeFilterOption,
-                        }}
-                    />
-                </TournamentControlItem>
-                <TournamentControlItem>
-                    <TournamentCreateButton
-                        props={{
-                            onClick: onTournamentCreate
-                        }}
-                    />
-                </TournamentControlItem>
-                <TournamentControlItem>
-                    <TournamentSearch
-                        props={{
-                            disabled: isPending,
-                            loading: isPending,
-                            value: searchValue,
-                            onInput,
-                            onSearch,
-                        }}
-                    />
-                </TournamentControlItem>
+                <TournamentCreateButton
+                    props={{
+                        onClick: onTournamentCreate
+                    }}/>
+                <TournamentSortByName props={{
+                    disabled: isPending,
+                    value: filterOptionsRef.current.name.toLowerCase(),
+                    onChange: onChangeFilterOption,
+                }}/>
+                <TournamentSortByType props={{
+                    disabled: isPending,
+                    value: filterOptionsRef.current.type.toLowerCase(),
+                    onChange: onChangeFilterOption,
+                }}/>
+                <TournamentSearch
+                    props={{
+                        disabled: isPending,
+                        loading: isPending,
+                        value: searchValue,
+                        onInput,
+                        onSearch
+                }}/>
             </Row>
         </Row>
     )

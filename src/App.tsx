@@ -3,7 +3,7 @@ import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import Root from "./component/root/Root"
 import {useAppUserTheme} from "./store/useAppUserTheme"
-import {useLogger} from "./hook/useLogger"
+
 
 interface IAppProvider {
     children: ReactNode,
@@ -22,12 +22,13 @@ const AppProvider: FC<IAppProvider> = ({children, appThemeConfig}) => {
 
 function App() {
     const {appAlgorithm} = useAppUserTheme()
+
     useEffect(() => {
         console.log("Render App")
     })
 
     return (
-        <div className="App">
+        <div className="App" style={{minWidth: 380}}>
             <AppProvider appThemeConfig={appAlgorithm}>
                 <Root/>
             </AppProvider>

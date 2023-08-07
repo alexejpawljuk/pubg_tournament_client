@@ -9,7 +9,7 @@ import RootLayoutFooter from "./RootLayoutFooter"
 import Home from "../content/Home"
 import NoFound from "../content/NotFound"
 import Navigation from "../navigation/Navigation"
-import Profile from "../profile/Profile"
+import Profile from "../content/Profile"
 import ModalPopup from "../popup/ModalPopup"
 import CommunityFloatButton from "../community/CommunityFloatButton"
 import ModalDrawer from "../popup/ModalDrawer";
@@ -41,7 +41,6 @@ const Root = () => {
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/profile" element={<Profile/>}/>
-                        {/*<Route path="/shop" element={<Shop/>}/>*/}
                         <Route path="*" element={<NoFound/>}/>
                     </Routes>
                 </RootContent>

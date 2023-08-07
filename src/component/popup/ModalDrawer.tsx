@@ -1,6 +1,7 @@
 import React, {CSSProperties, FC, ReactNode, useEffect} from 'react'
 import {Button, Drawer, Space} from "antd"
 import {useModalDrawer} from "../../store/useModalDrawer"
+import {ShoppingCartOutlined} from "@ant-design/icons";
 
 interface IContent {
     children: ReactNode
@@ -47,7 +48,6 @@ const ModalDrawer = () => {
             keyboard
             footer={null}
             placement="left"
-            title="Create new tournament"
             width={500}
             onClose={onClose}
             {...props}
@@ -55,8 +55,7 @@ const ModalDrawer = () => {
             extra={
                 <Space>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button type="primary" onClick={onClose}>
-                        OK
+                    <Button icon={<ShoppingCartOutlined loop={true}/>} onClick={onClose}>
                     </Button>
                 </Space>
             }
