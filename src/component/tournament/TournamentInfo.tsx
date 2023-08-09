@@ -17,7 +17,7 @@ interface ITournamentInfoDisplay {
 
 const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
     const {token} = theme.useToken()
-    const {type, id, name, date, condition, price, reward} = tournament
+    const {type, id, name, date, condition, price, reward, members} = tournament
 
 
     return (
@@ -55,6 +55,9 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
                     Ticket: {price.ticket}
                 </div>
                 <div>
+                    Player: {members.alreadyRegistered} / {members.max}
+                </div>
+                <div>
                     Reward for first place: {reward.coin}
                 </div>
                 <div style={{fontSize: 11}}>{name}</div>
@@ -80,8 +83,18 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
             .filter(({id, nickname}) => [nickname, id].join(" ").includes(e.target.value)))
     }
 
+    const addFriend = (player: IPlayer) => {
+        console.log(player)
+    }
+
     return (
-        <Row style={{background: token.colorBgBase, padding: 15}}>
+        <Row
+            style={{
+                background:
+                token.colorBgBase,
+                padding: 15
+            }}
+        >
             <Row justify="space-around" style={{width: "100%"}}>
 
                 <Col style={{marginBottom: 30,}}>
