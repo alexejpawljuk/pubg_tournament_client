@@ -1,11 +1,12 @@
 import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react"
 import {IPlayer, ITournament} from "./Tournament"
 import {Button, Col, Divider, Rate, Row, theme} from "antd"
-import {LoginOutlined, StarFilled} from "@ant-design/icons"
+import {LoginOutlined, NotificationOutlined, StarFilled, StarOutlined} from "@ant-design/icons"
 import TournamentPlayerList from "./TournamentPlayerList"
 import Search from "antd/es/input/Search"
 import {format} from "date-fns"
 import Countdown from "antd/es/statistic/Countdown"
+import {GrFavorite} from "react-icons/gr";
 
 
 interface ITournamentInfo {
@@ -30,11 +31,11 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
                 // borderColor: token.colorBorder,
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
             }}
         >
             <div style={{}}>
-                <div>
+                <div style={{textAlign: "center"}}>
                     <Countdown value={date.getTime()}/>
                 </div>
                 <div>
@@ -110,14 +111,14 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                 }}
             >
 
-                <Col style={{marginBottom: 30,}}>
+                <Col style={{marginBottom: 10,}}>
                     <TournamentInfoDisplay tournament={tournamentItem}/>
                 </Col>
 
                 <Col
                     style={{
                         width: 270,
-                        marginBottom: 30,
+                        marginBottom: 10,
                         // border: "1px solid",
                         // borderColor: token.colorBorder
                     }}
@@ -131,7 +132,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                         // size="small"
                         style={{
                             // width: 310,
-                            marginBottom: 5
+                            marginBottom: 10
                             // margin: 10
                         }}
                     />
@@ -165,7 +166,11 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
             </Row>
 
-            <Row justify="end" style={{width: "100%", paddingRight: 50}}>
+            <Row justify="space-between" style={{width: "100%"}}>
+                <Button  style={{color: "white"}} icon={ <NotificationOutlined />}>
+                    Notification
+                </Button>
+
                 <Button
                     style={{background: "orange", color: token.colorBgBase}}
                     icon={<LoginOutlined/>}
