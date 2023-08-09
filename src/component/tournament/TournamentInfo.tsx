@@ -40,7 +40,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
                 <div>Type: {type}</div>
                 <div>ID: {id}</div>
                 <div>
-                    Date: {format(date, "dd.mm.yyyy")} {format(date, "hh:mm")}
+                    Date: {format(date, "dd.mm.yyyy")} {format(date, "HH:mm")}
                 </div>
                 <div>
                     <Rate
@@ -110,7 +110,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
                 <Col
                     style={{
-                        width: 300,
+                        width: 270,
                         marginBottom: 30,
                         // border: "1px solid",
                         // borderColor: token.colorBorder
@@ -148,7 +148,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                                 border: "0.5px solid",
                                 borderColor: token.colorBorder,
                                 // marginBottom: 5,
-                                width: 300,
+                                width: 270,
                                 height: 45,
                                 padding: "5px 0px",
                             }
@@ -159,7 +159,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
             </Row>
 
-            <Row justify="end" style={{width: "100%", paddingRight: 30}}>
+            <Row justify="end" style={{width: "100%", paddingRight: 50}}>
                 <Button
                     style={{background: "orange", color: token.colorBgBase}}
                     icon={<LoginOutlined/>}
