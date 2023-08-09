@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react"
+import React, {ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState, useTransition,} from "react"
 import {IPlayer, ITournament} from "./Tournament"
 import {Button, Col, Divider, Rate, Row, theme} from "antd"
 import {LoginOutlined, NotificationOutlined, StarFilled, StarOutlined} from "@ant-design/icons"
@@ -15,9 +15,10 @@ interface ITournamentInfo {
 
 interface ITournamentInfoDisplay {
     tournament: ITournament
+    setTournamentStarted: Dispatch<SetStateAction<boolean>>
 }
 
-const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
+const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTournamentStarted}) => {
     const {token} = theme.useToken()
     const {type, id, name, date, condition, price, reward, members} = tournament
 
@@ -36,7 +37,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
         >
             <div style={{}}>
                 <div style={{textAlign: "center"}}>
-                    <Countdown value={date.getTime()}/>
+                    <Countdown value={date.getTime()} onFinish={() => setTournamentStarted(() => true)}/>
                 </div>
                 <div>
                     <Divider
@@ -81,6 +82,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
     const {token} = theme.useToken()
     const [isPending, startTransition] = useTransition()
     const [playerList, setPlayerList] = useState<IPlayer[]>([])
+    const [tournamentStarted, setTournamentStarted] = useState<boolean>(false)
 
     useEffect(() => {
         startTransition(() => {
@@ -112,7 +114,10 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
             >
 
                 <Col style={{marginBottom: 10,}}>
-                    <TournamentInfoDisplay tournament={tournamentItem}/>
+                    <TournamentInfoDisplay
+                        tournament={tournamentItem}
+                        setTournamentStarted={setTournamentStarted}
+                    />
                 </Col>
 
                 <Col
@@ -167,13 +172,16 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
             </Row>
 
             <Row justify="space-between" style={{width: "100%"}}>
-                <Button  style={{color: "white"}} icon={ <NotificationOutlined />}>
-                    Notification
-                </Button>
+                <Button
+                    style={{color: "white"}}
+                    icon={<NotificationOutlined/>}
+                    disabled={tournamentStarted}
+                >Notification</Button>
 
                 <Button
                     style={{background: "orange", color: token.colorBgBase}}
                     icon={<LoginOutlined/>}
+                    disabled={tournamentStarted}
                 >Join</Button>
             </Row>
         </Row>
