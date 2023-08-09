@@ -253,7 +253,10 @@ const list = new Promise<ITournament[]>(resolve => {
                 premium: getRandomNumber(2) % 2 === 0
             },
             meta: {
-                players: objectsList
+                players: objectsList.map(player => ({
+                    ...player,
+                    rank: getRandomNumber(5)
+                }))
             }
         }
 
