@@ -5,6 +5,7 @@ import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import TournamentPlayerList from "./TournamentPlayerList"
 import Search from "antd/es/input/Search"
 import {format} from "date-fns"
+import Countdown from "antd/es/statistic/Countdown"
 
 
 interface ITournamentInfo {
@@ -33,7 +34,9 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
             }}
         >
             <div style={{}}>
-                {/*<div>{tournamentItem.name}</div>*/}
+                <div>
+                    <Countdown value={date.getTime()}/>
+                </div>
                 <div>Type: {type}</div>
                 <div>ID: {id}</div>
                 <div>
@@ -92,6 +95,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
             <Row
                 justify="space-around"
                 style={{
+                    marginTop: 15,
                     width: "100%",
                     background: token.colorBgBase,
                     padding: 15,
@@ -125,6 +129,8 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                             // margin: 10
                         }}
                     />
+
+
                     <TournamentPlayerList
                         players={playerList}
                         isPending={isPending}
