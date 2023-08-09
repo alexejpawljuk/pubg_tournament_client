@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react"
 import {IPlayer, ITournament} from "./Tournament"
-import {Button, Col, Rate, Row, theme} from "antd"
+import {Button, Col, Divider, Rate, Row, theme} from "antd"
 import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import TournamentPlayerList from "./TournamentPlayerList"
 import Search from "antd/es/input/Search"
@@ -37,6 +37,13 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
                 <div>
                     <Countdown value={date.getTime()}/>
                 </div>
+                <div>
+                    <Divider
+                        style={{
+                            margin: "7px 0px"
+                        }}
+                    >{name.toUpperCase()}</Divider>
+                </div>
                 <div>Type: {type}</div>
                 <div>ID: {id}</div>
                 <div>
@@ -63,7 +70,6 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
                 <div>
                     Reward for first place: {reward.coin}
                 </div>
-                <div style={{fontSize: 11}}>{name}</div>
             </div>
         </div>
     )
