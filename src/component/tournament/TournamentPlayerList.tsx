@@ -1,6 +1,6 @@
 import React, {FC, TransitionStartFunction, useTransition} from 'react'
 import {IPlayer, ITournament} from "./Tournament";
-import {Avatar, Col, Row, theme} from "antd";
+import {Avatar, Col, Row, RowProps, theme} from "antd";
 import {UserAddOutlined} from "@ant-design/icons";
 import ListLoadMore from "../ListLoadMore";
 
@@ -8,9 +8,11 @@ interface ITournamentPlayerList {
     players: IPlayer[]
     isPending: boolean
     startTransition: TransitionStartFunction
+    containerProps: RowProps
+    itemProps: RowProps
 }
 
-const TournamentPlayerList: FC<ITournamentPlayerList> = ({players, isPending, startTransition}) => {
+const TournamentPlayerList: FC<ITournamentPlayerList> = ({players, isPending, startTransition, containerProps, itemProps}) => {
     const {token} = theme.useToken()
 
     const fontSize = 11
@@ -21,24 +23,9 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = ({players, isPending, st
             data={players}
 
             listProps={{
-                style: {
-                    // width: "30%",
-                    height: 230,
-                    overflowY: "scroll",
-                },
+                ...containerProps,
                 renderItem: (player, index) => (
-                    <Row
-                        align="middle"
-                        justify="space-around"
-                        style={{
-                            border: "0.5px solid",
-                            borderColor: token.colorBorder,
-                            // marginBottom: 5,
-                            width: 320,
-                            height: 45,
-                            padding: "5px 0px",
-                        }}
-                    >
+                    <Row {...itemProps}>
                         <Col>
                             <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}/>
                         </Col>

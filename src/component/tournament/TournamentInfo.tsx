@@ -88,14 +88,8 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
     }
 
     return (
-        <Row
-            style={{
-                background:
-                token.colorBgBase,
-                padding: 15
-            }}
-        >
-            <Row justify="space-around" style={{width: "100%"}}>
+        <Row>
+            <Row justify="space-around" style={{width: "100%", background: token.colorBgBase, padding: 15, marginBottom: 15}}>
 
                 <Col style={{marginBottom: 30,}}>
                     <TournamentInfoDisplay tournament={tournamentItem}/>
@@ -103,11 +97,12 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
                 <Col
                     style={{
-                        width: 320,
+                        width: 300,
                         marginBottom: 30,
                         // border: "1px solid",
                         // borderColor: token.colorBorder
                     }}
+
                 >
 
                     <Search
@@ -115,12 +110,34 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                         enterButton
                         onInput={onSearch}
                         // size="small"
-                        style={{marginBottom: 5}}
+                        style={{
+                            // width: 310,
+                            marginBottom: 5
+                            // margin: 10
+                        }}
                     />
                     <TournamentPlayerList
                         players={playerList}
                         isPending={isPending}
                         startTransition={startTransition}
+                        containerProps={{
+                            style: {
+                                height: 230,
+                                overflowY: "scroll",
+                            }
+                        }}
+                        itemProps={{
+                            align: "middle",
+                            justify: "space-around",
+                            style: {
+                                border: "0.5px solid",
+                                borderColor: token.colorBorder,
+                                // marginBottom: 5,
+                                width: 300,
+                                height: 45,
+                                padding: "5px 0px",
+                            }
+                        }}
                     />
 
                 </Col>
