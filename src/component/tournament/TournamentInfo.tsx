@@ -1,18 +1,66 @@
 import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react"
 import {IPlayer, ITournament} from "./Tournament"
-import {AutoComplete, Avatar, Button, Col, Input, List, Rate, Row, Space, theme} from "antd"
-import ListLoadMore from "../ListLoadMore"
-import {LoginOutlined, StarFilled, UserAddOutlined} from "@ant-design/icons"
+import {Button, Col, Rate, Row, theme} from "antd"
+import {LoginOutlined, StarFilled} from "@ant-design/icons"
 import TournamentPlayerList from "./TournamentPlayerList"
 import Search from "antd/es/input/Search"
-import {Typography} from 'antd'
-import {format} from "date-fns";
-import tournamentList from "./TournamentList";
+import {format} from "date-fns"
 
-const {Title} = Typography;
 
 interface ITournamentInfo {
     tournamentItem: ITournament
+}
+
+interface ITournamentInfoDisplay {
+    tournament: ITournament
+}
+
+const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament}) => {
+    const {token} = theme.useToken()
+    const {type, id, name, date, condition, price, reward} = tournament
+
+
+    return (
+        <div
+            style={{
+                height: 270,
+                width: 200,
+                // border: "1px solid",
+                // borderColor: token.colorBorder,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+        >
+            <div style={{}}>
+                {/*<div>{tournamentItem.name}</div>*/}
+                <div>Type: {type}</div>
+                <div>ID: {id}</div>
+                <div>
+                    Date: {format(date, "dd.mm.yyyy")} {format(date, "hh:mm")}
+                </div>
+                <div>
+                    <Rate
+                        disabled
+                        allowHalf
+                        count={5}
+                        value={condition.rank}
+                        character={<StarFilled style={{width: "0.6em"}}/>}
+                    />
+                </div>
+                <div>
+                    Coin: {price.coin}
+                </div>
+                <div>
+                    Ticket: {price.ticket}
+                </div>
+                <div>
+                    Reward for first place: {reward.coin}
+                </div>
+                <div style={{fontSize: 11}}>{name}</div>
+            </div>
+        </div>
+    )
 }
 
 
@@ -28,61 +76,16 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
     }, [tournamentItem.meta.players])
 
     const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
-        setPlayerList(() => {
-            return [...tournamentItem.meta.players]
-                .filter(({id, nickname}) => [nickname, id].join(" ").includes(e.target.value))
-        })
+        setPlayerList(() => [...tournamentItem.meta.players]
+            .filter(({id, nickname}) => [nickname, id].join(" ").includes(e.target.value)))
     }
 
     return (
-        <Row>
+        <Row style={{background: token.colorBgBase, padding: 15}}>
             <Row justify="space-around" style={{width: "100%"}}>
 
-                <Col
-                    style={{
-                        marginBottom: 30,
-                    }}
-                >
-                    <div
-                        style={{
-                            height: 270,
-                            width: 200,
-                            // border: "1px solid",
-                            // borderColor: token.colorBorder,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                    >
-                        <div style={{}}>
-                            {/*<div>{tournamentItem.name}</div>*/}
-                            <div>Type: {tournamentItem.type}</div>
-                            <div>ID: {tournamentItem.id}</div>
-                            <div>
-                                Date: {format(tournamentItem.date, "dd.mm.yyyy")} {format(tournamentItem.date, "hh:mm")}
-                            </div>
-                            <div>
-                                <Rate
-                                    disabled
-                                    allowHalf
-                                    count={5}
-                                    value={tournamentItem.condition.rank}
-                                    character={<StarFilled style={{width: "0.6em"}}/>}
-                                />
-                            </div>
-                            <div>
-                                Coin: {tournamentItem.price.coin}
-                            </div>
-                            <div>
-                                Ticket: {tournamentItem.price.ticket}
-                            </div>
-                            <div>
-                                Reward for first place: {tournamentItem.reward.coin}
-                            </div>
-                            <div style={{fontSize: 11}}>{tournamentItem.name}</div>
-                        </div>
-                    </div>
+                <Col style={{marginBottom: 30,}}>
+                    <TournamentInfoDisplay tournament={tournamentItem}/>
                 </Col>
 
                 <Col

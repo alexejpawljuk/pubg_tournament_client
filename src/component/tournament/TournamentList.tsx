@@ -95,15 +95,6 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
                 width: 700,
             }
         }))
-
-        // modalDrawer.setOpenDrawer(prevState => ({
-        //     openDrawer: true,
-        //     children: <TournamentInfo tournamentItem={tournament}/>,
-        //     props: {
-        //         width: 1000,
-        //     }
-        // }))
-
     }
 
     const stylesCol = {

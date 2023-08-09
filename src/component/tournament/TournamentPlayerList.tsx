@@ -23,7 +23,7 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = ({players, isPending, st
             listProps={{
                 style: {
                     // width: "30%",
-                    height: 235,
+                    height: 230,
                     overflowY: "scroll",
                 },
                 renderItem: (player, index) => (
