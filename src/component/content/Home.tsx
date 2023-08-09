@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div>
             <Tournament/>
-            {/*<TournamentScrollingList/>*/}
+            {/*<TournamentList/>*/}
         </div>
     )
 }

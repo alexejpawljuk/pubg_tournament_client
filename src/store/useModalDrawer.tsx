@@ -14,31 +14,29 @@ namespace IUseDrawer {
     }
 }
 
-export const useModalDrawer = create<IUseDrawer.IStore>()(
-    devtools(
-        (setState) => {
-            return {
-                openDrawer: false,
-                children: null,
-                props: {},
-                setOpenDrawer: (value) => {
-                    if (typeof value === "function") {
-                        setState(state => ({
-                            ...state,
-                            openDrawer: value(state).openDrawer,
-                            children: value(state).children,
-                            props: value(state).props
-                        }))
-                    } else {
-                        setState(state => ({
-                            ...state,
-                            openDrawer: value.openDrawer,
-                            children: value.children,
-                            props: value.props
-                        }))
-                    }
+export const useModalDrawer = create<IUseDrawer.IStore>(
+    (setState) => {
+        return {
+            openDrawer: false,
+            children: null,
+            props: {},
+            setOpenDrawer: (value) => {
+                if (typeof value === "function") {
+                    setState(state => ({
+                        ...state,
+                        openDrawer: value(state).openDrawer,
+                        children: value(state).children,
+                        props: value(state).props
+                    }))
+                } else {
+                    setState(state => ({
+                        ...state,
+                        openDrawer: value.openDrawer,
+                        children: value.children,
+                        props: value.props
+                    }))
                 }
             }
         }
-    )
+    }
 )

@@ -1,5 +1,5 @@
 import React, {FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
-import {Avatar, Col, Rate, Row, Skeleton, Tag, TagProps, theme} from 'antd'
+import {Avatar, Col, Rate, Row, Tag, TagProps, theme} from 'antd'
 import {ITournament} from "./Tournament"
 
 import {format, isToday, isTomorrow} from "date-fns"
@@ -10,6 +10,7 @@ import ticketSVG from "../../image/svg/ticket.svg"
 import TournamentInfo from "./TournamentInfo"
 import {useModalPopup} from "../../store/useModelPopup"
 import ListLoadMore from "../ListLoadMore"
+import {useModalDrawer} from "../../store/useModalDrawer"
 
 
 interface ITournamentScrollingList {
@@ -67,16 +68,17 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
     )
 }
 
-const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, transition}) => {
+const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transition}) => {
 
     const iter = useRef(0)
     useEffect(() => {
-        console.log("Render TournamentScrollingList:", iter.current)
+        console.log("Render TournamentList:", iter.current)
         iter.current = iter.current + 1
     })
 
     const {token} = theme.useToken()
     const modalPopup = useModalPopup()
+    const modalDrawer = useModalDrawer()
 
     const {isPending, startTransition} = transition
 
@@ -90,9 +92,18 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
             openModal: true,
             children: <TournamentInfo tournamentItem={tournament}/>,
             props: {
-                width: 1000,
+                width: 700,
             }
         }))
+
+        // modalDrawer.setOpenDrawer(prevState => ({
+        //     openDrawer: true,
+        //     children: <TournamentInfo tournamentItem={tournament}/>,
+        //     props: {
+        //         width: 1000,
+        //     }
+        // }))
+
     }
 
     const stylesCol = {
@@ -107,7 +118,7 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
         border: "0.5px solid",
         borderColor: token.colorBorder,
         // marginBottom: 5,
-        padding: "5px 0px"
+        padding: "5px 0px",
     }
 
 
@@ -242,4 +253,4 @@ const TournamentScrollingList: FC<ITournamentScrollingList> = ({tournamentList, 
     )
 }
 
-export default TournamentScrollingList
+export default TournamentList
