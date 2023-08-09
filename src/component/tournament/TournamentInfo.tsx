@@ -89,7 +89,16 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
     return (
         <Row>
-            <Row justify="space-around" style={{width: "100%", background: token.colorBgBase, padding: 15, marginBottom: 15}}>
+            <Row
+                justify="space-around"
+                style={{
+                    width: "100%",
+                    background: token.colorBgBase,
+                    padding: 15,
+                    marginBottom: 15,
+                    borderRadius: token.borderRadius
+                }}
+            >
 
                 <Col style={{marginBottom: 30,}}>
                     <TournamentInfoDisplay tournament={tournamentItem}/>
