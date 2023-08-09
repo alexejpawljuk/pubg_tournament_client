@@ -1,7 +1,7 @@
 import {create} from "zustand"
 import {ITournament} from "../component/tournament/Tournament"
 import list from "../DATA/tournamentData"
-import {IFilterOptions} from "../component/tournament/TournamentControlPanel"
+import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
 
 
 interface UseTournament {

@@ -6,16 +6,15 @@ import {
     DatePicker, Rate,
     Row,
     Select, SelectProps, Slider, Steps,
-    theme,
+    theme, Tooltip,
     Typography
 } from "antd"
 import {InfoCircleOutlined, ShoppingCartOutlined, StarFilled} from "@ant-design/icons"
-import Shop from "../shop/Shop"
-import {IUseModalPopup} from "../../store/useModelPopup"
-import AuthFrom from "../AuthForm"
-import {ITournament, ITournamentType} from "./Tournament"
-import {IoCreateOutline} from "react-icons/io5";
-import {GrNext} from "react-icons/gr";
+import Shop from "../../shop/Shop"
+import {IUseModalPopup} from "../../../store/useModelPopup"
+import AuthFrom from "../../AuthForm"
+import {ITournament, ITournamentType} from "../Tournament"
+import {IoCreateOutline} from "react-icons/io5"
 
 
 interface ITournamentCreate {
@@ -23,11 +22,6 @@ interface ITournamentCreate {
 }
 
 type ITournamentProps = Omit<ITournament, "id" | "key" | "reward" | "name" | "members">
-
-interface ITournamentCreateProps {
-    props?: ButtonProps
-    modalPopup: IUseModalPopup.IStore
-}
 
 
 function getSelectItem<ValueType>(value: ValueType, label: ReactNode) {
@@ -38,41 +32,16 @@ function getStepItem(title: string, content: ReactNode) {
     return {title, content}
 }
 
-export const TournamentCreateHeader: FC<ITournamentCreateProps> = ({props, modalPopup}) => {
-
-    const onShop = () => {
-        modalPopup.setOpenModal(prevState => ({
-            ...prevState,
-            openModal: true,
-            props: {
-                width: 550
-            },
-            children: <Shop/>
-        }))
-    }
-
-    return (
-        <Button
-            icon={<ShoppingCartOutlined/>}
-            onClick={onShop}
-            {...props}
-        >Shop</Button>
-    )
-}
 
 const Title = () => {
     const {token: {colorText}} = theme.useToken()
+    const info = "Here is a description of how to create a tournament."
 
     return (
         <Row justify="center">
             <Badge
                 count={
-                    <InfoCircleOutlined
-                        onClick={() => {
-                            console.log("Create tournament Info")
-                        }}
-                        style={{color: colorText}}
-                    />
+                    <Tooltip title={info}><InfoCircleOutlined style={{color: colorText}}/></Tooltip>
                 }
                 offset={[6, 0]}
                 size="default"
@@ -184,7 +153,8 @@ const TournamentCreateOptions = () => {
 
     return (
         <>
-            <Steps size="small" direction="vertical" style={{marginTop: 25}} current={current} items={steps}/>
+            {/*<Steps size="small" direction="vertical" style={{marginTop: 25}} current={current} items={steps}/>*/}
+
             <div style={contentStyle}>{steps[current].content}</div>
             <div style={{marginTop: 24}}>
                 {current < steps.length - 1 && (

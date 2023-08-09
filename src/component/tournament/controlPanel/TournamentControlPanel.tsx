@@ -10,16 +10,17 @@ import {
     theme
 } from "antd"
 import React, {ChangeEvent, CSSProperties, FC, ReactNode, TransitionStartFunction, useRef, useState} from "react"
-import {useTournament} from "../../store/useTournament"
-import {ITournamentNameType, ITournamentType} from "./Tournament"
-import {useLogger} from "../../hook/useLogger"
+import {useTournament} from "../../../store/useTournament"
+import {ITournamentNameType, ITournamentType} from "../Tournament"
+import {useLogger} from "../../../hook/useLogger"
 import Search from "antd/es/input/Search"
 import {SearchProps} from "antd/lib/input"
-import {LoginOutlined} from "@ant-design/icons"
-import {useModalDrawer} from "../../store/useModalDrawer"
+import {FormOutlined} from "@ant-design/icons"
+import {useModalDrawer} from "../../../store/useModalDrawer"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
-import TournamentCreate, {TournamentCreateHeader} from "./TournamentCreate"
-import {useModalPopup} from "../../store/useModelPopup"
+import TournamentCreate from "../create/TournamentCreate"
+import {useModalPopup} from "../../../store/useModelPopup"
+import TournamentCreateHeader from "../create/TournamentCreateHeader";
 
 export interface IFilterOptions {
     name: ITournamentNameType | "all"
@@ -132,7 +133,7 @@ const TournamentCreateButton: FC<ITournamentCreate> = ({props}) => {
         <TournamentControlItemWrap>
             <Button
                 style={styles}
-                icon={<LoginOutlined style={{color: colorBgContainer}}/>}
+                icon={<FormOutlined size={16} style={{color: colorBgContainer}}/>}
                 size="small"
                 {...props}
             >
@@ -153,8 +154,8 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     const modalDrawer = useModalDrawer()
     const modalPopup = useModalPopup()
 
-    const breakpoint = useBreakpoint()
-    console.log("Breakpoint:", breakpoint)
+    // const breakpoint = useBreakpoint()
+    // console.log("Breakpoint:", breakpoint)
 
     const {isPending, startTransition} = transition
     const [searchValue, setSearchValue] = useState<string>("")

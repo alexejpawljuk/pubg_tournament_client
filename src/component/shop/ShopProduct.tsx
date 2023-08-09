@@ -1,23 +1,24 @@
 import React, {FC, ReactNode} from "react"
-import {Avatar, Card, Input, Space} from "antd"
+import {Avatar, Card, Input, Space, Tooltip} from "antd"
 import {InfoCircleOutlined, ShoppingCartOutlined} from "@ant-design/icons"
 import Meta from "antd/es/card/Meta"
-import {useLogger} from "../../hook/useLogger";
+import {useLogger} from "../../hook/useLogger"
 
-export interface IShopItemData {
+export interface IShopProduct {
     title: string
     price: number
     avatarPath: string
+    description: string
 }
 
 interface IShopItem {
-    data: IShopItemData
+    product: IShopProduct
     children?: ReactNode
 }
 
-const ShopItem: FC<IShopItem> = ({data}) => {
+const ShopProduct: FC<IShopItem> = ({product}) => {
     useLogger("Render shop item")
-    const {title, price, avatarPath} = data
+    const {title, price, avatarPath, description} = product
 
     const onBuyItem = () => {
         console.log("Buy",)
@@ -39,24 +40,19 @@ const ShopItem: FC<IShopItem> = ({data}) => {
             }
             actions={[
                 <ShoppingCartOutlined key="buy" onClick={onBuyItem}/>,
-                <InfoCircleOutlined key="shop_unit_info" onClick={onInfo}/>
+                <Tooltip title={description}>
+                    <InfoCircleOutlined key="shop_unit_info" onClick={onInfo}/>
+                </Tooltip>
             ]}
         >
             <Meta
                 avatar={<Avatar src={avatarPath}/>}
                 title={title}
                 description={
-                    <>
-                        <Space direction="vertical">
-                            <span>
-                                Description
-                            </span>
-                        </Space>
-                        <Space size={[10, 0]}>
-                            <Input type="number" min={1} max={100} defaultValue={1} size="small" style={{width: 60}}/>
-                            <span>{` / ${10}`}</span>
-                        </Space>
-                    </>
+                    <Space size={[10, 0]}>
+                        <Input type="number" min={1} max={100} defaultValue={1} size="small" style={{width: 60}}/>
+                        <span>{` / ${10}`}</span>
+                    </Space>
                 }
                 key={"premium_account"}
             />
@@ -64,4 +60,4 @@ const ShopItem: FC<IShopItem> = ({data}) => {
     )
 }
 
-export default ShopItem
+export default ShopProduct

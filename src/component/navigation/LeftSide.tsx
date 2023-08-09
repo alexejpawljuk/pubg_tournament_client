@@ -36,7 +36,7 @@ const LeftSide = () => {
                     ...prevState,
                     openModal: true,
                     props: {
-                        width: 550
+                        width: 550,
                     },
                     children: <Shop/>
                 }))

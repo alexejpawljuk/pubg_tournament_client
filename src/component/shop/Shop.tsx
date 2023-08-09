@@ -1,41 +1,88 @@
-import React, {useState} from 'react'
-import {Col, Divider, Row, theme} from 'antd'
-import ShopItem, {IShopItemData} from "./ShopItem"
+import React, {FC, ReactNode, useEffect, useState} from 'react'
+import {Col, Divider, Row, Skeleton, theme} from 'antd'
+import ShopProduct from "./ShopProduct"
 import {uid} from "uid"
+import {useShop} from "../../store/useShop"
 
-import coinsImage from '../../image/coins.png'
-import ticketImage from "../../image/ticket.png"
-import premiumAccount from "../../image/high-quality.png"
+interface IShop {
 
+}
 
+interface IShopHeader {
+    title: string
+}
 
-const Shop = () => {
+interface IShopProductContainer {
+    children: ReactNode
+    loading: boolean
+}
+
+interface IShopProductWrap {
+    children: ReactNode
+}
+
+const ShopHeader: FC<IShopHeader> = ({title}) => {
+    return (
+        <Row>
+            <Col flex={"auto"}>
+                <Divider type="horizontal" orientation="center">{title}</Divider>
+            </Col>
+        </Row>
+    )
+}
+
+const ShopProductContainer: FC<IShopProductContainer> = ({children, loading}) => {
     const {token: {colorBgContainer}} = theme.useToken()
 
+    if (loading)
+        return (
+            <Skeleton active />
+        )
 
-    const [shopItems, setShopItems] = useState<IShopItemData[]>([
-        {price: 10, avatarPath: premiumAccount, title: "Premium account",},
-        {price: 0.1, avatarPath: coinsImage, title: "Coin",},
-        {price: 1, avatarPath: ticketImage, title: "Ticket",},
-    ])
+
+    return (
+        <Row
+            justify={"center"}
+            gutter={[0, 0]}
+            style={{
+                background: colorBgContainer,
+                padding: "24px",
+                margin: 0,
+            }}
+        >{children}</Row>
+    )
+}
+
+const ShopProductWrap: FC<IShopProductWrap> = ({children}) => {
+    return (
+        <Col style={{width: 200}}>
+            {children}
+        </Col>
+    )
+}
+
+const Shop: FC<IShop> = () => {
+    const {products, shopProductsFetch} = useShop()
+    const [loading, setLoading] = useState<boolean>(false)
+
+    useEffect(() => {
+        setLoading(true)
+        shopProductsFetch()
+            .then(() => setLoading(false))
+            .catch(console.log)
+    }, [])
 
     return (
         <Col>
-            <Row>
-                <Col flex={"auto"}>
-                    <Divider type="horizontal" orientation="center">
-                        Shop
-                    </Divider>
-                </Col>
-            </Row>
+            <ShopHeader title="Shop"/>
 
-            <Row justify={"center"} gutter={[0, 0]} style={{background: colorBgContainer, padding: "24px", margin: 0}}>
-
-                {shopItems.map(shopItem => <Col key={uid()} style={{width: 200}}>
-                    <ShopItem data={shopItem}/>
-                </Col>)}
-
-            </Row>
+            <ShopProductContainer loading={loading}>
+                {products.map(product =>
+                    <ShopProductWrap key={uid()}>
+                        <ShopProduct product={product}/>
+                    </ShopProductWrap>
+                )}
+            </ShopProductContainer>
         </Col>
     )
 }
