@@ -25,7 +25,7 @@ const Root = () => {
 
 
     return (
-        <Layout  style={{minHeight: '100vh', height: window.innerHeight, width: window.innerWidth}}>
+        <Layout  style={{minHeight: '100vh'}}>
             <ModalPopup/>
             <ModalDrawer/>
             <CommunityFloatButton/>
