@@ -37,6 +37,7 @@ export interface ITournament {
         coin: number
 
     }
+    donation: number
     condition: {
         rank: number // 0.00 - 3.00
         premium: boolean

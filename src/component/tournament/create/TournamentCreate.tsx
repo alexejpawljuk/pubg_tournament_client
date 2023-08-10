@@ -21,7 +21,7 @@ interface ITournamentCreate {
 
 }
 
-type ITournamentProps = Omit<ITournament, "id" | "key" | "reward" | "name" | "members" | "meta">
+type ITournamentProps = Omit<ITournament, "id" | "key" | "reward" | "name" | "members" | "meta" | "donation">
 
 
 function getSelectItem<ValueType>(value: ValueType, label: ReactNode) {

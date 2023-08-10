@@ -1,13 +1,15 @@
 import React, {ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState, useTransition,} from "react"
 import {IPlayer, ITournament} from "./Tournament"
-import {Button, Col, Divider, Rate, Row, theme} from "antd"
+import {Avatar, Button, Col, Divider, Rate, Row, theme} from "antd"
 import {LoginOutlined, NotificationOutlined, StarFilled, StarOutlined} from "@ant-design/icons"
 import TournamentPlayerList from "./TournamentPlayerList"
 import Search from "antd/es/input/Search"
 import {format} from "date-fns"
 import Countdown from "antd/es/statistic/Countdown"
-import {GrFavorite} from "react-icons/gr";
-
+import coinSVG from "../../image/svg/coins.svg"
+import Icon from "antd/es/icon";
+import Wallet from "../Wallet";
+import {useModalPopup} from "../../store/useModelPopup";
 
 interface ITournamentInfo {
     tournamentItem: ITournament
@@ -20,7 +22,7 @@ interface ITournamentInfoDisplay {
 
 const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTournamentStarted}) => {
     const {token} = theme.useToken()
-    const {type, id, name, date, condition, price, reward, members} = tournament
+    const {type, id, name, date, condition, price, reward, members, donation} = tournament
 
 
     return (
@@ -40,10 +42,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
                     <Countdown value={date.getTime()} onFinish={() => setTournamentStarted(() => true)}/>
                 </div>
                 <div>
-                    <Divider
-                        style={{
-                            margin: "7px 0px"
-                        }}
+                    <Divider style={{margin: "3px 0px",}}
                     >{name.toUpperCase()}</Divider>
                 </div>
                 <div>Type: {type}</div>
@@ -70,7 +69,10 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
                     Player: {members.alreadyRegistered} / {members.max}
                 </div>
                 <div>
-                    Reward for first place: {reward.coin}
+                    Donation: {donation}
+                </div>
+                <div>
+                    Reward for first place: {reward.coin + donation}
                 </div>
             </div>
         </div>
@@ -80,6 +82,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
 
 const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
     const {token} = theme.useToken()
+    const modalPopup = useModalPopup()
     const [isPending, startTransition] = useTransition()
     const [playerList, setPlayerList] = useState<IPlayer[]>([])
     const [tournamentStarted, setTournamentStarted] = useState<boolean>(false)
@@ -93,6 +96,10 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
     const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setPlayerList(() => [...tournamentItem.meta.players]
             .filter(({id, nickname}) => [nickname, id].join(" ").includes(e.target.value)))
+    }
+
+    const onDonation = () => {
+        console.log("Donation")
     }
 
     const addFriend = (player: IPlayer) => {
@@ -173,12 +180,20 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
             <Row justify="space-between" style={{width: "100%"}}>
                 <Button
-                    style={{color: "white"}}
+                    size="small"
+                    icon={<Avatar style={{marginBottom: 3, padding: 0}} size={19} src={coinSVG}/>}
+                    disabled={tournamentStarted}
+                    onClick={onDonation}
+                >Donation</Button>
+
+                <Button
+                    size="small"
                     icon={<NotificationOutlined/>}
                     disabled={tournamentStarted}
                 >Notification</Button>
 
                 <Button
+                    size="small"
                     style={{background: "orange", color: token.colorBgBase}}
                     icon={<LoginOutlined/>}
                     disabled={tournamentStarted}
