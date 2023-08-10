@@ -95,7 +95,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
 
     const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setPlayerList(() => [...tournamentItem.meta.players]
-            .filter(({id, nickname}) => [nickname, id].join(" ").includes(e.target.value)))
+            .filter(({id, nickname}) => [nickname, id].join(" ").toLowerCase().includes(e.target.value.toLowerCase())))
     }
 
     const onDonation = () => {
