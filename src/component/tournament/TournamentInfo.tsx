@@ -102,10 +102,6 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
         console.log("Donation")
     }
 
-    const addFriend = (player: IPlayer) => {
-        console.log(player)
-    }
-
     return (
         <Row>
             <Row
@@ -141,6 +137,7 @@ const TournamentInfo: FC<ITournamentInfo> = ({tournamentItem}) => {
                         placeholder="search player by nickname or id:"
                         enterButton
                         onInput={onSearch}
+                        autoFocus={false}
                         // size="small"
                         style={{
                             // width: 310,
