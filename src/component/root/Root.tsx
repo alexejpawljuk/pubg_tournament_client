@@ -12,7 +12,7 @@ import Navigation from "../navigation/Navigation"
 import Account from "../content/Account"
 import ModalPopup from "../modal/ModalPopup"
 import CommunityFloatButton from "../community/CommunityFloatButton"
-import ModalDrawer from "../modal/ModalDrawer";
+import ModalDrawer from "../modal/ModalDrawer"
 
 
 const Root = () => {
@@ -25,7 +25,7 @@ const Root = () => {
 
 
     return (
-        <Layout  style={{minHeight: '100vh'}}>
+        <Layout  style={{minHeight: '100vh', height: window.innerHeight, width: window.innerWidth}}>
             <ModalPopup/>
             <ModalDrawer/>
             <CommunityFloatButton/>
