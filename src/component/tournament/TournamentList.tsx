@@ -7,7 +7,7 @@ import coinSVG from "../../image/svg/coins.svg"
 import {StarFilled} from "@ant-design/icons"
 import {FaPeopleGroup} from "react-icons/fa6"
 import ticketSVG from "../../image/svg/ticket.svg"
-import TournamentInfo from "./TournamentInfo"
+import TournamentDetails from "./details/TournamentDetails"
 import {useModalPopup} from "../../store/useModelPopup"
 import ListLoadMore from "../ListLoadMore"
 import {useModalDrawer} from "../../store/useModalDrawer"
@@ -90,7 +90,7 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
         console.log("Select tournament:", tournament)
         modalPopup.setOpenModal(prevState => ({
             openModal: true,
-            children: <TournamentInfo tournamentItem={tournament}/>,
+            children: <TournamentDetails tournament={tournament}/>,
             props: {
                 width: 700,
             }
@@ -158,14 +158,14 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
                             <Row justify="center">
                                 <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
                                 <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-                                    <div style={{fontSize: 12}}>{999}</div>
+                                    <div style={{fontSize: 12}}>{item.price.ticket}</div>
                                 </Col>
                             </Row>
 
                             <Row justify="center" align="middle">
                                 <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
                                 <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-                                    <div style={{fontSize: 12}}>{7}</div>
+                                    <div style={{fontSize: 12}}>{item.price.coin}</div>
                                 </Col>
                             </Row>
 

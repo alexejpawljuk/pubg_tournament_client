@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/DATA/tournamentData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DATA/tournamentData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/content/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/content/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/Tournament.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/Tournament.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentScrollingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useModalDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModalDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModelPopup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentDonate.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentInfoDisplay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentJoinButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentPlayerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentPlayerList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +26,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": -1
+}]]></component>
   <component name="ProjectId" id="2RcSPu3Q7upFEWxTropjEuFw0Lb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,11 +60,11 @@
       <recent name="$PROJECT_DIR$/public/image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/component/tournament/details" />
       <recent name="$PROJECT_DIR$/src/component/tournament/create" />
       <recent name="$PROJECT_DIR$/src/component/tournament" />
       <recent name="$PROJECT_DIR$/src/component/controlPanel" />
       <recent name="$PROJECT_DIR$/src/image/png" />
-      <recent name="$PROJECT_DIR$/src/component/content" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -78,6 +83,8 @@
       <workItem from="1691161451421" duration="47329000" />
       <workItem from="1691317131321" duration="80100000" />
       <workItem from="1691570497806" duration="15499000" />
+      <workItem from="1691591155898" duration="31359000" />
+      <workItem from="1691745438658" duration="12490000" />
     </task>
     <servers />
   </component>

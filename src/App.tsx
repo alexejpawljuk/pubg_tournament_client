@@ -3,8 +3,7 @@ import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import Root from "./component/root/Root"
 import {useAppUserTheme} from "./store/useAppUserTheme"
-import useBreakpoint from "antd/es/grid/hooks/useBreakpoint";
-
+import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
 
 interface IAppProvider {
     children: ReactNode,

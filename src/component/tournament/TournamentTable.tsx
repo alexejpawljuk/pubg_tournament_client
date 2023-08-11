@@ -4,7 +4,7 @@ import {uid} from "uid"
 import {useModalPopup} from "../../store/useModelPopup"
 import {tournamentModel} from "./tableModel"
 import {useLogger} from "../../hook/useLogger"
-import TournamentInfo from "./TournamentInfo"
+import TournamentDetails from "./details/TournamentDetails"
 import {ITournament} from "./Tournament"
 
 
@@ -44,7 +44,7 @@ const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
                     console.log("Click on row:", data)
                     modalPopup.setOpenModal(prevState => ({
                         openModal: true,
-                        children: <TournamentInfo tournamentItem={data}/>,
+                        children: <TournamentDetails tournament={data}/>,
                         props: {
                             width: 1000,
                         }
