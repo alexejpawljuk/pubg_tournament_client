@@ -1,10 +1,11 @@
-import React, {ChangeEvent, FC, TransitionStartFunction, useState} from 'react'
+import React, {ChangeEvent, FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
 import {IDonate, IPlayer, ITournament} from "../Tournament"
 import {Avatar, Col, InputProps, Row, RowProps, Skeleton, theme} from "antd"
 import ListLoadMore from "../../ListLoadMore"
 import {DonateButton} from "./UI/DonateButton"
 import {PlayerRank} from "./UI/PlayerRank"
 import {DonateValue} from "./UI/DonateValueInput"
+import {DonateTour} from "./DonateTour";
 
 interface ITournamentPlayerList {
     players: IPlayer[]
@@ -16,51 +17,57 @@ interface ITournamentPlayerList {
     tournamentStarted: boolean
 }
 
+type TypeDonateInput = {
+    value: string
+    status: InputProps["status"]
+}
+
 
 const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
     const {token} = theme.useToken()
     const {players, isPending, startTransition, containerProps, itemProps, tournamentStarted, tournament} = props
 
-    const [donateInputValue, setDonateInputValue] = useState<string>("")
-    const [donateInputStatus, setDonateInputStatus] = useState<InputProps["status"]>("")
+    const [donateInput, setDonateInput] = useState<TypeDonateInput>({value: "", status: ""})
     const [showDonate, setShowDonate] = useState<IPlayer | null>(null)
     const [donateLoading, setDonateLoading] = useState<boolean>(false)
 
-    // const [] = useState()
 
     const fontSize = 11
+
+
+    useEffect(() => {
+        console.log("Donate for player:", showDonate)
+    }, [showDonate])
 
 
     const onInput = ({target}: ChangeEvent<HTMLInputElement>) => {
         const isInt = Number.isInteger(+target.value)
 
         if (isInt && target.value !== "0") {
-            setDonateInputStatus(() => "")
-            setDonateInputValue(() => target.value)
+            setDonateInput(() => ({value: target.value, status: ""}))
         } else {
-            setDonateInputStatus(() => "error")
+            setDonateInput(() => ({value: "", status: "error"}))
         }
     }
 
     const onInputClear = () => {
-        setDonateInputStatus(() => "")
-        setDonateInputValue(() => "")
-        setShowDonate(() =>  null)
+        setDonateInput(() => ({value: "", status: ""}))
+        setShowDonate(() => null)
     }
 
     const onDonation = (player: IPlayer) => {
-        setDonateInputStatus(() => "")
-        setDonateInputValue(() => "")
-        setShowDonate(prevState => prevState?.id === player.id ? null : player)
+        setDonateInput(() => ({value: "", status: ""}))
+        // setShowDonate(prevState => prevState?.id === player.id ? null : player)
+        setShowDonate(prevState => player)
     }
 
     const onDonationConfirm = (player: IPlayer) => {
-        if (+donateInputValue <= 0) return setShowDonate(() => null)
+        if (+donateInput.value <= 0) return setShowDonate(() => null)
 
 
         setDonateLoading(() => true)
         const donate: IDonate = {
-            amount: donateInputValue,
+            amount: donateInput.value,
             player: player,
             from: {} as IPlayer,
             tournament,
@@ -68,7 +75,6 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
         }
         console.log("Donate confirmed:", donate)
 
-        // setShowDonate(() => null)
     }
 
 
@@ -103,9 +109,9 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                                 showDonate?.id === player.id ?
                                     <DonateValue
                                         props={{
-                                            value: donateInputValue,
+                                            value: donateInput.value,
                                             onInput: onInput,
-                                            status: donateInputStatus,
+                                            status: donateInput.status,
                                             disabled: donateLoading,
                                         }}
                                         onClear={onInputClear}
@@ -126,7 +132,7 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                                     >Confirm</DonateButton> :
                                     <DonateButton
                                         props={{
-                                            disabled: tournamentStarted,
+                                            disabled: tournamentStarted || !!showDonate,
                                             onClick: () => onDonation(player)
                                         }}
                                     >Donate</DonateButton>
