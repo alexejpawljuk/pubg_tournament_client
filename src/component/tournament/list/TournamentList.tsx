@@ -1,16 +1,16 @@
 import React, {FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
 import {Avatar, Col, Rate, Row, Tag, TagProps, theme} from 'antd'
-import {ITournament} from "./Tournament"
+import {ITournament} from "../Tournament"
 
 import {format, isToday, isTomorrow} from "date-fns"
-import coinSVG from "../../image/svg/coins.svg"
+import coinSVG from "../../../image/svg/coins.svg"
 import {StarFilled} from "@ant-design/icons"
 import {FaPeopleGroup} from "react-icons/fa6"
-import ticketSVG from "../../image/svg/ticket.svg"
-import TournamentDetails from "./details/TournamentDetails"
-import {useModalPopup} from "../../store/useModelPopup"
-import ListLoadMore from "../ListLoadMore"
-import {useModalDrawer} from "../../store/useModalDrawer"
+import ticketSVG from "../../../image/svg/ticket.svg"
+import TournamentDetails from "../details/TournamentDetails"
+import {useModalPopup} from "../../../store/useModelPopup"
+import ListLoadMore from "../../ListLoadMore"
+import {useModalDrawer} from "../../../store/useModalDrawer"
 
 
 interface ITournamentScrollingList {
@@ -175,72 +175,6 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
             }}
 
         />
-        // <Row justify="center" key={uid()}>
-        //     <List
-        //         style={{height: 340, overflowY: "scroll", width: "99%"}}
-        //         className="demo-loadmore-list"
-        //         loading={isPending}
-        //         itemLayout="horizontal"
-        //         loadMore={loadMore}
-        //         dataSource={list}
-        //         size={"small"}
-        //         key={uid()}
-        //         renderItem={(item) => (
-        //             <Row
-        //                 onClick={() => onSelectTournament(item)}
-        //                 align="middle"
-        //                 justify="space-around"
-        //                 style={stylesRow}
-        //             >
-        //                 <Col style={{...stylesCol, width: "22%"}}>
-        //                     <Row style={{fontSize}} justify="center">{item.name.toUpperCase()}</Row>
-        //                     <Row style={{fontSize: fontSize - 1}} justify="center">{item.type.toUpperCase()}</Row>
-        //                     <Row style={{fontSize: fontSize - 3}} justify="center">ID: {item.id}</Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "15%"}}>
-        //                     <Row justify="center">
-        //                         <DateDisplay date={item.date} fontSize={fontSize}/>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "10%"}}>
-        //                     <Row justify="center"><Avatar src={coinSVG} size={iconSize} alt={"coin"}/></Row>
-        //                     <Row justify="center">
-        //                         <div style={{fontSize}}>{item.reward.coin}</div>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "25%"}}>
-        //                     <Row justify="center"><RankDisplay value={item.condition.rank}/></Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "12%"}}>
-        //                     <Row justify="center">
-        //                         <FaPeopleGroup size={iconSize}
-        //                                        color={item.members.max - item.members.alreadyRegistered ? "green" : "red"}/>
-        //                     </Row>
-        //                     <Row justify="center">
-        //                         <div style={{fontSize}}>{item.members.alreadyRegistered} / {item.members.max}</div>
-        //                     </Row>
-        //                 </Col>
-        //                 <Col style={{...stylesCol, width: "14%"}}>
-        //
-        //                     <Row justify="center">
-        //                         <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
-        //                         <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-        //                             <div style={{fontSize: 12}}>{999}</div>
-        //                         </Col>
-        //                     </Row>
-        //
-        //                     <Row justify="center" align="middle">
-        //                         <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
-        //                         <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-        //                             <div style={{fontSize: 12}}>{7}</div>
-        //                         </Col>
-        //                     </Row>
-        //
-        //                 </Col>
-        //             </Row>
-        //         )}
-        //     />
-        // </Row>
     )
 }
 

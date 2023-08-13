@@ -11,7 +11,7 @@ export const shopProducts = new Promise<IShopProduct[]>(resolve => {
             price: 10,
             avatarPath: premiumAccount,
             title: "Premium account",
-            description: "A premium account allows the player to participate in free tournaments and unlocks a multitude of other opportunities.",
+            description: "A premium account allows the playerList to participate in free tournaments and unlocks a multitude of other opportunities.",
         },
         {
             price: 1,

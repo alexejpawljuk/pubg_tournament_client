@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react
 import {IPlayer, ITournament} from "../Tournament"
 import {Avatar, Button, Col, Popconfirm, Row, Segmented, Select, theme} from "antd"
 import {LoginOutlined} from "@ant-design/icons"
-import TournamentPlayerList from "../TournamentPlayerList"
+import TournamentPlayerList from "../playerList/TournamentPlayerList"
 import Search from "antd/es/input/Search"
 import coinSVG from "../../../image/svg/coins.svg"
 import TournamentInfoDisplay from "./TournamentInfoDisplay"
@@ -18,7 +18,7 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
     // const modalPopup = useModalPopup()
     const [isPending, startTransition] = useTransition()
     const [playerList, setPlayerList] = useState<IPlayer[]>([])
-    const [tournamentStarted, setTournamentStarted] = useState<boolean>(false)
+    const [tournamentStarted, setTournamentStarted] = useState(false)
 
 
     useEffect(() => {
@@ -71,6 +71,7 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
                         isPending={isPending}
                         startTransition={startTransition}
                         tournamentStarted={tournamentStarted}
+                        tournament={tournament}
                         containerProps={{
                             style: {
                                 height: 230,

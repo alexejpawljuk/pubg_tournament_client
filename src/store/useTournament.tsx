@@ -8,12 +8,15 @@ interface UseTournament {
     readonly dataSource: ITournament[]
     tournamentList: ITournament[]
 
-    tournamentFetch: () => Promise<void>
-    tournamentUpdate: (tournament: ITournament) => Promise<void>
+    tournamentFetch(): Promise<void>
 
-    tournamentFilterByNameAndType: (options: IFilterOptions) => void
-    tournamentSearch: (value: string) => void
+    tournamentUpdate(tournament: ITournament): Promise<void>
 
+    tournamentFilterByNameAndType(options: IFilterOptions): void
+
+    tournamentSearch(value: string): void
+
+    getOriginTournamentList(): ITournament[]
 }
 
 
@@ -24,7 +27,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
     /**
      * Request tournament list from server
      */
-    async tournamentFetch ()  {
+    async tournamentFetch() {
         const tournaments = await list
         setState(state => ({
             ...state,
@@ -33,7 +36,7 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
         }))
     },
 
-    async tournamentUpdate (tournament: ITournament) {
+    async tournamentUpdate(tournament: ITournament) {
 
     },
 
@@ -73,4 +76,11 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
         }))
     },
 
+    /**
+     * The method return origin tournament list
+     * Return a new array
+     */
+    getOriginTournamentList(): ITournament[] {
+        return [...getState().dataSource]
+    }
 }))
