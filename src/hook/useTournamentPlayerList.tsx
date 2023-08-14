@@ -29,7 +29,7 @@ interface IUseTournamentControlPanelReturn {
 }
 
 export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
-    const modalPopup = ModalPopupService()
+    const modalPopupService = ModalPopupService()
     const {
         setDonateInput,
         setShowDonate,
@@ -72,24 +72,25 @@ export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps):
             console.log("Donate confirmed:", donate)
         },
         onOpenProfile(player: IPlayer) {
-            // startTransition(() => {
-            modalPopup.setOpenModal(prevState => {
+            modalPopupService.setOpenModal(detailState => {
                 return {
-                    openModal: true,
+                    children: <></>,
+                    openModal: false,
                     props: {
-                        ...prevState.props,
-                        onCancel: () => {
-                            modalPopup.setOpenModal(() => ({
-                                openModal: false,
-                                children: <></>
+                        afterClose: () => {
+                            modalPopupService.setOpenModal(prevState => ({
+                                openModal: true,
+                                children: <ProfileCard player={player}/>,
+                                props: {
+                                    afterClose: () => {
+                                        modalPopupService.setOpenModal(() => detailState)
+                                    }
+                                }
                             }))
-                            modalPopup.setOpenModal(() => prevState)
-                        },
-                    },
-                    children: <ProfileCard player={player}/>
+                        }
+                    }
                 }
             })
-            // })
         },
     }
 }
