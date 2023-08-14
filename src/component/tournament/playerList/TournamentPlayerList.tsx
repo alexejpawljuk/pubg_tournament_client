@@ -5,7 +5,6 @@ import ListLoadMore from "../../ListLoadMore"
 import {DonateButton} from "./UI/DonateButton"
 import {PlayerRank} from "./UI/PlayerRank"
 import {DonateValue} from "./UI/DonateValueInput"
-import {DonateTour} from "./DonateTour";
 
 interface ITournamentPlayerList {
     players: IPlayer[]
