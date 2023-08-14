@@ -1,7 +1,7 @@
 import React, {FC, TransitionStartFunction, useEffect, useState} from 'react'
 import {Table} from 'antd'
 import {uid} from "uid"
-import {useModalPopup} from "../../store/useModelPopup"
+import {ModalPopupService} from "../../service/ModelPopupService"
 import {tournamentModel} from "./tableModel"
 import {useLogger} from "../../hook/useLogger"
 import TournamentDetails from "./details/TournamentDetails"
@@ -18,7 +18,7 @@ interface ITournamentList {
 
 const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
     useLogger("TournamentList render")
-    const modalPopup = useModalPopup()
+    const modalPopupService = ModalPopupService()
     const {isPending, startTransition} = transition
     const [list, setList] = useState<ITournament[]>([])
 
@@ -42,7 +42,7 @@ const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
             onRow={data => ({
                 onClick: () => {
                     console.log("Click on row:", data)
-                    modalPopup.setOpenModal(prevState => ({
+                    modalPopupService.setOpenModal(prevState => ({
                         openModal: true,
                         children: <TournamentDetails tournament={data}/>,
                         props: {

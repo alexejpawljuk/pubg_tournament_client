@@ -1,5 +1,5 @@
-import {useModalPopup} from "../../store/useModelPopup"
-import {useAppUserTheme} from "../../store/useAppUserTheme"
+import {ModalPopupService} from "../../service/ModelPopupService"
+import {AppUserThemeService} from "../../service/AppUserThemeService"
 import {UserAddOutlined, UserOutlined, WalletOutlined} from "@ant-design/icons"
 import {AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
 import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md"
@@ -14,8 +14,8 @@ import Wallet from "../Wallet"
 
 
 const RightSide = () => {
-    const modalPopup = useModalPopup()
-    const {setAppUserTheme} = useAppUserTheme()
+    const modalPopupService = ModalPopupService()
+    const {setAppUserTheme} = AppUserThemeService()
     // const {setUserTheme} = useUserTheme()
 
 
@@ -54,7 +54,7 @@ const RightSide = () => {
     const onClick: MenuProps["onClick"] = (e) => {
         switch (e.key as RightMenuKey) {
             case "login":
-                modalPopup.setOpenModal(prevState => ({
+                modalPopupService.setOpenModal(prevState => ({
                     ...prevState,
                     openModal: true,
                     children: <AuthForm/>,
@@ -63,7 +63,7 @@ const RightSide = () => {
                 break;
 
             case "register":
-                modalPopup.setOpenModal(prevState => ({
+                modalPopupService.setOpenModal(prevState => ({
                     ...prevState,
                     openModal: true,
                     props: {
@@ -86,7 +86,7 @@ const RightSide = () => {
                 break;
 
             case "buy_coins":
-                modalPopup.setOpenModal(prevState => ({
+                modalPopupService.setOpenModal(prevState => ({
                     ...prevState,
                     openModal: true,
                     props: {
@@ -97,7 +97,7 @@ const RightSide = () => {
                 break;
 
             case "my_wallet":
-                modalPopup.setOpenModal(prevState => ({
+                modalPopupService.setOpenModal(prevState => ({
                     ...prevState,
                     openModal: true,
                     children: <Wallet/>

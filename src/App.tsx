@@ -2,7 +2,7 @@ import React, {FC, ReactNode, useEffect} from 'react'
 import {ConfigProvider, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import Root from "./component/root/Root"
-import {useAppUserTheme} from "./store/useAppUserTheme"
+import {AppUserThemeService} from "./service/AppUserThemeService"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
 
 interface IAppProvider {
@@ -21,7 +21,7 @@ const AppProvider: FC<IAppProvider> = ({children, appThemeConfig}) => {
 }
 
 function App() {
-    const {appAlgorithm} = useAppUserTheme()
+    const appUserThemeService = AppUserThemeService()
 
     const breakpoint = useBreakpoint()
 
@@ -32,7 +32,7 @@ function App() {
 
     return (
         <div className="App" style={{minWidth: 380}}>
-            <AppProvider appThemeConfig={appAlgorithm}>
+            <AppProvider appThemeConfig={appUserThemeService.appAlgorithm}>
                 <Root/>
             </AppProvider>
         </div>

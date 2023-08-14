@@ -1,11 +1,14 @@
 import React, {FC, TransitionStartFunction, useEffect, useState} from 'react'
 import {IPlayer, ITournament} from "../Tournament"
-import {Avatar, Col, InputProps, Row, RowProps, Skeleton} from "antd"
+import {Divider, InputProps, Row, RowProps, Skeleton, Space} from "antd"
 import ListLoadMore from "../../ListLoadMore"
-import {DonateButton} from "./UI/DonateButton"
-import {PlayerRank} from "./UI/PlayerRank"
-import {DonateValue} from "./UI/DonateValueInput"
 import {useTournamentPlayerList} from "../../../hook/useTournamentPlayerList"
+import {PlayerAvatarDisplay} from "./PlayerAvatarDisplay"
+import {PlayerNicknameDisplay} from "./PlayerNicknameDisplay"
+import {PlayerIdDisplay} from "./PlayerIdDisplay"
+import {PlayerDisplayWrap} from "./PlayerDisplayWrap"
+import {DonateValueOrRankDisplay} from "./DonateValueOrRankDisplay"
+import {DonateAction} from "./DonateAction"
 
 interface ITournamentPlayerList {
     players: IPlayer[]
@@ -45,7 +48,6 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
         tournament,
         donateInput,
         startTransition,
-
     })
 
     useEffect(() => {
@@ -55,78 +57,55 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
 
     if (!players.length)
         return (
-            <Skeleton active loading={true}/>
+            <>
+                <Divider style={{fontSize: 10}}>player not found</Divider>
+                <Skeleton active/>
+            </>
         )
 
-    return (
-        <ListLoadMore<IPlayer>
-            transition={{isPending, startTransition}}
-            data={players}
-            listProps={{
-                ...containerProps,
-                renderItem: (player, index) => (
-                    <Row {...itemProps} onClick={() => onOpenProfile(player)}>
-                        <Col>
-                            <Avatar src={player.avatar}/>
-                        </Col>
+    else
+        return (
+            <ListLoadMore<IPlayer>
+                transition={{isPending, startTransition}}
+                data={players}
+                listProps={{
+                    ...containerProps,
+                    renderItem: (player, index) => (
+                        <Row {...itemProps}>
+                            <Space wrap onClick={() => onOpenProfile(player)}>
+                                <PlayerAvatarDisplay avatar={player.avatar}/>
+                                <PlayerDisplayWrap>
+                                    <PlayerNicknameDisplay nickname={player.nickname} fontSize={fontSize}/>
+                                    <PlayerIdDisplay id={player.id} fontSize={fontSize}/>
+                                </PlayerDisplayWrap>
+                            </Space>
 
-                        <Col>
-                            <Row style={{fontSize: fontSize + 1}}>
-                                {player.nickname}
-                            </Row>
-                            <Row style={{fontSize}}>
-                                {player.id}
-                            </Row>
-                        </Col>
+                            <DonateValueOrRankDisplay
+                                rank={player.rank}
+                                playerId={player.id}
+                                showDonateId={showDonate?.id as string}
+                                donateLoading={donateLoading}
+                                donateInputValue={donateInput.value}
+                                donateInputStatus={donateInput.status}
+                                onInput={onInput}
+                                onInputClear={onInputClear}
+                            />
 
-                        <Col>
-                            {
-                                showDonate?.id === player.id ?
-                                    <DonateValue
-                                        props={{
-                                            value: donateInput.value,
-                                            onInput: onInput,
-                                            onClick: event => {
-                                                event.stopPropagation()
-                                            },
-                                            status: donateInput.status,
-                                            disabled: donateLoading,
-                                        }}
-                                        onClear={onInputClear}
-                                    /> :
-                                    <PlayerRank rank={player.rank}/>
-                            }
-                        </Col>
+                            <DonateAction
+                                showDonate={tournamentStarted || !!showDonate}
+                                player={player}
+                                tournamentStarted={tournamentStarted}
+                                showDonateId={showDonate?.id as string}
+                                donateLoading={donateLoading}
+                                onDonation={onDonation}
+                                onDonationConfirm={onDonationConfirm}
+                            />
 
-                        <Col>
-                            {
-                                showDonate?.id === player.id ?
-                                    <DonateButton
-                                        props={{
-                                            disabled: tournamentStarted,
-                                            onClick: (event) => {
-                                                event.stopPropagation()
-                                                onDonationConfirm(player)
-                                            },
-                                            loading: donateLoading,
-                                        }}
-                                    >Confirm</DonateButton> :
-                                    <DonateButton
-                                        props={{
-                                            disabled: tournamentStarted || !!showDonate,
-                                            onClick: (event) => {
-                                                event.stopPropagation()
-                                                onDonation(player)
-                                            }
-                                        }}
-                                    >Donate</DonateButton>
-                            }
-                        </Col>
-                    </Row>
-                )
-            }}
-        />
-    )
+                        </Row>
+                    )
+                }}
+            />
+        )
 }
 
-export default TournamentPlayerList
+export {TournamentPlayerList}

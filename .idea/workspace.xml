@@ -5,25 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/AvatarDisplay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/ExperienceDisplay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/IdDisplay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/NicknameDisplay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/ProfileCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/ProfileCardItemWrap.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/profile/card/RankDisplay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hook/useTournamentPlayerList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/DonateAction.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/DonateValueOrRankDisplay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/PlayerAvatarDisplay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/PlayerDisplayWrap.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/PlayerIdDisplay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/component/tournament/playerList/PlayerNicknameDisplay.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DATA/tournamentData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DATA/tournamentData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/profile/DisplayPremium.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/profile/card/PremiumDisplay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/profile/ProfileCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/AuthForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/community/CommunityFloatButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/community/CommunityFloatButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/modal/ModalDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/modal/ModalDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/modal/ModalPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/modal/ModalPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/navigation/LeftSide.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/LeftSide.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/navigation/RightSide.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/navigation/RightSide.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/profile/card/IdDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/profile/card/IdDisplay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/shop/Shop.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/tournament/Tournament.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/Tournament.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/TournamentTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/TournamentTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/controlPanel/TournamentControlPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/controlPanel/TournamentControlPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/controlPanel/UI/TournamentSortByData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/controlPanel/UI/TournamentSortByData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreateHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/create/TournamentCreateHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/details/TournamentDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/list/TournamentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/list/TournamentList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/tournament/playerList/TournamentPlayerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/playerList/TournamentPlayerList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/playerList/UI/DonateValueInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/playerList/UI/DonateValueInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/playerList/UI/PlayerRank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/playerList/UI/PlayerRank.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/tournament/playerList/UI/PlayerRank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/playerList/PlayerRankDisplay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/usePlayerList.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hook/useTournamentControlPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useTournamentControlPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/useModelPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/useTournamentPlayerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useTournamentPlayerList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useAppUserTheme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/AppUserThemeService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useCommunity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CommunityService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useModalDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ModalDrawerService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useModelPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ModelPopupService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useShop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ShopService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/useTournament.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TournamentService.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +86,9 @@
       <recent name="$PROJECT_DIR$/public/image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/component/tournament/playerList" />
       <recent name="$PROJECT_DIR$/src/component/profile/card" />
       <recent name="$PROJECT_DIR$/src/component/tournament/controlPanel/UI" />
-      <recent name="$PROJECT_DIR$/src/component/tournament/playerList" />
       <recent name="$PROJECT_DIR$/src/component/tournament/list" />
       <recent name="$PROJECT_DIR$/src/component/tournament" />
     </key>
@@ -94,7 +110,7 @@
       <workItem from="1691317131321" duration="80100000" />
       <workItem from="1691570497806" duration="15499000" />
       <workItem from="1691591155898" duration="31359000" />
-      <workItem from="1691745438658" duration="60909000" />
+      <workItem from="1691745438658" duration="69337000" />
     </task>
     <servers />
   </component>

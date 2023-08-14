@@ -1,4 +1,4 @@
-import {useModalPopup} from "../../store/useModelPopup"
+import {ModalPopupService} from "../../service/ModelPopupService"
 import {AiOutlineHome} from "react-icons/ai"
 import {ShoppingCartOutlined} from "@ant-design/icons"
 import {Menu, MenuProps} from "antd"
@@ -7,7 +7,7 @@ import {getItem, LeftMenuKey, MenuItem} from "./Navigation"
 import Shop from "../shop/Shop";
 
 const LeftSide = () => {
-    const modalPopup = useModalPopup()
+    const modalPopupService = ModalPopupService()
 
     const items: MenuItem[] = [
         getItem("Home", "home", <AiOutlineHome/>),
@@ -32,7 +32,7 @@ const LeftSide = () => {
 
             case "shop":
                 // window.location.replace("/shop")
-                modalPopup.setOpenModal(prevState => ({
+                modalPopupService.setOpenModal(prevState => ({
                     ...prevState,
                     openModal: true,
                     props: {

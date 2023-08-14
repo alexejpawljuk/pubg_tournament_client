@@ -1,10 +1,8 @@
-import React, {ChangeEvent, FC, useEffect, useState, useTransition,} from "react"
+import React, {ChangeEvent, FC, useEffect, useState, useTransition} from "react"
 import {IPlayer, ITournament} from "../Tournament"
-import {Avatar, Button, Col, Popconfirm, Row, Segmented, Select, theme} from "antd"
-import {LoginOutlined} from "@ant-design/icons"
-import TournamentPlayerList from "../playerList/TournamentPlayerList"
+import {Col, Row, theme} from "antd"
+import {TournamentPlayerList} from "../playerList/TournamentPlayerList"
 import Search from "antd/es/input/Search"
-import coinSVG from "../../../image/svg/coins.svg"
 import TournamentInfoDisplay from "./TournamentInfoDisplay"
 import TournamentJoinButton from "./TournamentJoinButton"
 

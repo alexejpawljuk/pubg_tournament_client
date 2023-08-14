@@ -2,7 +2,7 @@ import React, {FC, ReactNode, useEffect, useState} from 'react'
 import {Col, Divider, Row, Skeleton, theme} from 'antd'
 import ShopProduct from "./ShopProduct"
 import {uid} from "uid"
-import {useShop} from "../../store/useShop"
+import {ShopService} from "../../service/ShopService"
 
 interface IShop {
 
@@ -62,7 +62,7 @@ const ShopProductWrap: FC<IShopProductWrap> = ({children}) => {
 }
 
 const Shop: FC<IShop> = () => {
-    const {products, shopProductsFetch} = useShop()
+    const {products, shopProductsFetch} = ShopService()
     const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {

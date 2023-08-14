@@ -31,6 +31,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
 
     const {isPending, startTransition} = transition
     const [searchValue, setSearchValue] = useState<string>("")
+    const [dateValue, setDateValue] = useState("")
     const filterOptionsRef = useRef<IFilterOptions>({name: "all", type: "all"})
 
     const {
@@ -86,7 +87,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                 <TournamentSortByData
                     props={{
                         disabled: isPending,
-                        onChange: onDate
+                        onChange: onDate,
                     }}
                 />
             </Row>

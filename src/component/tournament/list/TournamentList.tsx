@@ -1,16 +1,15 @@
 import React, {FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
 import {Avatar, Col, Rate, Row, Tag, TagProps, theme} from 'antd'
 import {ITournament} from "../Tournament"
-
 import {format, isToday, isTomorrow} from "date-fns"
 import coinSVG from "../../../image/svg/coins.svg"
 import {StarFilled} from "@ant-design/icons"
 import {FaPeopleGroup} from "react-icons/fa6"
 import ticketSVG from "../../../image/svg/ticket.svg"
 import TournamentDetails from "../details/TournamentDetails"
-import {useModalPopup} from "../../../store/useModelPopup"
+import {ModalPopupService} from "../../../service/ModelPopupService"
 import ListLoadMore from "../../ListLoadMore"
-import {useModalDrawer} from "../../../store/useModalDrawer"
+import {ModalDrawerService} from "../../../service/ModalDrawerService"
 
 
 interface ITournamentScrollingList {
@@ -77,8 +76,8 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
     })
 
     const {token} = theme.useToken()
-    const modalPopup = useModalPopup()
-    const modalDrawer = useModalDrawer()
+    const modalPopupService = ModalPopupService()
+    const modalDrawerService = ModalDrawerService()
 
     const {isPending, startTransition} = transition
 
@@ -88,7 +87,7 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
 
     const onSelectTournament = (tournament: ITournament) => {
         console.log("Select tournament:", tournament)
-        modalPopup.setOpenModal(prevState => ({
+        modalPopupService.setOpenModal(prevState => ({
             openModal: true,
             children: <TournamentDetails tournament={tournament}/>,
             props: {

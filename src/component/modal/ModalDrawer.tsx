@@ -1,6 +1,6 @@
 import React, {CSSProperties, FC, ReactNode, useEffect} from 'react'
 import {Drawer} from "antd"
-import {useModalDrawer} from "../../store/useModalDrawer"
+import {ModalDrawerService} from "../../service/ModalDrawerService"
 
 interface IContent {
     children: ReactNode
@@ -24,7 +24,7 @@ const ModalDrawer = () => {
         setOpenDrawer,
         children,
         props
-    } = useModalDrawer()
+    } = ModalDrawerService()
 
     const onClose = () => {
         setOpenDrawer(prevState => ({...prevState, openDrawer: false}))

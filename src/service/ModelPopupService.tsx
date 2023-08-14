@@ -1,37 +1,36 @@
-import {Dispatch, ReactNode, SetStateAction} from "react"
-import {DrawerProps} from "antd"
 import {create} from "zustand"
-import {devtools} from "zustand/middleware"
+import {Dispatch, ReactNode, SetStateAction} from "react"
+import {ModalProps} from "antd"
 
-namespace IUseDrawer {
-    type OpenDrawer = boolean
+export namespace IModalPopupService {
+    type OpenModal = boolean
 
     export interface IStore {
-        openDrawer: OpenDrawer
+        openModal: OpenModal
         children: ReactNode | null
-        props: DrawerProps
-        setOpenDrawer: Dispatch<SetStateAction<{ openDrawer: OpenDrawer, children: ReactNode, props?: DrawerProps }>>
+        props: ModalProps
+        setOpenModal: Dispatch<SetStateAction<{ openModal: OpenModal, children: ReactNode, props?: ModalProps }>>
     }
 }
 
-export const useModalDrawer = create<IUseDrawer.IStore>(
+export const ModalPopupService = create<IModalPopupService.IStore>(
     (setState) => {
         return {
-            openDrawer: false,
+            openModal: false,
             children: null,
             props: {},
-            setOpenDrawer: (value) => {
+            setOpenModal: (value) => {
                 if (typeof value === "function") {
                     setState(state => ({
                         ...state,
-                        openDrawer: value(state).openDrawer,
+                        openModal: value(state).openModal,
                         children: value(state).children,
                         props: value(state).props
                     }))
                 } else {
                     setState(state => ({
                         ...state,
-                        openDrawer: value.openDrawer,
+                        openModal: value.openModal,
                         children: value.children,
                         props: value.props
                     }))

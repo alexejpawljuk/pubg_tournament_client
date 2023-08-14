@@ -11,12 +11,7 @@ const IdDisplay: FC<IIdDisplay> = ({id}) => {
     return (
         <ProfileCardItemWrap>
             <Meta title={
-                <Tooltip
-                    placement="top"
-                    title="Your ID"
-                >
-                    <Tag style={{marginTop: 10}}>ID: {id}</Tag>
-                </Tooltip>
+                <Tag style={{marginTop: 10}}>ID: {id}</Tag>
             }/>
         </ProfileCardItemWrap>
     );

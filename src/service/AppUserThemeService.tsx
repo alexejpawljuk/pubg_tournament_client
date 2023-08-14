@@ -4,7 +4,7 @@ import {Dispatch, SetStateAction} from "react"
 
 type ThemeType = "dark" | "light"
 
-interface IUseTheme {
+interface IAppUserThemeService{
     appAlgorithm: ThemeConfig["algorithm"]
     appUserTheme: ThemeType
     setAppUserTheme: Dispatch<SetStateAction<ThemeType>>
@@ -13,7 +13,7 @@ interface IUseTheme {
 const setThemeToLocalStorage = (theme: ThemeType) => localStorage.setItem("theme", theme)
 const getThemeToLocalStorage = (): ThemeType | null => localStorage.getItem("theme") as ThemeType
 
-export const useAppUserTheme = create<IUseTheme>(
+export const AppUserThemeService = create<IAppUserThemeService>(
     (setState) => {
         const userTheme = getThemeToLocalStorage()
 

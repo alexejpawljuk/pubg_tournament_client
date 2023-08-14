@@ -12,6 +12,7 @@ const TournamentSortByData: FC<ITournamentSortByData> = ({props}) => {
             <DatePicker
                 size="small"
                 style={{width: 231}}
+                placeholder="Select date"
                 {...props}
             />
         </TournamentControlItemWrap>

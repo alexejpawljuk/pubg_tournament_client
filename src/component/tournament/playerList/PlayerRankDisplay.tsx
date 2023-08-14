@@ -7,7 +7,7 @@ interface IPlayerRank {
     rank: number
 }
 
-const PlayerRank: FC<IPlayerRank> = ({rank}) => {
+const PlayerRankDisplay: FC<IPlayerRank> = ({rank}) => {
     return (
         <Rate
             disabled tooltips={["dad"]}
@@ -18,4 +18,4 @@ const PlayerRank: FC<IPlayerRank> = ({rank}) => {
     )
 }
 
-export {PlayerRank}
+export {PlayerRankDisplay}

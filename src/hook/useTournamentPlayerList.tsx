@@ -2,7 +2,7 @@ import React, {ChangeEvent, Dispatch, SetStateAction, TransitionStartFunction} f
 import {TypeDonateInput} from "../component/tournament/playerList/TournamentPlayerList"
 import {IDonate, IPlayer, ITournament} from "../component/tournament/Tournament"
 import ProfileCard from "../component/profile/card/ProfileCard";
-import {useModalPopup} from "../store/useModelPopup";
+import {ModalPopupService} from "../service/ModelPopupService";
 
 
 interface IUseTournamentControlPanelProps {
@@ -29,7 +29,7 @@ interface IUseTournamentControlPanelReturn {
 }
 
 export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
-    const modalPopup = useModalPopup()
+    const modalPopup = ModalPopupService()
     const {
         setDonateInput,
         setShowDonate,

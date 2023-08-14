@@ -1,7 +1,7 @@
 import React, {CSSProperties, FC, useState} from 'react'
 import {LockOutlined, UserOutlined} from '@ant-design/icons'
 import {Button, Form, FormProps, Input, Space} from 'antd'
-import {useModalPopup} from "../store/useModelPopup"
+import {ModalPopupService} from "../service/ModelPopupService"
 import RegisterForm from "./RegisterForm"
 
 
@@ -10,7 +10,7 @@ interface IAuthFrom {
 }
 
 const AuthFrom: FC<IAuthFrom> = ({props}) => {
-    const modalPopup = useModalPopup()
+    const modalPopupService = ModalPopupService()
     const [loading, setLoading] = useState<boolean>(false)
 
     const linkStyles: CSSProperties = {
@@ -28,7 +28,7 @@ const AuthFrom: FC<IAuthFrom> = ({props}) => {
 
     const onRegisterNow = () => {
         console.log("Register now")
-        modalPopup.setOpenModal(prevState => ({
+        modalPopupService.setOpenModal(prevState => ({
             ...prevState,
             openModal: true,
             props: {

@@ -2,9 +2,9 @@ import React, {ChangeEvent, Dispatch, MutableRefObject, SetStateAction, Transiti
 import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
 import TournamentCreateHeader from "../component/tournament/create/TournamentCreateHeader"
 import TournamentCreate from "../component/tournament/create/TournamentCreate"
-import {useModalDrawer} from "../store/useModalDrawer"
-import {useModalPopup} from "../store/useModelPopup"
-import {useTournament} from "../store/useTournament"
+import {ModalDrawerService} from "../service/ModalDrawerService"
+import {ModalPopupService} from "../service/ModelPopupService"
+import {TournamentService} from "../service/TournamentService"
 import {RadioChangeEvent} from "antd"
 
 
@@ -29,9 +29,9 @@ interface IUseTournamentControlPanelReturn {
 }
 
 export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
-    const modalDrawer = useModalDrawer()
-    const modalPopup = useModalPopup()
-    const tournament = useTournament()
+    const modalDrawerService = ModalDrawerService()
+    const modalPopupService = ModalPopupService()
+    const tournamentService = TournamentService()
     const {
         setSearchValue,
         startTransition,
@@ -44,7 +44,7 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
             if (e.target.name === "tournament_type") filterOptionsRef.current.type = e.target.value
             setSearchValue(() => "")
             startTransition(() => {
-                tournament.tournamentFilterByNameAndType(filterOptionsRef.current)
+                tournamentService.tournamentFilterByNameAndType(filterOptionsRef.current)
             })
         },
         onSearch(value) {
@@ -53,35 +53,46 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
             filterOptionsRef.current.type = "all"
             setSearchValue(() => value)
             startTransition(() => {
-                tournament.tournamentSearch(value)
+                tournamentService.tournamentSearch(value)
             })
         },
         onInput(e: ChangeEvent<HTMLInputElement>) {
             setSearchValue(() => e.target.value)
             if (e.target.value === "")
                 startTransition(() => {
-                    tournament.tournamentSearch(e.target.value)
+                    tournamentService.tournamentToDefault()
                 })
         },
         onInputClear() {
             setSearchValue(() => "")
             startTransition(() => {
-                tournament.tournamentSearch("")
+                tournamentService.tournamentSearch("")
             })
         },
         onTournamentCreate() {
-            console.log("Create tournament")
+            console.log("Create tournamentService")
 
-            modalDrawer.setOpenDrawer(() => ({
+            modalDrawerService.setOpenDrawer(() => ({
                 openDrawer: true,
                 children: <TournamentCreate/>,
                 props: {
-                    extra: <TournamentCreateHeader modalPopup={modalPopup}/>
+                    extra: <TournamentCreateHeader modalPopup={modalPopupService}/>
                 }
             }))
         },
         onDate(e, date) {
-            console.log(date)
+            filterOptionsRef.current.name = "all"
+            filterOptionsRef.current.type = "all"
+            setSearchValue(() => "")
+            if (date === "") {
+                startTransition(() => {
+                    tournamentService.tournamentToDefault()
+                })
+            } else {
+                startTransition(() => {
+                    tournamentService.tournamentFilterByDate(new Date(date))
+                })
+            }
         }
     }
 }

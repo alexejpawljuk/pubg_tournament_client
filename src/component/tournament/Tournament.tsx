@@ -1,12 +1,8 @@
-import React, {useEffect, useState, useTransition} from 'react'
+import React, {useEffect, useTransition} from 'react'
 import TournamentControlPanel from "./controlPanel/TournamentControlPanel"
-import {useTournament} from "../../store/useTournament"
+import {TournamentService} from "../../service/TournamentService"
 import TournamentList from "./list/TournamentList"
-import LoadMoreList from "../ListLoadMore";
-import {Avatar, Col, Row, theme} from "antd";
-import coinSVG from "../../image/svg/coins.svg";
-import {FaPeopleGroup} from "react-icons/fa6";
-import ticketSVG from "../../image/svg/ticket.svg";
+
 
 export type ITournamentNameType = "daily" | "custom" | "sponsorship"
 export type ITournamentType = "solo" | "duo" | "squad"
@@ -64,9 +60,7 @@ export interface ITournament {
 }
 
 const Tournament = () => {
-    const {token} = theme.useToken()
-
-    const {tournamentList, tournamentFetch} = useTournament()
+    const {tournamentList, tournamentFetch} = TournamentService()
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import React, {CSSProperties, FC, ReactNode} from 'react'
 import {Modal} from "antd"
-import {useModalPopup} from "../../store/useModelPopup"
+import {ModalPopupService} from "../../service/ModelPopupService"
 
 interface IContent {
     children: ReactNode
@@ -28,7 +28,7 @@ const ModalPopup: FC<IModalPopup> = () => {
         setOpenModal,
         children,
         props
-    } = useModalPopup()
+    } = ModalPopupService()
 
     const close = () => {
         setOpenModal(prevState => ({...prevState, openModal: false}))

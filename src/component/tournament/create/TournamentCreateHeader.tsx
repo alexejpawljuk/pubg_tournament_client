@@ -2,12 +2,12 @@ import React, {FC} from "react"
 import Shop from "../../shop/Shop"
 import {Button, ButtonProps} from "antd"
 import {ShoppingCartOutlined} from "@ant-design/icons"
-import {IUseModalPopup} from "../../../store/useModelPopup"
+import {IModalPopupService} from "../../../service/ModelPopupService"
 
 
 interface ITournamentCreateProps {
     props?: ButtonProps
-    modalPopup: IUseModalPopup.IStore
+    modalPopup: IModalPopupService.IStore
 }
 
 const TournamentCreateHeader: FC<ITournamentCreateProps> = ({props, modalPopup}) => {

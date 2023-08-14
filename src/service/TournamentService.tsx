@@ -4,8 +4,8 @@ import list from "../DATA/tournamentData"
 import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
 
 
-interface UseTournament {
-    readonly dataSource: ITournament[]
+interface ITournamentService {
+    readonly dataSource: Readonly<ITournament[]>
     tournamentList: ITournament[]
 
     tournamentFetch(): Promise<void>
@@ -14,13 +14,17 @@ interface UseTournament {
 
     tournamentFilterByNameAndType(options: IFilterOptions): void
 
+    tournamentFilterByDate(date: Date): void
+
     tournamentSearch(value: string): void
+
+    tournamentToDefault(): void
 
     getOriginTournamentList(): ITournament[]
 }
 
 
-export const useTournament = create<UseTournament>((setState, getState) => ({
+export const TournamentService = create<ITournamentService>((setState, getState) => ({
     dataSource: [],
     tournamentList: [],
 
@@ -63,6 +67,24 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
         }))
     },
 
+
+    /**
+     * Filter tournament list by tournament name and tournament type then return new array
+     * @param date
+     */
+    tournamentFilterByDate(date: Date) {
+        const filteredTournaments = [...getState().dataSource]
+            .filter(tournament =>
+                tournament.date.getFullYear() === date.getFullYear() &&
+                tournament.date.getMonth() === date.getMonth() &&
+                tournament.date.getDate() === date.getDate()
+            )
+        setState(state => ({
+            ...state,
+            tournamentList: filteredTournaments
+        }))
+    },
+
     /**
      * Filter tournament list by tournament id then return new array
      * @param value
@@ -73,6 +95,17 @@ export const useTournament = create<UseTournament>((setState, getState) => ({
         setState(state => ({
             ...state,
             tournamentList: searchedTournaments
+        }))
+    },
+
+
+    /**
+     * The method get origin tournament list
+     */
+    tournamentToDefault() {
+        setState(state => ({
+            ...state,
+            tournamentList: this.getOriginTournamentList()
         }))
     },
 

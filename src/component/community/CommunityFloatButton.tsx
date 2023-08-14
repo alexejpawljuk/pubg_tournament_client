@@ -1,15 +1,14 @@
 import React from 'react'
 import {FloatButton} from "antd"
-import {useModalPopup} from "../../store/useModelPopup"
-import {BsChatDots} from "react-icons/bs"
+import {ModalPopupService} from "../../service/ModelPopupService"
 import Community from "./Community"
-import {FaPeopleRoof} from "react-icons/fa6";
+import {FaPeopleRoof} from "react-icons/fa6"
 
 const CommunityFloatButton = () => {
-    const modalPopup = useModalPopup()
+    const modalPopupService = ModalPopupService()
 
     const onClickChat = () => {
-        modalPopup.setOpenModal(prevState => ({
+        modalPopupService.setOpenModal(prevState => ({
             ...prevState,
             openModal: true,
             props: {

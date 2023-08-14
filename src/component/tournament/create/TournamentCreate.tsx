@@ -11,7 +11,7 @@ import {
 } from "antd"
 import {InfoCircleOutlined, ShoppingCartOutlined, StarFilled} from "@ant-design/icons"
 import Shop from "../../shop/Shop"
-import {IUseModalPopup} from "../../../store/useModelPopup"
+import {IModalPopupService} from "../../../service/ModelPopupService"
 import AuthFrom from "../../AuthForm"
 import {ITournament, ITournamentType} from "../Tournament"
 import {IoCreateOutline} from "react-icons/io5"
