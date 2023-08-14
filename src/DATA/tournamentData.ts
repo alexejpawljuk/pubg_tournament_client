@@ -4,6 +4,8 @@ import {isAfter} from "date-fns"
 
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
+const getRandomFloat = (factor: number): number => Math.random() * factor
+
 const getRandomTournamentType = (): ITournamentType => {
     const tournamentTypes: ITournamentType[] = ["solo", "duo", "squad"]
     return tournamentTypes[getRandomNumber(tournamentTypes.length)]
@@ -22,38 +24,43 @@ const playerList: IPlayer[] = [
         avatar: "avatar1.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user2",
         id: "id2",
         rank: 5,
-        avatar: "avatar2.jpg",
+        avatar: "",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user3",
         id: "id3",
         rank: 15,
-        avatar: "avatar3.jpg",
+        avatar: "",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user4",
         id: "id4",
         rank: 8,
-        avatar: "avatar4.jpg",
+        avatar: "",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user5",
         id: "id5",
         rank: 25,
-        avatar: "avatar5.jpg",
+        avatar: "",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user6",
@@ -62,6 +69,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar6.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user7",
@@ -70,6 +78,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar7.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user8",
@@ -78,6 +87,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar8.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user9",
@@ -86,6 +96,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar9.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user10",
@@ -94,6 +105,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar10.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user11",
@@ -102,6 +114,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar11.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user12",
@@ -110,6 +123,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar12.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user13",
@@ -118,6 +132,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar13.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user14",
@@ -126,6 +141,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar14.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user15",
@@ -134,6 +150,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar15.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user16",
@@ -142,6 +159,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar16.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user17",
@@ -150,6 +168,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar17.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user18",
@@ -158,6 +177,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar18.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user19",
@@ -166,6 +186,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar19.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user20",
@@ -174,6 +195,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar20.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user21",
@@ -182,6 +204,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar21.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user22",
@@ -190,6 +213,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar22.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user23",
@@ -198,6 +222,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar23.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user24",
@@ -206,6 +231,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar24.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user25",
@@ -214,6 +240,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar25.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user26",
@@ -222,6 +249,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar26.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user27",
@@ -230,6 +258,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar27.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user28",
@@ -238,6 +267,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar28.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user29",
@@ -246,6 +276,7 @@ const playerList: IPlayer[] = [
         avatar: "avatar29.jpg",
         premium: true,
         teamId: null,
+        experience: 0,
     },
     {
         nickname: "user30",
@@ -254,9 +285,9 @@ const playerList: IPlayer[] = [
         avatar: "avatar30.jpg",
         premium: false,
         teamId: null,
+        experience: 0,
     }
 ];
-
 
 
 const list = new Promise<ITournament[]>(resolve => {
@@ -284,9 +315,12 @@ const list = new Promise<ITournament[]>(resolve => {
             },
             donation: getRandomNumber(100),
             meta: {
-                players: playerList.map(player => ({
+                players: playerList.map((player, index) => ({
                     ...player,
-                    rank: getRandomNumber(5)
+                    avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`,
+                    rank: getRandomNumber(5),
+                    experience: getRandomNumber(100),
+                    id: uid(7),
                 }))
             }
         }

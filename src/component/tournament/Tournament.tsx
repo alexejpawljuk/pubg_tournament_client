@@ -27,6 +27,7 @@ export interface IPlayer {
     avatar: string
     premium: boolean
     teamId: string | null
+    experience: number
 }
 
 export interface ITournament {

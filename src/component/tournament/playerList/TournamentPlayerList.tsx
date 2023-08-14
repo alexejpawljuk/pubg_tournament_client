@@ -1,10 +1,11 @@
-import React, {ChangeEvent, FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
-import {IDonate, IPlayer, ITournament} from "../Tournament"
-import {Avatar, Col, InputProps, Row, RowProps, Skeleton, theme} from "antd"
+import React, {FC, TransitionStartFunction, useEffect, useState} from 'react'
+import {IPlayer, ITournament} from "../Tournament"
+import {Avatar, Col, InputProps, Row, RowProps, Skeleton} from "antd"
 import ListLoadMore from "../../ListLoadMore"
 import {DonateButton} from "./UI/DonateButton"
 import {PlayerRank} from "./UI/PlayerRank"
 import {DonateValue} from "./UI/DonateValueInput"
+import {useTournamentPlayerList} from "../../../hook/useTournamentPlayerList"
 
 interface ITournamentPlayerList {
     players: IPlayer[]
@@ -16,65 +17,40 @@ interface ITournamentPlayerList {
     tournamentStarted: boolean
 }
 
-type TypeDonateInput = {
+export type TypeDonateInput = {
     value: string
     status: InputProps["status"]
 }
 
 
 const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
-    const {token} = theme.useToken()
-    const {players, isPending, startTransition, containerProps, itemProps, tournamentStarted, tournament} = props
+    const {
+        players,
+        isPending,
+        startTransition,
+        containerProps,
+        itemProps,
+        tournamentStarted,
+        tournament
+    } = props
+
 
     const [donateInput, setDonateInput] = useState<TypeDonateInput>({value: "", status: ""})
     const [showDonate, setShowDonate] = useState<IPlayer | null>(null)
     const [donateLoading, setDonateLoading] = useState<boolean>(false)
+    const {fontSize, onInputClear, onInput, onDonation, onDonationConfirm, onOpenProfile} = useTournamentPlayerList({
+        setShowDonate,
+        setDonateInput,
+        setDonateLoading,
+        tournament,
+        donateInput,
+        startTransition,
 
-
-    const fontSize = 11
-
+    })
 
     useEffect(() => {
         console.log("Donate for player:", showDonate)
     }, [showDonate])
-
-
-    const onInput = ({target}: ChangeEvent<HTMLInputElement>) => {
-        const isInt = Number.isInteger(+target.value)
-
-        if (isInt && target.value !== "0") {
-            setDonateInput(() => ({value: target.value, status: ""}))
-        } else {
-            setDonateInput(() => ({value: "", status: "error"}))
-        }
-    }
-
-    const onInputClear = () => {
-        setDonateInput(() => ({value: "", status: ""}))
-        setShowDonate(() => null)
-    }
-
-    const onDonation = (player: IPlayer) => {
-        setDonateInput(() => ({value: "", status: ""}))
-        // setShowDonate(prevState => prevState?.id === player.id ? null : player)
-        setShowDonate(prevState => player)
-    }
-
-    const onDonationConfirm = (player: IPlayer) => {
-        if (+donateInput.value <= 0) return setShowDonate(() => null)
-
-
-        setDonateLoading(() => true)
-        const donate: IDonate = {
-            amount: donateInput.value,
-            player: player,
-            from: {} as IPlayer,
-            tournament,
-            date: new Date()
-        }
-        console.log("Donate confirmed:", donate)
-
-    }
 
 
     if (!players.length)
@@ -89,9 +65,9 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
             listProps={{
                 ...containerProps,
                 renderItem: (player, index) => (
-                    <Row {...itemProps}>
+                    <Row {...itemProps} onClick={() => onOpenProfile(player)}>
                         <Col>
-                            <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}/>
+                            <Avatar src={player.avatar}/>
                         </Col>
 
                         <Col>
@@ -110,6 +86,9 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                                         props={{
                                             value: donateInput.value,
                                             onInput: onInput,
+                                            onClick: event => {
+                                                event.stopPropagation()
+                                            },
                                             status: donateInput.status,
                                             disabled: donateLoading,
                                         }}
@@ -125,14 +104,20 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                                     <DonateButton
                                         props={{
                                             disabled: tournamentStarted,
-                                            onClick: () => onDonationConfirm(player),
+                                            onClick: (event) => {
+                                                event.stopPropagation()
+                                                onDonationConfirm(player)
+                                            },
                                             loading: donateLoading,
                                         }}
                                     >Confirm</DonateButton> :
                                     <DonateButton
                                         props={{
                                             disabled: tournamentStarted || !!showDonate,
-                                            onClick: () => onDonation(player)
+                                            onClick: (event) => {
+                                                event.stopPropagation()
+                                                onDonation(player)
+                                            }
                                         }}
                                     >Donate</DonateButton>
                             }

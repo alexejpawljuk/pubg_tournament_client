@@ -14,6 +14,7 @@ const DonateValue: FC<IDonateValue> = ({props, onClear}) => {
 
     useEffect(() => {
         inputRef.current?.focus()
+
     }, [])
 
     return (

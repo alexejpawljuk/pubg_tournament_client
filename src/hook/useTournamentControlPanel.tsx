@@ -1,11 +1,11 @@
-import {RadioChangeEvent} from "antd"
 import React, {ChangeEvent, Dispatch, MutableRefObject, SetStateAction, TransitionStartFunction} from "react"
 import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
-import {useTournament} from "../store/useTournament"
-import TournamentCreate from "../component/tournament/create/TournamentCreate"
 import TournamentCreateHeader from "../component/tournament/create/TournamentCreateHeader"
+import TournamentCreate from "../component/tournament/create/TournamentCreate"
 import {useModalDrawer} from "../store/useModalDrawer"
 import {useModalPopup} from "../store/useModelPopup"
+import {useTournament} from "../store/useTournament"
+import {RadioChangeEvent} from "antd"
 
 
 interface IUseTournamentControlPanelProps {
@@ -29,10 +29,14 @@ interface IUseTournamentControlPanelReturn {
 }
 
 export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
-    const {setSearchValue, startTransition, filterOptionsRef} = props
     const modalDrawer = useModalDrawer()
     const modalPopup = useModalPopup()
     const tournament = useTournament()
+    const {
+        setSearchValue,
+        startTransition,
+        filterOptionsRef
+    } = props
 
     return {
         onChangeFilterOption(e) {
@@ -76,7 +80,7 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
                 }
             }))
         },
-        onDate(e, date){
+        onDate(e, date) {
             console.log(date)
         }
     }

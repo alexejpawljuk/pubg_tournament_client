@@ -6,7 +6,7 @@ interface IPremiumDisplay {
     isPremiumAccount: boolean
 }
 
-const DisplayPremium: FC<IPremiumDisplay> = ({children, isPremiumAccount}) => {
+const PremiumDisplay: FC<IPremiumDisplay> = ({children, isPremiumAccount}) => {
 
     if (isPremiumAccount) {
         return (
@@ -20,4 +20,4 @@ const DisplayPremium: FC<IPremiumDisplay> = ({children, isPremiumAccount}) => {
     }
 }
 
-export default DisplayPremium
+export default PremiumDisplay

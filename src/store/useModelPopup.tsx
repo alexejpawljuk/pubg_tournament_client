@@ -1,6 +1,5 @@
 import {create} from "zustand"
 import {Dispatch, ReactNode, SetStateAction} from "react"
-import {devtools} from "zustand/middleware"
 import {ModalProps} from "antd"
 
 export namespace IUseModalPopup {
