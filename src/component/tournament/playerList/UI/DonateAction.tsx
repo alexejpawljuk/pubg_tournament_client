@@ -1,7 +1,8 @@
-import React, {FC} from 'react'
+import React, {CSSProperties, FC} from 'react'
 import {PlayerDisplayWrap} from "../PlayerDisplayWrap"
 import {DonateButton} from "./DonateButton"
 import {IPlayer} from "../../Tournament"
+import {theme} from "antd";
 
 interface IDonateAction {
     showDonateId: string
@@ -16,6 +17,8 @@ interface IDonateAction {
 }
 
 const DonateAction: FC<IDonateAction> = (props) => {
+    const {token} = theme.useToken()
+
     const {
         showDonateId,
         tournamentStarted,
@@ -26,11 +29,18 @@ const DonateAction: FC<IDonateAction> = (props) => {
         onDonationConfirm,
     } = props
 
+
+    const styles: CSSProperties = {
+        fontSize: 11,
+        width: 85,
+    }
+
     if (showDonateId === player.id)
         return (
             <PlayerDisplayWrap>
                 <DonateButton
                     props={{
+                        style: styles,
                         disabled: tournamentStarted,
                         onClick: (event) => {
                             event.stopPropagation()
@@ -46,6 +56,9 @@ const DonateAction: FC<IDonateAction> = (props) => {
             <PlayerDisplayWrap>
                 <DonateButton
                     props={{
+                        style: {
+                            ...styles,
+                        },
                         disabled: tournamentStarted || showDonate,
                         onClick: (event) => {
                             event.stopPropagation()
