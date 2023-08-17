@@ -7,10 +7,8 @@ const RootLayoutContentHeader: FC<{children: ReactNode}> = ({children}) => {
 
     const styles: CSSProperties = {
         background: colorBgContainer,
-        height: 230,
+        height: 200,
         padding: 0,
-        // paddingBottom: 20,
-        // width: "100vh",
     }
 
     return (
