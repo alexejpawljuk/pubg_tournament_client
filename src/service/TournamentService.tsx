@@ -14,8 +14,6 @@ interface ITournamentService {
 
     tournamentFilterByNameAndType(options: IFilterOptions): void
 
-    tournamentFilterByDate(date: Date): void
-
     tournamentSearch(value: string): void
 
     tournamentToDefault(): void
@@ -64,24 +62,6 @@ export const TournamentService = create<ITournamentService>((setState, getState)
         setState(state => ({
             ...state,
             tournamentList: filteredTournaments,
-        }))
-    },
-
-
-    /**
-     * Filter tournament list by tournament name and tournament type then return new array
-     * @param date
-     */
-    tournamentFilterByDate(date: Date) {
-        const filteredTournaments = [...getState().dataSource]
-            .filter(tournament =>
-                tournament.date.getFullYear() === date.getFullYear() &&
-                tournament.date.getMonth() === date.getMonth() &&
-                tournament.date.getDate() === date.getDate()
-            )
-        setState(state => ({
-            ...state,
-            tournamentList: filteredTournaments
         }))
     },
 

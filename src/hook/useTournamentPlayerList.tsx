@@ -1,8 +1,8 @@
 import React, {ChangeEvent, Dispatch, SetStateAction, TransitionStartFunction} from "react"
 import {TypeDonateInput} from "../component/tournament/playerList/TournamentPlayerList"
 import {IDonate, IPlayer, ITournament} from "../component/tournament/Tournament"
-import ProfileCard from "../component/profile/card/ProfileCard";
-import {ModalPopupService} from "../service/ModelPopupService";
+import {ModalPopupService} from "../service/ModelPopupService"
+import {PlayerProfile} from "../component/tournament/playerList/PlayerProfile"
 
 
 interface IUseTournamentControlPanelProps {
@@ -74,16 +74,20 @@ export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps):
         onOpenProfile(player: IPlayer) {
             modalPopupService.setOpenModal(detailState => {
                 return {
-                    children: <></>,
+                    children: null,
                     openModal: false,
                     props: {
+                        ...detailState.props,
                         afterClose: () => {
-                            modalPopupService.setOpenModal(prevState => ({
+                            modalPopupService.setOpenModal((prevState) => ({
                                 openModal: true,
-                                children: <ProfileCard player={player}/>,
+                                children: <PlayerProfile player={player}/>,
                                 props: {
+                                    ...prevState.props,
                                     afterClose: () => {
-                                        modalPopupService.setOpenModal(() => detailState)
+                                        startTransition(() => {
+                                            modalPopupService.setOpenModal(() => detailState)
+                                        })
                                     }
                                 }
                             }))

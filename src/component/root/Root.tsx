@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import {Layout, theme} from 'antd'
+import React, {CSSProperties, useEffect} from 'react'
+import {Button, Col, Layout, Row, Tag, theme} from 'antd'
 import {Route, Routes} from "react-router-dom"
 import RootLayoutHeader from "./RootLayoutHeader"
 import RootLayoutContent from "./RootLayoutContent"
@@ -13,19 +13,24 @@ import Account from "../content/Account"
 import ModalPopup from "../modal/ModalPopup"
 import CommunityFloatButton from "../community/CommunityFloatButton"
 import ModalDrawer from "../modal/ModalDrawer"
-
+import {HeaderFeed} from "../header/HeaderFeed"
+import {FacebookOutlined, LinkedinOutlined, TwitterOutlined, YoutubeOutlined} from '@ant-design/icons'
+import {IoNotificationsOutline} from "react-icons/io5";
+import {AiTwotoneNotification} from "react-icons/ai";
+import FooterContent from "../footer/FooterContent";
 
 const Root = () => {
-    const {token: {colorBgContainer}} = theme.useToken()
+    const {token} = theme.useToken()
 
     useEffect(() => {
         const bodyEl = document.querySelector("body")
-        if (bodyEl) bodyEl.style.background = colorBgContainer
-    }, [colorBgContainer])
+        if (bodyEl) bodyEl.style.background = token.colorBgContainer
+    }, [token.colorBgContainer])
+
 
 
     return (
-        <Layout style={{minHeight: '100vh'}}>
+        <Layout>
             <ModalPopup/>
             <ModalDrawer/>
             <CommunityFloatButton/>
@@ -33,9 +38,10 @@ const Root = () => {
             <RootLayoutHeader>
                 <Navigation/>
             </RootLayoutHeader>
+
             <RootLayoutContent>
                 <RootLayoutContentHeader>
-                    LOGO
+                    <HeaderFeed/>
                 </RootLayoutContentHeader>
                 <RootContent>
                     <Routes>
@@ -46,8 +52,9 @@ const Root = () => {
                 </RootContent>
             </RootLayoutContent>
             <RootLayoutFooter>
-                Ant Design ©2023 Created by Ant UED
+                <FooterContent/>
             </RootLayoutFooter>
+
         </Layout>
     )
 }

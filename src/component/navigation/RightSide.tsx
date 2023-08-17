@@ -3,7 +3,7 @@ import {AppUserThemeService} from "../../service/AppUserThemeService"
 import {UserAddOutlined, UserOutlined, WalletOutlined} from "@ant-design/icons"
 import {AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
 import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md"
-import {Badge, Menu, MenuProps} from "antd"
+import {Badge, Menu, MenuProps, theme} from "antd"
 import AuthForm from "../AuthForm"
 import RegisterForm from "../RegisterForm"
 import React from "react"
@@ -14,6 +14,7 @@ import Wallet from "../Wallet"
 
 
 const RightSide = () => {
+    const {token} = theme.useToken()
     const modalPopupService = ModalPopupService()
     const {setAppUserTheme} = AppUserThemeService()
     // const {setUserTheme} = useUserTheme()
@@ -48,7 +49,7 @@ const RightSide = () => {
 
     const styles = {
         width: "50%",
-        justifyContent: "right"
+        justifyContent: "right",
     }
 
     const onClick: MenuProps["onClick"] = (e) => {

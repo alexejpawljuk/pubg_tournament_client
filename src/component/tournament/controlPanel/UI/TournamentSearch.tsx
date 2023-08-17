@@ -10,7 +10,7 @@ interface ITournamentSearch {
 
 const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
     const styles: CSSProperties = {
-        width: 230
+        width: 230,
     }
 
     return (

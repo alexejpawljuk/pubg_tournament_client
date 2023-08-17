@@ -172,7 +172,6 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
                     </Row>
                 )
             }}
-
         />
     )
 }

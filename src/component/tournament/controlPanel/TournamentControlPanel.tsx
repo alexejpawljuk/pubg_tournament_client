@@ -7,7 +7,6 @@ import {TournamentSortByName} from "./UI/TournamentSortByName"
 import {TournamentCreateButton} from "./UI/TournamentCreateButton"
 import {TournamentSearch} from "./UI/TournamentSearch"
 import {TournamentSortByType} from "./UI/TournamentSortByType"
-import TournamentSortByData from "./UI/TournamentSortByData"
 import {useTournamentControlPanel} from "../../../hook/useTournamentControlPanel"
 
 export interface IFilterOptions {
@@ -24,7 +23,7 @@ interface ITournamentControlPanel {
 
 const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     useLogger("Render control panel")
-    const {token: {borderRadius, colorBorder}} = theme.useToken()
+    const {token} = theme.useToken()
 
     // const breakpoint = useBreakpoint()
     // console.log("Breakpoint:", breakpoint)
@@ -40,7 +39,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         onInput,
         onInputClear,
         onTournamentCreate,
-        onDate
+        // onDate
     } = useTournamentControlPanel({startTransition, setSearchValue, filterOptionsRef})
 
 
@@ -49,9 +48,10 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
         width: "99%",
         margin: "10px auto",
         padding: "5px 0px 15px 0px",
-        border: "2px solid",
-        borderColor: colorBorder,
-        borderRadius: borderRadius,
+        // border: "0.5px solid",
+        // borderColor: colorBorder,
+        borderRadius: token.borderRadius,
+        // background: token.colorBgLayout,
         zIndex: 0
     }
 
@@ -84,12 +84,12 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                         onSearch
                     }}
                 />
-                <TournamentSortByData
-                    props={{
-                        disabled: isPending,
-                        onChange: onDate,
-                    }}
-                />
+                {/*<TournamentSortByData*/}
+                {/*    props={{*/}
+                {/*        disabled: isPending,*/}
+                {/*        onChange: onDate,*/}
+                {/*    }}*/}
+                {/*/>*/}
             </Row>
         </Row>
     )

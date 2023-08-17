@@ -1,7 +1,8 @@
-import React, {useEffect, useTransition} from 'react'
+import React, {CSSProperties, useEffect, useTransition} from 'react'
 import TournamentControlPanel from "./controlPanel/TournamentControlPanel"
 import {TournamentService} from "../../service/TournamentService"
 import TournamentList from "./list/TournamentList"
+import {ConfigProvider, theme} from "antd";
 
 
 export type ITournamentNameType = "daily" | "custom" | "sponsorship"
@@ -60,6 +61,7 @@ export interface ITournament {
 }
 
 const Tournament = () => {
+    const {token} = theme.useToken()
     const {tournamentList, tournamentFetch} = TournamentService()
     const [isPending, startTransition] = useTransition()
 
@@ -69,8 +71,11 @@ const Tournament = () => {
         })
     }, [])
 
+
     return (
-        <div>
+        <div style={{
+            background: token.colorBgLayout
+        }}>
             <TournamentControlPanel
                 transition={{isPending, startTransition}}
             />
@@ -79,7 +84,7 @@ const Tournament = () => {
                 transition={{isPending, startTransition}}
             />
         </div>
-    );
-};
+    )
+}
 
 export default Tournament

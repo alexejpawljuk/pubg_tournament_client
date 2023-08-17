@@ -25,7 +25,7 @@ interface IUseTournamentControlPanelReturn {
 
     onTournamentCreate(): void
 
-    onDate(e: any, date: string): void
+    // onDate(e: any, date: string): void
 }
 
 export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
@@ -80,19 +80,19 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
                 }
             }))
         },
-        onDate(e, date) {
-            filterOptionsRef.current.name = "all"
-            filterOptionsRef.current.type = "all"
-            setSearchValue(() => "")
-            if (date === "") {
-                startTransition(() => {
-                    tournamentService.tournamentToDefault()
-                })
-            } else {
-                startTransition(() => {
-                    tournamentService.tournamentFilterByDate(new Date(date))
-                })
-            }
-        }
+        // onDate(e, date) {
+        //     filterOptionsRef.current.name = "all"
+        //     filterOptionsRef.current.type = "all"
+        //     setSearchValue(() => "")
+        //     if (date === "") {
+        //         startTransition(() => {
+        //             tournamentService.tournamentToDefault()
+        //         })
+        //     } else {
+        //         startTransition(() => {
+        //             tournamentService.tournamentFilterByDate(new Date(date))
+        //         })
+        //     }
+        // }
     }
 }

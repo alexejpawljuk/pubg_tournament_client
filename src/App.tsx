@@ -1,5 +1,5 @@
 import React, {FC, ReactNode, useEffect} from 'react'
-import {ConfigProvider, ThemeConfig} from "antd"
+import {ConfigProvider, theme, ThemeConfig} from "antd"
 import {BrowserRouter} from "react-router-dom"
 import Root from "./component/root/Root"
 import {AppUserThemeService} from "./service/AppUserThemeService"
@@ -11,9 +11,14 @@ interface IAppProvider {
 }
 
 const AppProvider: FC<IAppProvider> = ({children, appThemeConfig}) => {
+
+
     return (
         <BrowserRouter>
-            <ConfigProvider theme={{algorithm: appThemeConfig}}>
+            <ConfigProvider theme={{
+                algorithm: appThemeConfig,
+            }}
+            >
                 {children}
             </ConfigProvider>
         </BrowserRouter>

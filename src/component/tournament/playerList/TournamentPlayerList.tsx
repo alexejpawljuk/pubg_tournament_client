@@ -8,7 +8,7 @@ import {PlayerNicknameDisplay} from "./PlayerNicknameDisplay"
 import {PlayerIdDisplay} from "./PlayerIdDisplay"
 import {PlayerDisplayWrap} from "./PlayerDisplayWrap"
 import {DonateValueOrRankDisplay} from "./DonateValueOrRankDisplay"
-import {DonateAction} from "./DonateAction"
+import {DonateAction} from "./UI/DonateAction"
 
 interface ITournamentPlayerList {
     players: IPlayer[]
@@ -72,7 +72,7 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                     ...containerProps,
                     renderItem: (player, index) => (
                         <Row {...itemProps}>
-                            <Space wrap onClick={() => onOpenProfile(player)}>
+                            <Space wrap onClick={() => onOpenProfile(player)} >
                                 <PlayerAvatarDisplay avatar={player.avatar}/>
                                 <PlayerDisplayWrap>
                                     <PlayerNicknameDisplay nickname={player.nickname} fontSize={fontSize}/>

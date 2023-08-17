@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
-import {PlayerDisplayWrap} from "./PlayerDisplayWrap"
-import {DonateButton} from "./UI/DonateButton"
-import {IPlayer} from "../Tournament"
+import {PlayerDisplayWrap} from "../PlayerDisplayWrap"
+import {DonateButton} from "./DonateButton"
+import {IPlayer} from "../../Tournament"
 
 interface IDonateAction {
     showDonateId: string

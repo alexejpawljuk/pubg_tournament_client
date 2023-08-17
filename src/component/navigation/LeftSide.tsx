@@ -1,12 +1,13 @@
 import {ModalPopupService} from "../../service/ModelPopupService"
 import {AiOutlineHome} from "react-icons/ai"
 import {ShoppingCartOutlined} from "@ant-design/icons"
-import {Menu, MenuProps} from "antd"
+import {Menu, MenuProps, theme} from "antd"
 import React from "react"
 import {getItem, LeftMenuKey, MenuItem} from "./Navigation"
 import Shop from "../shop/Shop";
 
 const LeftSide = () => {
+    const {token} = theme.useToken()
     const modalPopupService = ModalPopupService()
 
     const items: MenuItem[] = [
@@ -22,6 +23,7 @@ const LeftSide = () => {
 
     const styles = {
         width: "50%",
+
     }
 
     const onClick: MenuProps["onClick"] = (e) => {
