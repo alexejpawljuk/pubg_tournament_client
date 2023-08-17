@@ -11,16 +11,15 @@ const FooterContent = () => {
         minWidth: 300,
         maxWidth: 700,
         width: "100%",
-        padding: "20px 0"
+        // paddingTop: 20,
+        // paddingBottom: 20,
     }
     return (
         <Row
             align="middle"
             justify="space-evenly"
             style={{
-                height: "100%",
-                margin: "15px 0",
-                // border: "1px solid white",
+                height: "100%"
             }}
         >
             <SocialMedia

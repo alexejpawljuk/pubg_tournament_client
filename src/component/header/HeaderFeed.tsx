@@ -52,7 +52,7 @@ const HeaderFeed = () => {
         width: "max-content",
         maxWidth: "100",
         whiteSpace: "nowrap",
-        height: 190,
+        height: 200,
         paddingTop: "20px",
         borderBottom: "0.4px solid",
         borderBottomColor: token.colorBorder,
