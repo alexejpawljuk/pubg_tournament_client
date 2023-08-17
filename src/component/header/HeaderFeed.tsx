@@ -54,6 +54,7 @@ const HeaderFeed = () => {
         whiteSpace: "nowrap",
         height: 180,
         paddingTop: "20px",
+        marginBottom: 15,
         borderBottom: "0.4px solid",
         borderBottomColor: token.colorBorder,
         background: token.colorBgLayout,
