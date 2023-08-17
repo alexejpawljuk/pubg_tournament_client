@@ -15,7 +15,7 @@ const RootLayoutContentHeader: FC<{children: ReactNode}> = ({children}) => {
         <Header style={styles}>
             <Row
                 // justify="space-around"
-                // align="middle"
+                align="middle"
                 style={{width: "100%", height: "100%"}}
             >{children}</Row>
         </Header>
