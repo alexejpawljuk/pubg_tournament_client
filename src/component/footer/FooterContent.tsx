@@ -19,6 +19,7 @@ const FooterContent = () => {
             justify="space-evenly"
             style={{
                 height: "100%",
+                margin: "15px 0",
                 // border: "1px solid white",
             }}
         >
