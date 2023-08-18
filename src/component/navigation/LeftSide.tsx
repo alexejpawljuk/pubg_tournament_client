@@ -23,7 +23,7 @@ const LeftSide = () => {
 
     const styles = {
         width: "50%",
-
+        background: token.colorBgLayout
     }
 
     const onClick: MenuProps["onClick"] = (e) => {

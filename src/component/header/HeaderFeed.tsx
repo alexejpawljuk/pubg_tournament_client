@@ -1,12 +1,16 @@
 import React, {CSSProperties, FC, ReactNode, useEffect, useRef, useState} from 'react'
 import {Avatar, Card, Col, ConfigProvider, Divider, theme} from "antd"
+import tournament, {ITournament} from "../tournament/Tournament";
+import {TournamentService} from "../../service/TournamentService";
+import Meta from "antd/es/card/Meta";
 
 
 interface IHeaderFeedItem {
-    content: string
+    tournament: ITournament
+    index: number
 }
 
-const HeaderFeedItem: FC<IHeaderFeedItem> = ({content}) => {
+const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
     const {token} = theme.useToken()
 
     const styles: CSSProperties = {
@@ -26,15 +30,19 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({content}) => {
 
         <Card size="small" bordered={false} style={styles}>
             {/*<p>Card content Card content Card content Card content</p>*/}
-            <Divider style={{width: 300, margin: 0}} orientation="right">Card content</Divider>
-            <Col>
-                <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${1}`}/>
+            <Divider style={{width: 300, margin: 0}} orientation="right">{tournament.type.toUpperCase()}</Divider>
+            <Meta
+                avatar={<Avatar src={tournament.meta.players[0].avatar} />}
+                title={tournament.meta.players[0].nickname}
+                description={tournament.meta.players[0].id}
+            />
+            {/*<Col>*/}
+            {/*    <Avatar src={tournament.meta.players[1].avatar}/>*/}
+            {/*</Col>*/}
+            {/*<Col>*/}
+            {/*    <p>Card content</p>*/}
+            {/*</Col>*/}
 
-            </Col>
-            <Col>
-                <p>Card content</p>
-            </Col>
-            {/*<p>Card content</p>*/}
         </Card>
     )
 }
@@ -43,8 +51,8 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({content}) => {
 const HeaderFeed = () => {
     const {token} = theme.useToken()
     const feedRef = useRef<HTMLDivElement>(null)
-    const [feed, setFeed] = useState<ReactNode[]>([])
-
+    const [feed, setFeed] = useState<ITournament[]>([])
+    const tournamentService = TournamentService()
 
     const styles: CSSProperties = {
         display: "flex",
@@ -62,9 +70,8 @@ const HeaderFeed = () => {
     }
 
     useEffect(() => {
-        console.log("Scroll width", feedRef.current?.scrollWidth)
-        setFeed(() => new Array(20).fill(<></>))
-    }, [])
+        setFeed(() => tournamentService.tournamentList)
+    }, [tournamentService.tournamentList])
 
 
     const onScroll = (event: React.UIEvent<HTMLElement>) => {
@@ -89,7 +96,7 @@ const HeaderFeed = () => {
         >
             <ConfigProvider
                 theme={{token: {colorBgLayout: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.2) 100%)"}}}>
-                {feed.map((feedData, index) => <HeaderFeedItem content={index.toString()} key={index}/>)}
+                {feed.map((tournament, index) => <HeaderFeedItem tournament={tournament} index={index} key={index}/>)}
             </ConfigProvider>
         </div>
 

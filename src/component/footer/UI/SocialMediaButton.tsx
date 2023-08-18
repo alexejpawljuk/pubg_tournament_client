@@ -1,5 +1,5 @@
-import React, {FC, ReactNode} from 'react';
-import {Button, ButtonProps} from "antd";
+import React, {FC, ReactNode} from 'react'
+import {Button, ButtonProps} from "antd"
 
 interface ISocialMediaButton {
     props: ButtonProps
@@ -19,4 +19,4 @@ const SocialMediaButton: FC<ISocialMediaButton> = ({props, children}) => {
     );
 };
 
-export default SocialMediaButton;
+export default SocialMediaButton

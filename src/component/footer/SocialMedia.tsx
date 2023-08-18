@@ -15,7 +15,7 @@ const SocialMedia: FC<ISocialMedia> = ({props}) => {
             <Row style={{width: "100%"}} justify="center">
                 <SocialMediaButton
                     props={{
-                        icon: <AiOutlineNotification/>
+                        icon: <AiOutlineNotification/>,
                     }}
                 >Telegram</SocialMediaButton>
             </Row>

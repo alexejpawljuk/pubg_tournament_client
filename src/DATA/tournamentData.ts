@@ -1,6 +1,7 @@
 import {uid} from "uid"
 import {IPlayer, ITournament, ITournamentNameType, ITournamentType} from "../component/tournament/Tournament"
 import {isAfter} from "date-fns"
+import {playerListData} from "./playerListData";
 
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
@@ -290,9 +291,12 @@ const playerList: IPlayer[] = [
 ];
 
 
-const list = new Promise<ITournament[]>(resolve => {
+const list = new Promise<ITournament[]>((resolve) => {
     const list: ITournament[] = []
+
     for (let i = 0; i < 1000; i++) {
+        // const playerList: IPlayer[] = []
+
         const item: ITournament = {
             id: uid(),
             name: getRandomTournamentName(),
@@ -316,6 +320,7 @@ const list = new Promise<ITournament[]>(resolve => {
             donation: getRandomNumber(100),
             meta: {
                 players: playerList.map((player, index) => ({
+
                     ...player,
                     avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`,
                     rank: getRandomNumber(5),

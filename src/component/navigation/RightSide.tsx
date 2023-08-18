@@ -50,6 +50,7 @@ const RightSide = () => {
     const styles = {
         width: "50%",
         justifyContent: "right",
+        background: token.colorBgLayout
     }
 
     const onClick: MenuProps["onClick"] = (e) => {
