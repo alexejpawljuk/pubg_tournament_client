@@ -16,7 +16,8 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
     const styles: CSSProperties = {
         width: 350,
         // paddingBottom: 15,
-        margin: "0 20px",
+        marginRight: 20,
+        marginLeft: 20,
         background: token.colorBgLayout
     }
 
@@ -81,6 +82,7 @@ const HeaderFeed = () => {
     const handleScroll = (e: React.UIEvent<HTMLElement>): void => {
         e.stopPropagation() // Handy if you want to prevent event bubbling to scrollable parent
         const scrollLeftPosition = e.currentTarget.scrollLeft
+
         console.log(scrollLeftPosition)
         // e.currentTarget.scrollTo({left: scrollLeftPosition + 1})
     };
@@ -90,7 +92,6 @@ const HeaderFeed = () => {
 
         <div
             onScroll={handleScroll}
-            id="header_feed"
             ref={feedRef}
             style={styles}
         >

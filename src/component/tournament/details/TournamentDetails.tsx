@@ -82,7 +82,7 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
                             style: {
                                 border: "0.5px solid",
                                 borderColor: token.colorBorder,
-                                background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.1) 100%)",
+                                // background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.1) 100%)",
                                 // borderColor: token.colorBorder,
                                 // marginBottom: 5,
                                 width: 270,

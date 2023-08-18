@@ -22,8 +22,9 @@ interface IShopProductWrap {
 }
 
 const ShopHeader: FC<IShopHeader> = ({title}) => {
+
     return (
-        <Row>
+        <Row >
             <Col flex={"auto"}>
                 <Divider type="horizontal" orientation="center">{title}</Divider>
             </Col>
@@ -32,7 +33,7 @@ const ShopHeader: FC<IShopHeader> = ({title}) => {
 }
 
 const ShopProductContainer: FC<IShopProductContainer> = ({children, loading}) => {
-    const {token: {colorBgContainer}} = theme.useToken()
+    const {token} = theme.useToken()
 
     if (loading)
         return (
@@ -45,7 +46,7 @@ const ShopProductContainer: FC<IShopProductContainer> = ({children, loading}) =>
             justify={"center"}
             gutter={[0, 0]}
             style={{
-                background: colorBgContainer,
+                background: token.colorBgLayout,
                 padding: "24px",
                 margin: 0,
             }}
@@ -62,6 +63,7 @@ const ShopProductWrap: FC<IShopProductWrap> = ({children}) => {
 }
 
 const Shop: FC<IShop> = () => {
+    const {token} = theme.useToken()
     const {products, shopProductsFetch} = ShopService()
     const [loading, setLoading] = useState<boolean>(false)
 

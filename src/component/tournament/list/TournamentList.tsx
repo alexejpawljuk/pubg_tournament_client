@@ -57,7 +57,8 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
         width: "0.6em"
     }
 
-    return (<Rate
+    return (
+        <Rate
             disabled
             allowHalf
             count={5}

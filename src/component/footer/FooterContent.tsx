@@ -22,12 +22,13 @@ const FooterContent = () => {
                 props={{
                     style: {
                         // minWidth: 300,
-                        maxWidth: 200,
-                        // width: "100%",
+                        // maxWidth: 400,
+                        width: "50%",
                         height: 150,
+                        gap: 15
                     },
                     justify: "center",
-                    align: "middle",
+                    align: "bottom",
                 }}
             />
             {/*<Row style={styles}>*/}
@@ -39,7 +40,7 @@ const FooterContent = () => {
                 style={{
                     // minWidth: 300,
                     maxWidth: 700,
-                    width: 150,
+                    width: "50%",
                     height: 150,
                 }}
                 justify="center"

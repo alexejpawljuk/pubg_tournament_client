@@ -28,7 +28,10 @@ const SocialMedia: FC<ISocialMedia> = ({props}) => {
             <Row style={styles} justify="center">
                 <SocialMediaButton
                     props={{
-                        icon: <YoutubeOutlined/>
+                        icon: <YoutubeOutlined/>,
+                        style: {
+                            padding: "0 15px"
+                        },
                     }}
                 >Youtube</SocialMediaButton>
             </Row>
