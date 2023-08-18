@@ -21,13 +21,13 @@ const FooterContent = () => {
             <SocialMedia
                 props={{
                     style: {
-                        minWidth: 300,
-                        maxWidth: 700,
-                        width: "100%",
-                        height: 140,
+                        // minWidth: 300,
+                        maxWidth: 200,
+                        // width: "100%",
+                        height: 150,
                     },
-                    justify: "space-evenly",
-                    align: "bottom",
+                    justify: "center",
+                    align: "middle",
                 }}
             />
             {/*<Row style={styles}>*/}
@@ -37,10 +37,10 @@ const FooterContent = () => {
             {/*</Row>*/}
             <Row
                 style={{
-                    minWidth: 300,
+                    // minWidth: 300,
                     maxWidth: 700,
-                    width: "100%",
-                    height: 50,
+                    width: 150,
+                    height: 150,
                 }}
                 justify="center"
                 align="bottom"
