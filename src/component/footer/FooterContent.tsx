@@ -1,22 +1,18 @@
-import React, {CSSProperties} from 'react';
-import {Button, Col, Row, Tag} from "antd";
-import {AiTwotoneNotification} from "react-icons/ai";
-import {FacebookOutlined, LinkedinOutlined, YoutubeOutlined} from "@ant-design/icons";
-import SocialMedia from "./SocialMedia";
-
+import React, {CSSProperties} from 'react'
+import {Button, Row, theme} from "antd"
+import SocialMedia from "./SocialMedia"
 
 
 const FooterContent = () => {
+    const {token} = theme.useToken()
+
     const styles: CSSProperties = {
-        minWidth: 300,
-        maxWidth: 700,
-        width: "100%",
-        // paddingTop: 20,
-        // paddingBottom: 20,
+        // color: token.colorText,
+        // width: "100%",
     }
     return (
         <Row
-            align="middle"
+            align="bottom"
             justify="space-evenly"
             style={{
                 height: "100%"
@@ -24,7 +20,14 @@ const FooterContent = () => {
         >
             <SocialMedia
                 props={{
-                    style: styles
+                    style: {
+                        minWidth: 300,
+                        maxWidth: 700,
+                        width: "100%",
+                        height: 140,
+                    },
+                    justify: "space-evenly",
+                    align: "bottom",
                 }}
             />
             {/*<Row style={styles}>*/}
@@ -32,11 +35,28 @@ const FooterContent = () => {
             {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda aut consequatur earum eveniet excepturi explicabo harum ipsa ipsam iusto temporibus!*/}
             {/*    </Col>*/}
             {/*</Row>*/}
-            <Row style={styles} justify="center">
-                <Button type={"link"} style={{color: "white", width: "100%"}}>About Us</Button>
-                <Button type={"link"} style={{color: "white", width: "100%"}}>Rules</Button>
-                <Button type={"link"} style={{color: "white", width: "100%"}}>Payment concept</Button>
-                <Button type={"link"} style={{color: "white", width: "100%"}}>Cooperation</Button>
+            <Row
+                style={{
+                    minWidth: 300,
+                    maxWidth: 700,
+                    width: "100%",
+                    height: 50,
+                }}
+                justify="center"
+                align="bottom"
+            >
+                <Row style={styles}>
+                    <Button type={"link"} className="custom">About Us</Button>
+                </Row>
+                <Row>
+                    <Button type={"link"}>Rules</Button>
+                </Row>
+                <Row>
+                    <Button type={"link"}>Payment concept</Button>
+                </Row>
+                <Row>
+                    <Button type={"link"}>Cooperation</Button>
+                </Row>
             </Row>
 
         </Row>

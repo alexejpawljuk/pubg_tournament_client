@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {CSSProperties, FC} from 'react'
 import {Button, Row, RowProps, Tag} from "antd"
 import {AiOutlineNotification, AiTwotoneNotification} from "react-icons/ai"
 import {FacebookOutlined, LinkedinOutlined, YoutubeOutlined} from "@ant-design/icons"
@@ -10,23 +10,29 @@ interface ISocialMedia {
 }
 
 const SocialMedia: FC<ISocialMedia> = ({props}) => {
+    const styles: CSSProperties = {
+        // width: "100%"
+        padding: 0
+    }
+
+
     return (
         <Row {...props}>
-            <Row style={{width: "100%"}} justify="center">
+            <Row style={styles} justify="center">
                 <SocialMediaButton
                     props={{
                         icon: <AiOutlineNotification/>,
                     }}
                 >Telegram</SocialMediaButton>
             </Row>
-            <Row style={{width: "100%"}} justify="center">
+            <Row style={styles} justify="center">
                 <SocialMediaButton
                     props={{
                         icon: <YoutubeOutlined/>
                     }}
                 >Youtube</SocialMediaButton>
             </Row>
-            <Row style={{width: "100%"}} justify="center">
+            <Row style={styles} justify="center">
                 <SocialMediaButton
                     props={{
                         icon: <BsInstagram/>
