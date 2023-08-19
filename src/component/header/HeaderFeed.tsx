@@ -1,63 +1,8 @@
-import React, {CSSProperties, FC, ReactNode, useEffect, useRef, useState} from 'react'
-import {Avatar, Card, Col, ConfigProvider, Divider, Row, theme} from "antd"
-import tournament, {IMatch} from "../match/Match";
-import {MatchService} from "../../service/MatchService";
-import Meta from "antd/es/card/Meta";
-import coinSVG from "../../image/svg/coins.svg"
-import {format} from "date-fns";
-
-
-interface IHeaderFeedItem {
-    match: IMatch
-    index: number
-}
-
-const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
-    const {token} = theme.useToken()
-
-    const styles: CSSProperties = {
-        width: 350,
-        // paddingBottom: 15,
-        marginRight: 20,
-        marginLeft: 20,
-        background: token.colorBgLayout
-    }
-
-    if (!match.meta.winner) return null
-
-    return (
-        // <div style={styles}>
-        //     <Row justify="center" style={{width: "100%"}}>Daily</Row>
-        //     <Row style={{width: "100%"}}>Daily</Row>
-        //     <Row style={{width: "100%"}}>Daily</Row>
-        //     <Row style={{width: "100%"}}>Daily</Row>
-        // </div>
-
-        <Card size="small" bordered={false} style={styles}>
-            {/*<p>Card content Card content Card content Card content</p>*/}
-            <Divider style={{width: 300, margin: 0}} orientation="right">{"Winner"}</Divider>
-            <Meta
-                avatar={<Avatar src={match.meta.winner?.avatar}/>}
-                title={
-                    <>
-                        <Row>{match.meta.winner.nickname}</Row>
-                        <Row style={{fontSize: 9}}>{match.id}</Row>
-                    </>
-                }
-                description={
-                    <Row justify={"space-between"}>
-                        {/*<Col style={{fontSize: 13}}>Reward: {match.reward.coin}</Col>*/}
-
-                        <Col>
-                            <Avatar size={20} src={coinSVG} alt={"coin"}/> {match.reward.coin}
-                        </Col>
-                        <Col style={{fontSize: 12}}>{format(match.date.start, "dd.MM.yyyy HH:mm")}</Col>
-                    </Row>
-                }
-            />
-        </Card>
-    )
-}
+import React, {CSSProperties, useEffect, useRef, useState} from 'react'
+import {ConfigProvider, theme} from "antd"
+import {IMatch} from "../match/Match"
+import {MatchService} from "../../service/MatchService"
+import {HeaderFeedItem} from "./HeaderFeedItem"
 
 
 const HeaderFeed = () => {
@@ -73,11 +18,9 @@ const HeaderFeed = () => {
         maxWidth: "100",
         whiteSpace: "nowrap",
         height: 170,
-        paddingTop: "20px",
-        paddingBottom: "20px",
-        // marginBottom: 15,
-        // borderBottom: "0.4px solid",
-        // borderBottomColor: token.colorBorder,
+        gap: 40,
+        padding: "0px 40px",
+        alignItems: "center",
         background: token.colorBgLayout,
     }
 

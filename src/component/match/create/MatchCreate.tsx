@@ -51,7 +51,7 @@ const Title = () => {
                     style={{margin: 0}}
                     type={"secondary"}
                 >
-                    Create Tournament
+                    Create match
                 </Typography.Title>
             </Badge>
         </Row>
