@@ -24,7 +24,8 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
 
         <Card size="small" bordered={false} style={styles}>
             {/*<p>Card content Card content Card content Card content</p>*/}
-            <Divider style={{width: 300, marginBottom: 0}} orientation="right">{"Winner"}</Divider>
+            <Divider className="last_matches" style={{width: 300, marginBottom: 0}}
+                     orientation="right">{match.name.toUpperCase()}</Divider>
 
             <Meta
                 avatar={<Avatar src={match.meta.winner?.avatar}/>}
@@ -44,16 +45,28 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
                             <Col style={{fontSize: 12}}>{format(match.date.start, "dd.MM.yyyy HH:mm")}</Col>
 
                         </Row>
-                        <Row justify="space-between" style={{width: 60}}>
+                        <Row
+                            justify="space-between"
+                            style={{
+                                minWidth: 70
+                                // width: 75,
+                                // width: 75,
+                        }}
+                        >
                             <Col>
                                 <Avatar
-                                    size={20}
+                                    size={25}
                                     src={coinSVG}
                                     alt={"coin"}
                                     style={{marginBottom: 3}}
                                 />
                             </Col>
-                            <Col>
+                            <Col
+                                style={{
+                                    fontSize: 17,
+                                }}
+                            >
+                                {/*{9}*/}
                                 {match.reward.coin}
                             </Col>
                         </Row>

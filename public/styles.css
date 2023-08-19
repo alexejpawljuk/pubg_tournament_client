@@ -6,3 +6,8 @@ html {
 ::-webkit-scrollbar {
     width: 0;
 }
+
+.last_matches {
+    /*font-family: 'Dancing Script', cursive;*/
+    font-family: 'Josefin Sans', sans-serif;
+}

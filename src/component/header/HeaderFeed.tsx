@@ -48,27 +48,28 @@ const HeaderFeed = () => {
                 }
             }}
             >
-                <Divider
-                    orientation={"right"}
-                    style={{
-                        margin: 0,
-                        padding: 0,
-                        fontSize: 18,
-                        background: token.colorBgLayout
-                }}
-                >Last matches</Divider>
+                <Row style={{width: "100%"}}>
+                    <Divider
+                        orientation={"center"}
+                        className="last_matches"
+                        style={{
+                            margin: 0,
+                            padding: 0,
+                            paddingTop: 15,
+                            fontSize: 20,
+                            // fontFamily: "font-family: 'Dancing Script', cursive",
+                            background: token.colorBgLayout
+                        }}
+                    ><span>{"Last matches".toUpperCase()}</span></Divider>
+                </Row>
                 <div
                     onScroll={handleScroll}
                     ref={feedRef}
                     style={styles}
-                >
-
-                    {feed.map((tournament, index) => <HeaderFeedItem match={tournament} index={index} key={index}/>)}
-
+                >{feed.map((tournament, index) => <HeaderFeedItem match={tournament} index={index} key={index}/>)}
                 </div>
             </ConfigProvider>
         </Row>
-
     )
 }
 
