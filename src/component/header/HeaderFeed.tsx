@@ -3,6 +3,7 @@ import {Avatar, Card, Col, ConfigProvider, Divider, Row, theme} from "antd"
 import tournament, {IMatch} from "../match/Match";
 import {MatchService} from "../../service/MatchService";
 import Meta from "antd/es/card/Meta";
+import coinSVG from "../../image/svg/coins.svg"
 import {format} from "date-fns";
 
 
@@ -45,9 +46,12 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
                 }
                 description={
                     <Row justify={"space-between"}>
-                        <Col style={{fontSize: 13}}>Reward: {match.reward.coin}</Col>
-                        <Col style={{fontSize: 12}}>{format(match.date.start, "dd.MM.yyyy HH:mm")}</Col>
+                        {/*<Col style={{fontSize: 13}}>Reward: {match.reward.coin}</Col>*/}
 
+                        <Col>
+                            <Avatar size={20} src={coinSVG} alt={"coin"}/> {match.reward.coin}
+                        </Col>
+                        <Col style={{fontSize: 12}}>{format(match.date.start, "dd.MM.yyyy HH:mm")}</Col>
                     </Row>
                 }
             />
@@ -72,8 +76,8 @@ const HeaderFeed = () => {
         paddingTop: "20px",
         paddingBottom: "20px",
         // marginBottom: 15,
-        borderBottom: "0.4px solid",
-        borderBottomColor: token.colorBorder,
+        // borderBottom: "0.4px solid",
+        // borderBottomColor: token.colorBorder,
         background: token.colorBgLayout,
     }
 
