@@ -7,14 +7,14 @@ const RootLayoutContentHeader: FC<{children: ReactNode}> = ({children}) => {
 
     const styles: CSSProperties = {
         background: colorBgContainer,
-        height: 200,
+        height: 240,
+        // height: 200,
         padding: 0,
     }
 
     return (
         <Header style={styles}>
             <Row
-                // justify="space-around"
                 align="middle"
                 style={{width: "100%", height: "100%"}}
             >{children}</Row>

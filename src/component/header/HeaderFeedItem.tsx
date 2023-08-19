@@ -15,9 +15,6 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
 
     const styles: CSSProperties = {
         width: 350,
-        // paddingBottom: 15,
-        // marginRight: 20,
-        // marginLeft: 20,
         background: token.colorBgLayout
     }
 

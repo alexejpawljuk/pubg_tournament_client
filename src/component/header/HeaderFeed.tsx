@@ -1,5 +1,5 @@
 import React, {CSSProperties, useEffect, useRef, useState} from 'react'
-import {ConfigProvider, theme} from "antd"
+import {ConfigProvider, Divider, Row, theme} from "antd"
 import {IMatch} from "../match/Match"
 import {MatchService} from "../../service/MatchService"
 import {HeaderFeedItem} from "./HeaderFeedItem"
@@ -17,7 +17,7 @@ const HeaderFeed = () => {
         width: "max-content",
         maxWidth: "100",
         whiteSpace: "nowrap",
-        height: 170,
+        height: 180,
         gap: 40,
         padding: "0px 40px",
         alignItems: "center",
@@ -41,16 +41,33 @@ const HeaderFeed = () => {
 
     return (
 
-        <div
-            onScroll={handleScroll}
-            ref={feedRef}
-            style={styles}
-        >
-            <ConfigProvider
-                theme={{token: {colorBgLayout: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.2) 100%)"}}}>
-                {feed.map((tournament, index) => <HeaderFeedItem match={tournament} index={index} key={index}/>)}
+        <Row>
+            <ConfigProvider theme={{
+                token: {
+                    colorBgLayout: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.2) 100%)",
+                }
+            }}
+            >
+                <Divider
+                    orientation={"right"}
+                    style={{
+                        margin: 0,
+                        padding: 0,
+                        fontSize: 18,
+                        background: token.colorBgLayout
+                }}
+                >Last matches</Divider>
+                <div
+                    onScroll={handleScroll}
+                    ref={feedRef}
+                    style={styles}
+                >
+
+                    {feed.map((tournament, index) => <HeaderFeedItem match={tournament} index={index} key={index}/>)}
+
+                </div>
             </ConfigProvider>
-        </div>
+        </Row>
 
     )
 }
