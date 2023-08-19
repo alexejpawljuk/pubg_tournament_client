@@ -1,5 +1,5 @@
 import React, {CSSProperties} from 'react'
-import Tournament from "../tournament/Tournament"
+import Match from "../match/Match"
 import {theme} from "antd"
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
     return (
 
         <div style={styles}>
-            <Tournament/>
+            <Match/>
         </div>
 
     )

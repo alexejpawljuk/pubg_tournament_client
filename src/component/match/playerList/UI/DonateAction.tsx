@@ -1,7 +1,7 @@
 import React, {CSSProperties, FC} from 'react'
 import {PlayerDisplayWrap} from "../PlayerDisplayWrap"
 import {DonateButton} from "./DonateButton"
-import {IPlayer} from "../../Tournament"
+import {IPlayer} from "../../Match"
 import {theme} from "antd";
 
 interface IDonateAction {

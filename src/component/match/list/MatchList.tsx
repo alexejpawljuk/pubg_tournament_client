@@ -1,19 +1,19 @@
 import React, {FC, TransitionStartFunction, useEffect, useRef, useState} from 'react'
 import {Avatar, Col, Rate, Row, Tag, TagProps, theme} from 'antd'
-import {ITournament} from "../Tournament"
+import {IMatch} from "../Match"
 import {format, isToday, isTomorrow} from "date-fns"
 import coinSVG from "../../../image/svg/coins.svg"
 import {StarFilled} from "@ant-design/icons"
 import {FaPeopleGroup} from "react-icons/fa6"
 import ticketSVG from "../../../image/svg/ticket.svg"
-import TournamentDetails from "../details/TournamentDetails"
+import MatchDetails from "../details/MatchDetails"
 import {ModalPopupService} from "../../../service/ModelPopupService"
 import ListLoadMore from "../../ListLoadMore"
 import {ModalDrawerService} from "../../../service/ModalDrawerService"
 
 
-interface ITournamentScrollingList {
-    tournamentList: ITournament[]
+interface IMatchScrollingList {
+    matchList: IMatch[]
     transition: {
         startTransition: TransitionStartFunction
         isPending: boolean
@@ -68,7 +68,7 @@ const RankDisplay: FC<IRankDisplay> = ({value}) => {
     )
 }
 
-const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transition}) => {
+const MatchList: FC<IMatchScrollingList> = ({matchList, transition}) => {
 
     const iter = useRef(0)
     useEffect(() => {
@@ -86,11 +86,11 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
     const iconSize = 17
 
 
-    const onSelectTournament = (tournament: ITournament) => {
-        console.log("Select tournament:", tournament)
+    const onSelectMatch = (match: IMatch) => {
+        console.log("Select match:", match)
         modalPopupService.setOpenModal(prevState => ({
             openModal: true,
-            children: <TournamentDetails tournament={tournament}/>,
+            children: <MatchDetails tournament={match}/>,
             props: {
                 width: 700,
             }
@@ -114,13 +114,13 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
 
 
     return (
-        <ListLoadMore<ITournament>
+        <ListLoadMore<IMatch>
             transition={{isPending, startTransition}}
-            data={tournamentList}
+            data={matchList}
             listProps={{
                 renderItem: item => (
                     <Row
-                        onClick={() => onSelectTournament(item)}
+                        onClick={() => onSelectMatch(item)}
                         align="middle"
                         justify="space-around"
                         style={stylesRow}
@@ -177,4 +177,4 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
     )
 }
 
-export default TournamentList
+export default MatchList

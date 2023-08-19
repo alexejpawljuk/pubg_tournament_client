@@ -1,27 +1,27 @@
 import {Row, theme} from "antd"
 import React, {CSSProperties, FC, TransitionStartFunction, useRef, useState} from "react"
-import {ITournamentNameType, ITournamentType} from "../Tournament"
+import {IMatchNameType, IMatchType} from "../Match"
 import {useLogger} from "../../../hook/useLogger"
 import {CloseCircleOutlined} from "@ant-design/icons"
-import {TournamentSortByName} from "./UI/TournamentSortByName"
-import {TournamentCreateButton} from "./UI/TournamentCreateButton"
-import {TournamentSearch} from "./UI/TournamentSearch"
-import {TournamentSortByType} from "./UI/TournamentSortByType"
+import {MatchSortByName} from "./UI/MatchSortByName"
+import {MatchCreateButton} from "./UI/MatchCreateButton"
+import {MatchSearch} from "./UI/MatchSearch"
+import {MatchSortByType} from "./UI/MatchSortByType"
 import {useTournamentControlPanel} from "../../../hook/useTournamentControlPanel"
 
 export interface IFilterOptions {
-    name: ITournamentNameType | "all"
-    type: ITournamentType | "all"
+    name: IMatchNameType | "all"
+    type: IMatchType | "all"
 }
 
-interface ITournamentControlPanel {
+interface IMatchControlPanel {
     transition: {
         startTransition: TransitionStartFunction
         isPending: boolean
     }
 }
 
-const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
+const MatchControlPanel: FC<IMatchControlPanel> = ({transition}) => {
     useLogger("Render control panel")
     const {token} = theme.useToken()
 
@@ -58,21 +58,21 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     return (
         <Row wrap>
             <Row justify="space-evenly" style={{...stylesRow}}>
-                <TournamentCreateButton
+                <MatchCreateButton
                     props={{
                         onClick: onTournamentCreate
                     }}/>
-                <TournamentSortByName props={{
+                <MatchSortByName props={{
                     disabled: isPending,
                     value: filterOptionsRef.current.name.toLowerCase(),
                     onChange: onChangeFilterOption,
                 }}/>
-                <TournamentSortByType props={{
+                <MatchSortByType props={{
                     disabled: isPending,
                     value: filterOptionsRef.current.type.toLowerCase(),
                     onChange: onChangeFilterOption,
                 }}/>
-                <TournamentSearch
+                <MatchSearch
                     props={{
                         allowClear: {
                             clearIcon: <CloseCircleOutlined onClick={onInputClear}/>,
@@ -84,7 +84,7 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
                         onSearch
                     }}
                 />
-                {/*<TournamentSortByData*/}
+                {/*<MatchSortByData*/}
                 {/*    props={{*/}
                 {/*        disabled: isPending,*/}
                 {/*        onChange: onDate,*/}
@@ -95,4 +95,4 @@ const TournamentControlPanel: FC<ITournamentControlPanel> = ({transition}) => {
     )
 }
 
-export default TournamentControlPanel
+export default MatchControlPanel

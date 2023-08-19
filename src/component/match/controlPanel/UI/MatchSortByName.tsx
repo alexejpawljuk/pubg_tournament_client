@@ -1,16 +1,16 @@
 import React, {FC} from "react"
 import {Radio, RadioGroupProps} from "antd"
-import {TournamentControlItemWrap} from "../TournamentControlItemWrap"
+import {MatchControlItemWrap} from "../MatchControlItemWrap"
 
 
-interface ITournamentSortByName {
+interface IMatchSortByName {
     props: RadioGroupProps
 }
 
-const TournamentSortByName: FC<ITournamentSortByName> = ({props}) => {
+const MatchSortByName: FC<IMatchSortByName> = ({props}) => {
 
     return (
-        <TournamentControlItemWrap>
+        <MatchControlItemWrap>
             <Radio.Group
                 defaultValue="all"
                 size="small"
@@ -22,8 +22,8 @@ const TournamentSortByName: FC<ITournamentSortByName> = ({props}) => {
                 <Radio.Button value="custom">custom</Radio.Button>
                 <Radio.Button value="sponsorship">sponsorship</Radio.Button>
             </Radio.Group>
-        </TournamentControlItemWrap>
+        </MatchControlItemWrap>
     )
 }
 
-export {TournamentSortByName}
+export {MatchSortByName}

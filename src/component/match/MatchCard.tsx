@@ -1,7 +1,7 @@
 import {Card} from "antd"
 
 
-const TournamentCard = () => {
+const MatchCard = () => {
 
     const gridStyle: React.CSSProperties = {
         width: '25%',
@@ -20,4 +20,4 @@ const TournamentCard = () => {
     )
 }
 
-export default TournamentCard
+export default MatchCard

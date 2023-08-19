@@ -1,15 +1,15 @@
 import {Radio, RadioGroupProps} from "antd"
 import React, {FC} from "react"
-import {TournamentControlItemWrap} from "../TournamentControlItemWrap"
+import {MatchControlItemWrap} from "../MatchControlItemWrap"
 
-interface ITournamentSortByType {
+interface IMatchSortByType {
     props: RadioGroupProps
 }
 
 
-const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
+const MatchSortByType: FC<IMatchSortByType> = ({props}) => {
     return (
-        <TournamentControlItemWrap>
+        <MatchControlItemWrap>
             <Radio.Group
                 defaultValue="all"
                 size="small"
@@ -21,8 +21,8 @@ const TournamentSortByType: FC<ITournamentSortByType> = ({props}) => {
                 <Radio.Button value="duo">duo</Radio.Button>
                 <Radio.Button value="squad">squad</Radio.Button>
             </Radio.Group>
-        </TournamentControlItemWrap>
+        </MatchControlItemWrap>
     )
 }
 
-export {TournamentSortByType}
+export {MatchSortByType}

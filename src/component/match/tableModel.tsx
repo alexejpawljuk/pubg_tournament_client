@@ -9,7 +9,7 @@ import {LiteralUnion} from "antd/es/_util/type"
 import {PresetColorType, PresetStatusColorType} from "antd/es/_util/colors"
 import {format, isToday, isTomorrow} from "date-fns"
 import {LoginOutlined, StarFilled} from "@ant-design/icons"
-import {ITournament} from "./Tournament";
+import {IMatch} from "./Match";
 
 interface IDateDisplay {
     props?: TagProps
@@ -21,7 +21,7 @@ interface IRankDisplay {
 }
 
 interface IJoinGameButton {
-    tournament: ITournament
+    match: IMatch
     style?: CSSProperties
 }
 
@@ -35,7 +35,7 @@ const DateDisplay: FC<IDateDisplay> = ({date, props}) => {
     return <Tag color={color} {...props}>{format(date, "dd.MM.yyyy hh:mm")}</Tag>
 }
 
-const JoinGameButton: FC<IJoinGameButton> = ({tournament, style}) => {
+const JoinGameButton: FC<IJoinGameButton> = ({match, style}) => {
     const {token: {colorBgLayout}} = theme.useToken()
 
     return <Button
@@ -45,7 +45,7 @@ const JoinGameButton: FC<IJoinGameButton> = ({tournament, style}) => {
         type="default"
         onClick={e => {
             e.stopPropagation()
-            console.log("Click on JOIN", tournament)
+            console.log("Click on JOIN", match)
         }}
     >
         JOIN
@@ -88,7 +88,7 @@ const PremiumDisplay: FC<{ children: ReactNode }> = ({children}) => {
     )
 }
 
-export const tournamentModel: ColumnsType<ITournament> = [
+export const tournamentModel: ColumnsType<IMatch> = [
     {
         key: 'name',
         title: 'Name',
@@ -225,6 +225,6 @@ export const tournamentModel: ColumnsType<ITournament> = [
         dataIndex: "action",
         align: "center",
         width: 70,
-        render: (value, record) => <JoinGameButton tournament={record} style={{fontSize}}/>
+        render: (value, record) => <JoinGameButton match={record} style={{fontSize}}/>
     }
 ]

@@ -1,13 +1,13 @@
-import React, {CSSProperties, FC} from "react";
-import {Button, ButtonProps, theme} from "antd";
-import {TournamentControlItemWrap} from "../TournamentControlItemWrap";
+import React, {CSSProperties, FC} from "react"
+import {Button, ButtonProps, theme} from "antd"
+import {MatchControlItemWrap} from "../MatchControlItemWrap"
 import {FormOutlined} from "@ant-design/icons"
 
-interface ITournamentCreateButton {
+interface IMatchCreateButton {
     props: ButtonProps
 }
 
-const TournamentCreateButton: FC<ITournamentCreateButton> = ({props}) => {
+const MatchCreateButton: FC<IMatchCreateButton> = ({props}) => {
     const {token: {colorBgContainer}} = theme.useToken()
     const styles: CSSProperties = {
         background: "orange",
@@ -15,7 +15,7 @@ const TournamentCreateButton: FC<ITournamentCreateButton> = ({props}) => {
     }
 
     return (
-        <TournamentControlItemWrap>
+        <MatchControlItemWrap>
             <Button
                 style={styles}
                 icon={<FormOutlined size={16} style={{color: colorBgContainer}}/>}
@@ -23,11 +23,11 @@ const TournamentCreateButton: FC<ITournamentCreateButton> = ({props}) => {
                 {...props}
             >
                 <span style={{color: colorBgContainer}}>
-                    create tournament
+                    create match
                 </span>
             </Button>
-        </TournamentControlItemWrap>
+        </MatchControlItemWrap>
     )
 }
 
-export {TournamentCreateButton}
+export {MatchCreateButton}

@@ -1,17 +1,17 @@
 import React, {CSSProperties, FC, ReactNode, useEffect, useRef, useState} from 'react'
-import {Avatar, Card, Col, ConfigProvider, Divider, theme} from "antd"
-import tournament, {ITournament} from "../tournament/Tournament";
-import {TournamentService} from "../../service/TournamentService";
+import {Avatar, Card, Col, ConfigProvider, Divider, Row, theme} from "antd"
+import tournament, {IMatch} from "../match/Match";
+import {MatchService} from "../../service/MatchService";
 import Meta from "antd/es/card/Meta";
 import {format} from "date-fns";
 
 
 interface IHeaderFeedItem {
-    tournament: ITournament
+    match: IMatch
     index: number
 }
 
-const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
+const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
     const {token} = theme.useToken()
 
     const styles: CSSProperties = {
@@ -22,7 +22,7 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
         background: token.colorBgLayout
     }
 
-    if (!tournament.meta.winner) return null
+    if (!match.meta.winner) return null
 
     return (
         // <div style={styles}>
@@ -34,11 +34,22 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
 
         <Card size="small" bordered={false} style={styles}>
             {/*<p>Card content Card content Card content Card content</p>*/}
-            <Divider style={{width: 300, margin: 0}} orientation="right">{tournament.type.toUpperCase()}</Divider>
+            <Divider style={{width: 300, margin: 0}} orientation="right">{"Winner"}</Divider>
             <Meta
-                avatar={<Avatar src={tournament.meta.winner?.avatar}/>}
-                title={tournament.meta.winner.nickname}
-                description={format(tournament.date.start, "dd.mm.yyyy HH:mm")}
+                avatar={<Avatar src={match.meta.winner?.avatar}/>}
+                title={
+                    <>
+                        <Row>{match.meta.winner.nickname}</Row>
+                        <Row style={{fontSize: 9}}>{match.id}</Row>
+                    </>
+                }
+                description={
+                    <Row justify={"space-between"}>
+                        <Col style={{fontSize: 13}}>Reward: {match.reward.coin}</Col>
+                        <Col style={{fontSize: 12}}>{format(match.date.start, "dd.MM.yyyy HH:mm")}</Col>
+
+                    </Row>
+                }
             />
         </Card>
     )
@@ -48,8 +59,8 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
 const HeaderFeed = () => {
     const {token} = theme.useToken()
     const feedRef = useRef<HTMLDivElement>(null)
-    const [feed, setFeed] = useState<ITournament[]>([])
-    const tournamentService = TournamentService()
+    const [feed, setFeed] = useState<IMatch[]>([])
+    const tournamentService = MatchService()
 
     const styles: CSSProperties = {
         display: "flex",
@@ -90,7 +101,7 @@ const HeaderFeed = () => {
         >
             <ConfigProvider
                 theme={{token: {colorBgLayout: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,99,121,0) 0%, rgba(0,212,255,0.2) 100%)"}}}>
-                {feed.map((tournament, index) => <HeaderFeedItem tournament={tournament} index={index} key={index}/>)}
+                {feed.map((tournament, index) => <HeaderFeedItem match={tournament} index={index} key={index}/>)}
             </ConfigProvider>
         </div>
 

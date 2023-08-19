@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, ReactNode, useEffect, useState} from 'react'
+import React, {FC, ReactNode, useEffect, useState} from 'react'
 import {
     Badge,
     Button,
@@ -13,15 +13,15 @@ import {InfoCircleOutlined, ShoppingCartOutlined, StarFilled} from "@ant-design/
 import Shop from "../../shop/Shop"
 import {IModalPopupService} from "../../../service/ModelPopupService"
 import AuthFrom from "../../AuthForm"
-import {ITournament, ITournamentType} from "../Tournament"
+import {IMatch, IMatchType} from "../Match"
 import {IoCreateOutline} from "react-icons/io5"
 
 
-interface ITournamentCreate {
+interface IMatchCreate {
 
 }
 
-type ITournamentProps = Omit<ITournament, "id" | "key" | "reward" | "name" | "members" | "meta" | "donation">
+type IMatchCreateProps = Omit<IMatch, "id" | "key" | "reward" | "name" | "members" | "meta" | "donation">
 
 
 function getSelectItem<ValueType>(value: ValueType, label: ReactNode) {
@@ -35,7 +35,7 @@ function getStepItem(title: string, content: ReactNode) {
 
 const Title = () => {
     const {token: {colorText}} = theme.useToken()
-    const info = "Here is a description of how to create a tournament."
+    const info = "Here is a description of how to create a match."
 
     return (
         <Row justify="center">
@@ -58,10 +58,10 @@ const Title = () => {
     )
 }
 
-const TournamentCreateOptions = () => {
+const MatchCreateOptions = () => {
     const {token} = theme.useToken()
     const [rang, setRang] = useState<number>(0)
-    const [props, setProps] = useState<ITournamentProps>({
+    const [props, setProps] = useState<IMatchCreateProps>({
         type: "solo",
         price: {
             coin: 10,
@@ -79,7 +79,7 @@ const TournamentCreateOptions = () => {
 
     const [current, setCurrent] = useState(0)
 
-    const onSelectTournamentType = (e: ITournamentType) => {
+    const onSelectMatchType = (e: IMatchType) => {
         setProps(prevState => ({...prevState, type: e}))
     }
 
@@ -101,12 +101,12 @@ const TournamentCreateOptions = () => {
         defaultValue={props.type}
         size={"small"}
         style={{width: 120}}
-        onChange={onSelectTournamentType}
+        onChange={onSelectMatchType}
         placeholder="select"
         options={[
-            getSelectItem<ITournamentType>("solo", "solo"),
-            getSelectItem<ITournamentType>("duo", "duo"),
-            getSelectItem<ITournamentType>("squad", "squad"),
+            getSelectItem<IMatchType>("solo", "solo"),
+            getSelectItem<IMatchType>("duo", "duo"),
+            getSelectItem<IMatchType>("squad", "squad"),
         ]}
     />
 
@@ -206,7 +206,7 @@ const TournamentCreateOptions = () => {
     )
 }
 
-const TournamentCreate: FC<ITournamentCreate> = () => {
+const MatchCreate: FC<IMatchCreate> = () => {
     const {token: {colorBorder}} = theme.useToken()
 
 
@@ -217,7 +217,7 @@ const TournamentCreate: FC<ITournamentCreate> = () => {
         return (
             <>
                 <Title/>
-                <TournamentCreateOptions/>
+                <MatchCreateOptions/>
             </>
         )
 
@@ -233,4 +233,4 @@ const TournamentCreate: FC<ITournamentCreate> = () => {
         )
 }
 
-export default TournamentCreate
+export default MatchCreate

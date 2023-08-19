@@ -1,17 +1,17 @@
 import React, {ChangeEvent, FC, useEffect, useState, useTransition} from "react"
-import {IPlayer, ITournament} from "../Tournament"
+import {IPlayer, IMatch} from "../Match"
 import {Col, Row, theme} from "antd"
-import {TournamentPlayerList} from "../playerList/TournamentPlayerList"
+import {MatchPlayerList} from "../playerList/MatchPlayerList"
 import Search from "antd/es/input/Search"
-import TournamentInfoDisplay from "./TournamentInfoDisplay"
-import TournamentJoinButton from "./TournamentJoinButton"
+import MatchInfoDisplay from "./MatchInfoDisplay"
+import MatchJoinButton from "./MatchJoinButton"
 
-interface ITournamentInfo {
-    tournament: ITournament
+interface IMatchInfo {
+    tournament: IMatch
 }
 
 
-const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
+const MatchDetails: FC<IMatchInfo> = ({tournament}) => {
     const {token} = theme.useToken()
     // const modalPopup = useModalPopup()
     const [isPending, startTransition] = useTransition()
@@ -49,9 +49,9 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
             >
 
                 <Col style={{marginBottom: 10,}}>
-                    <TournamentInfoDisplay
-                        tournament={tournament}
-                        setTournamentStarted={setTournamentStarted}
+                    <MatchInfoDisplay
+                        match={tournament}
+                        setMatchStarted={setTournamentStarted}
                     />
                 </Col>
 
@@ -64,12 +64,12 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
                     />
 
 
-                    <TournamentPlayerList
+                    <MatchPlayerList
                         players={playerList}
                         isPending={isPending}
                         startTransition={startTransition}
-                        tournamentStarted={tournamentStarted}
-                        tournament={tournament}
+                        matchStarted={tournamentStarted}
+                        match={tournament}
                         containerProps={{
                             style: {
                                 height: 230,
@@ -97,7 +97,7 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
             </Row>
 
             <Row justify="space-between" style={{width: "100%"}}>
-                <TournamentJoinButton
+                <MatchJoinButton
                     buttonProps={{
                         disabled: tournamentStarted
                     }}
@@ -112,4 +112,4 @@ const TournamentDetails: FC<ITournamentInfo> = ({tournament}) => {
     )
 }
 
-export default TournamentDetails
+export default MatchDetails

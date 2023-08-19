@@ -1,7 +1,7 @@
 import {Card, Row} from "antd"
 import React, {FC} from "react"
 import PremiumDisplay from "./PremiumDisplay"
-import {IPlayer} from "../../tournament/Tournament"
+import {IPlayer} from "../../match/Match"
 import {NicknameDisplay} from "./NicknameDisplay"
 import {RankDisplay} from "./RankDisplay"
 import {AvatarDisplay} from "./AvatarDisplay"

@@ -1,11 +1,11 @@
 import React, {CSSProperties, FC, ReactNode} from "react";
 import {Col} from "antd"
 
-interface ITournamentControlItemWrap {
+interface IMatchControlItemWrap {
     children: ReactNode
 }
 
-const TournamentControlItemWrap: FC<ITournamentControlItemWrap> = ({children}) => {
+const MatchControlItemWrap: FC<IMatchControlItemWrap> = ({children}) => {
     const styles: CSSProperties = {
         display: "flex",
         justifyContent: "center",
@@ -18,4 +18,4 @@ const TournamentControlItemWrap: FC<ITournamentControlItemWrap> = ({children}) =
     )
 }
 
-export {TournamentControlItemWrap}
+export {MatchControlItemWrap}

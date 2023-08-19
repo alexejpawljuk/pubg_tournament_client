@@ -1,13 +1,13 @@
 import React, {FC} from 'react'
-import {Button, ButtonProps, Popconfirm, PopconfirmProps, theme} from "antd"
+import {Button, ButtonProps, PopconfirmProps, theme} from "antd"
 import {LoginOutlined} from "@ant-design/icons"
 
-interface ITournamentJoinButton {
+interface IMatchJoinButton {
     buttonProps: ButtonProps
     popconfirmProps: PopconfirmProps
 }
 
-const TournamentJoinButton: FC<ITournamentJoinButton> = ({popconfirmProps, buttonProps}) => {
+const MatchJoinButton: FC<IMatchJoinButton> = ({popconfirmProps, buttonProps}) => {
     const {token} = theme.useToken()
 
     return (
@@ -28,4 +28,4 @@ const TournamentJoinButton: FC<ITournamentJoinButton> = ({popconfirmProps, butto
     )
 }
 
-export default TournamentJoinButton
+export default MatchJoinButton

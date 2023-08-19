@@ -1,4 +1,4 @@
-import {IPlayer} from "../component/tournament/Tournament"
+import {IPlayer} from "../component/match/Match"
 import {uid} from "uid"
 
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)

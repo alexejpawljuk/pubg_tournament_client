@@ -1,8 +1,8 @@
 import React, {ChangeEvent, Dispatch, SetStateAction, TransitionStartFunction} from "react"
-import {TypeDonateInput} from "../component/tournament/playerList/TournamentPlayerList"
-import {IDonate, IPlayer, ITournament} from "../component/tournament/Tournament"
+import {TypeDonateInput} from "../component/match/playerList/MatchPlayerList"
+import {IDonate, IPlayer, IMatch} from "../component/match/Match"
 import {ModalPopupService} from "../service/ModelPopupService"
-import {PlayerProfile} from "../component/tournament/playerList/PlayerProfile"
+import {PlayerProfile} from "../component/match/playerList/PlayerProfile"
 
 
 interface IUseTournamentControlPanelProps {
@@ -10,7 +10,7 @@ interface IUseTournamentControlPanelProps {
     setShowDonate: Dispatch<SetStateAction<IPlayer | null>>
     setDonateLoading: Dispatch<SetStateAction<boolean>>
     startTransition: TransitionStartFunction
-    tournament: ITournament
+    match: IMatch
     donateInput: TypeDonateInput
 }
 
@@ -35,7 +35,7 @@ export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps):
         setShowDonate,
         setDonateLoading,
         startTransition,
-        tournament,
+        match,
         donateInput,
     } = props
     const fontSize = 11
@@ -66,7 +66,7 @@ export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps):
                 amount: donateInput.value,
                 player: player,
                 from: {} as IPlayer,
-                tournament,
+                match,
                 date: new Date()
             }
             console.log("Donate confirmed:", donate)

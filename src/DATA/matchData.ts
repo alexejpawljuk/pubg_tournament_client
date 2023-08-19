@@ -1,5 +1,5 @@
 import {uid} from "uid"
-import {IPlayer, ITournament, ITournamentNameType, ITournamentType} from "../component/tournament/Tournament"
+import {IPlayer, IMatch, IMatchNameType, IMatchType} from "../component/match/Match"
 import {isAfter} from "date-fns"
 import {playerListData} from "./playerListData";
 
@@ -7,13 +7,13 @@ import {playerListData} from "./playerListData";
 const getRandomNumber = (factor: number): number => Math.floor(Math.random() * factor)
 const getRandomFloat = (factor: number): number => Math.random() * factor
 
-const getRandomTournamentType = (): ITournamentType => {
-    const tournamentTypes: ITournamentType[] = ["solo", "duo", "squad"]
+const getRandomTournamentType = (): IMatchType => {
+    const tournamentTypes: IMatchType[] = ["solo", "duo", "squad"]
     return tournamentTypes[getRandomNumber(tournamentTypes.length)]
 }
 
-const getRandomTournamentName = (): ITournamentNameType => {
-    const tournamentNames: ITournamentNameType[] = ["daily", "custom", "sponsorship"]
+const getRandomTournamentName = (): IMatchNameType => {
+    const tournamentNames: IMatchNameType[] = ["daily", "custom", "sponsorship"]
     return tournamentNames[getRandomNumber(tournamentNames.length)]
 }
 
@@ -291,14 +291,14 @@ const playerList: IPlayer[] = [
 ];
 
 
-const list = new Promise<{ listSortedByDate: ITournament[], historySortedByDate: ITournament[] }>((resolve) => {
-    const list: ITournament[] = []
-    const history: ITournament[] = []
+const list = new Promise<{ listSortedByDate: IMatch[], historySortedByDate: IMatch[] }>((resolve) => {
+    const list: IMatch[] = []
+    const history: IMatch[] = []
 
     for (let i = 0; i < 100; i++) {
         // const playerList: IPlayer[] = []
 
-        const item: ITournament = {
+        const item: IMatch = {
             id: uid(),
             name: getRandomTournamentName(),
             type: getRandomTournamentType(),
@@ -358,7 +358,7 @@ const list = new Promise<{ listSortedByDate: ITournament[], historySortedByDate:
     }
 
     const listSortedByDate = list.sort((a, b) => a.date.start.getTime() - b.date.start.getTime())
-    const historySortedByDate = history.sort((a, b) => a.date.start.getTime() - b.date.start.getTime())
+    const historySortedByDate = history.sort((a, b) => b.date.start.getTime() - a.date.start.getTime())
     resolve({listSortedByDate, historySortedByDate})
 })
 

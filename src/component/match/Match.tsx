@@ -1,12 +1,12 @@
-import React, {CSSProperties, useEffect, useTransition} from 'react'
-import TournamentControlPanel from "./controlPanel/TournamentControlPanel"
-import {TournamentService} from "../../service/TournamentService"
-import TournamentList from "./list/TournamentList"
-import {ConfigProvider, theme} from "antd";
+import MatchControlPanel from "./controlPanel/MatchControlPanel"
+import {MatchService} from "../../service/MatchService"
+import React, {useEffect, useTransition} from 'react'
+import MatchList from "./list/MatchList"
+import {theme} from "antd"
 
 
-export type ITournamentNameType = "daily" | "custom" | "sponsorship"
-export type ITournamentType = "solo" | "duo" | "squad"
+export type IMatchNameType = "daily" | "custom" | "sponsorship"
+export type IMatchType = "solo" | "duo" | "squad"
 
 
 export interface IDonate {
@@ -14,7 +14,7 @@ export interface IDonate {
     from: IPlayer
     amount: string
     date: Date
-    tournament: ITournament
+    match: IMatch
 }
 
 export interface IPlayer {
@@ -27,11 +27,11 @@ export interface IPlayer {
     experience: number
 }
 
-export interface ITournament {
+export interface IMatch {
     key?: string
     id: string
-    name: ITournamentNameType
-    type: ITournamentType
+    name: IMatchNameType
+    type: IMatchType
     members: {
         max: number
         alreadyRegistered: number
@@ -62,14 +62,14 @@ export interface ITournament {
     }
 }
 
-const Tournament = () => {
+const Match = () => {
     const {token} = theme.useToken()
-    const {tournamentList, tournamentFetch} = TournamentService()
+    const {matchList, matchFetch} = MatchService()
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
         startTransition(() => {
-            tournamentFetch().catch(console.log)
+            matchFetch().catch(console.log)
         })
     }, [])
 
@@ -78,15 +78,15 @@ const Tournament = () => {
         <div style={{
             background: token.colorBgLayout
         }}>
-            <TournamentControlPanel
+            <MatchControlPanel
                 transition={{isPending, startTransition}}
             />
-            <TournamentList
-                tournamentList={tournamentList}
+            <MatchList
+                matchList={matchList}
                 transition={{isPending, startTransition}}
             />
         </div>
     )
 }
 
-export default Tournament
+export default Match

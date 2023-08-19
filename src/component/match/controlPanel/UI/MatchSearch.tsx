@@ -1,29 +1,29 @@
 import React, {CSSProperties, FC} from "react"
-import {TournamentControlItemWrap} from "../TournamentControlItemWrap"
+import {MatchControlItemWrap} from "../MatchControlItemWrap"
 import Search from "antd/es/input/Search"
 import {SearchProps} from "antd/lib/input"
 
 
-interface ITournamentSearch {
+interface IMatchSearch {
     props: SearchProps
 }
 
-const TournamentSearch: FC<ITournamentSearch> = ({props}) => {
+const MatchSearch: FC<IMatchSearch> = ({props}) => {
     const styles: CSSProperties = {
         width: 230,
     }
 
     return (
-        <TournamentControlItemWrap>
+        <MatchControlItemWrap>
             <Search
-                placeholder="Tournament search by ID:"
+                placeholder="search match by ID:"
                 size="small"
                 style={styles}
                 enterButton
                 {...props}
             />
-        </TournamentControlItemWrap>
+        </MatchControlItemWrap>
     )
 }
 
-export {TournamentSearch}
+export {MatchSearch}

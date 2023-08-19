@@ -1,6 +1,6 @@
 import React, {CSSProperties, FC} from 'react'
 import ProfileCard from "../../profile/card/ProfileCard"
-import {IPlayer} from "../Tournament"
+import {IPlayer} from "../Match"
 import {Row, theme} from "antd"
 
 

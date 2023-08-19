@@ -1,5 +1,5 @@
 import {create} from "zustand"
-import {IPlayer} from "../component/tournament/Tournament"
+import {IPlayer} from "../component/match/Match"
 import {playerListData} from "../DATA/playerListData"
 
 

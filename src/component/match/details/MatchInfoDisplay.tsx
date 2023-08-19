@@ -1,18 +1,18 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {ITournament} from "../Tournament";
-import {Divider, Rate, theme} from "antd";
-import Countdown from "antd/es/statistic/Countdown";
-import {format} from "date-fns";
-import {StarFilled} from "@ant-design/icons";
+import {IMatch} from "../Match"
+import {Divider, Rate, theme} from "antd"
+import Countdown from "antd/es/statistic/Countdown"
+import {format} from "date-fns"
+import {StarFilled} from "@ant-design/icons"
 
-interface ITournamentInfoDisplay {
-    tournament: ITournament
-    setTournamentStarted: Dispatch<SetStateAction<boolean>>
+interface IMatchInfoDisplay {
+    match: IMatch
+    setMatchStarted: Dispatch<SetStateAction<boolean>>
 }
 
-const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTournamentStarted}) => {
+const MatchInfoDisplay: FC<IMatchInfoDisplay> = ({match, setMatchStarted}) => {
     const {token} = theme.useToken()
-    const {type, id, name, date, condition, price, reward, members, donation} = tournament
+    const {type, id, name, date, condition, price, reward, members, donation} = match
 
 
     return (
@@ -29,7 +29,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
         >
             <div style={{}}>
                 <div style={{textAlign: "center"}}>
-                    <Countdown value={date.start.getTime()} onFinish={() => setTournamentStarted(() => true)}/>
+                    <Countdown value={date.start.getTime()} onFinish={() => setMatchStarted(() => true)}/>
                 </div>
                 <div>
                     <Divider style={{margin: "3px 0px",}}
@@ -69,4 +69,4 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
     )
 }
 
-export default TournamentInfoDisplay
+export default MatchInfoDisplay

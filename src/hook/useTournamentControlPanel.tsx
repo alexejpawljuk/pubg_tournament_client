@@ -1,10 +1,10 @@
 import React, {ChangeEvent, Dispatch, MutableRefObject, SetStateAction, TransitionStartFunction} from "react"
-import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
-import TournamentCreateHeader from "../component/tournament/create/TournamentCreateHeader"
-import TournamentCreate from "../component/tournament/create/TournamentCreate"
+import {IFilterOptions} from "../component/match/controlPanel/MatchControlPanel"
+import MatchCreateHeader from "../component/match/create/MatchCreateHeader"
+import MatchCreate from "../component/match/create/MatchCreate"
 import {ModalDrawerService} from "../service/ModalDrawerService"
 import {ModalPopupService} from "../service/ModelPopupService"
-import {TournamentService} from "../service/TournamentService"
+import {MatchService} from "../service/MatchService"
 import {RadioChangeEvent} from "antd"
 
 
@@ -31,7 +31,7 @@ interface IUseTournamentControlPanelReturn {
 export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps): IUseTournamentControlPanelReturn => {
     const modalDrawerService = ModalDrawerService()
     const modalPopupService = ModalPopupService()
-    const tournamentService = TournamentService()
+    const tournamentService = MatchService()
     const {
         setSearchValue,
         startTransition,
@@ -44,7 +44,7 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
             if (e.target.name === "tournament_type") filterOptionsRef.current.type = e.target.value
             setSearchValue(() => "")
             startTransition(() => {
-                tournamentService.tournamentFilterByNameAndType(filterOptionsRef.current)
+                tournamentService.matchFilterByNameAndType(filterOptionsRef.current)
             })
         },
         onSearch(value) {
@@ -53,20 +53,20 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
             filterOptionsRef.current.type = "all"
             setSearchValue(() => value)
             startTransition(() => {
-                tournamentService.tournamentSearch(value)
+                tournamentService.matchSearch(value)
             })
         },
         onInput(e: ChangeEvent<HTMLInputElement>) {
             setSearchValue(() => e.target.value)
             if (e.target.value === "")
                 startTransition(() => {
-                    tournamentService.tournamentToDefault()
+                    tournamentService.matchToDefault()
                 })
         },
         onInputClear() {
             setSearchValue(() => "")
             startTransition(() => {
-                tournamentService.tournamentSearch("")
+                tournamentService.matchSearch("")
             })
         },
         onTournamentCreate() {
@@ -74,9 +74,9 @@ export const useTournamentControlPanel = (props: IUseTournamentControlPanelProps
 
             modalDrawerService.setOpenDrawer(() => ({
                 openDrawer: true,
-                children: <TournamentCreate/>,
+                children: <MatchCreate/>,
                 props: {
-                    extra: <TournamentCreateHeader modalPopup={modalPopupService}/>
+                    extra: <MatchCreateHeader modalPopup={modalPopupService}/>
                 }
             }))
         },

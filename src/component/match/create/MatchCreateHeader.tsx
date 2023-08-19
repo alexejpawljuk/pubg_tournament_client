@@ -5,12 +5,12 @@ import {ShoppingCartOutlined} from "@ant-design/icons"
 import {IModalPopupService} from "../../../service/ModelPopupService"
 
 
-interface ITournamentCreateProps {
+interface IMatchCreateProps {
     props?: ButtonProps
     modalPopup: IModalPopupService.IStore
 }
 
-const TournamentCreateHeader: FC<ITournamentCreateProps> = ({props, modalPopup}) => {
+const MatchCreateHeader: FC<IMatchCreateProps> = ({props, modalPopup}) => {
 
     const onShop = () => {
         modalPopup.setOpenModal(prevState => ({
@@ -32,4 +32,4 @@ const TournamentCreateHeader: FC<ITournamentCreateProps> = ({props, modalPopup})
     )
 }
 
-export default TournamentCreateHeader
+export default MatchCreateHeader

@@ -1,32 +1,32 @@
 import React, {FC, TransitionStartFunction, useEffect, useState} from 'react'
-import {Table} from 'antd'
-import {uid} from "uid"
 import {ModalPopupService} from "../../service/ModelPopupService"
 import {tournamentModel} from "./tableModel"
 import {useLogger} from "../../hook/useLogger"
-import TournamentDetails from "./details/TournamentDetails"
-import {ITournament} from "./Tournament"
+import MatchDetails from "./details/MatchDetails"
+import {IMatch} from "./Match"
+import {Table} from 'antd'
+import {uid} from "uid"
 
 
-interface ITournamentList {
-    tournamentList: ITournament[]
+interface IMatchList {
+    matchTable: IMatch[]
     transition: {
         startTransition: TransitionStartFunction
         isPending: boolean
     }
 }
 
-const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
+const MatchTable: FC<IMatchList> = ({matchTable, transition}) => {
     useLogger("TournamentList render")
     const modalPopupService = ModalPopupService()
     const {isPending, startTransition} = transition
-    const [list, setList] = useState<ITournament[]>([])
+    const [list, setList] = useState<IMatch[]>([])
 
     useEffect(() => {
         startTransition(() => {
-            setList(() => tournamentList)
+            setList(() => matchTable)
         })
-    }, [tournamentList])
+    }, [matchTable])
 
     return (
         <Table
@@ -44,7 +44,7 @@ const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
                     console.log("Click on row:", data)
                     modalPopupService.setOpenModal(prevState => ({
                         openModal: true,
-                        children: <TournamentDetails tournament={data}/>,
+                        children: <MatchDetails tournament={data}/>,
                         props: {
                             width: 1000,
                         }
@@ -55,4 +55,4 @@ const TournamentList: FC<ITournamentList> = ({tournamentList, transition}) => {
     )
 }
 
-export default TournamentList
+export default MatchTable

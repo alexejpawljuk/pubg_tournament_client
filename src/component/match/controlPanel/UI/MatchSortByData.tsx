@@ -1,22 +1,22 @@
 import {DatePicker, DatePickerProps} from "antd"
-import {TournamentControlItemWrap} from "../TournamentControlItemWrap"
+import {MatchControlItemWrap} from "../MatchControlItemWrap"
 import React, {FC} from "react"
 
-interface ITournamentSortByData {
+interface IMatchSortByData {
     props: DatePickerProps
 }
 
-const TournamentSortByData: FC<ITournamentSortByData> = ({props}) => {
+const MatchSortByData: FC<IMatchSortByData> = ({props}) => {
     return (
-        <TournamentControlItemWrap>
+        <MatchControlItemWrap>
             <DatePicker
                 size="small"
                 style={{width: 231}}
                 placeholder="Select date"
                 {...props}
             />
-        </TournamentControlItemWrap>
+        </MatchControlItemWrap>
     );
 };
 
-export default TournamentSortByData
+export default MatchSortByData

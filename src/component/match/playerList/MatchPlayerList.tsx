@@ -1,5 +1,5 @@
 import React, {FC, TransitionStartFunction, useEffect, useState} from 'react'
-import {IPlayer, ITournament} from "../Tournament"
+import {IPlayer, IMatch} from "../Match"
 import {Divider, InputProps, Row, RowProps, Skeleton, Space} from "antd"
 import ListLoadMore from "../../ListLoadMore"
 import {useTournamentPlayerList} from "../../../hook/useTournamentPlayerList"
@@ -10,14 +10,14 @@ import {PlayerDisplayWrap} from "./PlayerDisplayWrap"
 import {DonateValueOrRankDisplay} from "./DonateValueOrRankDisplay"
 import {DonateAction} from "./UI/DonateAction"
 
-interface ITournamentPlayerList {
+interface IMatchPlayerList {
     players: IPlayer[]
     isPending: boolean
-    tournament: ITournament
+    match: IMatch
     startTransition: TransitionStartFunction
     containerProps: RowProps
     itemProps: RowProps
-    tournamentStarted: boolean
+    matchStarted: boolean
 }
 
 export type TypeDonateInput = {
@@ -26,15 +26,15 @@ export type TypeDonateInput = {
 }
 
 
-const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
+const MatchPlayerList: FC<IMatchPlayerList> = (props) => {
     const {
         players,
         isPending,
         startTransition,
         containerProps,
         itemProps,
-        tournamentStarted,
-        tournament
+        matchStarted,
+        match,
     } = props
 
 
@@ -45,7 +45,7 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
         setShowDonate,
         setDonateInput,
         setDonateLoading,
-        tournament,
+        match,
         donateInput,
         startTransition,
     })
@@ -92,9 +92,9 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
                             />
 
                             <DonateAction
-                                showDonate={tournamentStarted || !!showDonate}
+                                showDonate={matchStarted || !!showDonate}
                                 player={player}
-                                tournamentStarted={tournamentStarted}
+                                tournamentStarted={matchStarted}
                                 showDonateId={showDonate?.id as string}
                                 donateLoading={donateLoading}
                                 onDonation={onDonation}
@@ -108,4 +108,4 @@ const TournamentPlayerList: FC<ITournamentPlayerList> = (props) => {
         )
 }
 
-export {TournamentPlayerList}
+export {MatchPlayerList}
