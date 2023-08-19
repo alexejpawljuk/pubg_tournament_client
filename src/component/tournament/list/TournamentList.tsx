@@ -132,7 +132,7 @@ const TournamentList: FC<ITournamentScrollingList> = ({tournamentList, transitio
                         </Col>
                         <Col style={{...stylesCol, width: "15%"}}>
                             <Row justify="center">
-                                <DateDisplay date={item.date} fontSize={fontSize}/>
+                                <DateDisplay date={item.date.start} fontSize={fontSize}/>
                             </Row>
                         </Col>
                         <Col style={{...stylesCol, width: "10%"}}>

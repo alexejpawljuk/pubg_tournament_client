@@ -156,8 +156,8 @@ export const tournamentModel: ColumnsType<ITournament> = [
         dataIndex: "date",
         align: "center",
         width: 110,
-        sorter: (a, b, sortOrder) => a.date.getTime() - b.date.getTime(),
-        render: (value, record) => <DateDisplay date={record.date} props={{style: {fontSize}}}/>
+        sorter: (a, b, sortOrder) => a.date.start.getTime() - b.date.start.getTime(),
+        render: (value, record) => <DateDisplay date={record.date.start} props={{style: {fontSize}}}/>
     },
     {
         key: "reward",

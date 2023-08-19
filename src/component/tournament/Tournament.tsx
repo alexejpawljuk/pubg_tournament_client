@@ -39,11 +39,12 @@ export interface ITournament {
     reward: {
         coin: number
     }
-    date: Date
-    // date: {
-    //     start: Date
-    //     end: Date
-    // }
+    // date: Date
+    date: {
+        start: Date
+        end: Date | null
+    }
+
     price: {
         ticket: number
         coin: number
@@ -56,6 +57,7 @@ export interface ITournament {
     }
     meta: {
         players: IPlayer[]
+        winner: IPlayer | null
         // donations: IDonate[]
     }
 }

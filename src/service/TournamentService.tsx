@@ -1,12 +1,13 @@
 import {create} from "zustand"
 import {ITournament} from "../component/tournament/Tournament"
-import list from "../DATA/tournamentData"
+import {list} from "../DATA/tournamentData"
 import {IFilterOptions} from "../component/tournament/controlPanel/TournamentControlPanel"
 
 
 interface ITournamentService {
     readonly dataSource: Readonly<ITournament[]>
     tournamentList: ITournament[]
+    history: ITournament[]
 
     tournamentFetch(): Promise<void>
 
@@ -18,6 +19,8 @@ interface ITournamentService {
 
     tournamentToDefault(): void
 
+    getTournamentHistory(): Promise<void>
+
     getOriginTournamentList(): ITournament[]
 }
 
@@ -25,16 +28,18 @@ interface ITournamentService {
 export const TournamentService = create<ITournamentService>((setState, getState) => ({
     dataSource: [],
     tournamentList: [],
+    history: [],
 
     /**
      * Request tournament list from server
      */
     async tournamentFetch() {
-        const tournaments = await list
+        const {listSortedByDate, historySortedByDate} = await list
         setState(state => ({
             ...state,
-            dataSource: tournaments,
-            tournamentList: tournaments
+            dataSource: listSortedByDate,
+            tournamentList: listSortedByDate,
+            history: historySortedByDate
         }))
     },
 
@@ -87,6 +92,21 @@ export const TournamentService = create<ITournamentService>((setState, getState)
             ...state,
             tournamentList: this.getOriginTournamentList()
         }))
+    },
+
+
+    /**
+     * The method return history of tournaments
+     * Return a new array with 100 items
+     */
+    async getTournamentHistory() {
+        const {historySortedByDate} = await list
+        // const {listSortedByDate} = await list
+        // setState(state => ({
+        //     ...state,
+        //     dataSource: listSortedByDate,
+        //     tournamentList: listSortedByDate
+        // }))
     },
 
     /**

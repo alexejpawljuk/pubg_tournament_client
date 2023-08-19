@@ -3,6 +3,7 @@ import {Avatar, Card, Col, ConfigProvider, Divider, theme} from "antd"
 import tournament, {ITournament} from "../tournament/Tournament";
 import {TournamentService} from "../../service/TournamentService";
 import Meta from "antd/es/card/Meta";
+import {format} from "date-fns";
 
 
 interface IHeaderFeedItem {
@@ -21,6 +22,8 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
         background: token.colorBgLayout
     }
 
+    if (!tournament.meta.winner) return null
+
     return (
         // <div style={styles}>
         //     <Row justify="center" style={{width: "100%"}}>Daily</Row>
@@ -33,17 +36,10 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({tournament, index}) => {
             {/*<p>Card content Card content Card content Card content</p>*/}
             <Divider style={{width: 300, margin: 0}} orientation="right">{tournament.type.toUpperCase()}</Divider>
             <Meta
-                avatar={<Avatar src={tournament.meta.players[0].avatar} />}
-                title={tournament.meta.players[0].nickname}
-                description={tournament.meta.players[0].id}
+                avatar={<Avatar src={tournament.meta.winner?.avatar}/>}
+                title={tournament.meta.winner.nickname}
+                description={format(tournament.date.start, "dd.mm.yyyy HH:mm")}
             />
-            {/*<Col>*/}
-            {/*    <Avatar src={tournament.meta.players[1].avatar}/>*/}
-            {/*</Col>*/}
-            {/*<Col>*/}
-            {/*    <p>Card content</p>*/}
-            {/*</Col>*/}
-
         </Card>
     )
 }
@@ -71,13 +67,10 @@ const HeaderFeed = () => {
     }
 
     useEffect(() => {
-        setFeed(() => tournamentService.tournamentList)
-    }, [tournamentService.tournamentList])
+        setFeed(() => tournamentService.history)
+        console.log("History:", tournamentService.history)
+    }, [tournamentService.history])
 
-
-    const onScroll = (event: React.UIEvent<HTMLElement>) => {
-        // console.log("Scroll:", event)
-    }
 
     const handleScroll = (e: React.UIEvent<HTMLElement>): void => {
         e.stopPropagation() // Handy if you want to prevent event bubbling to scrollable parent

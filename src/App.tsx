@@ -5,13 +5,13 @@ import Root from "./component/root/Root"
 import {AppUserThemeService} from "./service/AppUserThemeService"
 import useBreakpoint from "antd/es/grid/hooks/useBreakpoint"
 
+
 interface IAppProvider {
     children: ReactNode,
     appThemeConfig: ThemeConfig["algorithm"]
 }
 
 const AppProvider: FC<IAppProvider> = ({children, appThemeConfig}) => {
-
 
     return (
         <BrowserRouter>
@@ -34,6 +34,7 @@ function App() {
         console.log("Render App")
         console.log("Breakpoint:", breakpoint)
     })
+
 
     return (
         <div className="App" style={{minWidth: 380}}>

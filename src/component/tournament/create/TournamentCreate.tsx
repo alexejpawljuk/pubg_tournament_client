@@ -71,7 +71,10 @@ const TournamentCreateOptions = () => {
             rank: 0,
             premium: false
         },
-        date: new Date()
+        date: {
+            start: new Date(),
+            end: null,
+        }
     })
 
     const [current, setCurrent] = useState(0)
@@ -81,7 +84,13 @@ const TournamentCreateOptions = () => {
     }
 
     const onSelectDate = (e: any, date: string) => {
-        setProps(prevState => ({...prevState, date: new Date(date)}))
+        setProps(prevState => ({
+            ...prevState,
+            date: {
+                start: new Date(date),
+                end: null
+            }
+        }))
     }
 
     const onSelectRang = (e: number) => {

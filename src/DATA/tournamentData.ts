@@ -291,10 +291,11 @@ const playerList: IPlayer[] = [
 ];
 
 
-const list = new Promise<ITournament[]>((resolve) => {
+const list = new Promise<{ listSortedByDate: ITournament[], historySortedByDate: ITournament[] }>((resolve) => {
     const list: ITournament[] = []
+    const history: ITournament[] = []
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
         // const playerList: IPlayer[] = []
 
         const item: ITournament = {
@@ -312,7 +313,10 @@ const list = new Promise<ITournament[]>((resolve) => {
                 ticket: getRandomNumber(20),
                 coin: getRandomNumber(20),
             },
-            date: new Date(2023, getRandomNumber(8), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
+            date: {
+                start: new Date(2023, getRandomNumber(8), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
+                end: null
+            },
             condition: {
                 rank: getRandomNumber(5),
                 premium: getRandomNumber(2) % 2 === 0
@@ -320,22 +324,43 @@ const list = new Promise<ITournament[]>((resolve) => {
             donation: getRandomNumber(100),
             meta: {
                 players: playerList.map((player, index) => ({
-
                     ...player,
-                    avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`,
+                    avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
                     rank: getRandomNumber(5),
                     experience: getRandomNumber(100),
                     id: uid(7),
-                }))
+                })),
+                winner: null
             }
         }
 
-        if (isAfter(item.date.getTime(), new Date().getTime())) list.push(item)
-        else i--
+        if (isAfter(item.date.start.getTime(), new Date().getTime())) list.push(item)
+        else {
+            if (history.length < 100) {
+                history.push({
+                    ...item,
+                    meta: {
+                        ...item.meta,
+                        winner: {
+                            nickname: "User" + i.toString(),
+                            avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
+                            rank: getRandomNumber(5),
+                            experience: getRandomNumber(100),
+                            id: uid(7),
+                            premium: !!getRandomNumber(1),
+                            teamId: null,
+                        }
+                    }
+                })
+            }
+            i--
+        }
     }
 
-    const listSortedByDate = list.sort((a, b) => a.date.getTime() - b.date.getTime())
-    resolve(listSortedByDate)
+    const listSortedByDate = list.sort((a, b) => a.date.start.getTime() - b.date.start.getTime())
+    const historySortedByDate = history.sort((a, b) => a.date.start.getTime() - b.date.start.getTime())
+    resolve({listSortedByDate, historySortedByDate})
 })
 
-export default list
+
+export {list}

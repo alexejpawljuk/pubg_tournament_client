@@ -7,8 +7,8 @@ const Home = () => {
 
 
     const styles: CSSProperties = {
-        borderTop: "0.3px solid",
-        borderTopColor: token.colorBorder,
+        // borderTop: "0.3px solid",
+        // borderTopColor: token.colorBorder,
         background: token.colorBgLayout,
         paddingTop: 20,
     }

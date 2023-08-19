@@ -29,7 +29,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
         >
             <div style={{}}>
                 <div style={{textAlign: "center"}}>
-                    <Countdown value={date.getTime()} onFinish={() => setTournamentStarted(() => true)}/>
+                    <Countdown value={date.start.getTime()} onFinish={() => setTournamentStarted(() => true)}/>
                 </div>
                 <div>
                     <Divider style={{margin: "3px 0px",}}
@@ -38,7 +38,7 @@ const TournamentInfoDisplay: FC<ITournamentInfoDisplay> = ({tournament, setTourn
                 <div>Type: {type}</div>
                 <div>ID: {id}</div>
                 <div>
-                    Date: {format(date, "dd.mm.yyyy")} {format(date, "HH:mm")}
+                    Date: {format(date.start, "dd.mm.yyyy")} {format(date.start, "HH:mm")}
                 </div>
                 <div>
                     <Rate

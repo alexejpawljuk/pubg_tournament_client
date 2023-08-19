@@ -31,11 +31,6 @@ const FooterContent = () => {
                     align: "bottom",
                 }}
             />
-            {/*<Row style={styles}>*/}
-            {/*    <Col >*/}
-            {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda aut consequatur earum eveniet excepturi explicabo harum ipsa ipsam iusto temporibus!*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
             <Row
                 style={{
                     // minWidth: 300,

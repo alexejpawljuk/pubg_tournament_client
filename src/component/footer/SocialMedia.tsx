@@ -1,9 +1,9 @@
 import React, {CSSProperties, FC} from 'react'
-import {Button, Row, RowProps, Tag} from "antd"
-import {AiOutlineNotification, AiTwotoneNotification} from "react-icons/ai"
-import {FacebookOutlined, LinkedinOutlined, YoutubeOutlined} from "@ant-design/icons"
-import SocialMediaButton from "./UI/SocialMediaButton";
-import {BsInstagram} from "react-icons/bs";
+import {Row, RowProps} from "antd"
+import {AiOutlineNotification} from "react-icons/ai"
+import {YoutubeOutlined} from "@ant-design/icons"
+import SocialMediaButton from "./UI/SocialMediaButton"
+import {BsInstagram} from "react-icons/bs"
 
 interface ISocialMedia {
     props: RowProps
@@ -11,7 +11,6 @@ interface ISocialMedia {
 
 const SocialMedia: FC<ISocialMedia> = ({props}) => {
     const styles: CSSProperties = {
-        // width: "100%"
         padding: 0
     }
 
@@ -46,4 +45,4 @@ const SocialMedia: FC<ISocialMedia> = ({props}) => {
     );
 };
 
-export default SocialMedia;
+export default SocialMedia
