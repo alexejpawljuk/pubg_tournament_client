@@ -1,10 +1,11 @@
 import React, {ChangeEvent, FC, useEffect, useState, useTransition} from "react"
 import {IPlayer, IMatch} from "../Match"
-import {Col, Row, theme} from "antd"
+import {Button, Col, Row, theme} from "antd"
 import {MatchPlayerList} from "../playerList/MatchPlayerList"
 import Search from "antd/es/input/Search"
 import MatchInfoDisplay from "./MatchInfoDisplay"
 import MatchJoinButton from "./MatchJoinButton"
+import {PiChatCircleDots} from "react-icons/pi";
 
 interface IMatchInfo {
     tournament: IMatch
@@ -91,10 +92,11 @@ const MatchDetails: FC<IMatchInfo> = ({tournament}) => {
                             }
                         }}
                     />
-
                 </Col>
 
             </Row>
+
+
 
             <Row justify="space-between" style={{width: "100%"}}>
                 <MatchJoinButton
@@ -107,6 +109,8 @@ const MatchDetails: FC<IMatchInfo> = ({tournament}) => {
                         disabled: tournamentStarted
                     }}
                 />
+
+                <Button size="small" icon={<PiChatCircleDots size={14}/>}>Chat</Button>
             </Row>
         </Row>
     )

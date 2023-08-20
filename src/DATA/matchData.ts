@@ -339,6 +339,10 @@ const list = new Promise<{ listSortedByDate: IMatch[], historySortedByDate: IMat
             if (history.length < 100) {
                 history.push({
                     ...item,
+                    date: {
+                        ...item.date,
+                        end: new Date(item.date.start.getTime() + 3600000)
+                    },
                     meta: {
                         ...item.meta,
                         winner: {

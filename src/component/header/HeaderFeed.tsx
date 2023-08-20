@@ -59,7 +59,6 @@ const HeaderFeed = () => {
                             padding: 0,
                             paddingTop: 15,
                             fontSize: 20,
-                            // fontFamily: "font-family: 'Dancing Script', cursive",
                             background: token.colorBgLayout
                         }}
                     ><span>{"Last matches".toUpperCase()}</span></Divider>

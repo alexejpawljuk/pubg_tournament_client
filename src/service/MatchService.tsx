@@ -5,7 +5,7 @@ import {IFilterOptions} from "../component/match/controlPanel/MatchControlPanel"
 
 
 interface IMatchService {
-    readonly dataSource: Readonly<IMatch[]>
+    readonly matchListDataSource: Readonly<IMatch[]>
     matchList: IMatch[]
     history: IMatch[]
 
@@ -19,14 +19,14 @@ interface IMatchService {
 
     matchToDefault(): void
 
-    getMatchHistory(): Promise<void>
+    matchHistoryFetch(): Promise<void>
 
     getOriginMatchList(): IMatch[]
 }
 
 
 export const MatchService = create<IMatchService>((setState, getState) => ({
-    dataSource: [],
+    matchListDataSource: [],
     matchList: [],
     history: [],
 
@@ -37,7 +37,7 @@ export const MatchService = create<IMatchService>((setState, getState) => ({
         const {listSortedByDate, historySortedByDate} = await list
         setState(state => ({
             ...state,
-            dataSource: listSortedByDate,
+            matchListDataSource: listSortedByDate,
             matchList: listSortedByDate,
             history: historySortedByDate
         }))
@@ -53,7 +53,7 @@ export const MatchService = create<IMatchService>((setState, getState) => ({
      */
     matchFilterByNameAndType(options) {
         const {name, type} = options
-        const filteredMatches = [...getState().dataSource]
+        const filteredMatches = [...getState().matchListDataSource]
             .filter(match => {
                 if (name !== "all" && type !== "all")
                     return match.name === name && match.type === type
@@ -75,7 +75,7 @@ export const MatchService = create<IMatchService>((setState, getState) => ({
      * @param value
      */
     matchSearch(value) {
-        const searchedMatches = [...getState().dataSource]
+        const searchedMatches = [...getState().matchListDataSource]
             .filter(match => match.id.includes(value))
         setState(state => ({
             ...state,
@@ -99,7 +99,7 @@ export const MatchService = create<IMatchService>((setState, getState) => ({
      * The method return history of tournaments
      * Return a new array with 100 items
      */
-    async getMatchHistory() {
+    async matchHistoryFetch() {
         const {historySortedByDate} = await list
         // const {listSortedByDate} = await list
         // setState(state => ({
@@ -114,6 +114,6 @@ export const MatchService = create<IMatchService>((setState, getState) => ({
      * Return a new array
      */
     getOriginMatchList(): IMatch[] {
-        return [...getState().dataSource]
+        return [...getState().matchListDataSource]
     }
 }))

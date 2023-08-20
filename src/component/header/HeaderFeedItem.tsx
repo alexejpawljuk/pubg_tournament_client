@@ -60,7 +60,7 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
                     >{match.meta.winner.nickname}</Row>
                 </Row>
                 <Row justify="end" align="bottom" style={{width: "20%"}}>
-                    <IsToday date={match.date.end}/>
+                    <IsToday date={match.date.start}/>
                 </Row>
             </Row>
             <Row align="bottom" justify="space-between" style={{width: "100%", height: 60}}>
@@ -71,12 +71,14 @@ const HeaderFeedItem: FC<IHeaderFeedItem> = ({match, index}) => {
                             fontSize: 9
                         }}
                     >Match ID: {match.id}</Row>
-                    <Row
-                        style={{
-                            width: "100%",
-                            fontSize: 12
-                        }}
-                    >Date: {match.date.end && format(match.date.end, "dd.MM.yyyy HH:mm")}</Row>
+                    <Row style={{width: "100%", fontSize: 12}}>
+                        <Row style={{width: "100%"}}>
+                            {match.date.start && format(match.date.start, "dd.MM.yyyy HH:mm")}
+                        </Row>
+                        <Row style={{width: "100%"}}>
+                            {match.date.end && format(match.date.end, "dd.MM.yyyy HH:mm")}
+                        </Row>
+                    </Row>
                 </Row>
                 <Row justify="end" style={{width: "20%"}}>
                     <Col>
