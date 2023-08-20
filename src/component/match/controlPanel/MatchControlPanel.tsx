@@ -45,13 +45,9 @@ const MatchControlPanel: FC<IMatchControlPanel> = ({transition}) => {
 
 
     const stylesRow: CSSProperties = {
-        width: "99%",
-        margin: "10px auto",
+        width: "100%",
         padding: "5px 0px 15px 0px",
-        // border: "0.5px solid",
-        // borderColor: colorBorder,
-        borderRadius: token.borderRadius,
-        // background: token.colorBgLayout,
+        background: token.colorBgLayout,
         zIndex: 0
     }
 

@@ -108,72 +108,81 @@ const MatchList: FC<IMatchScrollingList> = ({matchList, transition}) => {
     const stylesRow = {
         border: "0.5px solid",
         borderColor: token.colorBorder,
-        // marginBottom: 5,
+        background: token.colorBgLayout,
         padding: "5px 0px",
     }
 
 
     return (
-        <ListLoadMore<IMatch>
-            transition={{isPending, startTransition}}
-            data={matchList}
-            listProps={{
-                renderItem: item => (
-                    <Row
-                        onClick={() => onSelectMatch(item)}
-                        align="middle"
-                        justify="space-around"
-                        style={stylesRow}
-                    >
-                        <Col style={{...stylesCol, width: "22%"}}>
-                            <Row style={{fontSize}} justify="center">{item.name.toUpperCase()}</Row>
-                            <Row style={{fontSize: fontSize - 1}} justify="center">{item.type.toUpperCase()}</Row>
-                            <Row style={{fontSize: fontSize - 3}} justify="center">ID: {item.id}</Row>
-                        </Col>
-                        <Col style={{...stylesCol, width: "15%"}}>
-                            <Row justify="center">
-                                <DateDisplay date={item.date.start} fontSize={fontSize}/>
-                            </Row>
-                        </Col>
-                        <Col style={{...stylesCol, width: "10%"}}>
-                            <Row justify="center"><Avatar src={coinSVG} size={iconSize} alt={"coin"}/></Row>
-                            <Row justify="center">
-                                <div style={{fontSize}}>{item.reward.coin}</div>
-                            </Row>
-                        </Col>
-                        <Col style={{...stylesCol, width: "25%"}}>
-                            <Row justify="center"><RankDisplay value={item.condition.rank}/></Row>
-                        </Col>
-                        <Col style={{...stylesCol, width: "12%"}}>
-                            <Row justify="center">
-                                <FaPeopleGroup size={iconSize}
-                                               color={item.members.max - item.members.alreadyRegistered ? "green" : "red"}/>
-                            </Row>
-                            <Row justify="center">
-                                <div style={{fontSize}}>{item.members.alreadyRegistered} / {item.members.max}</div>
-                            </Row>
-                        </Col>
-                        <Col style={{...stylesCol, width: "14%"}}>
-
-                            <Row justify="center">
-                                <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
-                                <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-                                    <div style={{fontSize: 12}}>{item.price.ticket}</div>
-                                </Col>
-                            </Row>
-
-                            <Row justify="center" align="middle">
-                                <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
-                                <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
-                                    <div style={{fontSize: 12}}>{item.price.coin}</div>
-                                </Col>
-                            </Row>
-
-                        </Col>
-                    </Row>
-                )
+        <div
+            style={{
+                width: "100%",
+                background: token.colorBgLayout,
+                paddingBottom: 30,
             }}
-        />
+        >
+            <ListLoadMore<IMatch>
+                transition={{isPending, startTransition}}
+                data={matchList}
+                listProps={{
+                    renderItem: item => (
+                        <Row
+                            onClick={() => onSelectMatch(item)}
+                            align="middle"
+                            justify="space-around"
+                            style={stylesRow}
+                        >
+                            <Col style={{...stylesCol, width: "22%"}}>
+                                <Row style={{fontSize}} justify="center">{item.name.toUpperCase()}</Row>
+                                <Row style={{fontSize: fontSize - 1}} justify="center">{item.type.toUpperCase()}</Row>
+                                <Row style={{fontSize: fontSize - 3}} justify="center">ID: {item.id}</Row>
+                            </Col>
+                            <Col style={{...stylesCol, width: "15%"}}>
+                                <Row justify="center">
+                                    <DateDisplay date={item.date.start} fontSize={fontSize}/>
+                                </Row>
+                            </Col>
+                            <Col style={{...stylesCol, width: "10%"}}>
+                                <Row justify="center"><Avatar src={coinSVG} size={iconSize} alt={"coin"}/></Row>
+                                <Row justify="center">
+                                    <div style={{fontSize}}>{item.reward.coin}</div>
+                                </Row>
+                            </Col>
+                            <Col style={{...stylesCol, width: "25%"}}>
+                                <Row justify="center"><RankDisplay value={item.condition.rank}/></Row>
+                            </Col>
+                            <Col style={{...stylesCol, width: "12%"}}>
+                                <Row justify="center">
+                                    <FaPeopleGroup size={iconSize}
+                                                   color={item.members.max - item.members.alreadyRegistered ? "green" : "red"}/>
+                                </Row>
+                                <Row justify="center">
+                                    <div style={{fontSize}}>{item.members.alreadyRegistered} / {item.members.max}</div>
+                                </Row>
+                            </Col>
+                            <Col style={{...stylesCol, width: "14%"}}>
+
+                                <Row justify="center">
+                                    <Avatar size={iconSize} src={ticketSVG} alt={"ticket"}/>
+                                    <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
+                                        <div style={{fontSize: 12}}>{item.price.ticket}</div>
+                                    </Col>
+                                </Row>
+
+                                <Row justify="center" align="middle">
+                                    <Avatar size={iconSize} src={coinSVG} alt={"coin"}/>
+                                    <Col xs={{span: 10}} sm={{span: 10}} lg={{span: 4}} md={{span: 6}}>
+                                        <div style={{fontSize: 12}}>{item.price.coin}</div>
+                                    </Col>
+                                </Row>
+
+                            </Col>
+                        </Row>
+                    )
+                }}
+            />
+        </div>
+
     )
 }
 

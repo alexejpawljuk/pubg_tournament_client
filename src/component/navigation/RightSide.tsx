@@ -1,24 +1,17 @@
-import {ModalPopupService} from "../../service/ModelPopupService"
-import {AppUserThemeService} from "../../service/AppUserThemeService"
 import {UserAddOutlined, UserOutlined, WalletOutlined} from "@ant-design/icons"
 import {AiOutlineLogin, AiOutlineSetting} from "react-icons/ai"
 import {MdDarkMode, MdOutlineDarkMode} from "react-icons/md"
-import {Badge, Menu, MenuProps, theme} from "antd"
-import AuthForm from "../AuthForm"
-import RegisterForm from "../RegisterForm"
+import {Avatar, Badge, Menu, MenuProps, theme} from "antd"
 import React from "react"
-import {getItem, MenuItem, RightMenuKey} from "./Navigation"
 import {BiUserCheck} from "react-icons/bi"
 import {CiWallet} from "react-icons/ci"
-import Wallet from "../Wallet"
+import {MenuItem, useNavigation} from "../../hook/useNavigation"
+import coinSVG from "../../image/svg/coins.svg"
 
 
 const RightSide = () => {
     const {token} = theme.useToken()
-    const modalPopupService = ModalPopupService()
-    const {setAppUserTheme} = AppUserThemeService()
-    // const {setUserTheme} = useUserTheme()
-
+    const {rightSide, getItem} = useNavigation()
 
     const items: MenuItem[] = [
         getItem(
@@ -29,6 +22,7 @@ const RightSide = () => {
             </Badge>, "balance",
             <WalletOutlined style={{color: "gold"}} size={16}/>, [
                 getItem("My wallet", "my_wallet", <CiWallet color="gold" size={16}/>),
+                getItem("Buy coins", "buy_coins", <Avatar src={coinSVG} size={18}/>)
             ]),
         getItem("Account", "account", <UserOutlined/>, [
             getItem("Login", "login", <AiOutlineLogin/>),
@@ -41,7 +35,7 @@ const RightSide = () => {
         ]),
     ]
 
-    const authProps: MenuProps = {
+    const menuProps: MenuProps = {
         mode: "horizontal",
         items,
         selectable: false,
@@ -53,62 +47,7 @@ const RightSide = () => {
         background: token.colorBgLayout
     }
 
-    const onClick: MenuProps["onClick"] = (e) => {
-        switch (e.key as RightMenuKey) {
-            case "login":
-                modalPopupService.setOpenModal(prevState => ({
-                    ...prevState,
-                    openModal: true,
-                    children: <AuthForm/>,
-                    props: {width: 350}
-                }))
-                break;
-
-            case "register":
-                modalPopupService.setOpenModal(prevState => ({
-                    ...prevState,
-                    openModal: true,
-                    props: {
-                        width: 800
-                    },
-                    children: <RegisterForm/>
-                }))
-                break;
-
-            case "dark":
-                setAppUserTheme(() => "dark")
-                break;
-
-            case "light":
-                setAppUserTheme(() => "light")
-                break;
-
-            case "profile":
-                window.location.replace("/profile")
-                break;
-
-            case "buy_coins":
-                modalPopupService.setOpenModal(prevState => ({
-                    ...prevState,
-                    openModal: true,
-                    props: {
-                        width: 500
-                    },
-                    children: <div>Тут будет инструкция как пополнить кошелек (крипта)</div>
-                }))
-                break;
-
-            case "my_wallet":
-                modalPopupService.setOpenModal(prevState => ({
-                    ...prevState,
-                    openModal: true,
-                    children: <Wallet/>
-                }))
-                break;
-        }
-    }
-
-    return <Menu onClick={onClick} style={styles} {...authProps}/>
+    return <Menu onClick={rightSide.onClick} style={styles} {...menuProps}/>
 }
 
 export default RightSide

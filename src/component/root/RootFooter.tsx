@@ -2,7 +2,7 @@ import { Footer } from 'antd/es/layout/layout'
 import React, {FC, ReactNode} from 'react'
 import {theme} from "antd";
 
-const RootLayoutFooter: FC<{children: ReactNode}> = ({children}) => {
+const RootFooter: FC<{children: ReactNode}> = ({children}) => {
     const {token} = theme.useToken()
 
     return (
@@ -19,4 +19,4 @@ const RootLayoutFooter: FC<{children: ReactNode}> = ({children}) => {
     )
 }
 
-export default RootLayoutFooter
+export default RootFooter

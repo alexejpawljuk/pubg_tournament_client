@@ -1,7 +1,7 @@
 import React, {CSSProperties, FC, ReactNode} from 'react'
 import {Header} from "antd/es/layout/layout"
 
-const RootLayoutHeader: FC<{ children: ReactNode }> = ({children}) => {
+const RootHeader: FC<{ children: ReactNode }> = ({children}) => {
     const styles: CSSProperties = {
         position: 'sticky',
         top: 0,
@@ -21,4 +21,4 @@ const RootLayoutHeader: FC<{ children: ReactNode }> = ({children}) => {
     )
 }
 
-export default RootLayoutHeader
+export default RootHeader

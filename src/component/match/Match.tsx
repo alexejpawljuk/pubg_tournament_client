@@ -76,7 +76,7 @@ const Match = () => {
 
     return (
         <div style={{
-            background: token.colorBgLayout
+            background: token.colorBgContainer
         }}>
             <MatchControlPanel
                 transition={{isPending, startTransition}}

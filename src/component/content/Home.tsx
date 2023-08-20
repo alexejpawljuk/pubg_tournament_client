@@ -1,21 +1,20 @@
 import React, {CSSProperties} from 'react'
 import Match from "../match/Match"
 import {theme} from "antd"
+import {HeaderFeed} from "../header/HeaderFeed"
 
 const Home = () => {
     const {token} = theme.useToken()
 
-
     const styles: CSSProperties = {
-        // borderTop: "0.3px solid",
-        // borderTopColor: token.colorBorder,
-        background: token.colorBgLayout,
-        paddingTop: 20,
+        padding: "20px 0 0",
+        background: token.colorBgContainer,
     }
 
     return (
 
         <div style={styles}>
+            <HeaderFeed/>
             <Match/>
         </div>
 
