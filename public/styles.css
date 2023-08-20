@@ -11,3 +11,21 @@ html {
     /*font-family: 'Dancing Script', cursive;*/
     font-family: 'Josefin Sans', sans-serif;
 }
+
+.match_active_gradient {
+    background: linear-gradient(90deg, rgba(2,0,36,0.1) 0%, rgba(9,99,121,0) 0%, rgba(8, 47, 47, 0.1) 100%);
+    /*background: linear-gradient(90deg, rgba(2,0,36,0.1) 0%, rgba(9,99,121,0.1) 0%, rgba(0,212,255,0.1) 100%);*/
+    animation: gradient 1s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

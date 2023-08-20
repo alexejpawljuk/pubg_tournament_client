@@ -1,6 +1,6 @@
 import React, {CSSProperties} from 'react'
 import Match from "../match/Match"
-import {theme} from "antd"
+import {Row, theme} from "antd"
 import {HeaderFeed} from "../header/HeaderFeed"
 
 const Home = () => {
@@ -16,6 +16,12 @@ const Home = () => {
         <div style={styles}>
             <HeaderFeed/>
             <Match/>
+
+            <Row align="middle" className="match_active_gradient" style={{width: "100%", height: 350}}>
+                <Row style={{width: "100%", height: "90%"}}>
+
+                </Row>
+            </Row>
         </div>
 
     )
