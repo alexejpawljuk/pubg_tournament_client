@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfa7282-cfee-4c0e-884c-afa171c041d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/component/header/HeaderFeed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/header/HeaderFeed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/shop/Shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/shop/Shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/controlPanel/UI/TournamentSortByName.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/controlPanel/UI/TournamentSortByName.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/details/TournamentDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/details/TournamentDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/tournament/list/TournamentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/tournament/list/TournamentList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/content/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/content/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/match/playerList/PlayerProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/match/playerList/PlayerProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/useTournamentPlayerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useTournamentPlayerList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

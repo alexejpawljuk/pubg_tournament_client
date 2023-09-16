@@ -81,7 +81,8 @@ export const useTournamentPlayerList = (props: IUseTournamentControlPanelProps):
                         afterClose: () => {
                             modalPopupService.setOpenModal((prevState) => ({
                                 openModal: true,
-                                children: <PlayerProfile player={player}/>,
+                                // children: <PlayerProfile player={player}/>,
+                                children: <PlayerProfile />,
                                 props: {
                                     ...prevState.props,
                                     afterClose: () => {

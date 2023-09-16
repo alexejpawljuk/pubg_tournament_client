@@ -314,7 +314,7 @@ const list = new Promise<{ listSortedByDate: IMatch[], historySortedByDate: IMat
                 coin: getRandomNumber(20),
             },
             date: {
-                start: new Date(2023, getRandomNumber(8), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
+                start: new Date(2023, getRandomNumber(12), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
                 end: null
             },
             condition: {
@@ -334,7 +334,9 @@ const list = new Promise<{ listSortedByDate: IMatch[], historySortedByDate: IMat
             }
         }
 
-        if (isAfter(item.date.start.getTime(), new Date().getTime())) list.push(item)
+        if (isAfter(item.date.start.getTime(), new Date().getTime()))
+            list.push(item)
+
         else {
             if (history.length < 100) {
                 history.push({
