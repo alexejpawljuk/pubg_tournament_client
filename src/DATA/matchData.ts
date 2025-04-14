@@ -314,7 +314,7 @@ const list = new Promise<{ listSortedByDate: IMatch[], historySortedByDate: IMat
                 coin: getRandomNumber(20),
             },
             date: {
-                start: new Date(2023, getRandomNumber(12), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
+                start: new Date(new Date().getFullYear(), getRandomNumber(12), getRandomNumber(31), getRandomNumber(24), getRandomNumber(60)),
                 end: null
             },
             condition: {
