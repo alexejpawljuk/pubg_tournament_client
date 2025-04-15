@@ -47,15 +47,25 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 
-## Docker
+
+# Docker
 
 ## Build Image
+Creates a Docker image from the current directory and tags it as client.
 ``` bash
 docker build -t client .
 ```
+- t client — assigns the name (tag) client to the image.
+- sets the build context to the current directory (where the Dockerfile is located).
+
 
 ## Start a Container
+Runs a container from the client image in detached mode and maps the port.
 ``` bash 
 docker run -d -p 8080:8080 client
 ```
+- -d — runs the container in detached mode (in the background).
+- -p 8080:8080 — maps port 8080 of your local machine to port 8080 inside the container.
 
+
+Open http://localhost:8080 to view it in the browser
