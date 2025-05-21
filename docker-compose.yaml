@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web_client_apache:
+    build: .
+    #volumes:
+     # - ./build:/usr/local/apache2/htdocs/
+     # - ./apache/conf:/usr/local/apache2/conf/
+    ports: 
+      - "8000:80"
+    container_name: client
+    image: iaclient
+    restart: on-failure:3

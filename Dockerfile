@@ -1,19 +1,18 @@
-FROM node:18.16.1-alpine3.17
+FROM node:18-alpine as frontend_builder 
 
-RUN npm i -g typescript
-
-WORKDIR /client
-
-COPY package*.json ./
-
-RUN npm install
+WORKDIR /app
 
 COPY . .
 
-RUN npm run build
+RUN npm install && npm run build
 
-RUN npm install -g serve 
 
-EXPOSE 8080
+FROM httpd:2.4.63-alpine as backend
 
-CMD ["serve", "-s", "build", "-l", "8080"]
+COPY --from=frontend_builder app/build/ /usr/local/apache2/htdocs/
+
+COPY apache.conf/ conf/conf.d
+
+RUN echo "Include conf/conf.d/*.conf" >> "conf/httpd.conf"
+
+EXPOSE 80
