@@ -2,9 +2,14 @@ FROM node:18-alpine as frontend_builder
 
 WORKDIR /app
 
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm install && npm run build
+RUN npm run build
+
 
 
 FROM httpd:2.4.63-alpine as backend
